@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="18abb025410345d2bd9159e7da2d801b" Name="Diagram1">
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.BillDetail" Width="1.5" PointX="7.5" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Bill" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Menu" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Menu_Stores" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Role" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Statistic" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Store" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.User_Roles" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.WarehouseDetail" Width="1.5" PointX="7.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Warehouse" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_BillDetail_Bills" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Bills_Stores" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Bills_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Menu_Stores_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Menu_Stores_Stores" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_User_Roles_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Statistic_Stores" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Stores_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Warehouses_Stores" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_User_Roles_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_WarehouseDetail_Warehouses" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

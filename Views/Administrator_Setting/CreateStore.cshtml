@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Tạo cửa hàng";
+}
+@model Project_Web.Models.Store
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/RegisterStyle.css">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Tạo cửa hàng</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="Location" name="Location" placeholder="Your Location" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+                        </div>
+                    </form>
+                    <div class="textValidation">
+                        @ViewBag.Message
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/RegisterJS.js"></script>
+</body>

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Đăng ký";
+}
+@model Project_Web.Models.User
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/RegisterStyle.css">
+</head>
+<body>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <form method="POST" id="signup-form" class="signup-form">
+                        <h2 class="form-title">Create account</h2>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="Username" id="Username" placeholder="Your Username" />
+                        </div>
+                        @ViewBag.Message1
+                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
+                            <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
+                        </div>
+                        <div id="showError"></div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Your FullName" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Fullname, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <div class="form-input">
+                                <select class="custom-select" id="Gender" name="Gender" >
+                                    <option disabled="disabled" selected="selected">Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="IdentityCard" name="IdentityCard" placeholder="Your Identity Card" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.IdentityCard, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="Address" name="Address" placeholder="Your Address" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.Address, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
+                        </div>
+                        @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
+                        <div class="form-group">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+                        </div>
+                    </form>
+                    <div class="textValidation">
+                        @ViewBag.Message
+                    </div>
+                    <p class="loginhere">
+                        Have already an account ? <a href="~/SignIn/SignIn" class="loginhere-link">Login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/RegisterJS.js"></script>
+</body>

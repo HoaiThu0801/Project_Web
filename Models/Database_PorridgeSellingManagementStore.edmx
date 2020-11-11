@@ -1,0 +1,829 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Database_PorridgeSellingManagementStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BillDetail">
+          <Key>
+            <PropertyRef Name="IDBillDetail" />
+          </Key>
+          <Property Name="IDBillDetail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DishName" Type="nvarchar(max)" />
+          <Property Name="Price" Type="float" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Promotion" Type="nvarchar(max)" />
+          <Property Name="PaidPrice" Type="float" />
+          <Property Name="IDBill" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bills">
+          <Key>
+            <PropertyRef Name="IDBill" />
+          </Key>
+          <Property Name="IDBill" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDStore" Type="varchar" MaxLength="50" />
+          <Property Name="IDUser" Type="varchar" MaxLength="50" />
+          <Property Name="Time" Type="date" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IDDish" />
+          </Key>
+          <Property Name="IDDish" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DishName" Type="nvarchar(max)" />
+          <Property Name="Ingredient" Type="nvarchar(max)" />
+          <Property Name="ImportPrice" Type="float" />
+          <Property Name="SalePrice" Type="float" />
+        </EntityType>
+        <EntityType Name="Menu_Stores">
+          <Key>
+            <PropertyRef Name="IDDish" />
+            <PropertyRef Name="IDStore" />
+          </Key>
+          <Property Name="IDDish" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDStore" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Ingredient" Type="nvarchar(max)" />
+          <Property Name="Available" Type="float" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="IDStatistic" />
+          </Key>
+          <Property Name="IDStatistic" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDStore" Type="varchar" MaxLength="50" />
+          <Property Name="QuantityofExportedDish" Type="float" />
+          <Property Name="QuantityofInventory" Type="float" />
+          <Property Name="Profit" Type="float" />
+          <Property Name="Times" Type="date" />
+        </EntityType>
+        <EntityType Name="Stores">
+          <Key>
+            <PropertyRef Name="IDStore" />
+          </Key>
+          <Property Name="IDStore" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StoreName" Type="nvarchar(max)" />
+          <Property Name="Location" Type="nvarchar(max)" />
+          <Property Name="Promotion" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="IDUser" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDRole" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDUser" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="Fullname" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
+          <Property Name="DateofBirth" Type="date" />
+          <Property Name="IdentityCard" Type="varchar" MaxLength="20" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="Point" Type="float" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="WarehouseDetail">
+          <Key>
+            <PropertyRef Name="IDWarehouseDetail" />
+          </Key>
+          <Property Name="IDWarehouseDetail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DishName" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Time" Type="date" />
+          <Property Name="IDWarehouse" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Warehouses">
+          <Key>
+            <PropertyRef Name="IDWarehouse" />
+          </Key>
+          <Property Name="IDWarehouse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WarehouseName" Type="nvarchar(max)" />
+          <Property Name="LocationofWarehouse" Type="nvarchar(max)" />
+          <Property Name="IDStore" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_BillDetail_Bills">
+          <End Role="Bills" Type="Self.Bills" Multiplicity="0..1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bills">
+              <PropertyRef Name="IDBill" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="IDBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bills_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bills_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Stores_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menu_Stores" Type="Self.Menu_Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="IDDish" />
+            </Principal>
+            <Dependent Role="Menu_Stores">
+              <PropertyRef Name="IDDish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Stores_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="1" />
+          <End Role="Menu_Stores" Type="Self.Menu_Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Menu_Stores">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistic_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Statistic" Type="Self.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Statistic">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stores_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="User_Roles">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="User_Roles">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseDetail_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
+          <End Role="WarehouseDetail" Type="Self.WarehouseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="IDWarehouse" />
+            </Principal>
+            <Dependent Role="WarehouseDetail">
+              <PropertyRef Name="IDWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouses_Stores">
+          <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
+          <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Warehouses">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database_PorridgeSellingManagementStoreModelStoreContainer">
+          <EntitySet Name="BillDetail" EntityType="Self.BillDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu_Stores" EntityType="Self.Menu_Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WarehouseDetail" EntityType="Self.WarehouseDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BillDetail_Bills" Association="Self.FK_BillDetail_Bills">
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="BillDetail" EntitySet="BillDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bills_Stores" Association="Self.FK_Bills_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bills_Users" Association="Self.FK_Bills_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Stores_Menu" Association="Self.FK_Menu_Stores_Menu">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu_Stores" EntitySet="Menu_Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Stores_Stores" Association="Self.FK_Menu_Stores_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Menu_Stores" EntitySet="Menu_Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistic_Stores" Association="Self.FK_Statistic_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Statistic" EntitySet="Statistic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stores_Users" Association="Self.FK_Stores_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles_Roles" Association="Self.FK_User_Roles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="User_Roles" EntitySet="User_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles_Users" Association="Self.FK_User_Roles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Roles" EntitySet="User_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseDetail_Warehouses" Association="Self.FK_WarehouseDetail_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="WarehouseDetail" EntitySet="WarehouseDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouses_Stores" Association="Self.FK_Warehouses_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Warehouses" EntitySet="Warehouses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Database_PorridgeSellingManagementStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BillDetail">
+          <Key>
+            <PropertyRef Name="IDBillDetail" />
+          </Key>
+          <Property Name="IDBillDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaidPrice" Type="Double" />
+          <Property Name="IDBill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bill" Relationship="Self.FK_BillDetail_Bills" FromRole="BillDetail" ToRole="Bills" />
+        </EntityType>
+        <EntityType Name="Bill">
+          <Key>
+            <PropertyRef Name="IDBill" />
+          </Key>
+          <Property Name="IDBill" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDStore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Time" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="BillDetails" Relationship="Self.FK_BillDetail_Bills" FromRole="Bills" ToRole="BillDetail" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Bills_Stores" FromRole="Bills" ToRole="Stores" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Bills_Users" FromRole="Bills" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="IDDish" />
+          </Key>
+          <Property Name="IDDish" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ingredient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImportPrice" Type="Double" />
+          <Property Name="SalePrice" Type="Double" />
+          <NavigationProperty Name="Menu_Stores" Relationship="Self.FK_Menu_Stores_Menu" FromRole="Menu" ToRole="Menu_Stores" />
+        </EntityType>
+        <EntityType Name="Menu_Stores">
+          <Key>
+            <PropertyRef Name="IDDish" />
+            <PropertyRef Name="IDStore" />
+          </Key>
+          <Property Name="IDDish" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDStore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Ingredient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Available" Type="Double" />
+          <NavigationProperty Name="Menu" Relationship="Self.FK_Menu_Stores_Menu" FromRole="Menu_Stores" ToRole="Menu" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Menu_Stores_Stores" FromRole="Menu_Stores" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="IDRole" />
+          </Key>
+          <Property Name="IDRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User_Roles" Relationship="Self.FK_User_Roles_Roles" FromRole="Roles" ToRole="User_Roles" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="IDStatistic" />
+          </Key>
+          <Property Name="IDStatistic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDStore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QuantityofExportedDish" Type="Double" />
+          <Property Name="QuantityofInventory" Type="Double" />
+          <Property Name="Profit" Type="Double" />
+          <Property Name="Times" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Statistic_Stores" FromRole="Statistic" ToRole="Stores" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="IDStore" />
+          </Key>
+          <Property Name="IDStore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StoreName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Promotion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_Bills_Stores" FromRole="Stores" ToRole="Bills" />
+          <NavigationProperty Name="Menu_Stores" Relationship="Self.FK_Menu_Stores_Stores" FromRole="Stores" ToRole="Menu_Stores" />
+          <NavigationProperty Name="Statistics" Relationship="Self.FK_Statistic_Stores" FromRole="Stores" ToRole="Statistic" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Stores_Users" FromRole="Stores" ToRole="Users" />
+          <NavigationProperty Name="Warehouses" Relationship="Self.FK_Warehouses_Stores" FromRole="Stores" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User_Roles">
+          <Key>
+            <PropertyRef Name="IDRole" />
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDRole" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Roles_Roles" FromRole="User_Roles" ToRole="Roles" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Roles_Users" FromRole="User_Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDUser" />
+          </Key>
+          <Property Name="IDUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Fullname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="0" />
+          <Property Name="IdentityCard" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Point" Type="Double" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bills" Relationship="Self.FK_Bills_Users" FromRole="Users" ToRole="Bills" />
+          <NavigationProperty Name="Stores" Relationship="Self.FK_Stores_Users" FromRole="Users" ToRole="Stores" />
+          <NavigationProperty Name="User_Roles" Relationship="Self.FK_User_Roles_Users" FromRole="Users" ToRole="User_Roles" />
+        </EntityType>
+        <EntityType Name="WarehouseDetail">
+          <Key>
+            <PropertyRef Name="IDWarehouseDetail" />
+          </Key>
+          <Property Name="IDWarehouseDetail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DishName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Time" Type="DateTime" Precision="0" />
+          <Property Name="IDWarehouse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Warehouse" Relationship="Self.FK_WarehouseDetail_Warehouses" FromRole="WarehouseDetail" ToRole="Warehouses" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="IDWarehouse" />
+          </Key>
+          <Property Name="IDWarehouse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WarehouseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocationofWarehouse" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IDStore" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Warehouses_Stores" FromRole="Warehouses" ToRole="Stores" />
+          <NavigationProperty Name="WarehouseDetails" Relationship="Self.FK_WarehouseDetail_Warehouses" FromRole="Warehouses" ToRole="WarehouseDetail" />
+        </EntityType>
+        <Association Name="FK_BillDetail_Bills">
+          <End Role="Bills" Type="Self.Bill" Multiplicity="0..1" />
+          <End Role="BillDetail" Type="Self.BillDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bills">
+              <PropertyRef Name="IDBill" />
+            </Principal>
+            <Dependent Role="BillDetail">
+              <PropertyRef Name="IDBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bills_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bills_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Bills" Type="Self.Bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Bills">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Stores_Menu">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="1" />
+          <End Role="Menu_Stores" Type="Self.Menu_Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="IDDish" />
+            </Principal>
+            <Dependent Role="Menu_Stores">
+              <PropertyRef Name="IDDish" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Stores_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="1" />
+          <End Role="Menu_Stores" Type="Self.Menu_Stores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Menu_Stores">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles_Roles">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="IDRole" />
+            </Principal>
+            <Dependent Role="User_Roles">
+              <PropertyRef Name="IDRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Statistic_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Statistic" Type="Self.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Statistic">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stores_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Stores" Type="Self.Store" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="Stores">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouses_Stores">
+          <End Role="Stores" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stores">
+              <PropertyRef Name="IDStore" />
+            </Principal>
+            <Dependent Role="Warehouses">
+              <PropertyRef Name="IDStore" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Roles_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="User_Roles" Type="Self.User_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDUser" />
+            </Principal>
+            <Dependent Role="User_Roles">
+              <PropertyRef Name="IDUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseDetail_Warehouses">
+          <End Role="Warehouses" Type="Self.Warehouse" Multiplicity="0..1" />
+          <End Role="WarehouseDetail" Type="Self.WarehouseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Warehouses">
+              <PropertyRef Name="IDWarehouse" />
+            </Principal>
+            <Dependent Role="WarehouseDetail">
+              <PropertyRef Name="IDWarehouse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Database_PorridgeSellingManagementStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BillDetails" EntityType="Self.BillDetail" />
+          <EntitySet Name="Bills" EntityType="Self.Bill" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Menu_Stores" EntityType="Self.Menu_Stores" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistic" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="User_Roles" EntityType="Self.User_Roles" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="WarehouseDetails" EntityType="Self.WarehouseDetail" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_BillDetail_Bills" Association="Self.FK_BillDetail_Bills">
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="BillDetail" EntitySet="BillDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bills_Stores" Association="Self.FK_Bills_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bills_Users" Association="Self.FK_Bills_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Bills" EntitySet="Bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Stores_Menu" Association="Self.FK_Menu_Stores_Menu">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menu_Stores" EntitySet="Menu_Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Stores_Stores" Association="Self.FK_Menu_Stores_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Menu_Stores" EntitySet="Menu_Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles_Roles" Association="Self.FK_User_Roles_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="User_Roles" EntitySet="User_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Statistic_Stores" Association="Self.FK_Statistic_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Statistic" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stores_Users" Association="Self.FK_Stores_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Stores" EntitySet="Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouses_Stores" Association="Self.FK_Warehouses_Stores">
+            <End Role="Stores" EntitySet="Stores" />
+            <End Role="Warehouses" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Roles_Users" Association="Self.FK_User_Roles_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Roles" EntitySet="User_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseDetail_Warehouses" Association="Self.FK_WarehouseDetail_Warehouses">
+            <End Role="Warehouses" EntitySet="Warehouses" />
+            <End Role="WarehouseDetail" EntitySet="WarehouseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Database_PorridgeSellingManagementStoreModelStoreContainer" CdmEntityContainer="Database_PorridgeSellingManagementStoreEntities">
+          <EntitySetMapping Name="BillDetails">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.BillDetail">
+              <MappingFragment StoreEntitySet="BillDetail">
+                <ScalarProperty Name="IDBillDetail" ColumnName="IDBillDetail" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
+                <ScalarProperty Name="PaidPrice" ColumnName="PaidPrice" />
+                <ScalarProperty Name="IDBill" ColumnName="IDBill" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bills">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Bill">
+              <MappingFragment StoreEntitySet="Bills">
+                <ScalarProperty Name="IDBill" ColumnName="IDBill" />
+                <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="IDDish" ColumnName="IDDish" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
+                <ScalarProperty Name="ImportPrice" ColumnName="ImportPrice" />
+                <ScalarProperty Name="SalePrice" ColumnName="SalePrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menu_Stores">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Menu_Stores">
+              <MappingFragment StoreEntitySet="Menu_Stores">
+                <ScalarProperty Name="IDDish" ColumnName="IDDish" />
+                <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+                <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
+                <ScalarProperty Name="Available" ColumnName="Available" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Statistic">
+              <MappingFragment StoreEntitySet="Statistic">
+                <ScalarProperty Name="IDStatistic" ColumnName="IDStatistic" />
+                <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+                <ScalarProperty Name="QuantityofExportedDish" ColumnName="QuantityofExportedDish" />
+                <ScalarProperty Name="QuantityofInventory" ColumnName="QuantityofInventory" />
+                <ScalarProperty Name="Profit" ColumnName="Profit" />
+                <ScalarProperty Name="Times" ColumnName="Times" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Store">
+              <MappingFragment StoreEntitySet="Stores">
+                <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Promotion" ColumnName="Promotion" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Roles">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.User_Roles">
+              <MappingFragment StoreEntitySet="User_Roles">
+                <ScalarProperty Name="IDRole" ColumnName="IDRole" />
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IDUser" ColumnName="IDUser" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WarehouseDetails">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.WarehouseDetail">
+              <MappingFragment StoreEntitySet="WarehouseDetail">
+                <ScalarProperty Name="IDWarehouseDetail" ColumnName="IDWarehouseDetail" />
+                <ScalarProperty Name="DishName" ColumnName="DishName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="IDWarehouse" ColumnName="IDWarehouse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouses">
+                <ScalarProperty Name="IDWarehouse" ColumnName="IDWarehouse" />
+                <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
+                <ScalarProperty Name="LocationofWarehouse" ColumnName="LocationofWarehouse" />
+                <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
