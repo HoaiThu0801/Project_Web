@@ -394,6 +394,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CreateStore.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ForgotPassword.css" />
     <Content Include="Content\HomeStyle.css" />
@@ -422,6 +423,7 @@
     <Content Include="images\content.jpg" />
     <Content Include="images\icons\favicon.ico" />
     <Content Include="images\logo.png" />
+    <Content Include="images\remove-icon.png" />
     <Content Include="images\signup-bg.jpg" />
     <Content Include="images\unchecked.gif" />
     <Content Include="Models\Database_PorridgeSellingManagementStore.Context.tt">
@@ -439,6 +441,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CreateStore.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
