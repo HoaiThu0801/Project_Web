@@ -401,6 +401,7 @@
     <Content Include="Content\RegisterStyle.css" />
     <Content Include="Content\SignInStyle.css" />
     <Content Include="Content\util.css" />
+    <Content Include="Content\VerifyEmail.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
