@@ -214,7 +214,7 @@ body {
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     width:60%;
-    height: 700px;
+    height: 750px;
     margin-left: 250px;
     padding-left: 110px;
 }
@@ -242,17 +242,16 @@ body {
     padding: 50px 85px;
     margin-bottom: 10px;
 }
-.remove-icon{
-    margin-top:2px; 
-    margin-left: 575px;
-    background-image: url(../images/remove-icon.png);
-    width: 20px;
-    height: 20px;
-    background-size: 20px;
-    border-style: none;
+.remove-icon {
+    margin-left: 550px;
+    font-size: 40px;
+    font-weight: bold;
+    color: lightgray;
+    width: auto;
 }
-.remove-icon:hover{
+.remove-icon:hover, .remove-icon:focus{
     cursor: pointer;
+    color: gray;
 }
 .popup {
     display: block;
