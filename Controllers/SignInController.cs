@@ -15,7 +15,6 @@ namespace Project_Web.Controllers
     public class SignInController : Controller
     {
         // GET: SignIn
-        //public Database_PorridgeSellingManagementStore_v1_1Entities _db = new Database_PorridgeSellingManagementStore_v1_1Entities();
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         [HttpGet]
         public ActionResult SignIn()
@@ -59,14 +58,16 @@ namespace Project_Web.Controllers
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
             if (user is null)
             {
-                @ViewBag.Message = "Tên đăng nhập không chính xác";
+                @ViewBag.MessageIsNotUser = "Tên đăng nhập không chính xác";
             }
             if (ModelState.IsValid)
             {
+                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+                model.Password = encryptionPW.EncryptPass();
                 user.Password = model.Password;
                 _db.Users.AddOrUpdate(user);
                 _db.SaveChanges();
-                @ViewBag.Message = "Thành công"; 
+                @ViewBag.MessageSuccess = "Thành công";
                 return RedirectToAction("SignIn", "SignIn");
             }
             return View();
