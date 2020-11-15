@@ -37,6 +37,8 @@ namespace Project_Web.Controllers
                 var querryUsersCount = from User in _db.Users
                                        select User.IDUser;
                 user.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+                model.Password = encryptionPW.EncryptPass();
                 user.Username = model.Username;
                 user.Password = model.Password;
                 user.Fullname = model.Fullname;
