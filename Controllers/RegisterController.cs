@@ -35,6 +35,8 @@ namespace Project_Web.Controllers
                                        select User.IDUser;
 
                 model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+                model.Password = encryptionPW.EncryptPass();
                 _db.Users.Add(model);
                 //Setting Default: Role "Customer" in Register page
                 User_Roles user_role = new User_Roles();

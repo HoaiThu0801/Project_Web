@@ -20,9 +20,9 @@ namespace Project_Web.Models
             }
             else 
             {
-                string UserID = HttpContext.Current.Session["User ID"].ToString();
+                User user  = HttpContext.Current.Session["User"] as User;
                 var quyen = (from q in _db.User_Roles
-                            where  q.IDRole == "R01" && q.IDUser == UserID
+                            where  q.IDRole == "R01" && q.IDUser == user.IDUser
                              select q.IDRole).ToList();
                 if (quyen.Count()==0)
                 {

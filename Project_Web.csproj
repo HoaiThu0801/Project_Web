@@ -325,6 +325,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Administrator_SettingController.cs" />
+    <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
@@ -354,6 +355,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\FogotPassWord.cs" />
     <Compile Include="Models\Menu.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>

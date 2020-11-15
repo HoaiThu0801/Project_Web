@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity.Migrations;
 
 namespace Project_Web.Controllers
 {
@@ -21,6 +22,7 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+        [HttpGet]
         public ActionResult ForgotPassWord()
         {
             return View();
@@ -34,8 +36,11 @@ namespace Project_Web.Controllers
         public ActionResult SignIn(User model)
         {
             Session["Is Login"] = 0;
-            Session["User ID"] = null;
-            User user = _db.Users.SingleOrDefault(n => n.Username == model.Username && n.Password == model.Password);
+            Session["User"] = null;
+            EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+            string EncryptedPass = encryptionPW.EncryptPass();
+            User user = _db.Users.SingleOrDefault(n => n.Username == model.Username && n.Password == EncryptedPass);
+           
             if (user is null)
             {
                 @ViewBag.Message = "Tên đăng nhập hoặc mật khẩu không chính xác";
@@ -43,14 +48,27 @@ namespace Project_Web.Controllers
             else
             {
                 Session["Is Login"] = 1;
-                Session["User ID"] = user.IDUser;
+                Session["User"] = user;
                 return RedirectToAction("Index", "Home");
             }
             return View();
         }
         [HttpPost]
-        public ActionResult ForgotPassWord(User model)
+        public ActionResult ForgotPassWord(FogotPassWord model)
         {
+            User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
+            if (user is null)
+            {
+                @ViewBag.Message = "Tên đăng nhập không chính xác";
+            }
+            if (ModelState.IsValid)
+            {
+                user.Password = model.Password;
+                _db.Users.AddOrUpdate(user);
+                _db.SaveChanges();
+                @ViewBag.Message = "Thành công"; 
+                return RedirectToAction("SignIn", "SignIn");
+            }
             return View();
         }
         [HttpPost]
