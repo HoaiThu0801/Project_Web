@@ -2,12 +2,16 @@
     margin: 0px;
     padding: 0px;
 }
-
+body, html{
+    background-color: lightyellow;
+}
 .clearfix:after {
     display: block;
     clear: both;
 }
-
+.right-menu{
+    float:right;
+}
 .wrapper {
     width: 100%;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
@@ -32,7 +36,8 @@
     .menu a {
         transition: all linear 0.15s;
         color: #919191;
-        text-decoration: none
+        text-decoration: none;
+        float: left;
     }
 
     .menu li:hover > a, .menu .current-item > a {
@@ -46,7 +51,6 @@
     }
     /*----- css cho phần menu cha -----*/
     .menu > ul > li {
-        float: left;
         display: inline-block;
         position: relative;
         font-size: 19px;
@@ -68,7 +72,7 @@
     }
 
 .sub-menu {
-    width: 160%;
+    width: 150%;
     padding: 5px 0px;
     position: absolute;
     top: 100%;
@@ -98,7 +102,7 @@
     opacity: 1;
 }
 .sub-menu-information {
-    width: 160%;
+    width: 150%;
     padding: 5px 0px;
     position: absolute;
     top: 100%;
@@ -110,16 +114,16 @@
     background: #2e2728;
 }
 
-    .sub-menu-information li {
+    .right-menu .sub-menu-information li {
         display: block;
         font-size: 16px;
     }
 
-        .sub-menu-information li a {
+        .right-menu .sub-menu-information li a {
             padding: 10px 30px;
             display: block;
         }
 
-            .sub-menu-information li a:hover, .sub-menu-information .current-item a {
+            .right-menu .sub-menu-information li a:hover, .right-menu .sub-menu-information .current-item a {
                 background: #3e3436;
             }
