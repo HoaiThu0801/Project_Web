@@ -28,5 +28,11 @@ namespace Project_Web.Controllers
 
             return View();
         }
+        public ActionResult Logout()
+        {
+            Session["Is Login"] = 0;
+            Session.Remove("User");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

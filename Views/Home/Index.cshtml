@@ -1,4 +1,12 @@
-﻿@{
+﻿@using Project_Web.Models;
+@{
+    if (Session["User"]==null)
+    {
+        <h1>Hoài Thư</h1>
+    }
+}
+
+@{
     ViewBag.Title = "Trang chủ";
 }
 <head>
@@ -30,11 +38,12 @@
                         <li><a href="~/SignIn/SignIn">Đăng nhập</a></li>
                         <li><a href="~/Register/Register">Đăng ký</a></li>
                         <li><a href="#">Thông tin tài khoản</a></li>
-                        <li><a href="#">Đăng xuất</a></li>
+                        <li><a href="~/Home/Logout">Đăng xuất</a></li>
                     </ul>
                 </li>
             </ul>
         </nav>
     </div>
-        <h1>Cửa hàng bán cháo</h1>
+    <h1>Cửa hàng bán cháo</h1>
 </body>
+<script src="~/Scripts/HomePage.js"></script>
