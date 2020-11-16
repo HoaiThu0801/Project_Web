@@ -426,6 +426,7 @@
     <Content Include="images\content.jpg" />
     <Content Include="images\icons\favicon.ico" />
     <Content Include="images\logo.png" />
+    <Content Include="images\menu.png" />
     <Content Include="images\remove-icon.png" />
     <Content Include="images\signup-bg.jpg" />
     <Content Include="images\unchecked.gif" />
@@ -710,6 +711,7 @@
     <Content Include="Views\Administrator_Setting\CreateSeller.cshtml" />
     <Content Include="Views\SignIn\ForgotPassWord.cshtml" />
     <Content Include="Views\SignIn\VerifyEmail.cshtml" />
+    <Content Include="Views\Shared\_LocationStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

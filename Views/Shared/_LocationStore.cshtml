@@ -1,0 +1,71 @@
+﻿@model Project_Web.Models.Store
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .menu-head-right {
+        font-size: 20px;
+        margin: 0;
+        display: inline;
+        margin-left: 10px;
+    }
+    .menu-head {
+        display: flex;
+    }
+    .menu-head-left {
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+    .menu-head-left:hover{
+        cursor: pointer;
+    }
+    .menu-locationstore{
+        margin-left: 10px;
+        margin-top: 10px;
+        padding-left: 10px;
+        width: 20%;
+        background-color: white;
+        border: 1px solid black;
+    }
+    .menu-locationstore li{
+        list-style: none;
+    }
+    .menu-locationstore a{
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+    }
+    .menu-body > ul > li > a:hover{
+        color: gray;
+    }
+    .sub-menu-body{
+        display: none;
+    }
+</style>
+<div class="menu-locationstore">
+    <div menu-head>
+        <img src="~/images/menu.png" class="menu-head-left" id="image" onclick="OpenMenu()"/>
+        <div class="menu-head-right">Danh mục các quận</div>
+    </div>
+    <div class="menu-body">
+        <ul class="sub-menu-body" id="sub-menu-body">
+            <li><a href="#">Cửa hàng quận 9</a></li>
+            <li><a href="#">Cửa hàng quận Thủ Đức</a></li>
+            <li><a href="#">Cửa hàng quận Bình Thạnh</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+    var flaq = true;
+    function OpenMenu() {
+        if (flaq == true) {
+            document.getElementById('sub-menu-body').style.display = 'block';
+            flaq = false;
+        }
+        else {
+            document.getElementById('sub-menu-body').style.display = 'none';
+            flaq = true;
+        }
+    }
+</script>
