@@ -9,6 +9,11 @@
 
     <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="~/Content/CreateStore.css">
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/CreateStore.js"></script>
 </head>
 <body>
     <div class="main">
@@ -20,7 +25,7 @@
                 <div class="signup-content" id="signup-content">
                     <div class="signup-background" id="signup-background">
                         <span class="remove-icon" id="close-popup-form" onclick="closePopupForm()">x</span>
-                        <form method="POST" id="signup-form" class="signup-form">
+                        <form method="POST" action="/Administrator_Setting/CreateStore" id="signup-form" class="signup-form">
                             <h2 class="form-title">Tạo cửa hàng</h2>
                             <div class="form-group">
                                 <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
@@ -41,15 +46,16 @@
                             <div class="form-group">
                                 <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
                             </div>
-                            <div class="textValidation">
+                            <div id="res"></div>
+                            <div class="textValidation" id="showSuccess">
                                 @ViewBag.Message
                             </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
     </div>
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script src="~/Scripts/CreateStore.js"></script>
+    
 </body>
