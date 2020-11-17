@@ -33,7 +33,7 @@ namespace Project_Web.Models
         [RegularExpression(@"(03|07|08|09|01[2|6|8|9])+([0-9]{8})", ErrorMessage = "Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Email không được trống")]
-        [RegularExpression(@"\A(?:A-Z[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
+        [RegularExpression(@"\A(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
                             ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
         public string Email { get; set; }
         public string IDUser { get; set; }
