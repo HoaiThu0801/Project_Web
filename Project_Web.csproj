@@ -713,6 +713,9 @@
     <Content Include="Views\SignIn\ForgotPassWord.cshtml" />
     <Content Include="Views\SignIn\VerifyEmail.cshtml" />
     <Content Include="Views\Shared\_LocationStore.cshtml" />
+    <Content Include="Views\Administrator_Setting\_TabStore.cshtml" />
+    <Content Include="Views\Administrator_Setting\_TabStaff.cshtml" />
+    <Content Include="Views\Administrator_Setting\_TabDish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

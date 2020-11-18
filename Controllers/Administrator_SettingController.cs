@@ -92,5 +92,26 @@ namespace Project_Web.Controllers
             }
             return View();
         }
+        [HttpPost]
+        public ActionResult CreateDish(Store model)
+        {
+            var querryStoresCount = from Store in _db.Stores
+                                    select Store.IDStore;
+            model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+            if (ModelState.IsValid)
+            {
+                _db.Stores.Add(model);
+                //Setting Default: While creating store, creating warehouse of store
+                Warehouse warehouse = new Warehouse();
+                warehouse.IDWarehouse = "WH" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                warehouse.WarehouseName = "Kho hàng " + model.StoreName;
+                warehouse.LocationofWarehouse = model.Location;
+                warehouse.IDStore = model.IDStore;
+                _db.Warehouses.Add(warehouse);
+                _db.SaveChanges();
+                @ViewBag.Message = "Successful";
+            }
+            return View();
+        }
     }
 }
