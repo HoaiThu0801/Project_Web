@@ -1,14 +1,38 @@
 ﻿@model Project_Web.Models.Store
+@using Project_Web.Models;
 <div class="button-popup">
     <button id="open-popup-store-form" class="form-submit" onclick="openPopupStoreForm()">Thêm cửa hàng</button>
-    <table class="table table-hover">
-        <tr>
-            <th>StoreName</th>
-            <th>Location</th>
-            <th>PhoneNumber</th>
-            <th>Email</th>
-        </tr>
-    </table>
+    <div id="table-store" class="table-store">
+        <table class="table table-hover" id="tableStore">
+            <tr>
+                <th style="width: 30% ">Tên cửa hàng</th>
+                <th style="width: 25% " >Vị trí</th>
+                <th style="width: 20% ">Số điện thoại</th>
+                <th style="width: 25% ">Email</th>
+            </tr>
+            @{
+                Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+                var store = (from q in _db.Stores
+                             select new
+                             {
+                                 StoreName = q.StoreName,
+                                 Location = q.Location,
+                                 PhoneNumber = q.PhoneNumber,
+                                 Email = q.Email
+                             });
+                foreach (var s in store)
+                {
+                    <tr>
+                        <td>@s.StoreName</td>
+                        <td>@s.Location</td>
+                        <td>@s.PhoneNumber</td>
+                        <td>@s.Email</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+
 </div>
 <div class="signup-content-store" id="signup-content-store">
     <div class="signup-background" id="signup-background">

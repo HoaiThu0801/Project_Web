@@ -60,6 +60,7 @@ namespace Project_Web.Controllers
                 _db.User_Roles.Add(User_Role);
                 _db.SaveChanges();
                 @ViewBag.Message = "Thành công";
+                return Content("true");
             }
 
 
@@ -112,5 +113,7 @@ namespace Project_Web.Controllers
             }
             return View();
         }
+
+
     }
 }

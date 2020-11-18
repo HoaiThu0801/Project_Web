@@ -35,9 +35,10 @@ $(document).ready(function () {
             url: url,
             data: formdata,
             success: function (res) {
-                if (res == "true")
+                if (res == "true") {
                     alert("Đăng ký thành công");
-                $(window).attr('location', '../Home/Index');
+                    $(window).attr('location', '../Home/Index');
+                }       
             }
         })
     });

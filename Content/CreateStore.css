@@ -1,4 +1,4 @@
-﻿/* @extend display-flex; */
+﻿* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center {
     display: flex;
     display: -webkit-flex;
@@ -43,7 +43,9 @@ list-type-ulli {
     src: url("../fonts/montserrat/Montserrat-Medium.ttf");
     /* IE9 Compat Modes */
 }
-
+.main{
+    width: 1000px
+}
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -165,9 +167,10 @@ body {
 }
 
 .container {
-    width: 660px;
+    width: 90%;
     position: relative;
     margin: 0 auto;
+    margin-left: 300px;
 }
 
 .display-flex {
