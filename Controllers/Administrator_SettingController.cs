@@ -1,6 +1,7 @@
 ﻿using Project_Web.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
@@ -116,8 +117,40 @@ namespace Project_Web.Controllers
         [HttpGet]
         public JsonResult LoadStore()
         {
-            _db.Configuration.ProxyCreationEnabled = false;
-            return Json(_db.Stores.ToList(), JsonRequestBehavior.AllowGet); 
+            var store = (from s in _db.Stores
+                         select new
+                         {
+                             StoreName = s.StoreName,
+                             Location = s.Location,
+                             PhoneNumber = s.PhoneNumber,
+                             Email = s.Email
+                         });
+            return Json(store.ToList(), JsonRequestBehavior.AllowGet); 
+        }
+        [HttpGet]
+        public ActionResult CreateStaff ()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult CreateStaff(string Store, string Staff)
+        {
+            string storename = Store;
+            string fullname = Staff;
+            Store store = (from s in _db.Stores
+                           where s.StoreName == storename
+                           select s).FirstOrDefault();
+            string user = (from u in _db.Users
+                         where u.Fullname == fullname
+                           select u.IDUser).FirstOrDefault();
+            if (store != null && user != null)
+            {
+                store.IDUser = user;
+                _db.Stores.AddOrUpdate(store);
+                _db.SaveChanges();
+            }
+            
+            return View();
         }
 
     }
