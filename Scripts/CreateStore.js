@@ -1,29 +1,58 @@
-﻿
-var flaq = true;
-function openPopupForm() {
+﻿//Mở đóng popupform
+var flaqStore = true;
+var flaqStaff = true;
+var flaqDish = true;
+function openPopupStoreForm() {
 
-    if (flaq == false) {
-        document.getElementById("signup-content").style.display = "none";
-        flaq = true;
+    if (flaqStore == false) {
+        document.getElementById("signup-content-store").style.display = "none";
+        flaqStore = true;
     }
     else {
-        document.getElementById("signup-content").style.display = "block";
-        flaq = false;
+        document.getElementById("signup-content-store").style.display = "block";
+        flaqStore = false;
+    }
+}
+function openPopupStaffForm() {
+
+    if (flaqStaff == false) {
+        document.getElementById("signup-content-staff").style.display = "none";
+        flaqStaff = true;
+    }
+    else {
+        document.getElementById("signup-content-staff").style.display = "block";
+        flaqStaff = false;
+    }
+}
+function openPopupDishForm() {
+
+    if (flaqDish == false) {
+        document.getElementById("signup-content-dish").style.display = "none";
+        flaqDish = true;
+    }
+    else {
+        document.getElementById("signup-content-dish").style.display = "block";
+        flaqDish = false;
     }
 }
 function closePopupForm() {
-    if (flaq == false) {
-        document.getElementById("signup-content").style.display = "none";
-        flaq = true;
+    if (flaqStore == false) {
+        document.getElementById("signup-content-store").style.display = "none";
+        flaqStore = true;
     }
-    else {
-        document.getElementById("signup-content").style.display = "none";
-        flaq = false;
+    if (flaqStaff == false) {
+        document.getElementById("signup-content-staff").style.display = "none";
+        flaqStaff = true;
+    }
+    if (flaqDish == false) {
+        document.getElementById("signup-content-dish").style.display = "none";
+        flaqDish = true;
     }
 }
 
+//Save data without load page
 $(document).ready(function () {
-    $("#signup-form").submit(function (event) {
+    $("#signup-form-store").submit(function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
         var formdata = $(this).serialize();
@@ -39,3 +68,17 @@ $(document).ready(function () {
         return false;
     });
 });
+
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}

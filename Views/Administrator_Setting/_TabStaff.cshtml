@@ -1,6 +1,6 @@
-﻿@model Project_Web.Models.Store
+﻿@model Project_Web.Models.User
 <div class="button-popup">
-    <button id="open-popup-form" class="form-submit" onclick="openPopupForm()">Thêm nhân viên</button>
+    <button id="open-popup-staff-form" class="form-submit" onclick="openPopupStaffForm()">Thêm nhân viên</button>
     <table class="table table-hover">
         <tr>
             <th>StoreName</th>
@@ -10,29 +10,33 @@
         </tr>
     </table>
 </div>
-<div class="signup-content" id="signup-content">
-    <div class="signup-background" id="signup-background">
+<div class="signup-content-staff" id="signup-content-staff">
+    <div class="signup-background-staff" id="signup-background-staff">
         <span class="remove-icon" id="close-popup-form" onclick="closePopupForm()">x</span>
-        <form method="POST" action="/Administrator_Setting/CreateStore" id="signup-form" class="signup-form">
-            <h2 class="form-title">Tạo cửa hàng</h2>
+        <form method="POST" action="/Administrator_Setting/CreateStaff" id="signup-form-staff" class="signup-form">
+            <h2 class="form-title">Thêm nhân viên cho cửa hàng</h2>
             <div class="form-group">
-                <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
+                <div class="form-input-staff">
+                    <select class="custom-select" id="staff-dropdown" name="Staff">
+                        <option disabled="disabled" selected="selected">Chọn nhân viên</option>
+                        <option value="Thư">Thư</option>
+                        <option value="Tường">Tường</option>
+                        <option value="Thiên">Thiên</option>
+                    </select>
+                </div>
             </div>
-            @Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })
             <div class="form-group">
-                <input type="text" class="form-input" id="Location" name="Location" placeholder="Your Location" />
+                <div class="form-input-store">
+                    <select class="custom-select" id="store-dropdown" name="Store">
+                        <option disabled="disabled" selected="selected">Chọn cửa hàng</option>
+                        <option value="Quận 9">Quận 9</option>
+                        <option value="Quận Thủ Đức">Quận Thủ Đức</option>
+                        <option value="Quận 1">Quận 1</option>
+                    </select>
+                </div>
             </div>
-            @Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })
             <div class="form-group">
-                <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
-            </div>
-            @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
-            <div class="form-group">
-                <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
-            </div>
-            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
-            <div class="form-group">
-                <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+                <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu nhân viên" />
             </div>
             <div id="res"></div>
             <div class="textValidation" id="showSuccess">
