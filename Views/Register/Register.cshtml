@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="~/Content/RegisterStyle.css">
 </head>
-<body>s
+<body>
+    s
     <div class="main">
         <section class="signup">
             <div class="container">
@@ -41,7 +42,7 @@
                         @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <div class="form-input">
-                                <select class="custom-select" id="Gender" name="Gender" >
+                                <select class="custom-select" id="Gender" name="Gender">
                                     <option disabled="disabled" selected="selected">Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -78,6 +79,7 @@
             </div>
         </section>
     </div>
+    <script src="~/Scripts/jquery-3.5.1.js"></script>
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/RegisterJS.js"></script>
 </body>
