@@ -22,7 +22,7 @@ namespace Project_Web.Controllers
         }
         [HttpPost]
         public ActionResult Register(User model)
-        {            
+        {
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
             if (user != null)
             {
@@ -45,6 +45,7 @@ namespace Project_Web.Controllers
                 _db.User_Roles.Add(user_role);
                 _db.SaveChanges();
                 @ViewBag.Message = "Successful";
+                return Content("true");
             }
             return View();
         }

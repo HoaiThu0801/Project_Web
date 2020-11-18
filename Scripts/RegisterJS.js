@@ -26,3 +26,24 @@ $('#re_password').keyup(function () {
         return true
     }
 });
+
+$(document).ready(function () {
+    $("#signup-form").submit(function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formdata = $(this).serialize();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formdata,
+            success: function () {
+                if (res == "true") {
+                    alert("Đăng ký thành công");
+                    $(window).attr('location', '../SignIn/SignIn');
+                }
+            },
+        })
+    });
+});
+
+

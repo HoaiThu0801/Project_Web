@@ -1,12 +1,5 @@
 ﻿@using Project_Web.Models;
 @{
-    if (Session["User"]==null)
-    {
-        <h1>Hoài Thư</h1>
-    }
-}
-
-@{
     ViewBag.Title = "Trang chủ";
 }
 <head>
@@ -25,22 +18,70 @@
         <nav class="menu">
             <ul class="clearfix">
                 <li><a href="#">Trang chủ</a></li>
-                <li>
-                    <a href="#">Cài đặt <span class="arrow">&#9660;</span></a>
-                    <ul class="sub-menu">
-                        <li><a href="~/Administrator_Setting/CreateStore">Cài đặt cửa hàng</a></li>
-                        <li><a href="~/Administrator_Setting/CreateSeller">Cài đặt người bán hàng</a></li>
-                    </ul>
-                </li>
-                <li class="right-menu">
-                    <a href="#">Tài khoản <span class="arrow">&#9660;</span></a>
-                    <ul class="sub-menu-information">
-                        <li><a href="~/SignIn/SignIn">Đăng nhập</a></li>
-                        <li><a href="~/Register/Register">Đăng ký</a></li>
-                        <li><a href="#">Thông tin tài khoản</a></li>
-                        <li><a href="~/Home/Logout">Đăng xuất</a></li>
-                    </ul>
-                </li>
+
+                @{
+                    if (Session["User"] != null)
+                    {
+                        Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+                        User user = Session["User"] as User;
+                        var quyen = (from q in _db.User_Roles
+                                     where q.IDUser == user.IDUser
+                                     select q.IDRole).FirstOrDefault();
+                        string temp = quyen.ToString();
+                        if (temp == "R01")
+                        {
+                            <li>
+                                <a href="#">Cài đặt <span class="arrow">&#9660;</span></a>
+                                <ul class="sub-menu">
+                                    <li><a href="~/Administrator_Setting/CreateStore">Cài đặt cửa hàng</a></li>
+                                    <li><a href="~/Administrator_Setting/CreateSeller">Cài đặt người bán hàng</a></li>
+                                </ul>
+                            </li>
+                        }
+                    }
+
+                }
+
+                @*Nếu User đăng nhập thì hiển thị tên User, không thì hiển thị tài khoản*@
+                @{
+                    if (Session["User"] != null)
+                    {
+                        User user = Session["User"] as User;
+                        string temp = user.Username;
+                        if (user.Fullname != null)
+                        {
+                            temp = user.Fullname;
+                        }
+                        else
+                        {
+                            temp = user.Username;
+                        }
+                        <li class="right-menu">
+                            <a href="#">@temp<span class="arrow">&#9660;</span></a>
+                            <ul class="sub-menu-information">
+                                <li><a href="~/SignIn/SignIn">Đăng nhập</a></li>
+                                <li><a href="~/Register/Register">Đăng ký</a></li>
+                                <li><a href="#">Thông tin tài khoản</a></li>
+                                <li><a href="~/Home/Logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="right-menu">
+                            <a href="#">Tài khoản<span class="arrow">&#9660;</span></a>
+                            <ul class="sub-menu-information">
+                                <li><a href="~/SignIn/SignIn">Đăng nhập</a></li>
+                                <li><a href="~/Register/Register">Đăng ký</a></li>
+                                <li><a href="#">Thông tin tài khoản</a></li>
+                                <li><a href="~/Home/Logout">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                }
+
             </ul>
         </nav>
     </div>
