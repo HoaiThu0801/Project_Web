@@ -58,7 +58,6 @@ namespace Project_Web.Controllers
                                      select role.IDRole).SingleOrDefault();
                 User_Role.IDRole = querryGetRole.ToString();
                 _db.User_Roles.Add(User_Role);
-
                 _db.SaveChanges();
                 @ViewBag.Message = "Thành công";
             }

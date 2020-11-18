@@ -11,8 +11,6 @@
     });
 })(jQuery);
 
-
-
 $('#re_password').keyup(function () {
     var password = $('#Password').val();
     var re_password = $('#re_password').val();
@@ -28,22 +26,19 @@ $('#re_password').keyup(function () {
 });
 
 $(document).ready(function () {
-    $("#signup-form").submit(function (event) {
+    $("#signup-seller-form").submit(function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
         var formdata = $(this).serialize();
         $.ajax({
-            type: 'post',
+            type: "post",
             url: url,
             data: formdata,
             success: function (res) {
-                if (res == "true") {
+                if (res == "true")
                     alert("Đăng ký thành công");
-                    $(window).attr('location', '../SignIn/SignIn');
-                }
-            },
+                $(window).attr('location', '../Home/Index');
+            }
         })
     });
 });
-
-
