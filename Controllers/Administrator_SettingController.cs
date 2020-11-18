@@ -113,7 +113,12 @@ namespace Project_Web.Controllers
             }
             return View();
         }
-
+        [HttpGet]
+        public JsonResult LoadStore()
+        {
+            _db.Configuration.ProxyCreationEnabled = false;
+            return Json(_db.Stores.ToList(), JsonRequestBehavior.AllowGet); 
+        }
 
     }
 }

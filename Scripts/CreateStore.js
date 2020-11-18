@@ -82,3 +82,17 @@ function openCity(evt, cityName) {
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+//Load Data using ajax
+$(document).ready(function () {
+    $.ajax({
+        type: "get",
+        url: "/Administrator_Setting/LoadStore",
+        success: function (response) {
+            $.each(response, function (key, item) {
+                $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
+            });
+            return false;
+        },
+    });
+});
