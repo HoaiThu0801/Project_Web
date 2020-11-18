@@ -22,11 +22,10 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form method="post" action="/SignIn/SignIn" class="login100-form validate-form" autocomplete="off">
+                <form method="post" id="signin-form" action="/SignIn/SignIn" class="login100-form validate-form" autocomplete="off">
                     <span class="login100-form-title p-b-34">
                         Account Login
                     </span>
-
                     <div class="wrap-input100 rs1-wrap-input100 validate-input m-b-20" data-validate="Không được để trống">
                         <input id="Username" class="input100" type="text" name="Username" placeholder="Username">
                         <span class="focus-input100"></span>
@@ -38,7 +37,7 @@
                     @ViewBag.Message
                     <hr />
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
+                        <button class="login100-form-btn" type="submit">
                             Sign in
                         </button>
                     </div>
@@ -47,7 +46,6 @@
                         <span class="txt1">
                             Forgot
                         </span>
-
                         <a href="~/SignIn/VerifyEmail" class="txt2">
                             Password?
                         </a>
@@ -67,7 +65,6 @@
     
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/vendor/animsition/js/animsition.min.js"></script>
-    <script src="~/Scripts/esm/popper.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/vendor/select2/select2.min.js"></script>
     <script src="~/vendor/daterangepicker/moment.min.js"></script>

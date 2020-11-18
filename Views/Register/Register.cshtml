@@ -65,11 +65,11 @@
                         </div>
                         @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
                         <div class="form-group">
+                            @*<div  id="Submit" name="Submit" class="form-submit" style="text-align: center"> Sign up </div>*@
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
                         </div>
                     </form>
                     <div class="textValidation">
-                        @ViewBag.Message
                     </div>
                     <p class="loginhere">
                         Have already an account ? <a href="~/SignIn/SignIn" class="loginhere-link">Login here</a>

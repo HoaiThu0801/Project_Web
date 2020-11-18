@@ -48,7 +48,7 @@ namespace Project_Web.Controllers
             {
                 Session["Is Login"] = 1;
                 Session["User"] = user;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index","Home");
             }
             return View();
         }
