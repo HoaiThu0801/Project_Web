@@ -140,13 +140,14 @@ h2 {
     text-align: center;
     margin-bottom: 40px;
     margin-right: 100px;
-    margin-top: 50px;
 }
 
 .clear {
     clear: both;
 }
-
+.main{
+    height: 300px;
+}
 body {
     font-size: 14px;
     line-height: 1.8;
@@ -161,7 +162,8 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     background-position: center center;
-    padding: 115px 0;
+    padding: 130px 0;
+   
 }
 
 .container {
@@ -206,19 +208,8 @@ body {
     -o-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
-.signup-background-staff {
-    background-color: #fff;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -o-border-radius: 10px;
-    -ms-border-radius: 10px;
-    width: 60%;
-    height: 600px;
-    margin-left: 250px;
-    padding-left: 110px;
-}
-.signup-background {
+
+.signup-background-dish {
     background-color: #fff;
     border-radius: 10px;
     -moz-border-radius: 10px;
@@ -226,12 +217,24 @@ body {
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     width:60%;
-    height: 750px;
+    height: 600px;
+    margin-left: 250px;
+    padding-left: 110px;
+}
+.signup-background-store {
+    background-color: #fff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    width: 60%;
+    height: 605px;
     margin-left: 250px;
     padding-left: 110px;
 }
 .signup-content-store {
-    padding: 50px 85px;
+    padding: 25px 85px;
     display: none;
     transition: all 1s;
     -webkit-transition: all 1s;
@@ -244,8 +247,20 @@ body {
     overflow-y: scroll;
     z-index: 1000;
 }
+.signup-background-staff {
+    background-color: #fff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    width: 60%;
+    height: 500px;
+    margin-left: 250px;
+    padding-left: 110px;
+}
 .signup-content-dish {
-    padding: 50px 85px;
+    padding: 30px 85px;
     display: none;
     transition: all 1s;
     -webkit-transition: all 1s;
@@ -259,7 +274,7 @@ body {
     z-index: 1000;
 }
 .signup-content-staff {
-    padding: 50px 85px;
+    padding: 80px 85px;
     display: none;
     transition: all 1s;
     -webkit-transition: all 1s;
@@ -481,8 +496,7 @@ body {
 /*CSS for TabView*/
 .tab {
     overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
+    background-color: white;
 }
 
     /* Style the buttons inside the tab */
@@ -505,6 +519,7 @@ body {
         /* Create an active/current tablink class */
         .tab button.active {
             background-color: #ccc;
+            font-weight: bolder;
         }
 
 /* Style the tab content */
