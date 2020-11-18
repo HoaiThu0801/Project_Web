@@ -1,0 +1,43 @@
+﻿@model Project_Web.Models.Store
+<div class="button-popup">
+    <button id="open-popup-form" class="form-submit" onclick="openPopupForm()">Thêm cửa hàng</button>
+    <table class="table table-hover">
+        <tr>
+            <th>StoreName</th>
+            <th>Location</th>
+            <th>PhoneNumber</th>
+            <th>Email</th>
+        </tr>
+    </table>
+</div>
+<div class="signup-content" id="signup-content">
+    <div class="signup-background" id="signup-background">
+        <span class="remove-icon" id="close-popup-form" onclick="closePopupForm()">x</span>
+        <form method="POST" action="/Administrator_Setting/CreateStore" id="signup-form" class="signup-form">
+            <h2 class="form-title">Tạo cửa hàng</h2>
+            <div class="form-group">
+                <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
+            </div>
+            @Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })
+            <div class="form-group">
+                <input type="text" class="form-input" id="Location" name="Location" placeholder="Your Location" />
+            </div>
+            @Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })
+            <div class="form-group">
+                <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
+            </div>
+            @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
+            <div class="form-group">
+                <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
+            </div>
+            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
+            <div class="form-group">
+                <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up" />
+            </div>
+            <div id="res"></div>
+            <div class="textValidation" id="showSuccess">
+                @ViewBag.Message
+            </div>
+        </form>
+    </div>
+</div>
