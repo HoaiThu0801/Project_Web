@@ -1,4 +1,8 @@
 ﻿@model Project_Web.Models.User
+@using Project_Web.Models;
+@{ 
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+}
 <div class="button-popup">
     <button id="open-popup-staff-form" class="form-submit" onclick="openPopupStaffForm()">Thêm nhân viên</button>
     <table class="table table-hover">
@@ -17,11 +21,18 @@
             <h2 class="form-title">Thêm nhân viên cho cửa hàng</h2>
             <div class="form-group">
                 <div class="form-input-staff">
-                    <select class="custom-select" id="staff-dropdown" name="Staff">
-                        <option disabled="disabled" selected="selected">Chọn nhân viên</option>
-                        <option value="Thư">Thư</option>
-                        <option value="Tường">Tường</option>
-                        <option value="Thiên">Thiên</option>
+                    <select class="custom-select" id="staff-dropdown" name="Staff" >
+                    <option disabled="disabled" selected="selected">Chọn nhân viên</option>
+                        @{
+                            var user = (from u in _db.Users
+                                        join ur in _db.User_Roles on u.IDUser equals ur.IDUser
+                                        where ur.IDRole == "R02"
+                                        select u.Fullname).ToList();
+                            foreach (var u in user)
+                            {
+                                <option value=@u> @u </option>
+                            }
+                        }
                     </select>
                 </div>
             </div>
@@ -29,9 +40,14 @@
                 <div class="form-input-store">
                     <select class="custom-select" id="store-dropdown" name="Store">
                         <option disabled="disabled" selected="selected">Chọn cửa hàng</option>
-                        <option value="Quận 9">Quận 9</option>
-                        <option value="Quận Thủ Đức">Quận Thủ Đức</option>
-                        <option value="Quận 1">Quận 1</option>
+                        @{
+                            var store = (from s in _db.Stores
+                                         select s.StoreName).ToList();
+                            foreach (var s in store)
+                            {
+                                <option value=@s>@s</option>
+                            }
+                        }
                     </select>
                 </div>
             </div>
