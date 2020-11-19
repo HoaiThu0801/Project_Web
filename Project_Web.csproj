@@ -396,6 +396,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CreateSeller.css" />
     <Content Include="Content\CreateStore.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ForgotPassword.css" />
