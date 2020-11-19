@@ -92,7 +92,6 @@ $(document).ready(function () {
             $.each(response, function (key, item) {
                 $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
             });
-            return false;
         },
     });
 });

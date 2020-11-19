@@ -1,4 +1,4 @@
-﻿* @extend display-flex; */
+﻿/* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center {
     display: flex;
     display: -webkit-flex;
@@ -43,9 +43,7 @@ list-type-ulli {
     src: url("../fonts/montserrat/Montserrat-Medium.ttf");
     /* IE9 Compat Modes */
 }
-.main{
-    width: 1000px
-}
+
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -114,6 +112,21 @@ input, select, textarea {
         -ms-box-shadow: none !important;
     }
 
+    input[type=checkbox] {
+        appearance: checkbox !important;
+        -moz-appearance: checkbox !important;
+        -webkit-appearance: checkbox !important;
+        -o-appearance: checkbox !important;
+        -ms-appearance: checkbox !important;
+    }
+
+    input[type=radio] {
+        appearance: radio !important;
+        -moz-appearance: radio !important;
+        -webkit-appearance: radio !important;
+        -o-appearance: radio !important;
+        -ms-appearance: radio !important;
+    }
 
 img {
     max-width: 100%;
@@ -141,15 +154,12 @@ h2 {
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 40px;
-    margin-right: 100px;
 }
 
 .clear {
     clear: both;
 }
-.main{
-    height: 651px;
-}
+
 body {
     font-size: 14px;
     line-height: 1.8;
@@ -165,14 +175,12 @@ body {
     -ms-background-size: cover;
     background-position: center center;
     padding: 10px 0;
-   
 }
 
 .container {
-    width: 90%;
+    width: 660px;
     position: relative;
     margin: 0 auto;
-    margin-left: 250px;
 }
 
 .display-flex {
@@ -212,138 +220,19 @@ body {
     -ms-transform: translate(-50%, -50%);
 }
 
-.signup-background-dish {
-    background-color: #fff;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -o-border-radius: 10px;
-    -ms-border-radius: 10px;
-    width:60%;
-    height: 600px;
-    margin-left: 250px;
-    padding-left: 110px;
-}
-.signup-background-store {
-    background-color: #fff;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -o-border-radius: 10px;
-    -ms-border-radius: 10px;
-    width: 60%;
-    height: 605px;
-    margin-left: 250px;
-    padding-left: 110px;
-}
-.signup-content-store {
-    padding: 25px 85px;
-    display: none;
-    transition: all 1s;
-    -webkit-transition: all 1s;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background: rgba(0, 0, 0, 0.53);
-    overflow-y: scroll;
-    z-index: 1000;
-}
-.signup-background-staff {
-    background-color: #fff;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -o-border-radius: 10px;
-    -ms-border-radius: 10px;
-    width: 60%;
-    height: 500px;
-    margin-left: 250px;
-    padding-left: 110px;
-}
-.signup-content-dish {
-    padding: 30px 85px;
-    display: none;
-    transition: all 1s;
-    -webkit-transition: all 1s;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background: rgba(0, 0, 0, 0.53);
-    overflow-y: scroll;
-    z-index: 1000;
-}
-.signup-content-staff {
-    padding: 80px 85px;
-    display: none;
-    transition: all 1s;
-    -webkit-transition: all 1s;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    background: rgba(0, 0, 0, 0.53);
-    overflow-y: scroll;
-    z-index: 1000;
-}
-.button-popup {
+.signup-content {
     background: #fff;
+    border-radius: 10px;
     -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
-    padding: 50px 85px; 
+    padding: 50px 85px;
 }
-.remove-icon {
-    margin-left: 550px;
-    font-size: 40px;
-    font-weight: bold;
-    color: lightgray;
-    width: auto;
-}
-.remove-icon:hover, .remove-icon:focus{
-    cursor: pointer;
-    color: gray;
-}
-.popup {
-    display: block;
-}
+
 .form-group {
     overflow: hidden;
     margin-bottom: 20px;
-}
-
-.form-input-store {
-    width: 83%;
-    border: 1px solid #ebebeb;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -o-border-radius: 5px;
-    -ms-border-radius: 5px;
-    padding: 17px 20px;
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 500;
-    color: #222;
-}
-
-.form-input-staff {
-    width: 83%;
-    border: 1px solid #ebebeb;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -o-border-radius: 5px;
-    -ms-border-radius: 5px;
-    padding: 17px 20px;
-    box-sizing: border-box;
-    font-size: 14px;
-    font-weight: 500;
-    color: #222;
 }
 
 .form-input {
@@ -427,7 +316,6 @@ body {
         }
 
 .form-submit {
-
     width: 100%;
     border-radius: 5px;
     -moz-border-radius: 5px;
@@ -446,12 +334,67 @@ body {
     background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
     background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
     background-image: linear-gradient(to left, #74ebd5, #9face6);
-    align-content:center;
 }
-.form-submit:hover{
-    opacity: 70%;
-    transition-delay: 0.2s;
+
+    .form-submit:hover {
+        opacity: 70%;
+        transition-delay: 0.2s;
+    }
+
+input[type=checkbox]:not(old) {
+    width: 2em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    display: none;
 }
+
+    input[type=checkbox]:not(old) + label {
+        display: inline-block;
+        margin-top: 7px;
+        margin-bottom: 25px;
+    }
+
+        input[type=checkbox]:not(old) + label > span {
+            display: inline-block;
+            width: 13px;
+            height: 13px;
+            margin-right: 15px;
+            margin-bottom: 3px;
+            border: 1px solid #ebebeb;
+            border-radius: 2px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            -o-border-radius: 2px;
+            -ms-border-radius: 2px;
+            background: white;
+            background-image: -moz-linear-gradient(white, white);
+            background-image: -ms-linear-gradient(white, white);
+            background-image: -o-linear-gradient(white, white);
+            background-image: -webkit-linear-gradient(white, white);
+            background-image: linear-gradient(white, white);
+            vertical-align: bottom;
+        }
+
+    input[type=checkbox]:not(old):checked + label > span {
+        background-image: -moz-linear-gradient(white, white);
+        background-image: -ms-linear-gradient(white, white);
+        background-image: -o-linear-gradient(white, white);
+        background-image: -webkit-linear-gradient(white, white);
+        background-image: linear-gradient(white, white);
+    }
+
+        input[type=checkbox]:not(old):checked + label > span:before {
+            content: '\f26b';
+            display: block;
+            color: #222;
+            font-size: 11px;
+            line-height: 1.2;
+            text-align: center;
+            font-family: 'Material-Design-Iconic-Font';
+            font-weight: bold;
+        }
+
 .term-service {
     color: #555;
 }
@@ -463,6 +406,7 @@ body {
     margin-top: 91px;
     margin-bottom: 5px;
 }
+
 .loginhere-link {
     font-weight: 700;
     color: #222;
@@ -489,46 +433,8 @@ body {
         padding: 50px 25px;
     }
 }
-.textValidation{
+
+.textValidation {
     font-weight: bold;
-    color:red;
-    
+    color: red;
 }
-
-
-/*CSS for TabView*/
-.tab {
-    overflow: hidden;
-    background-color: white;
-}
-
-    /* Style the buttons inside the tab */
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-        font-size: 17px;
-    }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-            font-weight: bolder;
-        }
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    border-top: none;
-}
-
-
