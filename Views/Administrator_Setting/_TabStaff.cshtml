@@ -30,7 +30,7 @@
                                         select u.Fullname).ToList();
                             foreach (var u in user)
                             {
-                                <option value=@u> @u </option>
+                                <option value="@u"> @u </option>
                             }
                         }
                     </select>
@@ -45,7 +45,7 @@
                                          select s.StoreName).ToList();
                             foreach (var s in store)
                             {
-                                <option value=@s>@s</option>
+                                <option value="@s">@s</option>
                             }
                         }
                     </select>
