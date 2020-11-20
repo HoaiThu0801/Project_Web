@@ -149,7 +149,6 @@ namespace Project_Web.Controllers
                 _db.Stores.AddOrUpdate(store);
                 _db.SaveChanges();
             }
-            
             return View();
         }
 
