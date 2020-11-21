@@ -1,6 +1,7 @@
 ﻿using MailKit.Net.Smtp;
 using MimeKit;
 using MailKit;
+using Facebook;
 using Project_Web.Models;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,24 @@ using System.Security.Cryptography;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
+using System.Configuration;
 
 namespace Project_Web.Controllers
 {
     public class SignInController : Controller
     {
+        //Chuyển hướng URI
+        private Uri RedirectUri
+        {
+            get
+            {
+                var uriBuilder = new UriBuilder(Request.Url);
+                uriBuilder.Query = null;
+                uriBuilder.Fragment = null;
+                uriBuilder.Path = Url.Action("FacebookCallback");
+                return uriBuilder.Uri;
+            }
+        }
         // GET: SignIn
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         [HttpGet]
@@ -100,6 +114,86 @@ namespace Project_Web.Controllers
                 }
             }
             return View();
+        }
+
+        //Facebook API
+        public ActionResult LoginFacebook()
+        {
+            var fb = new FacebookClient();
+            var loginUrl = fb.GetLoginUrl(new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                response_type = "code",
+                scope = "email",
+            });
+            return Redirect(loginUrl.AbsoluteUri);
+        }
+        public ActionResult FacebookCallback(string code)
+        {
+            Session["Is Login"] = 0;
+            Session["User"] = null;
+            var fb = new FacebookClient();
+            dynamic result = fb.Post("oauth/access_token", new
+            {
+                client_id = ConfigurationManager.AppSettings["FbAppId"],
+                client_secret = ConfigurationManager.AppSettings["FbAppSecret"],
+                redirect_uri = RedirectUri.AbsoluteUri,
+                code =code,
+            });
+            var accessToken = result.access_token;
+            if(!string.IsNullOrEmpty(accessToken))
+            {
+                fb.AccessToken = accessToken;
+
+                dynamic me = fb.Get("me?fields=name,email,birthday,gender");
+                string email = me.email;
+                string name = me.name;
+                DateTime birthday = Convert.ToDateTime(me.birthday);
+                string gender = me.gender;
+
+                var user = new User();
+                user.Email = email;
+                user.Username = email;
+                user.Fullname = name;
+                user.DateofBirth = birthday;
+                user.Gender = gender;
+
+                var resultInsert = new SignInController().InsertForFacebook(user);
+                user.IDUser = resultInsert;
+                if(resultInsert != null)
+                {
+                    Session["Is Login"] = 1;
+                    Session["User"] = user;
+                }
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public string InsertForFacebook(User model)
+        {
+            var user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
+
+            var querryUsersCount = from User in _db.Users
+                                   select User.IDUser;
+            if (user == null)
+            {
+                model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                User_Roles user_role = new User_Roles();
+                user_role.IDRole = "R03";
+                user_role.IDUser = model.IDUser;
+                _db.User_Roles.Add(user_role);
+                _db.Users.Add(model);
+                _db.SaveChanges();
+                return model.IDUser;
+            }
+            else
+            {
+                var queryId = (from User in _db.Users
+                               where User.Username == model.Username
+                               select User.IDUser).SingleOrDefault();
+                return user.IDUser;
+            }
         }
     }
 }

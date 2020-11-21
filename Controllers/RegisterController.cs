@@ -13,7 +13,6 @@ namespace Project_Web.Controllers
     public class RegisterController : Controller
     {
         // GET: Register
-        //public Database_PorridgeSellingManagementStore_v1_1Entities _db = new Database_PorridgeSellingManagementStore_v1_1Entities();
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         [HttpGet]
         public ActionResult Register()
