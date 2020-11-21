@@ -77,6 +77,7 @@ namespace Project_Web.Controllers
         {
             var querryStoresCount = from Store in _db.Stores
                                    select Store.IDStore;
+            string errorMessage = null;
             model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
             if (ModelState.IsValid)
             {
@@ -89,9 +90,24 @@ namespace Project_Web.Controllers
                 warehouse.IDStore = model.IDStore;
                 _db.Warehouses.Add(warehouse);
                 _db.SaveChanges();
-                @ViewBag.Message = "Successful";
+                return Content("true");
             }
-            return View();
+            if (!ModelState.IsValidField("StoreName"))
+            {
+                errorMessage = "StoreName";
+                return Content(errorMessage);
+            }
+            if (!ModelState.IsValidField("PhoneNumber"))
+            {
+                errorMessage = "PhoneNumber";
+                return Content(errorMessage);
+            }
+            if (!ModelState.IsValidField("Email"))
+            {
+                errorMessage = "Email";
+                return Content(errorMessage);
+            }
+            return Content("errormessage");
         }
         [HttpPost]
         public ActionResult CreateDish(Store model)
