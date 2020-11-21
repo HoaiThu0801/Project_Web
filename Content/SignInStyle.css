@@ -153,7 +153,6 @@ iframe {
     color: #00ad5f;
     text-transform: uppercase;
 }
-
 /*==================================================================
 [ Size ]*/
 .size1 {
@@ -359,7 +358,9 @@ input.input100 {
         background: #333333;
     }
 
-
+.fa-facebook-square:before{
+    padding-right:5px;
+}
 
 /*------------------------------------------------------------------
 [ Responsive ]*/

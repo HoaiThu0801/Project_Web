@@ -146,16 +146,19 @@ namespace Project_Web.Controllers
             if(!string.IsNullOrEmpty(accessToken))
             {
                 fb.AccessToken = accessToken;
-                dynamic me = fb.Get("me?fields=first_name, middle_name,last_name,id,email");
+
+                dynamic me = fb.Get("me?fields=name,email,birthday,gender");
                 string email = me.email;
-                string firstname = me.first_name;
-                string middlename = me.middle_name;
-                string lastname = me.last_name;
+                string name = me.name;
+                DateTime birthday = Convert.ToDateTime(me.birthday);
+                string gender = me.gender;
 
                 var user = new User();
                 user.Email = email;
                 user.Username = email;
-                user.Fullname = firstname + " " + middlename + " " + lastname;
+                user.Fullname = name;
+                user.DateofBirth = birthday;
+                user.Gender = gender;
 
                 var resultInsert = new SignInController().InsertForFacebook(user);
                 user.IDUser = resultInsert;

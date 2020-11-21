@@ -126,39 +126,6 @@ iframe {
     border: none !important;
 }
 
-.txt1 {
-    font-family: Poppins-Regular;
-    font-size: 13px;
-    line-height: 1.4;
-    color: #999999;
-}
-
-.txt2 {
-    font-family: Poppins-Regular;
-    font-size: 13px;
-    line-height: 1.4;
-    color: #00ad5f;
-}
-
-.txt3 {
-    font-family: Poppins-Regular;
-    font-size: 15px;
-    line-height: 1.4;
-    color: #00ad5f;
-    text-transform: uppercase;
-}
-
-/*==================================================================
-[ Size ]*/
-.size1 {
-    width: 355px;
-    max-width: 100%;
-}
-
-.size2 {
-    width: calc(100% - 43px);
-}
-
 
 /*//////////////////////////////////////////////////////////////////
 [ login ]*/
@@ -196,6 +163,7 @@ iframe {
     flex-wrap: wrap;
     align-items: stretch;
     flex-direction: row-reverse;
+    height: 1000px;
 }
 
 .login100-more {
@@ -222,6 +190,7 @@ iframe {
 
 .login100-form {
     width: 50%;
+    height: 70%;
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -249,6 +218,7 @@ iframe {
     width: 100%;
     position: relative;
     border: 1px solid #e6e6e6;
+    height: 16%;
 }
 
 .rs1-wrap-input100,
@@ -402,59 +372,3 @@ input.input100 {
     position: relative;
 }
 
-.alert-validate::before {
-    content: attr(data-validate);
-    position: absolute;
-    max-width: 70%;
-    background-color: #fff;
-    border: 1px solid #c80000;
-    border-radius: 2px;
-    padding: 4px 25px 4px 10px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 12px;
-    pointer-events: none;
-    font-family: Poppins-Regular;
-    color: #c80000;
-    font-size: 13px;
-    line-height: 1.4;
-    text-align: left;
-    visibility: hidden;
-    opacity: 0;
-    -webkit-transition: opacity 0.4s;
-    -o-transition: opacity 0.4s;
-    -moz-transition: opacity 0.4s;
-    transition: opacity 0.4s;
-}
-
-.alert-validate::after {
-    content: "\f12a";
-    font-family: FontAwesome;
-    display: block;
-    position: absolute;
-    color: #c80000;
-    font-size: 16px;
-    top: 50%;
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-    transform: translateY(-50%);
-    right: 18px;
-}
-
-.alert-validate:hover:before {
-    visibility: visible;
-    opacity: 1;
-}
-
-@media (max-width: 992px) {
-    .alert-validate::before {
-        visibility: visible;
-        opacity: 1;
-    }
-}

@@ -7,18 +7,18 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/animate/animate.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/css-hamburgers/hamburgers.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/animsition/css/animsition.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="~/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/HomeStyle.css">
 </head>
 <body>
     <div class="wrapper">
         <nav class="menu">
             <ul class="clearfix">
-                <li><a href="#">Trang chủ</a></li>
+                <li>
+                    <a href="/Home/Index">
+                        <i class="fa fa-home">Trang chủ</i>
+                    </a>
+                </li>
                 @{
                     if (Session["User"] != null)
                     {
@@ -57,7 +57,7 @@
                             temp = user.Username;
                         }
                         <li class="right-menu">
-                            <a href="#">@temp<span class="arrow">&#9660;</span></a>
+                            <a href="#">@temp<span class="arrow"> &#9660;</span></a>
                             <ul class="sub-menu-information">
                                 <li><a href="#">Thông tin tài khoản</a></li>
                                 <li><a href="~/Home/Logout">Đăng xuất</a></li>
@@ -68,12 +68,13 @@
                     else
                     {
                         <li class="right-menu">
-                            <a href="#">Tài khoản<span class="arrow">&#9660;</span></a>
+                            <a href="#">
+                                <i class="fa fa-user">Tài khoản</i>
+                                <span class="arrow"> &#9660;</span>
+                            </a>
                             <ul class="sub-menu-information">
                                 <li><a href="~/SignIn/SignIn">Đăng nhập</a></li>
                                 <li><a href="~/Register/Register">Đăng ký</a></li>
-                                <li><a href="#">Thông tin tài khoản</a></li>
-                                <li><a href="~/Home/Logout">Đăng xuất</a></li>
                             </ul>
                         </li>
                     }
