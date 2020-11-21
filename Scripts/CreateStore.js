@@ -60,9 +60,23 @@ $(document).ready(function () {
             type: 'post',
             url: url,
             data: formdata,
-            success: function () {
-                $("#showSuccess").html("Đăng ký thành công");
-                $(".form-input").val('');
+            success: function (res) {
+                if (res == "true") {
+                    $("#showSuccess").html("Đăng ký thành công");
+                    $(".form-input").val('');
+                }
+                if (res == "StoreName") {
+                    $("#showFail_SN").html("Tên cửa hàng không được để trống!");
+                    $(".form-input").val('');
+                }
+                if (res == "PhoneNumber") {
+                    $("#showFail_PN").html("Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx");
+                    $(".form-input").val('');
+                }
+                if (res == "Email") {
+                    $("#showFail_Email").html("Hãy nhập email hợp lệ, VD: huutuong@gmail.com");
+                    $(".form-input").val('');
+                }
             },
         });
         return false;
