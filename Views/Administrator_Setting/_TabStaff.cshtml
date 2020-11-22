@@ -45,6 +45,7 @@
                         <option disabled="disabled" selected="selected">Chọn cửa hàng</option>
                         @{
                             var store = (from s in _db.Stores
+                                         where s.IDUser == null
                                          select s.StoreName).ToList();
                             foreach (var s in store)
                             {

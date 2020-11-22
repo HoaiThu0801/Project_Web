@@ -2,6 +2,7 @@
     ViewBag.Title = "Đăng ký";
 }
 @model Project_Web.Models.User
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="~/Content/boostrap-social.css" />
     <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="~/Content/RegisterStyle.css">
+
 </head>
 <body>
     <div class="main">
@@ -30,7 +32,7 @@
                             <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
                             <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
-                        @*@Html.ValidationMessageFor(m => m.Password, null, new { @class = "textValidation" })*@
+                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
                         </div>
@@ -82,7 +84,6 @@
                     <p class="loginhere">
                         Have already an account ? <a href="~/SignIn/SignIn" class="loginhere-link">Login here</a>
                     </p>
-
                 </div>
             </div>
         </section>
@@ -91,3 +92,4 @@
     <script src="~/Scripts/jquery-3.5.1.min.js"></script>
     <script src="~/Scripts/RegisterJS.js"></script>
 </body>
+</html>

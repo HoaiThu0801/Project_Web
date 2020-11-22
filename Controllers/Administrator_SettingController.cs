@@ -151,8 +151,9 @@ namespace Project_Web.Controllers
                 store.IDUser = user;
                 _db.Stores.AddOrUpdate(store);
                 _db.SaveChanges();
+                return Content("true");
             }
-            return View();
+            return Content("false");
         }
         #endregion
 
