@@ -16,6 +16,8 @@ namespace Project_Web.Controllers
 
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: Administrator_Setting
+
+        #region CreateSeller
         [HttpGet]
         public ActionResult CreateSeller()
         {
@@ -67,6 +69,9 @@ namespace Project_Web.Controllers
 
             return View();
         }
+        #endregion
+
+        #region Create Store
         [HttpGet]
         public ActionResult CreateStore()
         {
@@ -109,40 +114,22 @@ namespace Project_Web.Controllers
             }
             return Content("errormessage");
         }
-        [HttpPost]
-        public ActionResult CreateDish(Store model)
+        #endregion
+
+        #region Create Dish
+        [HttpGet]
+        public ActionResult CreateDish()
         {
-            var querryStoresCount = from Store in _db.Stores
-                                    select Store.IDStore;
-            model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-            if (ModelState.IsValid)
-            {
-                _db.Stores.Add(model);
-                //Setting Default: While creating store, creating warehouse of store
-                Warehouse warehouse = new Warehouse();
-                warehouse.IDWarehouse = "WH" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                warehouse.WarehouseName = "Kho hàng " + model.StoreName;
-                warehouse.LocationofWarehouse = model.Location;
-                warehouse.IDStore = model.IDStore;
-                _db.Warehouses.Add(warehouse);
-                _db.SaveChanges();
-                @ViewBag.Message = "Successful";
-            }
             return View();
         }
-        [HttpGet]
-        public JsonResult LoadStore()
+        [HttpPost]
+        public ActionResult CreateDish(Menu model)
         {
-            var store = (from s in _db.Stores
-                         select new
-                         {
-                             StoreName = s.StoreName,
-                             Location = s.Location,
-                             PhoneNumber = s.PhoneNumber,
-                             Email = s.Email
-                         });
-            return Json(store.ToList(), JsonRequestBehavior.AllowGet);
+            return View();
         }
+        #endregion
+
+        #region Create Staff
         [HttpGet]
         public ActionResult CreateStaff ()
         {
@@ -167,6 +154,9 @@ namespace Project_Web.Controllers
             }
             return View();
         }
+        #endregion
+
+        #region LoadData
         [HttpGet]
         public JsonResult LoadStaff()
         {
@@ -181,6 +171,19 @@ namespace Project_Web.Controllers
                          });
             return Json(staff_store.ToList(), JsonRequestBehavior.AllowGet);
         }
-
+        [HttpGet]
+        public JsonResult LoadStore()
+        {
+            var store = (from s in _db.Stores
+                         select new
+                         {
+                             StoreName = s.StoreName,
+                             Location = s.Location,
+                             PhoneNumber = s.PhoneNumber,
+                             Email = s.Email
+                         });
+            return Json(store.ToList(), JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

@@ -400,6 +400,7 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\CreateDish.css" />
     <Content Include="Content\CreateSeller.css" />
     <Content Include="Content\CreateStore.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -450,6 +451,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CreateDish.js" />
     <Content Include="Scripts\CreateSeller.js" />
     <Content Include="Scripts\CreateStore.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -722,6 +724,7 @@
     <Content Include="Views\Administrator_Setting\_TabStore.cshtml" />
     <Content Include="Views\Administrator_Setting\_TabStaff.cshtml" />
     <Content Include="Views\Administrator_Setting\_TabDish.cshtml" />
+    <Content Include="Views\Administrator_Setting\CreateDish.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
