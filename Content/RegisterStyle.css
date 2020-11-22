@@ -418,7 +418,13 @@ input[type=checkbox]:not(old) {
     z-index: 2;
     color: #555;
 }
-
+.register-fb{
+    text-align:center;
+}
+.fa-facebook-square{
+    color: white;
+    font-size: 20px;
+}
 @media screen and (max-width: 768px) {
     .container {
         width: calc(100% - 40px);
