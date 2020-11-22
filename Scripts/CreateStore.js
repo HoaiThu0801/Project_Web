@@ -62,7 +62,8 @@ $(document).ready(function () {
             data: formdata,
             success: function (res) {
                 if (res == "true") {
-                    $("#showSuccess").html("Đăng ký thành công");
+                    //$("#showSuccess").html("Đăng ký thành công");
+                    alert("Đăng ký thành công");
                     $(".form-input").val('');
                 }
                 if (res == "StoreName") {
@@ -103,8 +104,27 @@ $(document).ready(function () {
         type: "get",
         url: "/Administrator_Setting/LoadStore",
         success: function (response) {
+            $("tbody#ListData").html("");
             $.each(response, function (key, item) {
                 $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
+            });
+        },
+    });
+});
+
+$(document).ready(function () {
+    $.ajax({
+        type: "get",
+        url: "/Administrator_Setting/LoadStaff",
+        success: function (res) {
+            $("tbody#listStaff").html("");
+            $.each(res, function (key, item) {
+                var tr = $("<tr/>");
+                $("<td/>").html(item.StoreName).appendTo(tr);
+                $("<td/>").html(item.Location).appendTo(tr);
+                $("<td/>").html(item.FullName).appendTo(tr);
+                $("<td/>").html(item.UserName).appendTo(tr);
+                tr.appendTo("tbody#listStaff");
             });
         },
     });

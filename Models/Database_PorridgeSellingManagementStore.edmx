@@ -35,6 +35,7 @@
           <Property Name="Ingredient" Type="nvarchar(max)" />
           <Property Name="ImportPrice" Type="float" />
           <Property Name="SalePrice" Type="float" />
+          <Property Name="Image" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Menu_Stores">
           <Key>
@@ -110,6 +111,8 @@
           <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
           <Property Name="Point" Type="float" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar(max)" />
+          <Property Name="Facebook" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="WarehouseDetail">
           <Key>
@@ -359,6 +362,7 @@
           <Property Name="ImportPrice" Type="Double" />
           <Property Name="SalePrice" Type="Double" />
           <NavigationProperty Name="Menu_Stores" Relationship="Self.FK_Menu_Stores_Menu" FromRole="Menu" ToRole="Menu_Stores" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Menu_Stores">
           <Key>
@@ -448,6 +452,8 @@
           <NavigationProperty Name="Bills" Relationship="Self.FK_Bills_Users" FromRole="Users" ToRole="Bills" />
           <NavigationProperty Name="Stores" Relationship="Self.FK_Stores_Users" FromRole="Users" ToRole="Stores" />
           <NavigationProperty Name="User_Roles" Relationship="Self.FK_User_Roles_Users" FromRole="Users" ToRole="User_Roles" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Facebook" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WarehouseDetail">
           <Key>
@@ -693,6 +699,7 @@
           <EntitySetMapping Name="Menus">
             <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Menu">
               <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="IDDish" ColumnName="IDDish" />
                 <ScalarProperty Name="DishName" ColumnName="DishName" />
                 <ScalarProperty Name="Ingredient" ColumnName="Ingredient" />
@@ -767,6 +774,8 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
                 <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

@@ -141,7 +141,7 @@ namespace Project_Web.Controllers
                              PhoneNumber = s.PhoneNumber,
                              Email = s.Email
                          });
-            return Json(store.ToList(), JsonRequestBehavior.AllowGet); 
+            return Json(store.ToList(), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
         public ActionResult CreateStaff ()
@@ -166,6 +166,20 @@ namespace Project_Web.Controllers
                 _db.SaveChanges();
             }
             return View();
+        }
+        [HttpGet]
+        public JsonResult LoadStaff()
+        {
+            var staff_store = (from s in _db.Stores  
+                         join u in _db.Users on s.IDUser equals u.IDUser
+                         select new
+                         {
+                             StoreName = s.StoreName,
+                             Location = s.Location,
+                             FullName = u.Fullname,
+                             UserName = u.Username
+                         });
+            return Json(staff_store.ToList(), JsonRequestBehavior.AllowGet);
         }
 
     }

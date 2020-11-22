@@ -25,6 +25,7 @@ namespace Project_Web.Models
         public string Ingredient { get; set; }
         public Nullable<double> ImportPrice { get; set; }
         public Nullable<double> SalePrice { get; set; }
+        public string Image { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Menu_Stores> Menu_Stores { get; set; }
