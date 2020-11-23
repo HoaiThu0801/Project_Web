@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web;
-using System.Linq;
+
 namespace Project_Web.Models
 {
     public partial class User
