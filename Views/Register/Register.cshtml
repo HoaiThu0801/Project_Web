@@ -25,9 +25,9 @@
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="Username" id="Username" placeholder="Your Username" />
+                            @ViewBag.Message1
                         </div>
-                        @ViewBag.Message1
-                        @Html.ValidationMessageFor(m => m.Username)
+                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
                             <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
@@ -40,11 +40,11 @@
                         <div class="form-group">
                             <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Your FullName" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Fullname)
+                        @Html.ValidationMessageFor(m => m.Fullname, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Email)
+                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <div class="form-input">
                                 <select class="custom-select" id="Gender" name="Gender">
