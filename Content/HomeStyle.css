@@ -24,7 +24,6 @@ body, html{
     margin: 0px auto;
     background: #bf5c71;
     height: 48px;
-    margin-top: 150px;
 }
 
     .menu li {
@@ -132,4 +131,46 @@ body, html{
 .fa-home:before, .fa-user:before{
     padding-right: 5px;
 }
+.row{
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.header{
+    width:100%;
 
+}
+.text-col-right {
+    display: flex;
+    padding: 5px 0 5px 0;;
+}
+.shopping-cart{
+    padding: 5px 5px;
+    margin-right: 7px;
+    text-align: right;
+    opacity: 80%;
+    border: 2px solid black;
+}
+.shopping-cart:hover{
+    cursor: pointer;
+    opacity: 100%;
+}
+.number-shopping-cart {
+    background: rgb(253, 216, 53);
+    height: 20px;
+    border-radius: 2px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+    margin-left: 9px;
+    font-size: 12px;
+    padding: 0px 6px;
+    font-weight: 700;
+}
+.text-shopping-cart {
+    font-weight: 500;
+    white-space: nowrap;
+}
+.fa-shopping-cart:before{
+    margin-right: 7px;
+}
