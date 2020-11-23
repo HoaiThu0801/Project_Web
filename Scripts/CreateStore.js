@@ -129,3 +129,26 @@ $(document).ready(function () {
         },
     });
 });
+
+
+$(document).ready(function () {
+    $("#signup-form-staff").submit(function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formdata = $(this).serialize();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formdata,
+            success: function (res) {
+                if (res == "true") {
+                    alert("Đăng ký thành công");
+                }
+                else {
+                    alert("Đăng ký thất bại");
+                }
+            },
+        });
+        return false;
+    });
+});

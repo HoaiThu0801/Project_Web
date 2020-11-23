@@ -179,6 +179,20 @@ namespace Project_Web.Controllers
             if (user == null)
             {
                 model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                model.Username = "DefaultUser" + querryUsersCount.Count();
+                model.Password = "DefaultUser" + querryUsersCount.Count();
+                if (model.Email == null )
+                {
+                    model.Email = "DefaultUser@gmail.com";
+                }
+                if (model.Address == null)
+                {
+                    model.Address = "DefaultUser";
+                }
+                if (model.PhoneNumber == null)
+                {
+                    model.PhoneNumber = "0949488160";
+                }
                 User_Roles user_role = new User_Roles();
                 user_role.IDRole = "R03";
                 user_role.IDUser = model.IDUser;
