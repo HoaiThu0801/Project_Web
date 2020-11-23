@@ -21,13 +21,13 @@
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
-                    <form method="POST" id="signup-form" action="/Register/Register" class="signup-form">
+                    <form method="post" id="signup-form" action="/Register/Register" class="signup-form">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
                             <input type="text" class="form-input" name="Username" id="Username" placeholder="Your Username" />
                         </div>
                         @ViewBag.Message1
-                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "textValidation" })
+                        @Html.ValidationMessageFor(m => m.Username)
                         <div class="form-group">
                             <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
                             <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
@@ -40,11 +40,11 @@
                         <div class="form-group">
                             <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Your FullName" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Fullname, null, new { @class = "textValidation" })
+                        @Html.ValidationMessageFor(m => m.Fullname)
                         <div class="form-group">
                             <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
+                        @Html.ValidationMessageFor(m => m.Email)
                         <div class="form-group">
                             <div class="form-input">
                                 <select class="custom-select" id="Gender" name="Gender">
@@ -61,7 +61,6 @@
                         <div class="form-group">
                             <input type="text" class="form-input" id="IdentityCard" name="IdentityCard" placeholder="Your Identity Card" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.IdentityCard, null, new { @class = "textValidation" })
                         <div class="form-group">
                             <input type="text" class="form-input" id="Address" name="Address" placeholder="Your Address" />
                         </div>
@@ -74,10 +73,8 @@
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Đăng ký" />
                         </div>
                     </form>
-                    <div class="textValidation">
-                    </div>
-                    <div class="register-fb form-group">
-                        <a href="/SignIn/LoginFacebook" class="btn btn-facebook form-input">
+                    <div class="register-fb">
+                        <a href="/SignIn/LoginFacebook" class="btn btn-facebook">
                             <i class="fa fa-facebook-square"> Đăng ký với facebook</i>
                         </a>
                     </div>
