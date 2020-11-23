@@ -27,7 +27,6 @@ $('#re_password').keyup(function () {
 
 $(document).ready(function () {
     $("#signup-seller-form").submit(function (event) {
-        event.preventDefault();
         var url = $(this).attr("action");
         var formdata = $(this).serialize();
         $.ajax({
