@@ -172,7 +172,17 @@ namespace Project_Web.Controllers
         }
         public string InsertForFacebook(User model)
         {
-            var user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
+            var user = new User();
+            if (model.Email != null)
+            {
+                user = _db.Users.SingleOrDefault(n => n.Email == model.Email);
+
+            }
+            else
+            {
+               user = _db.Users.SingleOrDefault(n => n.Fullname == model.Fullname);
+            }
+           
 
             var querryUsersCount = from User in _db.Users
                                    select User.IDUser;

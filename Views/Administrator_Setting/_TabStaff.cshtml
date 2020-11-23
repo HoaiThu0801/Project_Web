@@ -24,16 +24,23 @@
             <h2 class="form-title">Thêm nhân viên cho cửa hàng</h2>
             <div class="form-group">
                 <div class="form-input-staff">
-                    <select class="custom-select" id="staff-dropdown" name="Staff" >
-                    <option disabled="disabled" selected="selected">Chọn nhân viên</option>
+                    <select class="custom-select" id="staff-dropdown" name="Staff">
+                        <option disabled="disabled" selected="selected">Chọn nhân viên</option>
                         @{
                             var user = (from u in _db.Users
                                         join ur in _db.User_Roles on u.IDUser equals ur.IDUser
                                         where ur.IDRole == "R02"
-                                        select u.Fullname).ToList();
+                                        select u).ToList();
                             foreach (var u in user)
                             {
-                                <option value="@u"> @u </option>
+                                var storetemp = (from s in _db.Stores
+                                                 where s.IDUser.ToString().Contains(u.IDUser)
+                                                 select s).ToList();
+                                if (storetemp.Count() == 0)
+                                {
+                                    <option value="@u.Fullname"> @u.Fullname </option>
+                                }
+
                             }
                         }
                     </select>
