@@ -48,6 +48,11 @@ namespace Project_Web.Controllers
                 @ViewBag.Message = "Successful";
                 return Content("true");
             }
+            if (ModelState.IsValidField("Username"))
+            {
+                @ViewBag.Message1 = "1";
+                return View();
+            }
             return View();
         }
     }

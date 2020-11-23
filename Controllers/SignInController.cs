@@ -181,6 +181,7 @@ namespace Project_Web.Controllers
                 model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
                 model.Username = "DefaultUser" + querryUsersCount.Count();
                 model.Password = "DefaultUser" + querryUsersCount.Count();
+                model.Facebook = "1";
                 if (model.Email == null )
                 {
                     model.Email = "DefaultUser@gmail.com";
