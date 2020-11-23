@@ -421,6 +421,10 @@ input[type=checkbox]:not(old) {
 .register-fb{
     text-align:center;
 }
+.btn-facebook{
+    width:100%;
+    padding: 17px 20px;
+}
 .fa-facebook-square{
     color: white;
     font-size: 20px;
