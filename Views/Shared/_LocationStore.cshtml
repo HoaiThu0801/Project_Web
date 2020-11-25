@@ -48,14 +48,41 @@
     <div class="menu-body">
         <ul class="sub-menu-body" id="sub-menu-body">
             @{
+                User user = Session["User"] as User;
                 Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
                 var storelist = (from s in _db.Stores
-                                 select s.Location).ToList();
-                foreach (string s in storelist)
+                                 select s).ToList();
+
+                if (user != null )
                 {
-                    <li><a href="#">@s</a></li>
-                }              
-              }
+                    var storetemp = (from s in _db.Stores
+                                     where s.IDUser == user.IDUser
+                                     select s).ToList();
+
+                    foreach (var s in storetemp)
+                    {
+                        
+                        <li><a href="#">@s.Location</a></li>
+                    }
+                }
+                else if (Session["User"] == null)
+                {
+                    foreach (var s in storelist)
+                    {
+                        <li><a href="#">@s.Location</a></li>
+                    }
+                }
+                else
+                {
+                    foreach (var s in storelist)
+                    {
+                        if (user.IDUser == s.IDUser)
+                        {
+                            <li><a href="#">@s</a></li>
+                        }
+                    }
+                }
+            }
         </ul>
     </div>
 </div>
