@@ -430,6 +430,7 @@
     <Content Include="images\bg-01.jpg" />
     <Content Include="images\checked.gif" />
     <Content Include="images\content.jpg" />
+    <Content Include="images\den.jpg" />
     <Content Include="images\icons\favicon.ico" />
     <Content Include="images\logo.png" />
     <Content Include="images\menu.png" />
