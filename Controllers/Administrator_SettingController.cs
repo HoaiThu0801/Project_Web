@@ -26,16 +26,19 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult CreateSeller(CreateSeller model)
         {
-            User usertemp = _db.Users.SingleOrDefault(n => n.Username == model.Username);
-            if (usertemp != null)
+            User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
+            if (user != null)
             {
-                @ViewBag.Message1 = "Tên đăng nhập bị trùng, vui lòng sử dụng tên khác";
-                return View();
+                return Content("user");
+            }
+            user = _db.Users.SingleOrDefault(n => n.Email == model.Email);
+            if (user != null)
+            {
+                return Content("email");
             }
 
             if (ModelState.IsValid) 
             {
-                User user = new User();
                 //Add user into "User" table
                 var querryUsersCount = from User in _db.Users
                                        select User.IDUser;
@@ -67,7 +70,7 @@ namespace Project_Web.Controllers
             }
 
 
-            return View();
+            return Content("false");
         }
         #endregion
 

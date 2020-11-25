@@ -20,13 +20,12 @@
                         <div class="form-group">
                             <input type="text" class="form-input" name="Username" id="Username" placeholder="Your Username" />
                         </div>
-                        @ViewBag.Message1
-                        @Html.ValidationMessageFor(m => m.Username, null, new { @class = "textValidation" })
+                        <div id="showError_Username"></div>
                         <div class="form-group">
                             <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
                             <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
-                        @Html.ValidationMessageFor(m => m.Password, null, new { @class = "textValidation" })
+                        <div id="showError_Password"></div>
                         <div class="form-group">
                             <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
                         </div>
@@ -34,21 +33,19 @@
                         <div class="form-group">
                             <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Your FullName" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Fullname, null, new { @class = "textValidation" })
+                        <div id="showError_Fullname"></div>
                         <div class="form-group">
                             <input type="text" class="form-input" id="Address" name="Address" placeholder="Your Address" />
                         </div>
+                        <div id="showError_Address"></div>
                         <div class="form-group">
                             <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
-
+                        <div id="showError_Email"></div>
                         <div class="form-group">
                             <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
                         </div>
-                        @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
-
-                        @Html.ValidationMessageFor(m => m.Address, null, new { @class = "textValidation" })
+                        <div id="showError_PhoneNumber"></div>
                         <div class="form-group">
                             <div class="form-input">
                                 <select class="custom-select" id="Role" name="Role">

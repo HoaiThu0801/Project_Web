@@ -25,8 +25,12 @@ namespace Project_Web.Controllers
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
             if (user != null)
             {
-                @ViewBag.Message1 = "Tên đăng nhập bị trùng, vui lòng sử dụng tên khác";
-                return View();
+                return Content("user");
+            }
+            user = _db.Users.SingleOrDefault(n => n.Email == model.Email);
+            if (user != null)
+            {
+                return Content("email");
             }
             if (ModelState.IsValid)
             {
@@ -48,12 +52,11 @@ namespace Project_Web.Controllers
                 @ViewBag.Message = "Successful";
                 return Content("true");
             }
-            if (ModelState.IsValidField("Username"))
+            else
             {
-                @ViewBag.Message1 = "1";
-                return View();
+                return Content("false");
             }
-            return View();
+            
         }
     }
 }

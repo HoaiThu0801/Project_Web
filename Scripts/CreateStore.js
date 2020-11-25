@@ -49,6 +49,38 @@ function closePopupForm() {
         flaqDish = true;
     }
 }
+//CreateStrore Validation
+$('#StoreName').click(function () {
+    alert("1");
+    var address = $('#StoreName').val();
+    if (address.length <= 0) {
+        $('#StoreName').css('background', 'yellow')
+        $('#showFail_SN').html('Địa chỉ không được trống!');
+        $('#showFail_SN').css('color', 'red');
+        $('#showFail_SN').css('font-weight', 'bold');
+        return false;
+    }
+    else {
+        $('#StoreName').css('background', 'white')
+        $('#showFail_SN').html('');
+        return true;
+    }
+});
+$('#StoreName').keyup(function () {
+    var address = $('#StoreName').val();
+    if (address.length <= 0) {
+        $('#StoreName').css('background', 'yellow')
+        $('#showFail_SN').html('Địa chỉ không được trống!');
+        $('#showFail_SN').css('color', 'red');
+        $('#showFail_SN').css('font-weight', 'bold');
+        return false;
+    }
+    else {
+        $('#StoreName').css('bacskground', 'white')
+        $('#showFail_SN').html('');
+        return true;
+    }
+});
 
 //Save data without load page
 $(document).ready(function () {
@@ -83,6 +115,7 @@ $(document).ready(function () {
         return false;
     });
 });
+
 
 function openCity(evt, cityName) {
     var i, tabcontent, tablinks;
