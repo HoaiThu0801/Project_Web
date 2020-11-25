@@ -174,3 +174,138 @@ body, html{
 .fa-shopping-cart:before{
     margin-right: 7px;
 }
+/*Menu đa cấp*/
+.menu-head {
+    background-color: white;
+    border: 1px solid black;
+    width: 256px;
+}
+
+.menu-head-right {
+    font-size: 20px;
+    margin: 0;
+    display: inline;
+    margin-left: 10px;
+    text-transform: uppercase;
+}
+
+.menu-head-left {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.menu-head:hover {
+    cursor: pointer;
+}
+
+.menu-locationstore {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 23%;
+}
+
+    .menu-locationstore li {
+        list-style: none;
+    }
+
+    .menu-locationstore a {
+        text-decoration: none;
+        color: gray;
+        font-size: 20px;
+    }
+
+.menu-body {
+    background-color: white;
+    border: 1px solid black;
+    margin-top: 10px;
+    width: 200px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+    .menu-body > ul > li > a:hover {
+        color: black;
+    }
+
+.sub-menu-location {
+    position: relative;
+    left: 198px;
+    top: -43px;
+    width: 200px;
+    display: none;
+    background-color: white;
+    border: 1px solid black;
+}
+
+    .sub-menu-location li {
+        position: relative;
+    }
+
+li:hover .sub-menu-location {
+    display: block;
+}
+
+.sub-menu-location li a {
+    display: block;
+}
+
+    .sub-menu-location li a:hover {
+        display: block;
+        color: black;
+    }
+
+.menu-locationstore .menu-location:hover {
+    background-color: lightblue;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    cursor: pointer;
+}
+
+.menu-locationstore .menu-location {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+
+/*Tải hình ảnh*/
+.body-menu {
+    display: flex;
+}
+
+.menu-parialview {
+    z-index: 1000;
+}
+
+.menu-dish {
+    padding-top: 3.8%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    padding-right: 1%;
+}
+
+.contentProducts{
+    position: relative;
+    padding: 10px;
+    background-color: lightgray;
+    border-radius: 4px;
+}
+.contentProducts:hover{
+    cursor:pointer;
+    text-decoration: none;
+}
+
+.contentProducts-image img {
+    width: 230px;
+    height: 240px;
+}
+
+.contentProducts .contentProducts-title{
+    margin-top: 5px;
+    color: black;
+}
+
+.contentProducts-price .contentProducts-priceOriginal{
+    color: black;
+}
