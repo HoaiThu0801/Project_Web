@@ -2,16 +2,20 @@
     margin: 0px;
     padding: 0px;
 }
-body, html{
+
+body, html {
     background-color: lightyellow;
 }
+
 .clearfix:after {
     display: block;
     clear: both;
 }
-.right-menu{
-    float:right;
+
+.right-menu {
+    float: right;
 }
+
 .wrapper {
     width: 100%;
     box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
@@ -96,10 +100,12 @@ body, html{
             .sub-menu li a:hover, .sub-menu .current-item a {
                 background: #3e3436;
             }
+
 .menu li:hover .sub-menu-information {
     z-index: 1;
     opacity: 1;
 }
+
 .sub-menu-information {
     width: 100%;
     padding: 5px 0px;
@@ -113,48 +119,46 @@ body, html{
     background: #2e2728;
 }
 
-    .right-menu .sub-menu-information li {
+.right-menu .sub-menu-information li {
+    display: block;
+    font-size: 16px;
+}
+
+    .right-menu .sub-menu-information li a {
+        padding: 10px 30px;
         display: block;
-        font-size: 16px;
     }
 
-        .right-menu .sub-menu-information li a {
-            padding: 10px 30px;
-            display: block;
+        .right-menu .sub-menu-information li a:hover, .right-menu .sub-menu-information .current-item a {
+            background: #3e3436;
         }
 
-            .right-menu .sub-menu-information li a:hover, .right-menu .sub-menu-information .current-item a {
-                background: #3e3436;
-            }
 
-
-.fa-home:before, .fa-user:before{
+.fa-home:before, .fa-user:before {
     padding-right: 5px;
 }
-.row{
+
+.row {
     width: 100%;
     margin-left: 0px;
     margin-right: 0px;
 }
-.header{
-    width:100%;
 
+.header {
+    width: 100%;
 }
+
 .text-col-right {
     display: flex;
-    padding: 5px 0 5px 0;;
+    padding: 5px 0 5px 0;
 }
-.shopping-cart{
+
+.shopping-cart {
     padding: 5px 5px;
     margin-right: 7px;
-    text-align: right;
-    opacity: 80%;
     border: 2px solid black;
 }
-.shopping-cart:hover{
-    cursor: pointer;
-    opacity: 100%;
-}
+
 .number-shopping-cart {
     background: rgb(253, 216, 53);
     height: 20px;
@@ -167,13 +171,26 @@ body, html{
     padding: 0px 6px;
     font-weight: 700;
 }
+
 .text-shopping-cart {
     font-weight: 500;
     white-space: nowrap;
 }
-.fa-shopping-cart:before{
+
+.fa-shopping-cart:before {
     margin-right: 7px;
 }
+
+.change-web-shopping {
+    color: black;
+    opacity: 0.75;
+}
+
+    .change-web-shopping:hover {
+        text-decoration: none;
+        color: black;
+        opacity: 1;
+    }
 /*Menu đa cấp*/
 .menu-head {
     background-color: white;
@@ -267,7 +284,7 @@ li:hover .sub-menu-location {
     text-align: center;
 }
 
-/*Tải hình ảnh*/
+/*Show hình ảnh với transition*/
 .body-menu {
     display: flex;
 }
@@ -285,27 +302,72 @@ li:hover .sub-menu-location {
     padding-right: 1%;
 }
 
-.contentProducts{
-    position: relative;
+.contentProducts {
     padding: 10px;
     background-color: lightgray;
     border-radius: 4px;
 }
-.contentProducts:hover{
-    cursor:pointer;
-    text-decoration: none;
-}
 
+    .contentProducts:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+/*Transition hình ảnh*/
 .contentProducts-image img {
     width: 230px;
-    height: 240px;
+    height: 230px;
+    opacity: 1;
+    -webkit-transition: all 0.7s ease;
+    transition: all 0.7s ease;  
 }
+    .contentProducts-image img:hover {
+        -webkit-box-shadow: 0px 0px 15px 15px #fff;
+        box-shadow: 0px 0px 15px 15px #fff;
+        border-radius: 50%;
+        opacity: 0.5;
+        -webkit-transform: scale(1,1);
+        transform: scale(1,1);
+    }
 
-.contentProducts .contentProducts-title{
+/*Transition Text*/
+.contentProducts-image {
+    position: relative;
+}
+    .contentProducts-image .imgredient {
+        position: absolute;
+        top: 50px;
+        color: black;
+        font-size: 20px;
+        text-transform: uppercase;
+        text-align: center;
+        font-weight: bold;
+        opacity: 0;
+        -webkit-transition: all 0.7s ease;
+        transition: all 0.7s ease;
+    }
+
+    .contentProducts-image:hover .imgredient {
+        opacity: 1;
+    }
+
+.contentProducts .contentProducts-title {
     margin-top: 5px;
     color: black;
 }
 
-.contentProducts-price .contentProducts-priceOriginal{
+.fa-cart-plus {
+    font-size: 25px;
     color: black;
+    margin-left: 5px;
 }
+
+.contentProducts-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .contentProducts-price .contentProducts-priceOriginal {
+        color: black;
+        font-size: 18px;
+    }
