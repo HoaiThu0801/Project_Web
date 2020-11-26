@@ -433,6 +433,8 @@
     <Content Include="images\content.jpg" />
     <Content Include="images\den.jpg" />
     <Content Include="images\icons\favicon.ico" />
+    <Content Include="images\ImageProducts\backGroundRegister.jpg" />
+    <Content Include="images\ImageProducts\chao-hanh.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\menu.png" />
     <Content Include="images\remove-icon.png" />

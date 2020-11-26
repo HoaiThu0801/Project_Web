@@ -1,5 +1,5 @@
 ﻿@using Project_Web.Models;
-
+@{Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities(); }
 @{
     ViewBag.Title = "Trang chủ";
 }
@@ -44,7 +44,6 @@
                 @{
                     if (Session["User"] != null)
                     {
-                        Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
                         User user = Session["User"] as User;
                         var quyen = (from q in _db.User_Roles
                                      where q.IDUser == user.IDUser
@@ -113,112 +112,31 @@
             @Html.Partial("~/Views/Shared/_LocationStore.cshtml")
         </div>
         <div class="menu-dish">
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/chao-hanh.jpg" class="image-title" />
-                    <p class="imgredient">Thành phần<br />Cháo, hành, thịt bằm</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Cháo Hành</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">50.000đ</div>
-                    <i class="fa fa-cart-plus" id="cart-plus"></i>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/den.jpg" />
-                    <p class="imgredient">Thành phần<br />Điệu, phá, ăn như hêu</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Thư</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">0đ siêu sale</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/avatar.jpg" />
-                    <p class="imgredient">Thành phần<br />Đẹp trai, giỏi, tài</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Tường</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">Không bán</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/den.jpg" />
-                    <p class="imgredient">Thành phần<br />Điệu, phá, ăn như hêu</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Thư</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">0đ siêu sale</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/avatar.jpg" />
-                    <p class="imgredient">Thành phần<br />Đẹp trai, giỏi, tài</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Tường</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">Không bán</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/den.jpg" />
-                    <p class="imgredient">Thành phần<br />Điệu, phá, ăn như hêu</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Thư</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">0đ siêu sale</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/avatar.jpg" />
-                    <p class="imgredient">Thành phần<br />Đẹp trai, giỏi, tài</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Tường</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">Không bán</div>
-                </div>
-            </a>
-
-            <a class="contentProducts">
-                <div class="contentProducts-image">
-                    <img src="~/images/avatar.jpg" />
-                    <p class="imgredient">Thành phần<br />Đẹp trai, giỏi, tài</p>
-                </div>
-                <div class="contentProducts-text">
-                    <h4 class="contentProducts-title">Tường</h4>
-                </div>
-                <div class="contentProducts-price">
-                    <div class="contentProducts-priceOriginal">Không bán</div>
-                </div>
-            </a>
+            @{
+                var listImage = (from image in _db.Menus
+                                 select image).ToList();
+                if (listImage.Count() > 0)
+                {
+                    foreach (var s in listImage)
+                    {
+                        <a class="contentProducts">
+                            <div class="contentProducts-image">
+                                <img src="../@s.Image" class="image-title" id="ImageProducts"/>
+                                <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                            </div>
+                            <div class="contentProducts-text">
+                                <h4 class="contentProducts-title">@s.DishName</h4>
+                            </div>
+                            <div class="contentProducts-price">
+                                <div class="contentProducts-priceOriginal">@s.ImportPrice.000vnđ</div>
+                                <i class="fa fa-cart-plus" id="cart-plus"></i>
+                            </div>
+                        </a>
+                    }
+                }
+            }
         </div>
     </div>
 </body>
 <script src="~/Scripts/HomePage.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>

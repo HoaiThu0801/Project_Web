@@ -37,7 +37,7 @@ namespace Project_Web.Controllers
                 return Content("email");
             }
 
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 //Add user into "User" table
                 var querryUsersCount = from User in _db.Users
@@ -57,7 +57,7 @@ namespace Project_Web.Controllers
                 //Add role of User into "User_Role" table
 
                 User_Roles User_Role = new User_Roles();
-                string roletemp =model.Role;
+                string roletemp = model.Role;
                 User_Role.IDUser = user.IDUser;
                 var querryGetRole = (from role in _db.Roles
                                      where role.Role1 == roletemp
@@ -84,7 +84,7 @@ namespace Project_Web.Controllers
         public ActionResult CreateStore(Store model)
         {
             var querryStoresCount = from Store in _db.Stores
-                                   select Store.IDStore;
+                                    select Store.IDStore;
             string errorMessage = null;
             model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
             if (ModelState.IsValid)
@@ -128,13 +128,22 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult CreateDish(Menu model)
         {
+            var querryDishesCount = from Menu in _db.Menus
+                                    select Menu.IDDish;
+            model.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+            if(ModelState.IsValid)
+            {
+                _db.Menus.Add(model);
+                _db.SaveChanges();
+                return Content("true");
+            }    
             return View();
         }
         #endregion
 
         #region Create Staff
         [HttpGet]
-        public ActionResult CreateStaff ()
+        public ActionResult CreateStaff()
         {
             return View();
         }
@@ -147,7 +156,7 @@ namespace Project_Web.Controllers
                            where s.StoreName == storename
                            select s).FirstOrDefault();
             string user = (from u in _db.Users
-                         where u.Fullname == fullname
+                           where u.Fullname == fullname
                            select u.IDUser).FirstOrDefault();
             if (store != null && user != null)
             {
@@ -164,15 +173,15 @@ namespace Project_Web.Controllers
         [HttpGet]
         public JsonResult LoadStaff()
         {
-            var staff_store = (from s in _db.Stores  
-                         join u in _db.Users on s.IDUser equals u.IDUser
-                         select new
-                         {
-                             StoreName = s.StoreName,
-                             Location = s.Location,
-                             FullName = u.Fullname,
-                             UserName = u.Username
-                         });
+            var staff_store = (from s in _db.Stores
+                               join u in _db.Users on s.IDUser equals u.IDUser
+                               select new
+                               {
+                                   StoreName = s.StoreName,
+                                   Location = s.Location,
+                                   FullName = u.Fullname,
+                                   UserName = u.Username
+                               });
             return Json(staff_store.ToList(), JsonRequestBehavior.AllowGet);
         }
         [HttpGet]

@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Tạo món ăn";
 }
+@model Project_Web.Models.Menu
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +20,7 @@
                         <div class="form-group">
                             <input type="text" class="form-input" name="DishName" id="DishName" placeholder="DishName" />
                         </div>
+                        @Html.ValidationMessageFor(m => m.DishName)
                         <div class="form-group">
                             <input type="text" class="form-input" id="Ingredient" name="Ingredient" placeholder="Ingredient" />
                         </div>
