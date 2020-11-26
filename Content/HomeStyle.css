@@ -1,6 +1,7 @@
 ﻿* {
     margin: 0px;
     padding: 0px;
+    box-sizing: border-box;
 }
 
 body, html {
@@ -338,8 +339,10 @@ li:hover .sub-menu-location {
 
     .contentProducts-image .imgredient {
         position: absolute;
-        top: 50px;
-        font-size: 20px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -170%);
+        font-size: 14px;
         text-transform: uppercase;
         text-align: center;
         color: yellow;
@@ -365,8 +368,11 @@ li:hover .sub-menu-location {
 
 .fa-cart-plus {
     font-size: 25px;
-    color: black;
+    color: gray;
     margin-left: 5px;
+}
+.fa-cart-plus:hover{
+    color: black;
 }
 
 .contentProducts-price {
