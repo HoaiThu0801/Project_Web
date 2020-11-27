@@ -17,6 +17,18 @@
                     var storetemp = (from s in _db.Stores
                                      where s.IDUser == user.IDUser
                                      select s).ToList();
+                    for (int i = 0; i < storetemp.Count(); i++)
+                    {
+                        string temp = storetemp[i].Location;
+                        for (int j = i + 1; j < storetemp.Count; j++)
+                        {
+                            if (String.Compare(temp, storetemp[j].Location, false) == 0)
+                            {
+                                storetemp.RemoveAt(j);
+                            }
+                        }
+                    }
+
                     if (storetemp.Count() > 0)
                     {
                         foreach (var s in storetemp)
@@ -31,6 +43,17 @@
                     }
                     else
                     {
+                        for (int i = 0; i < storelist.Count(); i++)
+                        {
+                            string temp = storelist[i].Location;
+                            for (int j = i + 1; j < storelist.Count; j++)
+                            {
+                                if (String.Compare(temp, storelist[j].Location, false) == 0)
+                                {
+                                    storelist.RemoveAt(j);
+                                }
+                            }
+                        }
                         foreach (var s in storelist)
                         {
 
@@ -41,12 +64,25 @@
                                 </ul>
                             </li>
                         }
+
                     }
                 }
                 else
                 {
+                    for (int i = 0; i < storelist.Count(); i++)
+                    {
+                        string temp = storelist[i].Location;
+                        for (int j = i + 1; j < storelist.Count; j++)
+                        {
+                            if (String.Compare(temp, storelist[j].Location, false) == 0)
+                            {
+                                storelist.RemoveAt(j);
+                            }
+                        }
+                    }
                     foreach (var s in storelist)
                     {
+
                         <li class="menu-location">
                             <a href="#">@s.Location</a>
                             <ul class="sub-menu-location">
