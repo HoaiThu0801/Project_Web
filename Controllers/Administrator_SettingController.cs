@@ -130,6 +130,11 @@ namespace Project_Web.Controllers
         {
             var querryDishesCount = from Menu in _db.Menus
                                     select Menu.IDDish;
+            Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == model.DishName);
+            if (menu != null)
+            {
+                return Content("false");
+            }
             model.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
             if(ModelState.IsValid)
             {

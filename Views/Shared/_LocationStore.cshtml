@@ -11,27 +11,30 @@
                 Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
                 var storelist = (from s in _db.Stores
                                  select s).ToList();
+                List<Store> storelist_full = new List<Store>();
 
                 if (user != null)
                 {
                     var storetemp = (from s in _db.Stores
                                      where s.IDUser == user.IDUser
                                      select s).ToList();
-                    var storetempfull = (from s in _db.Stores
-                                         where s.IDUser == user.IDUser
-                                         select s).ToList();
-                    for (int i = 0; i < storetemp.Count(); i++)
+
+                    foreach (var s in storetemp)
+                    {
+                        storelist_full.Add(s);
+                    }
+                    for (int i = 0; i < storetemp.Count() - 1; i++)
                     {
                         string temp = storetemp[i].Location;
-                        for (int j = i + 1; j < storetemp.Count; j++)
+                        for (int j = i + 1; j < storetemp.Count(); j++)
                         {
                             if (String.Compare(temp, storetemp[j].Location, false) == 0)
                             {
+                                j--;
                                 storetemp.RemoveAt(j);
                             }
                         }
                     }
-
                     if (storetemp.Count() > 0)
                     {
                         foreach (var s in storetemp)
@@ -39,7 +42,7 @@
                             <li class="menu-location">
                                 <a href="#">@s.Location</a>
                                 @{
-                                    foreach (var sf in storetempfull)
+                                    foreach (var sf in storelist_full)
                                     {
                                         if (sf.Location == s.Location)
                                         {
@@ -57,16 +60,20 @@
                     }
                     else
                     {
-                        var storelistfull = (from s in _db.Stores
-                                 select s).ToList();
-                        for (int i = 0; i < storelist.Count(); i++)
+
+                        foreach (var s in storelist)
+                        {
+                            storelist_full.Add(s);
+                        }
+                        for (int i = 0; i < storelist.Count()-1; i++)
                         {
                             string temp = storelist[i].Location;
-                            for (int j = i + 1; j < storelist.Count; j++)
+                            for (int j = i + 1; j < storelist.Count(); j++)
                             {
                                 if (String.Compare(temp, storelist[j].Location, false) == 0)
                                 {
                                     storelist.RemoveAt(j);
+                                    j--;
                                 }
                             }
                         }
@@ -75,58 +82,65 @@
 
                             <li class="menu-location">
                                 <a href="#">@s.Location</a>
-                                @{ 
-                                    foreach (var sf in storelistfull)
+                                @{
+                                    foreach (var sf in storelist_full)
                                     {
                                         if (sf.Location == s.Location)
                                         {
-                                             <ul class="sub-menu-location">
-                                                 <li><a href="#">@sf.StoreName</a></li>
+                                            <ul class="sub-menu-location">
+                                                <li><a href="#">@sf.StoreName</a></li>
                                             </ul>
                                         }
-                                       
+
                                     }
                                 }
-                                
+
+
                             </li>
                         }
 
                     }
+
                 }
                 else
                 {
-                    var storelistfull = (from s in _db.Stores
-                                 select s).ToList();
-                    for (int i = 0; i < storelist.Count(); i++)
-                    {
-                        string temp = storelist[i].Location;
-                        for (int j = i + 1; j < storelist.Count; j++)
+                foreach (var s in storelist)
                         {
-                            if (String.Compare(temp, storelist[j].Location, false) == 0)
+                            storelist_full.Add(s);
+                        }
+                        for (int i = 0; i < storelist.Count()-1; i++)
+                        {
+                            string temp = storelist[i].Location;
+                            for (int j = i + 1; j < storelist.Count(); j++)
                             {
-                                storelist.RemoveAt(j);
+                                if (String.Compare(temp, storelist[j].Location, false) == 0)
+                                {
+                                    storelist.RemoveAt(j);
+                                    j --;
+                                }
                             }
                         }
-                    }
-                    foreach (var s in storelist)
-                    {
+                        foreach (var s in storelist)
+                        {
 
-                        <li class="menu-location">
-                            <a href="#">@s.Location</a>
-                             @{ 
-                                    foreach (var sf in storelistfull)
+                            <li class="menu-location">
+                                <a href="#">@s.Location</a>
+                                @{
+                                    foreach (var sf in storelist_full)
                                     {
                                         if (sf.Location == s.Location)
                                         {
-                                             <ul class="sub-menu-location">
-                                                 <li><a href="#">@sf.StoreName</a></li>
+                                            <ul class="sub-menu-location">
+                                                <li><a href="#">@sf.StoreName</a></li>
                                             </ul>
                                         }
-                                       
+
                                     }
                                 }
-                        </li>
-                    }
+
+
+                            </li>
+                        }   
                 }
             }
         </ul>
