@@ -165,7 +165,6 @@ body {
     -ms-background-size: cover;
     background-position: center center;
     padding: 10px 0;
-   
 }
 
 .container {
@@ -477,24 +476,12 @@ body {
     color: #555;
 }
 
-@media screen and (max-width: 768px) {
-    .container {
-        width: calc(100% - 40px);
-        max-width: 100%;
-    }
-}
 
-@media screen and (max-width: 480px) {
-    .signup-content {
-        padding: 50px 25px;
-    }
-}
 .textValidation{
     font-weight: bold;
     color:red;
     
 }
-
 
 /*CSS for TabView*/
 .tab {
@@ -531,4 +518,21 @@ body {
     border-top: none;
 }
 
+/*CSS for table View*/
+.table{
+    margin-top: 10px;
+    border-width: 3px;
+}
 
+@media screen and (max-width: 768px) {
+    .container {
+        width: calc(100% - 40px);
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .signup-content {
+        padding: 50px 25px;
+    }
+}
