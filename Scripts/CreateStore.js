@@ -163,6 +163,16 @@ $(document).ready(function () {
     });
 });
 
+//Click icon X reload page
+$(document).ready(function () {
+    $(".remove-icon").click(function () {
+        alert("Chờ xíu trang sẽ được tải lại");
+        setTimeout(function () {
+            $('.table').load('.table');
+            //location.reload();
+        }, 100)
+    });
+});
 
 $(document).ready(function () {
     $("#signup-form-staff").submit(function (event) {
