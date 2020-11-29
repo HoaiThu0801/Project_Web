@@ -487,6 +487,11 @@ body {
 .tab {
     overflow: hidden;
     background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
     /* Style the buttons inside the tab */
@@ -517,11 +522,20 @@ body {
     display: none;
     border-top: none;
 }
+    .tabcontent .button-popup {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
 
 /*CSS for table View*/
 .table{
     margin-top: 10px;
     border-width: 3px;
+}
+.custom-select{
+    height: 61px;
+    font-size: 14px;
+    font-weight:500;
 }
 
 @media screen and (max-width: 768px) {
