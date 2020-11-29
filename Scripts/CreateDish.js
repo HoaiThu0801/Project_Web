@@ -8,6 +8,10 @@ function readURL(event) {
         show.src = src;
         srcImage = event.target.files[0].name;
         show.style.display = "block";
+        
+        const reader = new FileReader();
+        reader.onload();
+        
     }
 }
 $(document).ready(function () {

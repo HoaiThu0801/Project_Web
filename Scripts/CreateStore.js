@@ -132,18 +132,18 @@ function openCity(evt, cityName) {
 }
 
 //Load Data using ajax
-$(document).ready(function () {
-    $.ajax({
-        type: "get",
-        url: "/Administrator_Setting/LoadStore",
-        success: function (response) {
-            $("tbody#ListData").html("");
-            $.each(response, function (key, item) {
-                $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
-            });
-        },
-    });
-});
+//$(document).ready(function () {
+//    $.ajax({
+//        type: "get",
+//        url: "/Administrator_Setting/LoadStore",
+//        success: function (response) {
+//            $("tbody#ListData").html("");
+//            $.each(response, function (key, item) {
+//                $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
+//            });
+//        },
+//    });
+//});
 
 $(document).ready(function () {
     $.ajax({

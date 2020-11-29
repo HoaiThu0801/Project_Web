@@ -27,7 +27,8 @@
                         <button class="tablinks" onclick="openCity(event, 'Dish')">Món ăn</button>
                     </div>
                     <div class="tabcontent" id="Store">
-                        @Html.Partial("~/Views/Administrator_Setting/_TabStore.cshtml")
+                        @*@Html.Partial("~/Views/Administrator_Setting/_TabStore.cshtml")*@
+                        @{Html.RenderAction("_TabStore", "Administrator_Setting", new { page = 1 });}
                     </div>
                     <div class="tabcontent" id="Staff">
                         @Html.Partial("~/Views/Administrator_Setting/_TabStaff.cshtml")
