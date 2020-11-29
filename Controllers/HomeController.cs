@@ -4,15 +4,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace Project_Web.Controllers
 {
     //[AuthorizeController]
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+        public ActionResult Index(int ?page)
         {
-            return View();
+            if (page == null) page = 1;
+            var menu = (from l in _db.Menus
+                         select l).OrderBy(x => x.IDDish);
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(menu.ToPagedList(pageNumber, pageSize));
+            //return View();
         }
 
         public ActionResult About()

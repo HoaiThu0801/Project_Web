@@ -1,4 +1,7 @@
 ﻿@using Project_Web.Models;
+@model PagedList.IPagedList<Project_Web.Models.Menu>
+@using PagedList.Mvc;
+
 @{Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities(); }
 @{
     ViewBag.Title = "Trang chủ";
@@ -113,30 +116,31 @@
         </div>
         <div class="menu-dish">
             @{
-                var listImage = (from image in _db.Menus
-                                 select image).ToList();
-                if (listImage.Count() > 0)
+                foreach (var s in Model)
                 {
-                    foreach (var s in listImage)
-                    {
-                        <a class="contentProducts">
-                            <div class="contentProducts-image">
-                                <img src="../@s.Image" class="image-title" id="ImageProducts"/>
-                                <p class="imgredient">Thành phần<br />@s.Ingredient</p>
-                            </div>
-                            <div class="contentProducts-text">
-                                <h4 class="contentProducts-title">@s.DishName</h4>
-                            </div>
-                            <div class="contentProducts-price">
-                                <div class="contentProducts-priceOriginal">@s.ImportPrice.000vnđ</div>
-                                <i class="fa fa-cart-plus cart-plus" id="cart-plus"></i>
-                            </div>
-                        </a>
-                    }
+                    <a class="contentProducts">
+                        <div class="contentProducts-image">
+                            <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                            <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                        </div>
+                        <div class="contentProducts-text">
+                            <h4 class="contentProducts-title">@s.DishName</h4>
+                        </div>
+                        <div class="contentProducts-price">
+                            <div class="contentProducts-priceOriginal">@s.SalePrice.000vnđ</div>
+                            <i class="fa fa-cart-plus cart-plus" id="cart-plus"></i>
+                        </div>
+                    </a>
                 }
             }
         </div>
     </div>
 </body>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</div>
 <script src="~/Scripts/HomePage.js"></script>
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>

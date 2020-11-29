@@ -1,5 +1,8 @@
-﻿@model Project_Web.Models.Store
+﻿@*@model Project_Web.Models.Store*@
 @using Project_Web.Models;
+@model PagedList.IPagedList<Project_Web.Models.Store>
+@using PagedList.Mvc;
+
 <div class="button-popup">
     <button id="open-popup-store-form" class="form-submit" onclick="openPopupStoreForm()">Thêm cửa hàng</button>
     <table class="table table-bordered">
@@ -12,9 +15,28 @@
             </tr>
         </thead>
         <tbody id="ListData">
+            @{
+                foreach (var s in Model)
+                {
 
+                    <tr>
+                        <td>@s.StoreName</td>
+                        <td>@s.Location</td>
+                        <td>@s.PhoneNumber</td>
+                        <td>@s.Email</td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
+</div>
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
+        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("_TabStore", new { page }),
+       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
+       { HttpMethod = "GET", UpdateTargetId = "Administrator_Setting" }))
+    </div>
 </div>
 <div class="signup-content-store" id="signup-content-store">
     <div class="signup-background-store" id="signup-background-store">
@@ -24,7 +46,7 @@
             <div class="form-group">
                 <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
             </div>
-            @Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })
+            @*@Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_SN">
                 @ViewBag.Message
@@ -57,11 +79,11 @@
                     <option value="	Huyện Cần Giờ">Huyện Cần Giờ</option>
                 </select>
             </div>
-            @Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })
+            @*@Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })*@
             <div class="form-group">
                 <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
             </div>
-            @Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })
+            @*@Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_PN">
                 @ViewBag.Message
@@ -69,7 +91,7 @@
             <div class="form-group">
                 <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
             </div>
-            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })
+            @*@Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_Email">
                 @ViewBag.Message
@@ -78,9 +100,9 @@
                 <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu cửa hàng" />
             </div>
             @*<div id="res"></div>
-            <div class="textValidation" id="showSuccess">
-                @ViewBag.Message
-            </div>*@
+                <div class="textValidation" id="showSuccess">
+                    @ViewBag.Message
+                </div>*@
         </form>
     </div>
 </div>

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.DynamicData;
 using System.Web.Mvc;
 using System.Web.UI;
+using PagedList;
 
 namespace Project_Web.Controllers
 {
@@ -203,5 +204,18 @@ namespace Project_Web.Controllers
             return Json(store.ToList(), JsonRequestBehavior.AllowGet);
         }
         #endregion
+
+        #region Paging
+        public PartialViewResult _TabStore(int ?page)
+        {
+            if (page == null) page = 1;
+            var store = (from s in _db.Stores
+                        select s).OrderBy(x => x.IDStore);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return PartialView("_TabStore",store.ToPagedList(pageNumber, pageSize));
+        }
+        #endregion
+
     }
 }
