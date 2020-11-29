@@ -135,12 +135,16 @@
             }
         </div>
     </div>
-</body>
-<div class="row">
-    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
-        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    <div class="paging">
+        <div class="paging-show">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+        <div class="paging-choose">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+        
     </div>
-</div>
+</body>
+
 <script src="~/Scripts/HomePage.js"></script>
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>

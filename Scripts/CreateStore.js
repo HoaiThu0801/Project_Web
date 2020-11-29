@@ -193,3 +193,17 @@ $(document).ready(function () {
         return false;
     });
 });
+
+$(function () {
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Store').html(result);
+            },
+        });
+        return false;
+    });
+});

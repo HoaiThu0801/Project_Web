@@ -2,8 +2,7 @@
 @using Project_Web.Models;
 @model PagedList.IPagedList<Project_Web.Models.Store>
 @using PagedList.Mvc;
-
-<div class="button-popup">
+<div class="button-popup" id="button-popup">
     <button id="open-popup-store-form" class="form-submit" onclick="openPopupStoreForm()">Thêm cửa hàng</button>
     <table class="table table-bordered">
         <thead>
@@ -29,13 +28,16 @@
             }
         </tbody>
     </table>
-</div>
-<div class="row">
-    <div class="col-md-6 col-lg-6 col-xs-6 col-sm-6 text-right">
-        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-        @Html.PagedListPager(Model, page => Url.Action("_TabStore", new { page }),
-       PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions()
-       { HttpMethod = "GET", UpdateTargetId = "Administrator_Setting" }))
+    <div class="paging">
+        <div class="paging-show">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+        <div class="paging-choose" id="myPager">
+            @Html.PagedListPager(Model, page => Url.Action("_TabStore", new { page }), 
+           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.ClassicPlusFirstAndLast
+           , new AjaxOptions 
+           {InsertionMode = InsertionMode.Replace, HttpMethod = "Get",UpdateTargetId="Store" }))
+        </div>
     </div>
 </div>
 <div class="signup-content-store" id="signup-content-store">

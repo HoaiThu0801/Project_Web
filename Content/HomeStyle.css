@@ -370,9 +370,10 @@ li:hover .sub-menu-location {
     color: gray;
     margin-left: 5px;
 }
-.fa-cart-plus:hover{
-    color: black;
-}
+
+    .fa-cart-plus:hover {
+        color: black;
+    }
 
 .contentProducts-price {
     display: flex;
@@ -383,3 +384,20 @@ li:hover .sub-menu-location {
         color: black;
         font-size: 18px;
     }
+
+/*Paging for menu*/
+.paging {
+    margin-top: 20px;
+}
+
+.paging-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paging-choose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

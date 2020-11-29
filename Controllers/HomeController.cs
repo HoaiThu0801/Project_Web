@@ -20,7 +20,6 @@ namespace Project_Web.Controllers
             int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(menu.ToPagedList(pageNumber, pageSize));
-            //return View();
         }
 
         public ActionResult About()

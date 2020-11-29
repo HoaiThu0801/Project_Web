@@ -216,6 +216,5 @@ namespace Project_Web.Controllers
             return PartialView("_TabStore",store.ToPagedList(pageNumber, pageSize));
         }
         #endregion
-
     }
 }
