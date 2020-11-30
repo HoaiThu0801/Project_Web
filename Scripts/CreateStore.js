@@ -82,6 +82,18 @@ $('#StoreName').keyup(function () {
     }
 });
 
+$(document).ready(function () {
+    $('#LocationSelect').change(function () {
+        $("#StoreNameList").css("display", "block");
+        $(".show-dish-list").css("display", "block");
+    });
+});
+$(document).ready(function () {
+    $('.fa').click(function () {
+        var t = $(this).toggleClass('fa-circle');
+    });
+});
+
 //Save data without load page
 $(document).ready(function () {
     $("#signup-form-store").submit(function (event) {
@@ -131,20 +143,6 @@ function openCity(evt, cityName) {
     evt.currentTarget.className += " active";
 }
 
-//Load Data using ajax
-//$(document).ready(function () {
-//    $.ajax({
-//        type: "get",
-//        url: "/Administrator_Setting/LoadStore",
-//        success: function (response) {
-//            $("tbody#ListData").html("");
-//            $.each(response, function (key, item) {
-//                $("#ListData").append("<tr><td>" + item.StoreName + "</td><td>" + item.Location + "</td><td>" + item.PhoneNumber + "</td><td>" + item.Email + "</td></tr>");
-//            });
-//        },
-//    });
-//});
-
 $(document).ready(function () {
     $.ajax({
         type: "get",
@@ -168,7 +166,7 @@ $(document).ready(function () {
     $(".remove-icon").click(function () {
         setTimeout(function () {
             location.reload();
-        }, 1000)
+        }, 100)
     });
 });
 
