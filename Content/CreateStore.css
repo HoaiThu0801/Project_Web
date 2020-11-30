@@ -1,4 +1,4 @@
-﻿* @extend display-flex; */
+﻿/*@extend display-flex; */
 display-flex, .display-flex, .display-flex-center {
     display: flex;
     display: -webkit-flex;
@@ -89,9 +89,7 @@ a:focus, a:active {
 
 input, select, textarea {
     outline: none;
-    appearance: unset !important;
     -moz-appearance: unset !important;
-    -webkit-appearance: unset !important;
     -o-appearance: unset !important;
     -ms-appearance: unset !important;
 }
@@ -219,9 +217,8 @@ body {
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     width:60%;
-    height: 600px;
     margin-left: 250px;
-    padding-left: 110px;
+    padding:0 0 10px 110px;
 }
 .signup-background-store {
     background-color: #fff;
@@ -448,7 +445,7 @@ body {
     align-content:center;
 }
 .form-submit:hover{
-    opacity: 70%;
+    opacity: 0.7;
     transition-delay: 0.2s;
 }
 .term-service {
@@ -534,7 +531,7 @@ body {
 }
 .custom-select{
     height: 61px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight:500;
 }
 /*Paging table*/
@@ -547,6 +544,28 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.dishname-choose {
+    color: black;
+    font-size: 18px;
+}
+.dishname-choose:hover {
+    color: black;
+    cursor:text;
+}
+.fa-circle-o:before{
+    padding-right: 5px;
+}
+.fa-circle-o:before{
+    cursor: pointer;
+}
+.list-dish {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+.show-dish-list{
+    display: none;
 }
 
 @media screen and (max-width: 768px) {

@@ -5,11 +5,7 @@
 <head>
     <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="~/Content/CreateStore.css">
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script src="~/Scripts/jquery-3.5.1.js"></script>
-    <script src="~/Scripts/jquery.validate.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/CreateStore.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <div class="main">
@@ -22,7 +18,6 @@
                         <button class="tablinks" onclick="openCity(event, 'Dish')">Món ăn</button>
                     </div>
                     <div class="tabcontent" id="Store">
-                        @*@Html.Partial("~/Views/Administrator_Setting/_TabStore.cshtml")*@
                         @{Html.RenderAction("_TabStore", "Administrator_Setting", new { page = 1 });}
                     </div>
                     <div class="tabcontent" id="Staff">
@@ -37,3 +32,8 @@
         </section>
     </div>
 </body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/CreateStore.js"></script>
