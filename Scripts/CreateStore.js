@@ -70,7 +70,7 @@ $('#StoreName').keyup(function () {
     var address = $('#StoreName').val();
     if (address.length <= 0) {
         $('#StoreName').css('background', 'yellow')
-        $('#showFail_SN').html('Địa chỉ không được trống!');
+        $('#showFail_SN').html('Tên cửa hàng không được trống!');
         $('#showFail_SN').css('color', 'red');
         $('#showFail_SN').css('font-weight', 'bold');
         return false;
