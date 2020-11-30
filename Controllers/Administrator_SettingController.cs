@@ -27,6 +27,7 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult CreateSeller(CreateSeller model)
         {
+
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
             if (user != null)
             {
@@ -40,26 +41,28 @@ namespace Project_Web.Controllers
 
             if (ModelState.IsValid)
             {
+                User usertemp = new User();
                 //Add user into "User" table
                 var querryUsersCount = from User in _db.Users
                                        select User.IDUser;
-                user.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                usertemp.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+
                 EncryptionPW encryptionPW = new EncryptionPW(model.Password);
                 model.Password = encryptionPW.EncryptPass();
-                user.Username = model.Username;
-                user.Password = model.Password;
-                user.Fullname = model.Fullname;
-                user.Address = model.Address;
-                user.PhoneNumber = model.PhoneNumber;
-                user.Email = model.Email;
+                usertemp.Username = model.Username;
+                usertemp.Password = model.Password;
+                usertemp.Fullname = model.Fullname;
+                usertemp.Address = model.Address;
+                usertemp.PhoneNumber = model.PhoneNumber;
+                usertemp.Email = model.Email;
+                _db.Users.Add(usertemp);
 
-                _db.Users.Add(user);
 
                 //Add role of User into "User_Role" table
 
                 User_Roles User_Role = new User_Roles();
                 string roletemp = model.Role;
-                User_Role.IDUser = user.IDUser;
+                User_Role.IDUser = usertemp.IDUser;
                 var querryGetRole = (from role in _db.Roles
                                      where role.Role1 == roletemp
                                      select role.IDRole).SingleOrDefault();
@@ -214,6 +217,17 @@ namespace Project_Web.Controllers
             int pageSize = 4;
             int pageNumber = (page ?? 1);
             return PartialView("_TabStore",store.ToPagedList(pageNumber, pageSize));
+        }
+        public PartialViewResult _TabStaff(int? page)
+        {
+
+            if (page == null) page = 1;
+            var store = (from s in _db.Stores
+                         where s.IDUser != null
+                         select s).OrderBy(x => x.IDStore);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return PartialView("_TabStaff", store.ToPagedList(pageNumber, pageSize));
         }
         #endregion
     }

@@ -55,7 +55,7 @@ $('#StoreName').click(function () {
     var address = $('#StoreName').val();
     if (address.length <= 0) {
         $('#StoreName').css('background', 'yellow')
-        $('#showFail_SN').html('Địa chỉ không được trống!');
+        $('#showFail_SN').html('Tên cửa hàng không được trống!');
         $('#showFail_SN').css('color', 'red');
         $('#showFail_SN').css('font-weight', 'bold');
         return false;
@@ -70,7 +70,7 @@ $('#StoreName').keyup(function () {
     var address = $('#StoreName').val();
     if (address.length <= 0) {
         $('#StoreName').css('background', 'yellow')
-        $('#showFail_SN').html('Địa chỉ không được trống!');
+        $('#showFail_SN').html('Tên cửa hàng không được trống!');
         $('#showFail_SN').css('color', 'red');
         $('#showFail_SN').css('font-weight', 'bold');
         return false;
@@ -102,12 +102,24 @@ $(document).ready(function () {
                     $("#showFail_SN").html("Tên cửa hàng không được để trống!");
                     $(".form-input").val('');
                 }
+                else {
+                    $("#showFail_SN").html("");
+                    $(".form-input").val('');
+                }
                 if (res == "PhoneNumber") {
                     $("#showFail_PN").html("Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx");
                     $(".form-input").val('');
                 }
+                else {
+                    $("#showFail_PN").html("");
+                    $(".form-input").val('');
+                }
                 if (res == "Email") {
                     $("#showFail_Email").html("Hãy nhập email hợp lệ, VD: huutuong@gmail.com");
+                    $(".form-input").val('');
+                }
+                else {
+                    $("#showFail_Email").html("");
                     $(".form-input").val('');
                 }
             },
@@ -145,23 +157,23 @@ function openCity(evt, cityName) {
 //    });
 //});
 
-$(document).ready(function () {
-    $.ajax({
-        type: "get",
-        url: "/Administrator_Setting/LoadStaff",
-        success: function (res) {
-            $("tbody#listStaff").html("");
-            $.each(res, function (key, item) {
-                var tr = $("<tr/>");
-                $("<td/>").html(item.StoreName).appendTo(tr);
-                $("<td/>").html(item.Location).appendTo(tr);
-                $("<td/>").html(item.FullName).appendTo(tr);
-                $("<td/>").html(item.UserName).appendTo(tr);
-                tr.appendTo("tbody#listStaff");
-            });
-        },
-    });
-});
+//$(document).ready(function () {
+//    $.ajax({
+//        type: "get",
+//        url: "/Administrator_Setting/LoadStaff",
+//        success: function (res) {
+//            $("tbody#listStaff").html("");
+//            $.each(res, function (key, item) {
+//                var tr = $("<tr/>");
+//                $("<td/>").html(item.StoreName).appendTo(tr);
+//                $("<td/>").html(item.Location).appendTo(tr);
+//                $("<td/>").html(item.FullName).appendTo(tr);
+//                $("<td/>").html(item.UserName).appendTo(tr);
+//                tr.appendTo("tbody#listStaff");
+//            });
+//        },
+//    });
+//});
 
 //Click icon X reload page
 $(document).ready(function () {
@@ -202,6 +214,19 @@ $(function () {
             cache: false,
             success: function (result) {
                 $('#Store').html(result);
+            },
+        });
+        return false;
+    });
+});
+$(function () {
+    $('#myPagerStaff').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Staff').html(result);
             },
         });
         return false;

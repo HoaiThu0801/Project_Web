@@ -1,6 +1,8 @@
-﻿@model Project_Web.Models.User
+﻿
+@model PagedList.IPagedList<Project_Web.Models.Store>
+@using PagedList.Mvc;
 @using Project_Web.Models;
-@{ 
+@{
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
 }
 <div class="button-popup">
@@ -13,9 +15,45 @@
             <th>Username</th>
         </tr>
         <tbody id="listStaff">
-           
+            @{
+                //var staff = (from st in _db.Users
+                //             join s in Model on st.IDUser equals s.IDUser
+                //             select new
+                //             {
+                //                 StoreName = s.StoreName,
+                //                 Location = s.Location,
+                //                 FullName = st.Fullname,
+                //                 UserName = st.Username
+                //             }).ToList();
+                foreach (var s in Model)
+                {
+                    if (s.IDUser != null)
+                    {
+                        var staff = _db.Users.SingleOrDefault(x => x.IDUser == s.IDUser);
+                        <tr>
+                            <td>@s.StoreName</td>
+                            <td>@s.Location</td>
+                            <td>@staff.Fullname</td>
+                            <td>@staff.Username</td>
+                        </tr>
+                    }
+
+
+                }
+            }
         </tbody>
     </table>
+    <div class="paging">
+        <div class="paging-show">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+        <div class="paging-choose" id="myPagerStaff">
+            @Html.PagedListPager(Model, page => Url.Action("_TabStaff", new { page }),
+           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.ClassicPlusFirstAndLast
+           , new AjaxOptions
+           { InsertionMode = InsertionMode.Replace, HttpMethod = "Get", UpdateTargetId = "Staff" }))
+        </div>
+    </div>  
 </div>
 <div class="signup-content-staff" id="signup-content-staff">
     <div class="signup-background-staff" id="signup-background-staff">

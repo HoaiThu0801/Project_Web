@@ -48,7 +48,6 @@
             <div class="form-group">
                 <input type="text" class="form-input" name="StoreName" id="StoreName" placeholder="Your StoreName" />
             </div>
-            @*@Html.ValidationMessageFor(m => m.StoreName, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_SN">
                 @ViewBag.Message
@@ -81,11 +80,9 @@
                     <option value="Huyện Cần Giờ">Huyện Cần Giờ</option>
                 </select>
             </div>
-            @*@Html.ValidationMessageFor(m => m.Location, null, new { @class = "textValidation" })*@
             <div class="form-group">
                 <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
             </div>
-            @*@Html.ValidationMessageFor(m => m.PhoneNumber, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_PN">
                 @ViewBag.Message
@@ -93,7 +90,6 @@
             <div class="form-group">
                 <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
             </div>
-            @*@Html.ValidationMessageFor(m => m.Email, null, new { @class = "textValidation" })*@
             <div id="res"></div>
             <div class="textValidation" id="showFail_Email">
                 @ViewBag.Message

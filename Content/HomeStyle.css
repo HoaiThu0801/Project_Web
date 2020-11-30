@@ -344,7 +344,7 @@ li:hover .sub-menu-location {
         font-size: 14px;
         text-transform: uppercase;
         text-align: center;
-        color: yellow;
+        color: lightyellow;
         font-weight: bold;
         opacity: 0;
         -webkit-transition: all 0.7s ease;
@@ -352,7 +352,7 @@ li:hover .sub-menu-location {
     }
 
         .contentProducts-image .imgredient:hover {
-            font-weight: blo;
+            font-weight: bold;
             text-shadow: 5px 5px 5px black;
         }
 
