@@ -82,6 +82,19 @@ $('#StoreName').keyup(function () {
     }
 });
 
+//Show store name and choose dish when change select
+$(document).ready(function () {
+    $('#LocationSelect').change(function () {
+        $("#StoreNameList").css("display", "block");
+        $(".show-dish-list").css("display", "block");
+    });
+});
+$(document).ready(function () {
+    $('.fa').click(function () {
+        var t = $(this).toggleClass('fa-circle');
+    });
+});
+
 //Save data without load page
 $(document).ready(function () {
     $("#signup-form-store").submit(function (event) {
