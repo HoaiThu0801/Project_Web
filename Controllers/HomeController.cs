@@ -46,6 +46,11 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+        //[HttpPost]
+        //public ActionResult InformationAccount()
+        //{
+        //    return View();
+        //}
         public ActionResult ChangePass()
         {
             return View();

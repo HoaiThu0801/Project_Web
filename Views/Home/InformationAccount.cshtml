@@ -19,50 +19,83 @@
     <div class="information" id="result">
         <div class="information-background">
             <div class="information-body">
-                <form class="information-form" id="InformationForm">
+                <form method="post" action="/Home/InformationAccount" class="information-form" id="InformationForm" >
                     <h1>Thông tin tài khoản</h1>
                     <div class="information-account">
-                        <div class="form-group">
-                            <label>Tên tài khoản:</label>
-                            <input type="text" disabled id="Username" name="Username" class="form-input" placeholder="Username" />
-                        </div>
-                        <div class="form-group">
-                            <label>Họ và tên:</label>
-                            <input type="text" id="Fullname" name="Fullname" class="form-input" />
-                        </div>
-                        <div class="form-group">
-                            <label>Giới tính:</label>
-                            <div class="form-input">
-                                <select class="custom-select" id="Gender" name="Gender">
-                                    <option disabled="disabled" selected="selected">Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Ngày sinh:</label>
-                            <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
-                        </div>
-                        <div class="form-group">
-                            <label>CMND:</label>
-                            <input type="text" id="IdentityCard" name="IdentityCard" class="form-input" />
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ:</label>
-                            <input type="text" id="Address" name="Address" class="form-input" />
-                        </div>
-                        <div class="form-group">
-                            <label>Số điện thoại:</label>
-                            <input type="tel" id="PhoneNumber" name="PhoneNumber" class="form-input" />
-                        </div>
-                        <div class="form-group">
-                            <div class="button-submit">
-                                <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu thông tin" />
-                                <a href="/Home/ChangePass" name="ChangePass" id="changePass" class="form-submit">Đổi mật khẩu</a>
-                            </div>
-                        </div>
+                        @{
+                            User user = Session["User"] as User;
+                            if (user != null)
+                            {
+                                <div class="form-group">
+                                    <label>Tên tài khoản:</label>
+                                    <input type="text" disabled id="Username" value="@user.Username" name="Username" class="form-input" placeholder="Username" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Họ và tên:</label>
+                                    <input type="text" id="Fullname" value="@user.Fullname" name="Fullname" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Giới tính:</label>
+                                    <div class="form-input">
+                                        <select class="custom-select" id="Gender" name="Gender">
+                                            @{
+                                                if (user.Gender != null)
+                                                {
+                                                    <option value="@user.Gender" selected="selected">@user.Gender</option>
+                                                }
+                                                else
+                                                {
+                                                    <option disabled="disabled" selected="selected">Gender</option>
+                                                }
+                                            }
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh:</label>
+                                    @{
+                                        if (user.DateofBirth != null)
+                                        {
+                                            <input type="date" value="@user.DateofBirth" class="form-input" id="DateofBirth" name="DateofBirth" />
+                                        }
+                                        else
+                                        {
+                                            <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label>CMND:</label>
+                                    @{
+                                        if (user.IdentityCard != null)
+                                        {
+                                            <input type="text" id="IdentityCard" value="@user.IdentityCard" name="IdentityCard" class="form-input" />
+                                        }
+                                        else
+                                        {
+                                            <input type="text" id="IdentityCard" value="" name="IdentityCard" class="form-input" />
+                                        }
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ:</label>
+                                    <input type="text" id="Address" name="Address" value="@user.Address" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại:</label>
+                                    <input type="tel" id="PhoneNumber" name="PhoneNumber" value="@user.PhoneNumber" class="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <div class="button-submit">
+                                        <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu thông tin" />
+                                        <a href="/Home/ChangePass" name="ChangePass" id="changePass" class="form-submit">Đổi mật khẩu</a>
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
                 </form>
                 <div>
