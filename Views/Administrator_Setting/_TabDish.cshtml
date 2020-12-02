@@ -15,7 +15,7 @@
 <div class="signup-content-dish" id="signup-content-dish">
     <div class="signup-background-dish" id="signup-background-dish">
         <span class="remove-icon" id="close-popup-form" onclick="closePopupForm()">x</span>
-        <form method="POST" action="/Administrator_Setting/CreateDish" id="signup-form-dish" class="signup-form">
+        <form method="POST" action="/Administrator_Setting/AddDish" id="signup-form-dish" class="signup-form">
             <h2 class="form-title">Tạo món ăn cho cửa hàng</h2>
             <div class="form-group">
                 <select class="custom-select" id="LocationSelect" name="Location">
@@ -46,8 +46,17 @@
                 </select>
             </div>
             <div class="form-group" style="display: none" id="StoreNameList">
-                <select class="custom-select" name="StoreName">
+                <select class="custom-select" name="StoreName" id="StoreNameSelect">
                     <option disabled="disabled" selected="selected">Store Name</option>
+                    @*@{
+                var store = (from s in _db.Stores
+                             select s.StoreName).ToList();
+                foreach (var s in store)
+                {*@
+                    <option id="loading" value="-">Store Name</option>
+                    @*}
+
+                }*@
                 </select>
             </div>
             <div class="form-group show-dish-list" id="DishNameList">
@@ -58,10 +67,11 @@
                                             select dishName).ToList();
                         foreach (var s in listDishName)
                         {
-                            <a href="#" class="dishname-choose"><i class="fa fa-circle-o">@s.DishName</i></a>
+                            <a href="#" class="dishname-choose" id="DishName_a"><i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i></a>
                         }
                     }
                 </div>
+                @ViewBag.Message
             </div>
         </form>
     </div>

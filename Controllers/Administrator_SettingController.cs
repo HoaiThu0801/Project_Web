@@ -206,6 +206,19 @@ namespace Project_Web.Controllers
                          });
             return Json(store.ToList(), JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
+        public JsonResult LoadStoreName(string Location)
+        {
+            var store = (from s in _db.Stores
+                         where s.Location == Location
+                         select new
+                         {
+                             StoreName = s.StoreName,
+                         });
+            int dem = store.Count();
+            return Json(store.ToList(), JsonRequestBehavior.AllowGet);
+        }
+ 
         #endregion
 
         #region Paging
@@ -228,6 +241,37 @@ namespace Project_Web.Controllers
             int pageSize = 4;
             int pageNumber = (page ?? 1);
             return PartialView("_TabStaff", store.ToPagedList(pageNumber, pageSize));
+        }
+        #endregion
+
+        #region AddFoodintoStore
+        [HttpPost]
+        public ActionResult AddDish(string DishName, string StoreName)
+        {
+            string dishname = DishName;
+            string storetemp = StoreName;
+            var dish = (from d in _db.Menus
+                       where d.DishName == dishname
+                       select d).SingleOrDefault();
+            var store = (from s in _db.Stores
+                        where s.StoreName == storetemp
+                        select s).SingleOrDefault();
+            Menu_Stores menu_store_temp = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == store.IDStore && n.IDDish == dish.IDDish);
+            if (menu_store_temp != null)
+            {
+                return Content("False");
+            }
+            Menu_Stores menu_store = new Menu_Stores();
+            menu_store.IDDish = dish.IDDish;
+            menu_store.IDStore = store.IDStore;
+            menu_store.Ingredient = dish.Ingredient;
+            if (menu_store != null)
+            {
+                _db.Menu_Stores.Add(menu_store);
+                _db.SaveChanges();
+                @ViewBag.Message = dishname + " được thêm vào thành công";
+            }
+            return View();
         }
         #endregion
     }

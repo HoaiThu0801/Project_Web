@@ -1,4 +1,5 @@
-﻿//Mở đóng popupform
+﻿
+//Mở đóng popupform
 var flaqStore = true;
 var flaqStaff = true;
 var flaqDish = true;
@@ -82,18 +83,60 @@ $('#StoreName').keyup(function () {
     }
 });
 
-//Show store name and choose dish when change select
+//Show store name and choose dish when change select, load store accroding to location
 $(document).ready(function () {
     $('#LocationSelect').change(function () {
         $("#StoreNameList").css("display", "block");
         $(".show-dish-list").css("display", "block");
+        var location = $('#LocationSelect').val();
+        $.ajax({
+            type: "get",
+            url: "/Administrator_Setting/LoadStoreName",
+            data: {
+                Location: location
+            },
+            success: function (response) {
+               
+                $('#StoreNameSelect').html("");
+                $("#StoreNameSelect").append(("<option>" + "StoreName" + "</option>"));
+                $.each(response, function (key, item) {
+                    //$('#loading').text("item.StoreName")
+                    $("#StoreNameSelect").append("<option>" + item.StoreName + "</option>");
+                    //$("#StoreNameSelect").append($('#loading'));
+                });
+            }
+        })
     });
 });
+//Click dish, add dish into menu_store
 $(document).ready(function () {
-    $('.fa').click(function () {
-        var t = $(this).toggleClass('fa-circle');
+    var storename;
+    $('#StoreNameSelect').change(function () {
+        storename = $('#StoreNameSelect').val();
+        alert(storename);
+    });
+     $('.fa').click(function () {
+        var t = $(this).addClass('fa-circle');
+        let dishname = t.text();   
+        $.ajax({
+            type: "post",
+            url: "/Administrator_Setting/AddDish",
+            data: {
+                DishName: dishname,
+                StoreName: storename
+
+            },
+            success: function (res) {
+                if (res == "False") {
+                    $('.fa').removeClass('fa-circle');
+                    alert("Món ăn đã có sẵn");
+                }
+            }
+        });
     });
 });
+
+   
 
 //Save data without load page
 $(document).ready(function () {
