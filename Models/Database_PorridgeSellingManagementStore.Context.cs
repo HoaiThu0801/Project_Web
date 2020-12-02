@@ -37,5 +37,7 @@ namespace Project_Web.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<WarehouseDetail> WarehouseDetails { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<OrderState> OrderStates { get; set; }
+        public virtual DbSet<OrderTrack> OrderTracks { get; set; }
     }
 }

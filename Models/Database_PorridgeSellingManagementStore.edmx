@@ -47,6 +47,22 @@
           <Property Name="Ingredient" Type="nvarchar(max)" />
           <Property Name="Available" Type="float" />
         </EntityType>
+        <EntityType Name="OrderStates">
+          <Key>
+            <PropertyRef Name="IDOrderStatse" />
+          </Key>
+          <Property Name="IDOrderStatse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderTracks">
+          <Key>
+            <PropertyRef Name="IDOrderStatse" />
+            <PropertyRef Name="IDBill" />
+          </Key>
+          <Property Name="IDOrderStatse" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDBill" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="IDRole" />
@@ -193,6 +209,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderTracks_Bills">
+          <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
+          <End Role="OrderTracks" Type="Self.OrderTracks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bills">
+              <PropertyRef Name="IDBill" />
+            </Principal>
+            <Dependent Role="OrderTracks">
+              <PropertyRef Name="IDBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTracks_OrderStates">
+          <End Role="OrderStates" Type="Self.OrderStates" Multiplicity="1" />
+          <End Role="OrderTracks" Type="Self.OrderTracks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStates">
+              <PropertyRef Name="IDOrderStatse" />
+            </Principal>
+            <Dependent Role="OrderTracks">
+              <PropertyRef Name="IDOrderStatse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Statistic_Stores">
           <End Role="Stores" Type="Self.Stores" Multiplicity="0..1" />
           <End Role="Statistic" Type="Self.Statistic" Multiplicity="*" />
@@ -270,6 +310,8 @@
           <EntitySet Name="Bills" EntityType="Self.Bills" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menu_Stores" EntityType="Self.Menu_Stores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStates" EntityType="Self.OrderStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderTracks" EntityType="Self.OrderTracks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Stores" EntityType="Self.Stores" Schema="dbo" store:Type="Tables" />
@@ -297,6 +339,14 @@
           <AssociationSet Name="FK_Menu_Stores_Stores" Association="Self.FK_Menu_Stores_Stores">
             <End Role="Stores" EntitySet="Stores" />
             <End Role="Menu_Stores" EntitySet="Menu_Stores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTracks_Bills" Association="Self.FK_OrderTracks_Bills">
+            <End Role="Bills" EntitySet="Bills" />
+            <End Role="OrderTracks" EntitySet="OrderTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTracks_OrderStates" Association="Self.FK_OrderTracks_OrderStates">
+            <End Role="OrderStates" EntitySet="OrderStates" />
+            <End Role="OrderTracks" EntitySet="OrderTracks" />
           </AssociationSet>
           <AssociationSet Name="FK_Statistic_Stores" Association="Self.FK_Statistic_Stores">
             <End Role="Stores" EntitySet="Stores" />
@@ -351,6 +401,7 @@
           <NavigationProperty Name="BillDetails" Relationship="Self.FK_BillDetail_Bills" FromRole="Bills" ToRole="BillDetail" />
           <NavigationProperty Name="Store" Relationship="Self.FK_Bills_Stores" FromRole="Bills" ToRole="Stores" />
           <NavigationProperty Name="User" Relationship="Self.FK_Bills_Users" FromRole="Bills" ToRole="Users" />
+          <NavigationProperty Name="OrderTracks" Relationship="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills" FromRole="Bill" ToRole="OrderTrack" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -666,7 +717,60 @@
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="WarehouseDetail" EntitySet="WarehouseDetails" />
           </AssociationSet>
+          <EntitySet Name="OrderStates" EntityType="Database_PorridgeSellingManagementStoreModel.OrderState" />
+          <EntitySet Name="OrderTracks" EntityType="Database_PorridgeSellingManagementStoreModel.OrderTrack" />
+          <AssociationSet Name="FK_OrderTracks_Bills" Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills">
+            <End Role="Bill" EntitySet="Bills" />
+            <End Role="OrderTrack" EntitySet="OrderTracks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderTracks_OrderStates" Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_OrderStates">
+            <End Role="OrderState" EntitySet="OrderStates" />
+            <End Role="OrderTrack" EntitySet="OrderTracks" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="OrderState">
+          <Key>
+            <PropertyRef Name="IDOrderStatse" />
+          </Key>
+          <Property Name="IDOrderStatse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderTracks" Relationship="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_OrderStates" FromRole="OrderState" ToRole="OrderTrack" />
+        </EntityType>
+        <EntityType Name="OrderTrack">
+          <Key>
+            <PropertyRef Name="IDOrderStatse" />
+            <PropertyRef Name="IDBill" />
+          </Key>
+          <Property Name="IDOrderStatse" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDBill" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bill" Relationship="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills" FromRole="OrderTrack" ToRole="Bill" />
+          <NavigationProperty Name="OrderState" Relationship="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_OrderStates" FromRole="OrderTrack" ToRole="OrderState" />
+        </EntityType>
+        <Association Name="FK_OrderTracks_Bills">
+          <End Type="Database_PorridgeSellingManagementStoreModel.Bill" Role="Bill" Multiplicity="1" />
+          <End Type="Database_PorridgeSellingManagementStoreModel.OrderTrack" Role="OrderTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bill">
+              <PropertyRef Name="IDBill" />
+            </Principal>
+            <Dependent Role="OrderTrack">
+              <PropertyRef Name="IDBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderTracks_OrderStates">
+          <End Type="Database_PorridgeSellingManagementStoreModel.OrderState" Role="OrderState" Multiplicity="1" />
+          <End Type="Database_PorridgeSellingManagementStoreModel.OrderTrack" Role="OrderTrack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderState">
+              <PropertyRef Name="IDOrderStatse" />
+            </Principal>
+            <Dependent Role="OrderTrack">
+              <PropertyRef Name="IDOrderStatse" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -808,6 +912,23 @@
                 <ScalarProperty Name="WarehouseName" ColumnName="WarehouseName" />
                 <ScalarProperty Name="LocationofWarehouse" ColumnName="LocationofWarehouse" />
                 <ScalarProperty Name="IDStore" ColumnName="IDStore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStates">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.OrderState">
+              <MappingFragment StoreEntitySet="OrderStates">
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="IDOrderStatse" ColumnName="IDOrderStatse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderTracks">
+            <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.OrderTrack">
+              <MappingFragment StoreEntitySet="OrderTracks">
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="IDBill" ColumnName="IDBill" />
+                <ScalarProperty Name="IDOrderStatse" ColumnName="IDOrderStatse" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

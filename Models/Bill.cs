@@ -18,6 +18,7 @@ namespace Project_Web.Models
         public Bill()
         {
             this.BillDetails = new HashSet<BillDetail>();
+            this.OrderTracks = new HashSet<OrderTrack>();
         }
     
         public string IDBill { get; set; }
@@ -29,5 +30,7 @@ namespace Project_Web.Models
         public virtual ICollection<BillDetail> BillDetails { get; set; }
         public virtual Store Store { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderTrack> OrderTracks { get; set; }
     }
 }

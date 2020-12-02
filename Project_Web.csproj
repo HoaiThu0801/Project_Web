@@ -375,6 +375,12 @@
     <Compile Include="Models\Menu_Stores.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderState.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderTrack.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Role.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>

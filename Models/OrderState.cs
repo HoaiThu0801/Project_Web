@@ -12,22 +12,18 @@ namespace Project_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class OrderState
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Menu()
+        public OrderState()
         {
-            this.Menu_Stores = new HashSet<Menu_Stores>();
+            this.OrderTracks = new HashSet<OrderTrack>();
         }
     
-        public string IDDish { get; set; }
-        public string DishName { get; set; }
-        public string Ingredient { get; set; }
-        public Nullable<double> ImportPrice { get; set; }
-        public Nullable<double> SalePrice { get; set; }
-        public string Image { get; set; }
+        public string IDOrderStatse { get; set; }
+        public string StateName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu_Stores> Menu_Stores { get; set; }
+        public virtual ICollection<OrderTrack> OrderTracks { get; set; }
     }
 }

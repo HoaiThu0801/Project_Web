@@ -28,6 +28,10 @@
         <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Warehouses_Stores" ManuallyRouted="false" />
         <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_User_Roles_Users" ManuallyRouted="false" />
         <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_WarehouseDetail_Warehouses" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.OrderState" Width="1.5" PointX="8.25" PointY="4.5" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.OrderTrack" Width="1.5" PointX="10.5" PointY="9.25" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_OrderStates" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
