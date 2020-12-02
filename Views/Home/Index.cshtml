@@ -87,7 +87,7 @@
                                 <span class="arrow"> &#9660;</span>
                             </a>
                             <ul class="sub-menu-information">
-                                <li><a href="#">Thông tin tài khoản</a></li>
+                                <li><a href="~/Home/InformationAccount">Thông tin tài khoản</a></li>
                                 <li><a href="~/Home/Logout">Đăng xuất</a></li>
                             </ul>
                         </li>
@@ -142,7 +142,7 @@
         <div class="paging-choose">
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
-        
+
     </div>
 </body>
 

@@ -41,5 +41,14 @@ namespace Project_Web.Controllers
             Session.Remove("User");
             return RedirectToAction("Index", "Home");
         }
+        [HttpGet]
+        public ActionResult InformationAccount()
+        {
+            return View();
+        }
+        public ActionResult ChangePass()
+        {
+            return View();
+        }
     }
 }
