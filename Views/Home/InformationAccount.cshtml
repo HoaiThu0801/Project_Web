@@ -19,7 +19,7 @@
     <div class="information" id="result">
         <div class="information-background">
             <div class="information-body">
-                <form method="post" action="/Home/InformationAccount" class="information-form" id="InformationForm" >
+                <form method="post" action="/Home/InformationAccount" class="information-form" id="InformationForm">
                     <h1>Thông tin tài khoản</h1>
                     <div class="information-account">
                         @{
@@ -57,9 +57,10 @@
                                 <div class="form-group">
                                     <label>Ngày sinh:</label>
                                     @{
+                                        string datestring = String.Format("{0:yyyy-dd-MM}", user.DateofBirth);
                                         if (user.DateofBirth != null)
                                         {
-                                            <input type="date" value="@user.DateofBirth" class="form-input" id="DateofBirth" name="DateofBirth" />
+                                            <input type="date" value="@datestring" class="form-input" id="DateofBirth" name="DateofBirth" />
                                         }
                                         else
                                         {
@@ -116,8 +117,8 @@
                         <input type="file" accept=".jpg,.jpeg,.png" name="Image" id="Image" style="display: none;" />
                     </div>
                 </div>
-                
-                
+
+
             </div>
         </div>
     </div>
