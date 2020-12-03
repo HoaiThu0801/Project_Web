@@ -55,5 +55,9 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+        public ActionResult ShoppingCart()
+        {
+            return View();
+        }
     }
 }

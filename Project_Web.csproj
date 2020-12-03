@@ -426,6 +426,7 @@
     <Content Include="Content\InformationAccount.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\RegisterStyle.css" />
+    <Content Include="Content\ShoppingCart.css" />
     <Content Include="Content\SignInStyle.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\VerifyEmail.css" />
@@ -754,6 +755,7 @@
     <Content Include="Views\Administrator_Setting\CreateDish.cshtml" />
     <Content Include="Views\Home\InformationAccount.cshtml" />
     <Content Include="Views\Home\ChangePass.cshtml" />
+    <Content Include="Views\Home\ShoppingCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

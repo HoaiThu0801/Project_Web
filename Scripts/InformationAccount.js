@@ -4,7 +4,6 @@
             type: 'get',
             url: '/Home/ChangePass',
             success: function () {
-                $('#result').load('/Home/ChangePass');
             }
         });
     });
