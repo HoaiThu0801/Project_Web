@@ -8,7 +8,6 @@ using PagedList;
 
 namespace Project_Web.Controllers
 {
-    //[AuthorizeController]
     public class HomeController : Controller
     {
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
@@ -42,6 +41,7 @@ namespace Project_Web.Controllers
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]
+        [AuthorizeController]
         public ActionResult InformationAccount()
         {
             return View();
@@ -55,6 +55,7 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+        [AuthorizeController]
         public ActionResult ShoppingCart()
         {
             return View();

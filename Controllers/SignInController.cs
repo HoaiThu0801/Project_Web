@@ -151,13 +151,14 @@ namespace Project_Web.Controllers
                 string email = me.email;
                 string name = me.name;
                 DateTime birthday = Convert.ToDateTime(me.birthday);
+                string datestring = String.Format("{0:yyyy-dd-MM}", birthday);
                 string gender = me.gender;
 
                 var user = new User();
                 user.Email = email;
                 user.Username = email;
                 user.Fullname = name;
-                user.DateofBirth = birthday;
+                user.DateofBirth = Convert.ToDateTime(datestring);
                 user.Gender = gender;
 
                 var resultInsert = new SignInController().InsertForFacebook(user);
