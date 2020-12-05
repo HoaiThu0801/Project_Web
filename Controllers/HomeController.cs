@@ -51,31 +51,22 @@ namespace Project_Web.Controllers
         [Authorize_userController]
         public ActionResult InformationAccount(User model)
         {
+            User user_session = Session["User"] as User;
+            model.Username = user_session.Username;
             User user = (from u in _db.Users
                         where u.Username == model.Username
                         select u).SingleOrDefault();
             if (user != null)
             {
-                User usertemp = _db.Users.SingleOrDefault(n => n.Email == model.Email && n.IDUser != user.IDUser);
-                if (usertemp != null)
-                {
-                    return Content("email");
-                }
-                if (ModelState.IsValid)
-                {
-                    user.Fullname = model.Fullname;
-                    user.Gender = model.Gender;
-                    user.DateofBirth = model.DateofBirth;
-                    user.IdentityCard = model.IdentityCard;
-                    user.Address = model.Address;
-                    user.PhoneNumber = model.PhoneNumber;
-                    _db.Users.AddOrUpdate(user);
-                    _db.SaveChanges();
-                }
-                else
-                {
-                    return Content("false");
-                }
+                user.Fullname = model.Fullname;
+                user.Gender = model.Gender;
+                user.DateofBirth = model.DateofBirth;
+                user.IdentityCard = model.IdentityCard;
+                user.Address = model.Address;
+                user.PhoneNumber = model.PhoneNumber;
+                _db.Users.AddOrUpdate(user);
+                _db.SaveChanges();
+                return View();
 
             }
           
