@@ -346,6 +346,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorizeController.cs" />
+    <Compile Include="Models\Authorize_userController.cs" />
     <Compile Include="Models\Bill.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
