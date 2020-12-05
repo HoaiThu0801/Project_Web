@@ -41,31 +41,29 @@
                         {
                             <li class="menu-location">
                                 <a href="#">@s.Location</a>
-                                @{
-                                    foreach (var sf in storelist_full)
-                                    {
-                                        if (sf.Location == s.Location)
+                                <div class="sub-menu-around">
+                                    @{
+                                        foreach (var sf in storelist_full)
                                         {
-                                            <ul class="sub-menu-location">
-                                                <li><a href="#">@sf.StoreName</a></li>
-                                            </ul>
+                                            if (sf.Location == s.Location)
+                                            {
+                                                <ul class="sub-menu-location">
+                                                    <li><a href="#">@sf.StoreName</a></li>
+                                                </ul>
+                                            }
                                         }
-
                                     }
-
-                                }
-
+                                </div>
                             </li>
                         }
                     }
                     else
                     {
-
                         foreach (var s in storelist)
                         {
                             storelist_full.Add(s);
                         }
-                        for (int i = 0; i < storelist.Count()-1; i++)
+                        for (int i = 0; i < storelist.Count() - 1; i++)
                         {
                             string temp = storelist[i].Location;
                             for (int j = i + 1; j < storelist.Count(); j++)
@@ -82,49 +80,47 @@
 
                             <li class="menu-location">
                                 <a href="#">@s.Location</a>
-                                @{
-                                    foreach (var sf in storelist_full)
-                                    {
-                                        if (sf.Location == s.Location)
+                                <div class="sub-menu-around">
+                                    @{
+                                        foreach (var sf in storelist_full)
                                         {
-                                            <ul class="sub-menu-location">
-                                                <li><a href="#">@sf.StoreName</a></li>
-                                            </ul>
+                                            if (sf.Location == s.Location)
+                                            {
+                                                <ul class="sub-menu-location">
+                                                    <li><a href="#">@sf.StoreName</a></li>
+                                                </ul>
+                                            }
                                         }
-
                                     }
-                                }
-
-
+                                </div>
                             </li>
                         }
-
                     }
-
                 }
                 else
                 {
-                foreach (var s in storelist)
+                    foreach (var s in storelist)
+                    {
+                        storelist_full.Add(s);
+                    }
+                    for (int i = 0; i < storelist.Count() - 1; i++)
+                    {
+                        string temp = storelist[i].Location;
+                        for (int j = i + 1; j < storelist.Count(); j++)
                         {
-                            storelist_full.Add(s);
-                        }
-                        for (int i = 0; i < storelist.Count()-1; i++)
-                        {
-                            string temp = storelist[i].Location;
-                            for (int j = i + 1; j < storelist.Count(); j++)
+                            if (String.Compare(temp, storelist[j].Location, false) == 0)
                             {
-                                if (String.Compare(temp, storelist[j].Location, false) == 0)
-                                {
-                                    storelist.RemoveAt(j);
-                                    j --;
-                                }
+                                storelist.RemoveAt(j);
+                                j--;
                             }
                         }
-                        foreach (var s in storelist)
-                        {
+                    }
+                    foreach (var s in storelist)
+                    {
 
-                            <li class="menu-location">
-                                <a href="#">@s.Location</a>
+                        <li class="menu-location">
+                            <a href="#">@s.Location</a>
+                            <div class="sub-menu-around">
                                 @{
                                     foreach (var sf in storelist_full)
                                     {
@@ -134,18 +130,14 @@
                                                 <li><a href="#">@sf.StoreName</a></li>
                                             </ul>
                                         }
-
                                     }
                                 }
-
-
-                            </li>
-                        }   
+                            </div>
+                        </li>
+                    }
                 }
             }
         </ul>
     </div>
 </div>
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-<script>
-</script>
