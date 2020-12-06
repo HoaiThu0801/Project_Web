@@ -123,19 +123,21 @@
             @{
                 foreach (var s in Model)
                 {
-                    <a class="contentProducts">
-                        <div class="contentProducts-image">
-                            <img src="../@s.Image" class="image-title" id="ImageProducts" />
-                            <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                        <div class="contentProducts">
+                            <div class="contentProducts-image">
+                                <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                                <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                            </div>
+                            <div class="contentProducts-text">
+                                <h4 class="contentProducts-title">@s.DishName</h4>
+                            </div>
+                            <div class="contentProducts-price">
+                                <div class="contentProducts-priceOriginal">@s.SalePrice.000vnđ</div>
+                                <i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>                                 
+                                @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
+                            </div>                
                         </div>
-                        <div class="contentProducts-text">
-                            <h4 class="contentProducts-title">@s.DishName</h4>
-                        </div>
-                        <div class="contentProducts-price">
-                            <div class="contentProducts-priceOriginal">@s.SalePrice.000vnđ</div>
-                            <i class="fa fa-cart-plus cart-plus" id="cart-plus"></i>
-                        </div>
-                    </a>
+                   
                 }
             }
         </div>
