@@ -111,6 +111,11 @@ $(document).ready(function () {
 //Click dish, add dish into menu_store
 $(document).ready(function () {
     var storename;
+    var location;
+    $('#LocationSelect').change(function () {
+        location = $('#LocationSelect').val();
+        alert(location);
+    });
     $('#StoreNameSelect').change(function () {
         storename = $('#StoreNameSelect').val();
         alert(storename);
@@ -123,8 +128,8 @@ $(document).ready(function () {
             url: "/Administrator_Setting/AddDish",
             data: {
                 DishName: dishname,
-                StoreName: storename
-
+                StoreName: storename,
+                Location: location
             },
             success: function (res) {
                 if (res == "False") {

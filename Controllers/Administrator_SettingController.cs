@@ -27,7 +27,6 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult CreateSeller(CreateSeller model)
         {
-
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
             if (user != null)
             {
@@ -246,15 +245,16 @@ namespace Project_Web.Controllers
 
         #region AddFoodintoStore
         [HttpPost]
-        public ActionResult AddDish(string DishName, string StoreName)
+        public ActionResult AddDish(string DishName, string StoreName, string Location)
         {
+            string location = Location;
             string dishname = DishName;
             string storetemp = StoreName;
             var dish = (from d in _db.Menus
                        where d.DishName == dishname
                        select d).SingleOrDefault();
             var store = (from s in _db.Stores
-                        where s.StoreName == storetemp
+                        where s.StoreName == storetemp && s.Location == location
                         select s).SingleOrDefault();
             Menu_Stores menu_store_temp = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == store.IDStore && n.IDDish == dish.IDDish);
             if (menu_store_temp != null)
