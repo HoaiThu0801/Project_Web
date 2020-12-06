@@ -340,6 +340,7 @@
     <Compile Include="Controllers\Administrator_SettingController.cs" />
     <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Global.asax.cs">
@@ -424,6 +425,7 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\ForgotPassword.css" />
     <Content Include="Content\HomeStyle.css" />
+    <Content Include="Content\ImportProducts.css" />
     <Content Include="Content\InformationAccount.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\RegisterStyle.css" />
@@ -485,6 +487,7 @@
     <Content Include="Scripts\esm\popper.min.js" />
     <Content Include="Scripts\ForgotPassword.js" />
     <Content Include="Scripts\HomePage.js" />
+    <Content Include="Scripts\ImportProducts.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
@@ -757,6 +760,7 @@
     <Content Include="Views\Home\InformationAccount.cshtml" />
     <Content Include="Views\Home\ChangePass.cshtml" />
     <Content Include="Views\Home\ShoppingCart.cshtml" />
+    <Content Include="Views\ImportProducts\ImportProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

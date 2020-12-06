@@ -48,15 +48,7 @@
             <div class="form-group" style="display: none" id="StoreNameList">
                 <select class="custom-select" name="StoreName" id="StoreNameSelect">
                     <option disabled="disabled" selected="selected">Store Name</option>
-                    @*@{
-                var store = (from s in _db.Stores
-                             select s.StoreName).ToList();
-                foreach (var s in store)
-                {*@
                     <option id="loading" value="-">Store Name</option>
-                    @*}
-
-                }*@
                 </select>
             </div>
             <div class="form-group show-dish-list" id="DishNameList">

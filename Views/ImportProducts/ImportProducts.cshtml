@@ -1,0 +1,64 @@
+﻿@using Project_Web.Models;
+@{
+    ViewBag.Title = "Nhập hàng";
+}
+@{ Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/ImportProducts.css">
+</head>
+
+<body>
+    <div class="import-products-container">
+        <div class="import-products-body">
+            <form method="post" action="/ImportProducts/ImportProducts" class="import-products-form" id="import-products-form">
+                <h1>Nhập hàng cho kho của cửa hàng</h1>
+                <div class="import-products">
+                    <div class="form-group">
+                        <label>Kho hàng:</label>
+                        <select class="custom-select" name="WarehouseName" id="Warehouse-Select">
+                            <option disabled selected>Kho hàng</option>
+                            @{
+                                var listWarehouse = (from Warehouse in _db.Warehouses
+                                                     select Warehouse).ToList();
+                                foreach (var warehouse in listWarehouse)
+                                {
+                                    <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="import-product-display" id="DisplayImportsProduct">
+                        <div class="form-group">
+                            <label>Món ăn:</label>
+                            <select class="custom-select" name="DishName" id="DishName-Select">
+                                <option disabled selected>Món ăn</option>
+                                <option id="loading" value="-">Dish Name</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Số lượng:</label>
+                            <input type="number" min="1" max="200" value="1" class="form-input" name="Quantity" id="Quantity" />
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian nhập:</label>
+                            @{
+                                <input type="datetime" class="form-input" name="Time" readonly id="Time" value="@DateTime.Now" />
+                            }
+                        </div>
+                        <div class="form-group">
+                            <div class="button-submit" id="button-submit">
+                                <input type="submit" name="submit" id="submit" class="form-submit" value="Thêm vào cửa hàng" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/ImportProducts.js"></script>
+
