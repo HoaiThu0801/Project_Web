@@ -1,5 +1,9 @@
-﻿@{
+﻿@using Project_Web.Models;
+@using System.Data;
+@{
     ViewBag.Title = "Giỏ hàng";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    float sum = 0;
 }
 
 <head>
@@ -23,32 +27,50 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td data-th="Product">
-                        <div class="row">
-                            <div class="col-sm-2 hidden-xs">
-                                <img src="~/images/ImageProducts/chao-hanh.jpg" alt="Sản phẩm 1" class="img-responsive" width="100">
-                            </div>
-                            <div class="col-md-8 text-product">
-                                <h4 class="nomargin">Sản phẩm 1</h4>
-                                <p>Mô tả của sản phẩm 1</p>
-                            </div>
-                        </div>
-                    </td>
-                    <td data-th="Price">200.000 đ</td>
-                    <td data-th="Quantity">
-                        <input class="form-control text-center" value="1" type="number">
-                    </td>
-                    <td data-th="Subtotal" class="text-center">200.000 đ</td>
-                    <td class="actions" data-th="">
-                        <a href="#" class="btn btn-info btn-sm">
-                            <i class="fa fa-edit"></i>
-                        </a>
-                        <a href="#" class="btn btn-danger btn-sm">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
-                    </td>
-                </tr>
+                @{
+
+                    DataTable cart = new DataTable();
+                    cart = Session["cart"] as DataTable;
+                    if (cart != null)
+                    {
+                        foreach (DataRow dr in cart.Rows)
+                        {
+                            string dishname = dr["DishName"].ToString();
+                            Menu dish = _db.Menus.SingleOrDefault(n => n.DishName == dishname);
+                            sum = sum + float.Parse(dr["PaidPrice"].ToString());
+                            <tr>
+                                <td data-th="Product">
+                                    <div class="row">
+                                        <div class="col-sm-2 hidden-xs">
+                                            <img src="../@dish.Image" alt="@dish.DishName" class="img-responsive" width="100">
+                                        </div>
+                                        <div class="col-md-8 text-product">
+                                            <h4 class="nomargin">@dish.DishName</h4>
+                                            <p>@dish.Ingredient</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-th="Price"></td>
+                                <td data-th="Quantity">
+                                    @{
+                                         int quatity = int.Parse(dr["Quantity"].ToString());
+                                        <input class="form-control text-center" value="@quatity" type="number" min="0" max="10">
+                                    }
+                                </td>
+                                <td data-th="Subtotal" class="text-center"> @dr["PaidPrice"]</td>
+                                <td class="actions" data-th="">
+                                    <a href="#" class="btn btn-info btn-sm">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                }
             </tbody>
             <tfoot>
                 <tr>
@@ -57,7 +79,7 @@
                     </td>
                     <td colspan="2" class="hidden-xs"> </td>
                     <td class="hidden-xs text-center">
-                        <strong>Tổng tiền 500.000 đ</strong>
+                        <strong>Tổng tiền: @sum</strong>
                     </td>
                     <td>
                         <a href="#" class="btn btn-success btn-block">Đặt hàng <i class="fa fa-angle-right"></i></a>

@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity.Migrations;
 using System.Configuration;
+using System.Data;
 
 namespace Project_Web.Controllers
 {
@@ -50,6 +51,7 @@ namespace Project_Web.Controllers
         {
             Session["Is Login"] = 0;
             Session["User"] = null;
+            Session["cart"] = null;
             EncryptionPW encryptionPW = new EncryptionPW(model.Password);
             string EncryptedPass = encryptionPW.EncryptPass();
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username && n.Password == EncryptedPass);
@@ -62,6 +64,38 @@ namespace Project_Web.Controllers
             {
                 Session["Is Login"] = 1;
                 Session["User"] = user;
+                var Bill = (from ot in _db.OrderTracks
+                            join b in _db.Bills on ot.IDBill equals b.IDBill
+                            where b.IDUser == user.IDUser && ot.IDOrderStatse == "OS-01"
+                            select b).SingleOrDefault();
+                if (Bill != null)
+                {
+                    DataTable cart = new DataTable();
+                    cart.Columns.Add("IDBillDetails");
+                    cart.Columns.Add("DishName");
+                    cart.Columns.Add("Price");
+                    cart.Columns.Add("Quantity");
+                    cart.Columns.Add("Promotion");
+                    cart.Columns.Add("PaidPrice");
+                    cart.Columns.Add("IDBill");
+
+                    List<BillDetail> billDetails = (from bd in _db.BillDetails
+                                                    where bd.IDBill == Bill.IDBill
+                                                    select bd).ToList();
+                    foreach (BillDetail bd in billDetails)
+                    {
+                        DataRow dr = cart.NewRow();
+                        dr["IDBillDetails"] = bd.IDBillDetail;
+                        dr["DishName"] = bd.DishName;
+                        dr["Price"] = bd.Price;
+                        dr["Quantity"] = bd.Quantity;
+                        dr["Promotion"] =  bd.Promotion;
+                        dr["PaidPrice"] = bd.PaidPrice;
+                        dr["IDBill"] = bd.IDBill;
+                        cart.Rows.Add(dr);
+                    }
+                    Session["cart"] = cart;
+                }
                 return RedirectToAction("Index","Home");
             }
             return View();

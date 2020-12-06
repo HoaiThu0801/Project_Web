@@ -14,10 +14,17 @@ namespace Project_Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+              name: "Add Cart",
+              url: "them-gio-hang",
+              defaults: new { controller = "Home", action = "AddCart", id = UrlParameter.Optional },
+              namespaces: new[] { "Project_Web.Controllers" }
+             );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

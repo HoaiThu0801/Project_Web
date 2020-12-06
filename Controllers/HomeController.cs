@@ -86,7 +86,8 @@ namespace Project_Web.Controllers
         {
             return View();
         }
-        [HttpPost]
+        #region Cart
+        //[HttpPost]
         public ActionResult AddCart(string DishName)
         {
             User user = Session["User"] as User;
@@ -202,7 +203,8 @@ namespace Project_Web.Controllers
                 }
                 Session["cart"] = cart;
             }
-            return View();
+            return RedirectToAction("Index", "Home");
         }
+        #endregion
     }
 }

@@ -1,8 +1,20 @@
 ﻿@using Project_Web.Models;
 @model PagedList.IPagedList<Project_Web.Models.Menu>
 @using PagedList.Mvc;
+@using System.Data;
 
-@{Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities(); }
+@{
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    int itemsCount = 0;
+
+    if (Session["cart"] != null)
+    {
+        DataTable cart = new DataTable();
+        cart = Session["cart"] as DataTable;
+        itemsCount = cart.Rows.Count;
+    }
+
+}
 @{
     ViewBag.Title = "Trang chủ";
 }
@@ -25,7 +37,7 @@
                         <i class="fa fa-shopping-cart"></i>
                         <span class="text-shopping-cart">
                             Giỏ hàng
-                            <span class="number-shopping-cart" id="number-shopping">0</span>
+                            <span class="number-shopping-cart" id="number-shopping">@itemsCount</span>
                         </span>
                     </div>
                     <div class="info-shopping-cart">
@@ -33,11 +45,11 @@
                             <img src="~/images/avatar.jpg" />
                         </div>
                         <div class="info-text-shopping-cart">
-                            Bạn chưa mua sản phẩm
+                            Bạn đã chọn @itemsCount sản phẩm
                         </div>
                     </div>
                 </a>
-                
+
             </div>
         </div>
     </div>
@@ -123,21 +135,23 @@
             @{
                 foreach (var s in Model)
                 {
-                        <div class="contentProducts">
-                            <div class="contentProducts-image">
-                                <img src="../@s.Image" class="image-title" id="ImageProducts" />
-                                <p class="imgredient">Thành phần<br />@s.Ingredient</p>
-                            </div>
-                            <div class="contentProducts-text">
-                                <h4 class="contentProducts-title">@s.DishName</h4>
-                            </div>
-                            <div class="contentProducts-price">
-                                <div class="contentProducts-priceOriginal">@s.SalePrice.000vnđ</div>
-                                <i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>                                 
-                                @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
-                            </div>                
+                    string nameDish = s.DishName;
+                    <div class="contentProducts">
+                        <div class="contentProducts-image">
+                            <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                            <p class="imgredient">Thành phần<br />@s.Ingredient</p>
                         </div>
-                   
+                        <div class="contentProducts-text">
+                            <h4 class="contentProducts-title">@s.DishName</h4>
+                        </div>
+                        <div class="contentProducts-price">
+                            <div class="contentProducts-priceOriginal">@s.SalePrice.000vnđ</div>
+                            <a href="/them-gio-hang?DishName=@nameDish"><i class="fa fa-cart-plus cart-plus" id="cart-plus"></i></a>
+                            @*<i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>*@
+                            @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
+                        </div>
+                    </div>
+
                 }
             }
         </div>
