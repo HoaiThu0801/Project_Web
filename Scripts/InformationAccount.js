@@ -8,22 +8,6 @@
         });
     });
 });
-$('#Email').keyup(function () {
-    var email = $('#Email').val();
-    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/).test(email)) {
-        $('#Email').css('background', 'yellow')
-        $('#showError_Email').html('Hãy nhập email hợp lệ, VD: huutuong@gmail.com');
-        $('#showError_Email').css('color', 'red');
-        $('#showError_Email').css('font-weight', 'bold');
-        return false;
-    }
-    else {
-        $('#Email').css('background', 'white')
-        $('#showError_Email').html('');
-        return true;
-    }
-
-});
 $('#Fullname').click(function () {
     var fullname = $('#Fullname').val();
     if (fullname.length <= 0) {

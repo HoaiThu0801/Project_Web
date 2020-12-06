@@ -66,6 +66,7 @@ namespace Project_Web.Controllers
                 user.PhoneNumber = model.PhoneNumber;
                 _db.Users.AddOrUpdate(user);
                 _db.SaveChanges();
+                Session["User"] = user;
                 return View();
 
             }
