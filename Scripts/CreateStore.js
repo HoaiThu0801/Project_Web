@@ -86,6 +86,9 @@ $('#StoreName').keyup(function () {
 $(document).ready(function () {
     $('#LocationSelect').change(function () {
         var location = $('#LocationSelect').val();
+        $('#StoreNameList').css('opacity', '1');
+        $('#StoreNameList').css('visibility', 'visible');
+        $('#StoreNameList').css('height', 'unset');
         $.ajax({
             type: "get",
             url: "/Administrator_Setting/LoadStoreName",
