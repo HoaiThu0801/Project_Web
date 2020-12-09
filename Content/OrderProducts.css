@@ -1,0 +1,266 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightyellow;
+    min-height: 100vh;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.text-center {
+    font-size: 30px;
+}
+/*CSS for header*/
+.row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
+/*Progress Bar*/
+.progress-bar-design {
+    margin-top: 60px;
+    padding-left: 94px;
+}
+
+.progressbar {
+    counter-reset: step;
+    padding: 0;
+}
+
+    .progressbar li {
+        float: left;
+        list-style: none;
+        position: relative;
+        text-align: center;
+        width: calc(100% / 3);
+    }
+
+        .progressbar li:before {
+            background: #fff;
+            border: 2px solid #bebebe;
+            border-radius: 50%;
+            color: #bebebe;
+            content: counter(step);
+            counter-increment: step;
+            display: block;
+            font-weight: 700;
+            height: 30px;
+            line-height: 27px;
+            margin: 0 auto 10px;
+            text-align: center;
+            width: 30px;
+        }
+
+        .progressbar li:after {
+            background: #979797;
+            content: '';
+            height: 3px;
+            left: -50%;
+            position: absolute;
+            top: 15px;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .progressbar li.active:after,
+        .progressbar li.complete:after {
+            background: #3aac5d;
+        }
+
+        .progressbar li.active:before,
+        .progressbar li.complete:before {
+            background: #3aac5d;
+            border-color: #3aac5d;
+            color: #fff;
+        }
+
+        .progressbar li.active {
+            color: #3aac5d;
+            font-weight: 700;
+        }
+
+        .progressbar li.complete {
+            color: #333;
+            font-weight: 700;
+        }
+/*end*/
+
+/*CSS for container left*/
+.container {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 90%;
+}
+
+.orderProducts-left {
+    width: 60%;
+    padding: 10px;
+}
+
+.fa-dot-circle-o:before {
+    margin-right: 7px;
+    color: #0d5cb6;
+    font-size: 23px;
+}
+
+.orderProducts-left-step1 {
+    margin-bottom: 10px;
+    padding-top: 15px;
+}
+
+.orderProducts-left-step2 {
+    margin-bottom: 10px;
+    padding-top: 15px;
+}
+
+.orderProducts-left-step3 {
+    margin-bottom: 10px;
+    padding-top: 15px;
+}
+
+.orderProducts-left-step1-border1 {
+    border: 1px solid gray;
+}
+
+    .orderProducts-left-step1-border1 .fa {
+        padding-top: 15px;
+        margin-left: 15px;
+        font-size: 15px;
+    }
+
+        .orderProducts-left-step1-border1 .fa:hover {
+            cursor: pointer;
+        }
+
+.orderProducts-left-step1-border2 {
+    border: 1px solid gray;
+    margin: 30px;
+    width: 70%;
+    margin-left: 50px;
+}
+
+    .orderProducts-left-step1-border2 .orderProducts-left-step1-border2-textup {
+        padding: 10px 0 0 15px;
+        font-weight: 600;
+        color: #26bc76;
+    }
+
+    .orderProducts-left-step1-border2 .orderProducts-left-step1-border2-textupbottom {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px 10px 10px;
+    }
+
+    .orderProducts-left-step1-border2 .orderProducts-left-step1-border2-bordercenter {
+        border: 1px solid gray;
+        margin: 10px;
+    }
+
+.orderProducts-left-step2-border {
+    border: 1px solid gray;
+}
+
+    .orderProducts-left-step2-border .orderProducts-left-step2-border-input {
+        padding: 15px;
+    }
+
+        .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa-square-o:before {
+            margin-right: 7px;
+            font-size: 23px;
+        }
+
+        .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa {
+            font-size: 20px;
+        }
+
+            .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa:hover {
+                cursor: pointer;
+            }
+
+.orderProducts-left-step3-border {
+    border: 1px solid gray;
+}
+
+    .orderProducts-left-step3-border .fa {
+        padding: 15px;
+        font-size: 20px;
+    }
+
+        .orderProducts-left-step3-border .fa:hover {
+            cursor: pointer;
+        }
+
+        .orderProducts-left-step3-border .fa img {
+            margin-right: 10px;
+        }
+/*end*/
+
+
+/*CSS for container right*/
+.orderProducts-right {
+    width: 30%;
+    margin-top: 55px;
+}
+
+.orderProducts-right-border {
+    border: 1px solid gray;
+}
+
+.orderProducts-right-border-cover-up {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.orderProducts-right-border-cover-up-text {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.orderProducts-right-border-cover-up-button {
+    background-color: #fafafa;
+    border-style: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+    opacity: 0.6;
+}
+
+    .orderProducts-right-border-cover-up-button:hover {
+        opacity: 1;
+    }
+
+.orderProducts-right-border-cover-center{
+    border-bottom: 1px solid gray;
+    margin: 15px;
+}
+.orderProducts-right-border-cover-bottom{
+    padding: 0 15px 15px 15px;
+}
+.orderProducts-right-border-cover-bottom-name{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+/*end*/
