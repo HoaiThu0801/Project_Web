@@ -52,7 +52,6 @@ function closePopupForm() {
 }
 //CreateStrore Validation
 $('#StoreName').click(function () {
-    alert("1");
     var address = $('#StoreName').val();
     if (address.length <= 0) {
         $('#StoreName').css('background', 'yellow')
@@ -114,11 +113,22 @@ $(document).ready(function () {
     var location;
     $('#LocationSelect').change(function () {
         location = $('#LocationSelect').val();
-        alert(location);
     });
     $('#StoreNameSelect').change(function () {
         storename = $('#StoreNameSelect').val();
-        alert(storename);
+        //$.ajax({
+        //    type: "get",
+        //    url: "/Administrator_Setting/LoadDish_no_StoreName",
+        //    data: {
+        //        StoreName: storename
+        //    },
+        //    success: function (res) {
+        //        $('#listdish').html("");
+        //        $.each(res, function (key, item) {
+                   
+        //        })
+        //    }
+        //})
     });
      $('.fa').click(function () {
         var t = $(this).addClass('fa-circle');
@@ -288,6 +298,19 @@ $(function () {
             cache: false,
             success: function (result) {
                 $('#Staff').html(result);
+            },
+        });
+        return false;
+    });
+});
+$(function () {
+    $('#myPagerDish').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Dish').html(result);
             },
         });
         return false;

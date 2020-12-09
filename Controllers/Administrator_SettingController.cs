@@ -214,10 +214,18 @@ namespace Project_Web.Controllers
                          {
                              StoreName = s.StoreName,
                          });
-            int dem = store.Count();
             return Json(store.ToList(), JsonRequestBehavior.AllowGet);
         }
- 
+        //[HttpGet]
+        //public JsonResult LoadDish_no_StoreName(string StoreName)
+        //{
+        //    Store store = _db.Stores.SingleOrDefault(n => n.StoreName == StoreName);
+        //    var dish = (from m in _db.Menus
+        //                where !(_db.Menu_Stores.Any(ms => ms.IDDish == m.IDDish && ms.IDStore == store.IDStore))
+        //                select m.DishName);
+        //    return Json(dish.ToList(), JsonRequestBehavior.AllowGet);
+        //}
+
         #endregion
 
         #region Paging
@@ -240,6 +248,16 @@ namespace Project_Web.Controllers
             int pageSize = 4;
             int pageNumber = (page ?? 1);
             return PartialView("_TabStaff", store.ToPagedList(pageNumber, pageSize));
+        }
+        public PartialViewResult _TabDish(int? page)
+        {
+
+            if (page == null) page = 1;
+            var store = (from s in _db.Stores
+                         select s).OrderBy(x => x.IDStore);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return PartialView("_TabDish", store.ToPagedList(pageNumber, pageSize));
         }
         #endregion
 

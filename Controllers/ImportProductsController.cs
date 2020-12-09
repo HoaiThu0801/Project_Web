@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -21,12 +22,18 @@ namespace Project_Web.Controllers
         {
             warehouse = _db.Warehouses.SingleOrDefault(n => n.WarehouseName == warehouse.WarehouseName);
             var querryWarehouseDetailCount = from WarehouseDetail in _db.WarehouseDetails
-                                            select WarehouseDetail.IDWarehouseDetail;
+                                             select WarehouseDetail.IDWarehouseDetail;
             model.IDWarehouseDetail = "WHD" + querryWarehouseDetailCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
             model.IDWarehouse = warehouse.IDWarehouse;
             _db.WarehouseDetails.Add(model);
+            Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == model.DishName);
+            Menu_Stores menu_store = _db.Menu_Stores.SingleOrDefault(n => n.IDDish == menu.IDDish);
+            if (menu_store != null)
+            {
+                menu_store.Available = model.Quantity;
+                _db.Menu_Stores.AddOrUpdate(menu_store);
+            }
             _db.SaveChanges();
-
             return View();
         }
 
@@ -40,8 +47,7 @@ namespace Project_Web.Controllers
                         select new
                         {
                             DishName = c.DishName,
-                        });
-            int dem = dish.Count();
+                        }).ToList();
             return Json(dish.ToList(), JsonRequestBehavior.AllowGet);
         }
     }

@@ -205,6 +205,80 @@ namespace Project_Web.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        public ActionResult DeleteCart (int Index)
+        {
+            if (Session["cart"] != null)
+            {
+                DataTable dt = new DataTable();
+                dt = Session["cart"] as DataTable;
+                DataRow dr = dt.Rows[Index];
+                string IDBillDetails = dr["IDBillDetails"].ToString();
+                BillDetail bd = _db.BillDetails.Find(IDBillDetails);
+                if (bd != null)
+                {
+                    var bdTemp = (from s in _db.BillDetails
+                                  where s.IDBill == bd.IDBill
+                                  select s).ToList();
+                    if (bdTemp.Count > 1)
+                    {
+                        _db.BillDetails.Remove(bd);
+                        _db.SaveChanges();
+                        dt.Rows.RemoveAt(Index);
+                        Session["cart"] = dt;
+                    }
+                    else
+                    {
+                        string IDBill = bd.IDBill;
+                        _db.BillDetails.Remove(bd);
+
+
+                        OrderTrack ot = _db.OrderTracks.Where(n => n.IDBill == IDBill).SingleOrDefault();
+                        if (ot != null)
+                        {
+                            _db.OrderTracks.Remove(ot);
+                        }
+                        Bill b = _db.Bills.SingleOrDefault(n => n.IDBill == IDBill);
+                        if (b != null)
+                        {
+                            _db.Bills.Remove(b);
+                        }
+                        _db.SaveChanges();
+                        Session.Remove("Cart");
+                    }
+                }
+
+            }
+            return RedirectToAction("ShoppingCart", "Home");
+        }
+
+        public ActionResult EditCart (string IDBillDetail, int Quantity)
+        {
+            if (Session["cart"] != null)
+            {
+                DataTable dt = new DataTable();
+                dt = Session["cart"] as DataTable;
+                foreach(DataRow dr in dt.Rows)
+                {
+                    if (dr["IDBillDetails"].ToString() == IDBillDetail)
+                    {
+                        dr["Quantity"] = Quantity;
+                        dr["PaidPrice"] = (int.Parse(dr["Quantity"].ToString()) * float.Parse(dr["Price"].ToString())).ToString();
+                        BillDetail billDetail = _db.BillDetails.SingleOrDefault(n => n.IDBillDetail == IDBillDetail);
+                        if (billDetail != null)
+                        {
+                            billDetail.Quantity = Quantity;
+                            billDetail.PaidPrice = float.Parse(dr["PaidPrice"].ToString());
+                            _db.BillDetails.AddOrUpdate(billDetail);
+                            _db.SaveChanges();
+                        }
+                        break;
+                    }
+                }
+                Session["cart"] = dt;
+                return Content("true");
+            }
+            return RedirectToAction("ShoppingCart", "Home");
+        }
         #endregion
     }
 }

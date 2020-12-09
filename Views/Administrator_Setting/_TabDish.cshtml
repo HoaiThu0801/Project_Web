@@ -1,16 +1,58 @@
 ﻿@using Project_Web.Models
-@model Project_Web.Models.Menu
+@*@model Project_Web.Models.Menu*@
+@model PagedList.IPagedList<Project_Web.Models.Store>
+@using PagedList.Mvc;
 @{ Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();}
 <div class="button-popup">
     <button id="open-popup-dish-form" class="form-submit" onclick="openPopupDishForm()">Thêm món ăn</button>
-    <table class="table table-hover">
-        <tr>
-            <th>StoreName</th>
-            <th>Location</th>
-            <th>PhoneNumber</th>
-            <th>Email</th>
-        </tr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 30% ">Tên cửa hàng</th>
+                <th style="width: 25% ">Vị trí</th>
+                <th style="width: 20% "> Tên món ăn</th>
+                <th style="width: 25% ">Số lượng</th>
+            </tr>
+        </thead>
+        <tbody id="ListData">
+            @{
+
+                foreach (var s in Model)
+                {
+                    var menu_store = (from ms in _db.Menu_Stores
+                                      where ms.IDStore == s.IDStore
+                                      select ms).ToList();
+                    foreach (var ms in menu_store)
+                    {
+                        Menu menu = _db.Menus.SingleOrDefault(n => n.IDDish == ms.IDDish);
+                        if (ms.Available == null)
+                        {
+                            ms.Available = 0;
+                        }
+                        <tr>
+                            <td>@s.StoreName</td>
+                            <td>@s.Location</td>
+                            <td>@menu.DishName</td>
+                            <td>@ms.Available</td>
+                        </tr>
+                    }
+
+                }
+            }
+        </tbody>
     </table>
+    <div class="paging">
+        <div class="paging-show">
+            Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+        </div>
+        <div class="paging-choose" id="myPagerDish">
+            @Html.PagedListPager(Model, page => Url.Action("_TabDish", new { page }),
+           PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.ClassicPlusFirstAndLast
+           , new AjaxOptions
+           { InsertionMode = InsertionMode.Replace, HttpMethod = "Get", UpdateTargetId = "Dish" }))
+        </div>
+    </div>
+
 </div>
 <div class="signup-content-dish" id="signup-content-dish">
     <div class="signup-background-dish" id="signup-background-dish">
@@ -53,7 +95,7 @@
             </div>
             <div class="form-group show-dish-list" id="DishNameList">
                 <h6 class="form-title">Chọn món ăn</h6>
-                <div class="list-dish">
+                <div class="list-dish" id="listdish">
                     @{
                         var listDishName = (from dishName in _db.Menus
                                             select dishName).ToList();

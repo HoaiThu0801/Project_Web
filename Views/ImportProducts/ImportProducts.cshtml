@@ -21,12 +21,32 @@
                         <select class="custom-select" name="WarehouseName" id="Warehouse-Select">
                             <option disabled selected>Kho hàng</option>
                             @{
-                                var listWarehouse = (from Warehouse in _db.Warehouses
-                                                     select Warehouse).ToList();
-                                foreach (var warehouse in listWarehouse)
+                                User user = Session["User"] as User;
+                                var role = (from s in _db.User_Roles
+                                            where s.IDUser == user.IDUser
+                                            select s).SingleOrDefault();
+                                if (role.IDRole == "R02")
                                 {
-                                    <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                    var listWarehouse = (from Warehouse in _db.Warehouses
+                                                         join s in _db.Stores
+                                                         on Warehouse.IDStore equals s.IDStore
+                                                         where s.IDUser == user.IDUser
+                                                         select Warehouse).ToList();
+                                    foreach (var warehouse in listWarehouse)
+                                    {
+                                        <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                    }
                                 }
+                                else
+                                {
+                                    var listWarehouse = (from Warehouse in _db.Warehouses
+                                                         select Warehouse).ToList();
+                                    foreach (var warehouse in listWarehouse)
+                                    {
+                                        <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                    }
+                                }
+
                             }
                         </select>
                     </div>

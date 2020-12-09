@@ -25,7 +25,8 @@
                         @{Html.RenderAction("_TabStaff", "Administrator_Setting", new { page = 1 });}
                     </div>
                     <div class="tabcontent" id="Dish">
-                        @Html.Partial("~/Views/Administrator_Setting/_TabDish.cshtml")
+                        @*@Html.Partial("~/Views/Administrator_Setting/_TabDish.cshtml")*@
+                        @{Html.RenderAction("_TabDish", "Administrator_Setting", new { page = 1 });}
                     </div>
                 </div>
             </div>
