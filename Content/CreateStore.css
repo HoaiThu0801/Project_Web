@@ -565,9 +565,16 @@ body {
     grid-gap: 20px;
 }
 .show-dish-list{
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s linear;
 }
-
+#StoreNameList{
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    transition: 0.5s linear;
+}
 @media screen and (max-width: 768px) {
     .container {
         width: calc(100% - 40px);

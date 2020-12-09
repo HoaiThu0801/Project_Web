@@ -85,8 +85,6 @@ $('#StoreName').keyup(function () {
 //Show store name and choose dish when change select, load store accroding to location
 $(document).ready(function () {
     $('#LocationSelect').change(function () {
-        $("#StoreNameList").css("display", "block");
-        $(".show-dish-list").css("display", "block");
         var location = $('#LocationSelect').val();
         $.ajax({
             type: "get",
@@ -94,14 +92,11 @@ $(document).ready(function () {
             data: {
                 Location: location
             },
-            success: function (response) {
-               
-                $('#StoreNameSelect').html("");
-                $("#StoreNameSelect").append(("<option>" + "StoreName" + "</option>"));
+            success: function (response) {          
+                $('#StoreNameSelect').html("");            
                 $.each(response, function (key, item) {
-                    //$('#loading').text("item.StoreName")
+                    $("#StoreNameSelect").append(("<option disabled selected>" + "StoreName" + "</option>"));
                     $("#StoreNameSelect").append("<option>" + item.StoreName + "</option>");
-                    //$("#StoreNameSelect").append($('#loading'));
                 });
             }
         })
@@ -113,41 +108,49 @@ $(document).ready(function () {
     var location;
     $('#LocationSelect').change(function () {
         location = $('#LocationSelect').val();
+        $('#StoreNameList').css('opacity', '1');
+        $('#StoreNameList').css('visibility', 'visible');
+        $('#StoreNameList').css('height', 'unset');
     });
     $('#StoreNameSelect').change(function () {
         storename = $('#StoreNameSelect').val();
-        //$.ajax({
-        //    type: "get",
-        //    url: "/Administrator_Setting/LoadDish_no_StoreName",
-        //    data: {
-        //        StoreName: storename
-        //    },
-        //    success: function (res) {
-        //        $('#listdish').html("");
-        //        $.each(res, function (key, item) {
-                   
-        //        })
-        //    }
-        //})
-    });
-     $('.fa').click(function () {
-        var t = $(this).addClass('fa-circle');
-        let dishname = t.text();   
+        $('#DishNameList').css('opacity', '1');
+        $('#DishNameList').css('visibility', 'visible');
+        $('#DishNameList').css('height', 'unset');
         $.ajax({
-            type: "post",
-            url: "/Administrator_Setting/AddDish",
+            type: "get",
+            url: "/Administrator_Setting/LoadDish_no_StoreName",
             data: {
-                DishName: dishname,
-                StoreName: storename,
-                Location: location
+                StoreName: storename
             },
             success: function (res) {
-                if (res == "False") {
-                    $('.fa').removeClass('fa-circle');
-                    alert("Món ăn đã có sẵn");
-                }
+                $('#listdish').html("");
+                var html = '';
+                $.each(res, function (key, item) {
+                    html += '<a href="#" class="dishname-choose" id="DishName_a"><i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />' + item + '</i></a>';
+                    $('#listdish').html(html);
+                    $('.fa').click(function () {
+                        var t = $(this).addClass('fa-circle');
+                        let dishname = t.text();
+                        $.ajax({
+                            type: "post",
+                            url: "/Administrator_Setting/AddDish",
+                            data: {
+                                DishName: dishname,
+                                StoreName: storename,
+                                Location: location
+                            },
+                            success: function (res) {
+                                if (res == "False") {
+                                    $('.fa').removeClass('fa-circle');
+                                    alert("Món ăn đã có sẵn");
+                                }
+                            }
+                        });
+                    });
+                })
             }
-        });
+        })
     });
 });
 

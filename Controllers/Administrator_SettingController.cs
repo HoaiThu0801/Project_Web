@@ -216,15 +216,15 @@ namespace Project_Web.Controllers
                          });
             return Json(store.ToList(), JsonRequestBehavior.AllowGet);
         }
-        //[HttpGet]
-        //public JsonResult LoadDish_no_StoreName(string StoreName)
-        //{
-        //    Store store = _db.Stores.SingleOrDefault(n => n.StoreName == StoreName);
-        //    var dish = (from m in _db.Menus
-        //                where !(_db.Menu_Stores.Any(ms => ms.IDDish == m.IDDish && ms.IDStore == store.IDStore))
-        //                select m.DishName);
-        //    return Json(dish.ToList(), JsonRequestBehavior.AllowGet);
-        //}
+        [HttpGet]
+        public JsonResult LoadDish_no_StoreName(string StoreName)
+        {
+            Store store = _db.Stores.SingleOrDefault(n => n.StoreName == StoreName);
+            var dish = (from m in _db.Menus
+                        where !(_db.Menu_Stores.Any(ms => ms.IDDish == m.IDDish && ms.IDStore == store.IDStore))
+                        select m.DishName);
+            return Json(dish.ToList(), JsonRequestBehavior.AllowGet);
+        }
 
         #endregion
 
