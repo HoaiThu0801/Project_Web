@@ -93,9 +93,9 @@ $(document).ready(function () {
                 Location: location
             },
             success: function (response) {          
-                $('#StoreNameSelect').html("");            
+                $('#StoreNameSelect').html("");   
+                $("#StoreNameSelect").append(("<option disabled selected>" + "StoreName" + "</option>"));
                 $.each(response, function (key, item) {
-                    $("#StoreNameSelect").append(("<option disabled selected>" + "StoreName" + "</option>"));
                     $("#StoreNameSelect").append("<option>" + item.StoreName + "</option>");
                 });
             }
