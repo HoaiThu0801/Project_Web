@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Thông tin giao hàng";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Shipping.css">
+</head>
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/logo.gif" class="image-logo" />
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Cửa hàng bán cháo | Giao hàng</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+                <ul class="progressbar">
+                    <li class="complete">Đăng nhập</li>
+                    <li class="active">Mua hàng</li>
+                    <li>Thanh toán & Đặt mua</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="shipping-up">
+            <div>2. Địa chỉ giao hàng</div>
+            <h6>Chọn địa chỉ giao hàng có sẵn bên dưới</h6>
+            <div class="shipping-up-border">
+                <div class="shipping-up-border-text">
+                    <div>Nguyễn Hữu Tường</div>
+                    <div>2 Đào Trinh Nhất</div>
+                    <div>Điện thoại: 0396084832</div>
+                </div>
+                <div class="shipping-up-border-button">
+                    <button class="button-address">Giao đến địa chỉ này</button>
+                    <button class="button-update">Sửa</button>
+                </div>
+            </div>
+            <div class="shipping-up-border-bottom">
+                Bạn muốn giao đến địa chỉ khác?
+                <a href="#">Thêm địa chỉ giao hàng mới</a>
+            </div>
+        </div>
+        <div class="shipping-form">
+            <form action="~/OrderProducts/Shipping" method="post" class="shipping-form-cover">
+                <div class="shipping-group">
+                    <label>Họ tên</label>
+                    <input type="text" placeholder="Nhập họ tên"/>
+                </div>
+                <div class="shipping-group">
+                    <label>Điện thoại di động</label>
+                    <input type="tel" placeholder="Nhập số điện thoại"/>
+                </div>
+                <div class="shipping-group">
+                    <label>Tỉnh/Thành phố</label>
+                    <select class="custom-select">
+                        <option>Chọn Tỉnh/Thành phố</option>
+                    </select>
+                </div>
+                <div class="shipping-group">
+                    <label>Quận/Huyện</label>
+                    <select class="custom-select">
+                        <option>Chọn Quận/Huyện</option>
+                    </select>
+                </div>
+                <div class="shipping-group">
+                    <label>Phường/Xã</label>
+                    <select class="custom-select">
+                        <option>Chọn Phường/Xã</option>
+                    </select>
+                </div>
+                <div class="shipping-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" />
+                </div>
+            </form>
+        </div>    
+    </div>
+</body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/Shipping.js"></script>

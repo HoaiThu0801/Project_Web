@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Đặt hàng";
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/OrderProducts.css">
+</head>
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/logo.gif" class="image-logo" />
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Cửa hàng bán cháo | Đặt hàng</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+                <ul class="progressbar">
+                    <li class="complete">Đăng nhập</li>
+                    <li class="complete">Mua hàng</li>
+                    <li class="active">Thanh toán & Đặt mua</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <div class="orderProducts-left">
+            <div class="orderProducts-left-cover">
+                <div class="orderProducts-left-step1">
+                    <h3>1. Chọn hình thức giao hàng</h3>
+                    <div class="orderProducts-left-step1-border1">
+                        <i class="fa fa-dot-circle-o">Giao tiêu chuẩn</i>
+                        <div class="orderProducts-left-step1-border2">
+                            <div class="orderProducts-left-step1-border2-textup">
+                                Giao vào Thứ hai, 14/12
+                            </div>
+                            <div class="class=" orderProducts-left-step1-border2-nameProduct">
+
+                            </div>
+                            <div class="orderProducts-left-step1-border2-bordercenter"></div>
+                            <div class="orderProducts-left-step1-border2-textupbottom">
+                                <div>Giao tiêu chuẩn</div>
+                                <div>22.000đ</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="orderProducts-left-step2">
+                    <h3>2. Thanh toán bằng MST Xu</h3>
+                    <div class="orderProducts-left-step2-border">
+                        <div class="orderProducts-left-step2-border-input">
+                            <i class="fa fa-square-o">Ấn để sử dụng MST Xu. Hiện có: 1000MST Xu</i>
+                        </div>
+                    </div>
+                </div>
+                <div class="orderProducts-left-step3">
+                    <h3>3. Chọn hình thức thanh toán</h3>
+                    <div class="orderProducts-left-step3-border">
+                        <i class="fa fa-circle-o"><img src="~/images/payment-method.png" />Thanh toán bằng tiền mặt</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="orderProducts-right">
+            <div class="orderProducts-right-border">
+                <div class="orderProducts-right-border-cover">
+                    <div class="orderProducts-right-border-cover-up">
+                        <div class="orderProducts-right-border-cover-up-text">Địa chỉ giao hàng</div>
+                        <button class="orderProducts-right-border-cover-up-button" id="update-button">Sửa</button>
+                    </div>
+                    <div class="orderProducts-right-border-cover-center"></div>
+                    <div class="orderProducts-right-border-cover-bottom">
+                        <div class="orderProducts-right-border-cover-bottom-name">Nguyễn Hữu Tường</div>
+                        <div class="orderProducts-right-border-cover-bottom-address">2 đào trinh nhất</div>
+                        <div class="orderProducts-right-border-cover-bottom-phone">Điện thoại: 0396084832</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/OrderProducts.js"></script>

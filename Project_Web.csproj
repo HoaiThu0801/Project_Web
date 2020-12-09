@@ -341,6 +341,7 @@
     <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportProductsController.cs" />
+    <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
     <Compile Include="Global.asax.cs">
@@ -427,8 +428,10 @@
     <Content Include="Content\HomeStyle.css" />
     <Content Include="Content\ImportProducts.css" />
     <Content Include="Content\InformationAccount.css" />
+    <Content Include="Content\OrderProducts.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\RegisterStyle.css" />
+    <Content Include="Content\Shipping.css" />
     <Content Include="Content\ShoppingCart.css" />
     <Content Include="Content\SignInStyle.css" />
     <Content Include="Content\util.css" />
@@ -458,8 +461,10 @@
     <Content Include="images\icons\favicon.ico" />
     <Content Include="images\ImageProducts\backGroundRegister.jpg" />
     <Content Include="images\ImageProducts\chao-hanh.jpg" />
+    <Content Include="images\logo.gif" />
     <Content Include="images\logo.png" />
     <Content Include="images\menu.png" />
+    <Content Include="images\payment-method.png" />
     <Content Include="images\remove-icon.png" />
     <Content Include="images\signup-bg.jpg" />
     <Content Include="images\unchecked.gif" />
@@ -623,8 +628,10 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\OrderProducts.js" />
     <Content Include="Scripts\RegisterJS.js" />
     <Content Include="Scripts\ShoppingCart.js" />
+    <Content Include="Scripts\Shipping.js" />
     <Content Include="Scripts\SignIn.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
@@ -762,6 +769,8 @@
     <Content Include="Views\Home\ChangePass.cshtml" />
     <Content Include="Views\Home\ShoppingCart.cshtml" />
     <Content Include="Views\ImportProducts\ImportProducts.cshtml" />
+    <Content Include="Views\OrderProducts\OrderProducts.cshtml" />
+    <Content Include="Views\OrderProducts\Shipping.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
