@@ -8,12 +8,30 @@
 </head>
 
 <body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/logo.gif" class="image-logo" />
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Cửa hàng bán cháo | Trạng thái </h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+                <ul class="progressbar">
+                    <li class="active">Chờ chuẩn bị</li>
+                    <li>Đang giao</li>
+                    <li>Đã thanh toán</li>
+                    <li>Đã hoàn thành</li>
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="main">
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
                     <div class="tab">
-                        <button class="tablinks" onclick="openOrder(event, 'All')">Tất cả</button>
+                        <button class="tablinks active" onclick="openOrder(event, 'All')">Tất cả</button>
                         <button class="tablinks" onclick="openOrder(event, 'Preparing')">Chờ chuân bị</button>
                         <button class="tablinks" onclick="openOrder(event, 'Delivering')">Đang giao</button>
                         <button class="tablinks" onclick="openOrder(event, 'Paid')">Đã thanh toán</button>
@@ -21,7 +39,8 @@
                         <button class="tablinks" onclick="openOrder(event, 'Cancelleation')">Đã hủy</button>
                         <button class="tablinks" onclick="openOrder(event, 'Refund')">Trả hàng/Hoàn tiền</button>
                     </div>
-                    <div class="tabcontent" id="All">
+                    <!--Tab Tất cả-->
+                    <div class="tabcontent" id="All" style="display: block">
                         <div class="tabcontent-top-search">
                             <div class="tabcontent-container">
                                 <div class="search-border">
@@ -33,7 +52,6 @@
                         <div class="tabcontent-all-bottom">
                             <div class="tabcontent-all-bottom-products">
                                 <div class="tabcontent-all-bottom-left">
-
                                     <table>
                                         <thead>
                                             <tr>
@@ -68,17 +86,341 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tabcontent" id="Preparing">
+                    </div>
+                    <!--Tab Chờ Chuẩn bị-->
+                    <div class="tabcontent" id="Preparing">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabcontent" id="Delivering">
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products" style="display: none;">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabcontent" id="Paid">
+                    </div>
+                    <!--Tab Giao Hàng-->
+                    <div class="tabcontent" id="Delivering">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabcontent" id="Completion">
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left" style="display: none">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabcontent" id="Cancelleation">
+                    </div>
+                    <!--Tab Thanh Toán-->
+                    <div class="tabcontent" id="Paid">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="tabcontent" id="Refund">
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left" style="display: none">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab Hoàn thành-->
+                    <div class="tabcontent" id="Completion">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left" style="display: none">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab Đã hủy-->
+                    <div class="tabcontent" id="Cancelleation">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left" style="display: none">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab Hoàn Tiền-->
+                    <div class="tabcontent" id="Refund">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="none-products">
+                                    <div class="none-products-cover">
+                                        <img src="~/images/avatar.jpg" />
+                                        <div class="none-products-text">
+                                            Không tìm thấy đơn hàng
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tabcontent-all-bottom-left" style="display: none">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
