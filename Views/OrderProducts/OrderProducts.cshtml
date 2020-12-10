@@ -116,6 +116,7 @@
                         <div class="orderProducts-right-border-bottom-top-text text-format">Đơn hàng (số lượng sản phẩm)</div>
                         <button class="orderProducts-right-border-bottom-top-button" id="update-button-products">Sửa</button>
                     </div>
+                    <div class="orderProducts-right-hr"></div>
                     @{
                         foreach (DataRow dr in cart.Rows)
                         {
@@ -123,10 +124,9 @@
                             string DishName = dr["DishName"].ToString();
                             string Price = dr["PaidPrice"].ToString();
                             sum = sum + float.Parse(dr["PaidPrice"].ToString());
-                            <div class="orderProducts-right-hr"></div>
                             <div class="orderProducts-right-border-bottom-center">
-                                    <div class="text-format">@Quantity x @DishName</div>
-                                    <div class="value-format">@Price</div>
+                                <div class="text-format">@Quantity x @DishName</div>
+                                <div class="value-format">@Price</div>
                             </div>
                         }
                         sum = sum + 22000;
