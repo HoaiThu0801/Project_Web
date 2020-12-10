@@ -21,6 +21,8 @@ namespace Project_Web.Models
         public string Ward { get; set; }
         public Nullable<int> IsDefault { get; set; }
         public string Street { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Fullname { get; set; }
     
         public virtual User User { get; set; }
     }

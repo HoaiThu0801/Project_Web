@@ -34,7 +34,7 @@ namespace Project_Web.Models
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Email không được trống")]
         [RegularExpression(@"\A(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-                            ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
+                   ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
         public string Email { get; set; }
         public string IDUser { get; set; }
     
