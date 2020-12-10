@@ -143,6 +143,7 @@ h3 {
 
 .orderProducts-left-step1-border1 {
     border: 1px solid gray;
+    border-radius: 5px;
 }
 
     .orderProducts-left-step1-border1 .fa {
@@ -158,6 +159,7 @@ h3 {
 .orderProducts-left-step1-border2 {
     border: 1px solid gray;
     margin: 30px;
+    border-radius: 5px;
     width: 70%;
     margin-left: 50px;
 }
@@ -179,8 +181,41 @@ h3 {
         margin: 10px;
     }
 
+.orderProducts-left-step1-border2-products {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.orderProducts-left-step1-border2-products-inner {
+    margin-bottom: 12px;
+    font-size: 13px;
+    color: rgb(36, 36, 36);
+    position: relative;
+    padding-left: 20px;
+    font-weight: 300;
+    width: 90%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden !important;
+    margin-left: 20px;
+}
+
+    .orderProducts-left-step1-border2-products-inner:before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgb(216, 216, 216);
+        left: 0px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
 .orderProducts-left-step2-border {
     border: 1px solid gray;
+    border-radius: 5px;
 }
 
     .orderProducts-left-step2-border .orderProducts-left-step2-border-input {
@@ -192,16 +227,19 @@ h3 {
             font-size: 23px;
         }
 
-        .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa {
-            font-size: 20px;
-        }
+    .orderProducts-left-step2-border .orderProducts-left-step2-border-input-a {
+        font-size: 20px;
+        text-decoration: none;
+        color: black;
+    }
 
-            .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa:hover {
-                cursor: pointer;
-            }
+    .orderProducts-left-step2-border .orderProducts-left-step2-border-input .fa:hover {
+        cursor: pointer;
+    }
 
 .orderProducts-left-step3-border {
     border: 1px solid gray;
+    border-radius: 5px;
 }
 
     .orderProducts-left-step3-border .fa {
@@ -216,17 +254,32 @@ h3 {
         .orderProducts-left-step3-border .fa img {
             margin-right: 10px;
         }
+
+.orderProducts-left-button {
+    margin: 10px 0px 0px;
+    padding: 4px 12px;
+    width: 360px;
+    height: 50px;
+    line-height: 2;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    border: 1px solid rgb(172, 34, 39);
+    outline-color: rgb(204, 204, 204);
+    border-radius: 3px;
+    cursor: pointer;
+    background: linear-gradient(rgb(239, 57, 89), rgb(215, 32, 65));
+}
 /*end*/
 
-
-/*CSS for container right*/
+/*CSS for container right top*/
 .orderProducts-right {
     width: 30%;
     margin-top: 55px;
 }
 
-.orderProducts-right-border {
+.orderProducts-right-border-up {
     border: 1px solid gray;
+    border-radius: 10px;
 }
 
 .orderProducts-right-border-cover-up {
@@ -244,7 +297,7 @@ h3 {
     background-color: #fafafa;
     border-style: none;
     border: 1px solid gray;
-    border-radius: 5px;
+    width: 20%;
     opacity: 0.6;
 }
 
@@ -252,15 +305,85 @@ h3 {
         opacity: 1;
     }
 
-.orderProducts-right-border-cover-center{
+.orderProducts-right-hr {
     border-bottom: 1px solid gray;
     margin: 15px;
 }
-.orderProducts-right-border-cover-bottom{
+
+.orderProducts-right-border-cover-bottom {
     padding: 0 15px 15px 15px;
 }
-.orderProducts-right-border-cover-bottom-name{
+
+.orderProducts-right-border-cover-bottom-name {
     font-weight: bold;
     margin-bottom: 5px;
+}
+/*end*/
+
+/*CSS for container right bottim*/
+.orderProducts-right-hr-bold {
+    border: 2px solid gray;
+    margin: 15px;
+}
+
+.orderProducts-right-border-bottom-cover {
+    border: 1px solid gray;
+    margin-top: 25px;
+    border-radius: 10px;
+}
+
+.orderProducts-right-border-bottom-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 18px 0 18px;
+}
+
+.orderProducts-right-border-bottom-top-text {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.orderProducts-right-border-bottom-top-button {
+    background-color: #fafafa;
+    border-style: none;
+    border: 1px solid gray;
+    width: 20%;
+    opacity: 0.6;
+}
+
+    .orderProducts-right-border-bottom-top-button:hover {
+        opacity: 1;
+    }
+
+.orderProducts-right-border-bottom-center {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px 0 18px;
+}
+
+.orderProducts-right-border-bottom-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 18px 0 18px;
+}
+
+.pay-value {
+    color: rgb(238, 35, 71);
+    font-size: 19px;
+    font-weight: 400;
+    text-align: right;
+}
+
+.text-format {
+    font-size: 14px;
+}
+
+.text-format-sum {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.value-format {
+    font-size: 14px;
 }
 /*end*/
