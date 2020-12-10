@@ -15,6 +15,7 @@
           <Property Name="District" Type="varchar(max)" />
           <Property Name="Ward" Type="varchar(max)" />
           <Property Name="IsDefault" Type="int" />
+          <Property Name="Street" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="BillDetail">
           <Key>
@@ -952,6 +953,7 @@
           <Property Name="Ward" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="IsDefault" Type="Int32" />
           <NavigationProperty Name="User" Relationship="Database_PorridgeSellingManagementStoreModel.FK_Address_Users_Bills" FromRole="Address_Users" ToRole="User" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -1238,6 +1240,7 @@
           <EntitySetMapping Name="Address_Users">
             <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Address_Users">
               <MappingFragment StoreEntitySet="Address_Users">
+                <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
                 <ScalarProperty Name="Ward" ColumnName="Ward" />
                 <ScalarProperty Name="District" ColumnName="District" />

@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Project_Web.Models;
+@{
     ViewBag.Title = "Thông tin giao hàng";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -56,13 +58,21 @@
                 </div>
                 <div class="shipping-group">
                     <label>Tỉnh/Thành phố</label>
-                    <select class="custom-select">
+                    <select class="custom-select" id="ProvinceSelect">
                         <option>Chọn Tỉnh/Thành phố</option>
+                        @{
+                            var provinces = (from s in _db.Provinces
+                                             select s.Name).ToList();
+                            foreach (var pro in provinces)
+                            {
+                                <option>@pro</option>
+                            }
+                        }
                     </select>
                 </div>
                 <div class="shipping-group">
                     <label>Quận/Huyện</label>
-                    <select class="custom-select">
+                    <select class="custom-select" id="DistrictSelect">
                         <option>Chọn Quận/Huyện</option>
                     </select>
                 </div>
