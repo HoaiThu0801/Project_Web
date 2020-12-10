@@ -69,4 +69,5 @@ $('#Cancel').click(function () {
     $('#form-address').css('visibility', 'hidden');
     $('#form-address').css('height', '0');
     $('#form-address').css('width', '0');
+    $('#address-form').trigger("reset");
 });
