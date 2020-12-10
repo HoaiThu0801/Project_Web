@@ -48,6 +48,10 @@ $(document).ready(function () {
             url: url,
             data: form,
             success: function (res) {
+                if (res == "true") {
+                    alert("Thêm địa chỉ mới thành công");
+                    $(window).attr('location', '../OrderProducts/Shipping');
+                }
             },
 
         })

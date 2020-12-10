@@ -29,7 +29,21 @@ namespace Project_Web.Controllers
         {
             User user = new User();
             user = Session["User"] as User;
-            return View();
+            Address_Users address_Users = new Address_Users();
+            address_Users.IDUser = user.IDUser;
+            address_Users.IsDefault = 0;
+            address_Users.Fullname = form["FullName"].ToString();
+            address_Users.PhoneNumber = form["PhoneNumber"].ToString();
+            address_Users.Province = form["Province"].ToString();
+            address_Users.District = form["District"].ToString();
+            address_Users.Ward = form["Ward"].ToString();
+            address_Users.Street = form["Street"].ToString();
+            var querryaddress_UsersCount = (from au in _db.Address_Users
+                                   select au).ToList();
+            address_Users.IDAddress = "A-U" + querryaddress_UsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+            _db.Address_Users.Add(address_Users);
+            _db.SaveChanges();
+            return Content("true");
         }
         #region LoadData
         [HttpGet]
