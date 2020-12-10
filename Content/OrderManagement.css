@@ -7,6 +7,101 @@ body {
     min-height: 100vh;
 }
 
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+/*CSS for header*/
+.row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
+/*Progress Bar*/
+.progress-bar-design {
+    margin-top: 60px;
+    padding-left: 94px;
+}
+
+.progressbar {
+    counter-reset: step;
+    padding: 0;
+}
+
+    .progressbar li {
+        float: left;
+        list-style: none;
+        position: relative;
+        text-align: center;
+        width: calc(100% / 5);
+    }
+
+        .progressbar li:before {
+            background: #fff;
+            border: 2px solid #bebebe;
+            border-radius: 50%;
+            color: #bebebe;
+            content: counter(step);
+            counter-increment: step;
+            display: block;
+            font-weight: 700;
+            height: 30px;
+            line-height: 27px;
+            margin: 0 auto 10px;
+            text-align: center;
+            width: 30px;
+        }
+
+        .progressbar li:after {
+            background: #979797;
+            content: '';
+            height: 3px;
+            left: -50%;
+            position: absolute;
+            top: 15px;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .progressbar li.active:after,
+        .progressbar li.complete:after {
+            background: #3aac5d;
+        }
+
+        .progressbar li.active:before,
+        .progressbar li.complete:before {
+            background: #3aac5d;
+            border-color: #3aac5d;
+            color: #fff;
+        }
+
+        .progressbar li.active {
+            color: #3aac5d;
+            font-weight: 700;
+        }
+
+        .progressbar li.complete {
+            color: #333;
+            font-weight: 700;
+        }
+/*end*/
+
 .container {
     width: 1000px;
     margin-top: 20px;
@@ -47,9 +142,7 @@ body {
 
 /* Style the tab content */
 .tabcontent {
-    opacity: 1;
-    visibility: visible;
-    border-top: none;
+    display: none;
     height: 0;
     margin-top: 20px;
     width: 100%;
@@ -158,5 +251,22 @@ thead{
 }
 .fa-info-circle:before {
     margin-right: 5px;
+}
+.none-products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.none-products-cover{
+    margin: 20px;
+}
+.none-products-cover img{
+    width: 100px;
+    height: 100px;
+    margin-left: 35px;
+}
+.none-products-text{
+    font-size: 18px;
+    font-weight: bold;
 }
 /*end*/
