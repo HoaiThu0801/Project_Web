@@ -13,15 +13,73 @@
             <div class="container">
                 <div class="signup-content">
                     <div class="tab">
-                        <button class="tablinks" onclick="openOrder(event, 'Store')">Cửa hàng</button>
-                        <button class="tablinks" onclick="openOrder(event, 'Staff')">Nhân viên</button>
-                        <button class="tablinks" onclick="openOrder(event, 'Dish')">Món ăn</button>
+                        <button class="tablinks" onclick="openOrder(event, 'All')">Tất cả</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Preparing')">Chờ chuân bị</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Delivering')">Đang giao</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Paid')">Đã thanh toán</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Completion')">Đã hoàn thành</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Cancelleation')">Đã hủy</button>
+                        <button class="tablinks" onclick="openOrder(event, 'Refund')">Trả hàng/Hoàn tiền</button>
                     </div>
-                    <div class="tabcontent" id="Store">
-                    </div>
-                    <div class="tabcontent" id="Staff">
-                    </div>
-                    <div class="tabcontent" id="Dish">
+                    <div class="tabcontent" id="All">
+                        <div class="tabcontent-top-search">
+                            <div class="tabcontent-container">
+                                <div class="search-border">
+                                    <i class="fa fa-search"></i>
+                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabcontent-all-bottom">
+                            <div class="tabcontent-all-bottom-products">
+                                <div class="tabcontent-all-bottom-left">
+
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                <th style="width: 30% ">Trạng thái</th>
+                                                <th style="width: 15% ">Vận chuyển</th>
+                                                <th style="width: 15% ">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="display-infor">
+                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
+                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
+                                                </td>
+                                                <td class="text-center">860.000đ</td>
+                                                <td class="text-center">Đã giao</td>
+                                                <td class="text-center">Giao tiêu chuẩn</td>
+                                                <td class="text-center">
+                                                    <a href="#" class="detail">Xem chi tiết</a>
+                                                    <button class="button-sale">Mua lần nữa</button>
+                                                    <a href="#" class="detail">Chuyển state</a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="table-top">
+                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
+                                        <div class="table-top-products">DH000000</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tabcontent" id="Preparing">
+                        </div>
+                        <div class="tabcontent" id="Delivering">
+                        </div>
+                        <div class="tabcontent" id="Paid">
+                        </div>
+                        <div class="tabcontent" id="Completion">
+                        </div>
+                        <div class="tabcontent" id="Cancelleation">
+                        </div>
+                        <div class="tabcontent" id="Refund">
+                        </div>
                     </div>
                 </div>
             </div>
