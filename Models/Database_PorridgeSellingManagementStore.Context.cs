@@ -39,5 +39,10 @@ namespace Project_Web.Models
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<OrderState> OrderStates { get; set; }
         public virtual DbSet<OrderTrack> OrderTracks { get; set; }
+        public virtual DbSet<Address_Users> Address_Users { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<Province> Provinces { get; set; }
+        public virtual DbSet<Ward> Wards { get; set; }
     }
 }

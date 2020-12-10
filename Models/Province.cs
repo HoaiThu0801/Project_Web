@@ -12,23 +12,27 @@ namespace Project_Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Menu
+    public partial class Province
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Menu()
+        public Province()
         {
-            this.Menu_Stores = new HashSet<Menu_Stores>();
+            this.Districts = new HashSet<District>();
         }
     
-        public string IDDish { get; set; }
-        public string DishName { get; set; }
-        public string Ingredient { get; set; }
-        public Nullable<double> ImportPrice { get; set; }
-        public Nullable<double> SalePrice { get; set; }
-        public string Image { get; set; }
-        public string Category { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public Nullable<int> TelephoneCode { get; set; }
+        public string ZipCode { get; set; }
+        public int CountryId { get; set; }
+        public string CountryCode { get; set; }
+        public Nullable<int> SortOrder { get; set; }
+        public Nullable<bool> IsPublished { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
+        public virtual Country Country { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Menu_Stores> Menu_Stores { get; set; }
+        public virtual ICollection<District> Districts { get; set; }
     }
 }

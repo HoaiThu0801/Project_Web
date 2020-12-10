@@ -32,6 +32,15 @@
         <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.OrderTrack" Width="1.5" PointX="10.5" PointY="9.25" />
         <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills" />
         <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_OrderStates" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Address_Users" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Country" Width="1.5" PointX="10.375" PointY="1" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.District" Width="1.5" PointX="14.875" PointY="1.875" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Province" Width="1.5" PointX="12.625" PointY="1.75" />
+        <EntityTypeShape EntityType="Database_PorridgeSellingManagementStoreModel.Ward" Width="1.5" PointX="17.125" PointY="2" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Address_Users_Bills" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Province_Country" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_District_Province" />
+        <AssociationConnector Association="Database_PorridgeSellingManagementStoreModel.FK_Ward_District" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

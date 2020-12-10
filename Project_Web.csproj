@@ -347,12 +347,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Address_Users.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AuthorizeController.cs" />
     <Compile Include="Models\Authorize_userController.cs" />
     <Compile Include="Models\Bill.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BillDetail.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CreateSeller.cs" />
@@ -371,6 +377,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\District.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\FogotPassWord.cs" />
     <Compile Include="Models\Menu.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
@@ -382,6 +391,9 @@
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderTrack.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Province.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
@@ -403,6 +415,9 @@
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VerifyEmail.cs" />
+    <Compile Include="Models\Ward.cs">
+      <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Warehouse.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
