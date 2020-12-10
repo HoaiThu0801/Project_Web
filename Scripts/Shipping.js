@@ -57,3 +57,16 @@ $(document).ready(function () {
         })
     });
 })
+
+$('#openForm').click(function () {
+    $('#form-address').css('opacity', '1');
+    $('#form-address').css('visibility', 'visible');
+    $('#form-address').css('height', 'unset');
+    $('#form-address').css('width', '100%');
+});
+$('#Cancel').click(function () {
+    $('#form-address').css('opacity', '0');
+    $('#form-address').css('visibility', 'hidden');
+    $('#form-address').css('height', '0');
+    $('#form-address').css('width', '0');
+});
