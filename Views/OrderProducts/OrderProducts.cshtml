@@ -1,5 +1,13 @@
-﻿@{
+﻿@using Project_Web.Models;
+@using System.Data;
+@{
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
     ViewBag.Title = "Đặt hàng";
+    User user = new User();
+    user = Session["User"] as User;
+    DataTable cart = new DataTable();
+    cart = Session["cart"] as DataTable;
+    float sum = 0;
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -32,16 +40,29 @@
                     <div class="orderProducts-left-step1-border1">
                         <i class="fa fa-dot-circle-o">Giao tiêu chuẩn</i>
                         <div class="orderProducts-left-step1-border2">
-                            <div class="orderProducts-left-step1-border2-textup">
-                                Giao vào Thứ hai, 14/12
-                            </div>
+                            @{
+
+                                DateTime now = DateTime.Now;
+                                now = now.AddDays(3);
+                                <div class="orderProducts-left-step1-border2-textup">
+                                    Giao vào @now
+                                </div>
+                            }
+
                             <div class="orderProducts-left-step1-border2-nameProduct">
                                 <ul class="orderProducts-left-step1-border2-products">
-                                    <li>
-                                        <div class="orderProducts-left-step1-border2-products-inner">
-                                            Số lương x Tên sản phẩm
-                                        </div>
-                                    </li>
+                                    @{
+                                        foreach (DataRow dr in cart.Rows)
+                                        {
+                                            string Quantity = dr["Quantity"].ToString();
+                                            string DishName = dr["DishName"].ToString();
+                                            <li>
+                                                <div class="orderProducts-left-step1-border2-products-inner">
+                                                    @Quantity x @DishName
+                                                </div>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </div>
                             <div class="orderProducts-left-step1-border2-bordercenter"></div>
@@ -50,6 +71,7 @@
                                 <div>22.000đ</div>
                             </div>
                         </div>
+
                     </div>
 
                 </div>
@@ -82,9 +104,9 @@
                     </div>
                     <div class="orderProducts-right-hr"></div>
                     <div class="orderProducts-right-border-cover-bottom">
-                        <div class="orderProducts-right-border-cover-bottom-name">Nguyễn Hữu Tường</div>
+                        <div class="orderProducts-right-border-cover-bottom-name">@user.Fullname</div>
                         <div class="orderProducts-right-border-cover-bottom-address">2 đào trinh nhất</div>
-                        <div class="orderProducts-right-border-cover-bottom-phone">Điện thoại: 0396084832</div>
+                        <div class="orderProducts-right-border-cover-bottom-phone">@user.PhoneNumber</div>
                     </div>
                 </div>
             </div>
@@ -94,11 +116,21 @@
                         <div class="orderProducts-right-border-bottom-top-text text-format">Đơn hàng (số lượng sản phẩm)</div>
                         <button class="orderProducts-right-border-bottom-top-button" id="update-button-products">Sửa</button>
                     </div>
-                    <div class="orderProducts-right-hr"></div>
-                    <div class="orderProducts-right-border-bottom-center">
-                        <div class="text-format">Số lương x sản phẩm</div>
-                        <div class="value-format">Giá</div>
-                    </div>
+                    @{
+                        foreach (DataRow dr in cart.Rows)
+                        {
+                            string Quantity = dr["Quantity"].ToString();
+                            string DishName = dr["DishName"].ToString();
+                            string Price = dr["PaidPrice"].ToString();
+                            sum = sum + float.Parse(dr["PaidPrice"].ToString());
+                            <div class="orderProducts-right-hr"></div>
+                            <div class="orderProducts-right-border-bottom-center">
+                                    <div class="text-format">@Quantity x @DishName</div>
+                                    <div class="value-format">@Price</div>
+                            </div>
+                        }
+                        sum = sum + 22000;
+                    }
                     <div class="orderProducts-right-hr"></div>
                     <div class="orderProducts-right-border-bottom-center">
                         <div class="text-format">Phí vận chuyển</div>
@@ -108,7 +140,7 @@
                     <div class="orderProducts-right-border-bottom-bottom">
                         <div class="text-format-sum">Thành tiền:</div>
                         <div class="text-right">
-                            <div class="pay-value">Giá tiền</div>
+                            <div class="pay-value">@sum</div>
                             <p>(Đã bao gồm VAT)</p>
                         </div>
                     </div>

@@ -47,44 +47,47 @@
             </div>
         </div>
         <div class="shipping-form">
-            <form action="~/OrderProducts/Shipping" method="post" class="shipping-form-cover">
+            <form action="~/OrderProducts/Shipping" id="address-form" method="post" class="shipping-form-cover">
                 <div class="shipping-group">
                     <label>Họ tên</label>
-                    <input type="text" placeholder="Nhập họ tên"/>
+                    <input type="text" name="FullName" placeholder="Nhập họ tên" />
                 </div>
                 <div class="shipping-group">
                     <label>Điện thoại di động</label>
-                    <input type="tel" placeholder="Nhập số điện thoại"/>
+                    <input type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" />
                 </div>
                 <div class="shipping-group">
                     <label>Tỉnh/Thành phố</label>
-                    <select class="custom-select" id="ProvinceSelect">
+                    <select class="custom-select" name="Province" id="ProvinceSelect">
                         <option>Chọn Tỉnh/Thành phố</option>
                         @{
                             var provinces = (from s in _db.Provinces
-                                             select s.Name).ToList();
+                                             select s).ToList();
                             foreach (var pro in provinces)
                             {
-                                <option>@pro</option>
+                                <option value="@pro.Name">@pro.Type @pro.Name</option>
                             }
                         }
                     </select>
                 </div>
                 <div class="shipping-group">
                     <label>Quận/Huyện</label>
-                    <select class="custom-select" id="DistrictSelect">
+                    <select class="custom-select" name="District" id="DistrictSelect">
                         <option>Chọn Quận/Huyện</option>
                     </select>
                 </div>
                 <div class="shipping-group">
                     <label>Phường/Xã</label>
-                    <select class="custom-select">
+                    <select class="custom-select" name="Ward" id="WardSelect">
                         <option>Chọn Phường/Xã</option>
                     </select>
                 </div>
                 <div class="shipping-group">
                     <label>Địa chỉ</label>
-                    <input type="text" />
+                    <input name="Street" type="text" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận" />
                 </div>
             </form>
         </div>    
