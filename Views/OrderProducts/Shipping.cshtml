@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Thông tin giao hàng";
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    User user = Session["User"] as User;
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -26,72 +27,80 @@
             </div>
         </div>
     </div>
+
     <div class="container" id="container">
-        <div class="shipping-up">
-            <div>2. Địa chỉ giao hàng</div>
-            <h6>Chọn địa chỉ giao hàng có sẵn bên dưới</h6>
-            <div class="shipping-up-border">
-                <div class="shipping-up-border-text">
-                    <div>Nguyễn Hữu Tường</div>
-                    <div>2 Đào Trinh Nhất</div>
-                    <div>Điện thoại: 0396084832</div>
+        @{
+            if (user != null)
+            {
+                <div class="shipping-up">
+                    <div>2. Địa chỉ giao hàng</div>
+                    <h6>Chọn địa chỉ giao hàng có sẵn bên dưới</h6>
+                    <div class="shipping-up-border">
+                        <div class="shipping-up-border-text">
+                            <div>@user.Fullname</div>
+                            <div>@user.Address</div>
+                            <div>Điện thoại: @user.PhoneNumber</div>
+                        </div>
+                        <div class="shipping-up-border-button">
+                            <button class="button-address">Giao đến địa chỉ này</button>
+                            <button class="button-update" id="update-button">Sửa</button>
+                        </div>
+                    </div>
+                    <div class="shipping-up-border-bottom">
+                        Bạn muốn giao đến địa chỉ khác?
+                        <div class="text-add-address" id="openForm">Thêm địa chỉ giao hàng mới</div>
+                    </div>
                 </div>
-                <div class="shipping-up-border-button">
-                    <button class="button-address">Giao đến địa chỉ này</button>
-                    <button class="button-update">Sửa</button>
+                <div class="shipping-form" id="form-address">
+                    <form action="~/OrderProducts/Shipping" id="address-form" method="post" class="shipping-form-cover">
+
+                        <div class="shipping-group">
+                            <label>Họ tên</label>
+                            <input type="text" name="FullName" id="Fullname" placeholder="Nhập họ tên" class="form-input" value="@user.Fullname" />
+                        </div>
+                        <div class="shipping-group">
+                            <label>Điện thoại di động</label>
+                            <input type="text" name="PhoneNumber" id="PhoneNumber" placeholder="Nhập số điện thoại" class="form-input" value="@user.PhoneNumber" />
+                        </div>
+                        <div class="shipping-group">
+                            <label>Tỉnh/Thành phố</label>
+                            <select class="custom-select" name="Province" id="ProvinceSelect">
+                                <option disabled selected>Chọn Tỉnh/Thành phố</option>
+                                @{
+                                    var provinces = (from s in _db.Provinces
+                                                     select s).ToList();
+                                    foreach (var pro in provinces)
+                                    {
+                                        <option value="@pro.Name">@pro.Type @pro.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="shipping-group">
+                            <label>Quận/Huyện</label>
+                            <select class="custom-select" name="District" id="DistrictSelect">
+                                <option disabled selected>Chọn Quận/Huyện</option>
+                            </select>
+                        </div>
+                        <div class="shipping-group">
+                            <label>Phường/Xã</label>
+                            <select class="custom-select" name="Ward" id="WardSelect">
+                                <option disabled selected>Chọn Phường/Xã</option>
+                            </select>
+                        </div>
+                        <div class="shipping-group">
+                            <label>Địa chỉ</label>
+                            <input name="Street" id="Street" type="text" class="form-input" placeholder="Nhập số nhà và tên đường" value="@user.Address" />
+                        </div>
+
+                        <div class="button-form">
+                            <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận" />
+                            <input name="Cancel" id="Cancel" class="form-submit" value="Hủy" />
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <div class="shipping-up-border-bottom">
-                Bạn muốn giao đến địa chỉ khác?
-                <div class="text-add-address" id="openForm">Thêm địa chỉ giao hàng mới</div>
-            </div>
-        </div>
-        <div class="shipping-form" id="form-address">
-            <form action="~/OrderProducts/Shipping" id="address-form" method="post" class="shipping-form-cover">
-                <div class="shipping-group">
-                    <label>Họ tên</label>
-                    <input type="text" name="FullName" placeholder="Nhập họ tên" class="form-input"/>
-                </div>
-                <div class="shipping-group">
-                    <label>Điện thoại di động</label>
-                    <input type="tel" name="PhoneNumber" placeholder="Nhập số điện thoại" class="form-input"/>
-                </div>
-                <div class="shipping-group">
-                    <label>Tỉnh/Thành phố</label>
-                    <select class="custom-select" name="Province" id="ProvinceSelect">
-                        <option disabled selected>Chọn Tỉnh/Thành phố</option>
-                        @{
-                            var provinces = (from s in _db.Provinces
-                                             select s).ToList();
-                            foreach (var pro in provinces)
-                            {
-                                <option value="@pro.Name">@pro.Type @pro.Name</option>
-                            }
-                        }
-                    </select>
-                </div>
-                <div class="shipping-group">
-                    <label>Quận/Huyện</label>
-                    <select class="custom-select" name="District" id="DistrictSelect">
-                        <option disabled selected>Chọn Quận/Huyện</option>
-                    </select>
-                </div>
-                <div class="shipping-group">
-                    <label>Phường/Xã</label>
-                    <select class="custom-select" name="Ward" id="WardSelect">
-                        <option disabled selected>Chọn Phường/Xã</option>
-                    </select>
-                </div>
-                <div class="shipping-group">
-                    <label>Địa chỉ</label>
-                    <input name="Street" type="text" class="form-input"/>
-                </div>
-                <div class="button-form">
-                    <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận" />
-                    <input name="Cancel" id="Cancel" class="form-submit" value="Hủy" />
-                </div>
-            </form>
-        </div>    
+            }
+        }
     </div>
 </body>
 <script src="~/Scripts/jquery-3.5.1.min.js"></script>
