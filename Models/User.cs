@@ -23,7 +23,6 @@ namespace Project_Web.Models
             this.User_Roles = new HashSet<User_Roles>();
             this.Address_Users = new HashSet<Address_Users>();
         }
-    
         public string IDUser { get; set; }
         [MinLength(8, ErrorMessage = "Tên ít nhất 8 kí tự")]
         [RegularExpression(@"^(([A-za-z0-9]+[\s]{1}[A-za-z0-9]+)|([A-Za-z0-9]+))$", ErrorMessage = "Tên của bạn phải chứa chữ cái viết thường hoặc hoa, VD: Huutuong")]
@@ -45,7 +44,7 @@ namespace Project_Web.Models
         public Nullable<double> Point { get; set; }
         [Required(ErrorMessage = "Email không được trống")]
         [RegularExpression(@"\A(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-za-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
-                    ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
+                   ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
         public string Email { get; set; }
         public string Image { get; set; }
         public string Facebook { get; set; }
