@@ -87,8 +87,8 @@ namespace Project_Web.Controllers
             return View();
         }
         #region Cart
-        //[HttpPost]
-        public ActionResult AddCart(string DishName)
+        [HttpPost]
+        public ActionResult AddCart(string IDDish)
         {
             User user = Session["User"] as User;
             if (user == null)
@@ -97,7 +97,7 @@ namespace Project_Web.Controllers
             }
             string IDBill = "Default";
             var dish = (from s in _db.Menus
-                        where s.DishName == DishName
+                        where s.IDDish == IDDish
                         select s).SingleOrDefault();
             if (dish != null)
             {
@@ -125,7 +125,7 @@ namespace Project_Web.Controllers
                 bool isExisted = false;
                 foreach(DataRow dr in cart.Rows)
                 {
-                    if (dr["DishName"].ToString() == DishName)
+                    if (dr["DishName"].ToString() == dish.DishName)
                     {
                         dr["Quantity"] = (int.Parse(dr["Quantity"].ToString()) + 1).ToString();
                         dr["PaidPrice"] = (int.Parse(dr["Quantity"].ToString()) * float.Parse(dr["Price"].ToString())).ToString();
@@ -149,7 +149,7 @@ namespace Project_Web.Controllers
                     var querryIDBillDetailCount = from bd in _db.BillDetails
                                            select bd.IDBillDetail;
                     dr["IDBillDetails"] = "ID-B-De" + querryIDBillDetailCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                    dr["DishName"] = DishName;
+                    dr["DishName"] = dish.DishName;
                     dr["Price"] = dish.SalePrice;
                     dr["Quantity"] = 1;
                     dr["Promotion"]=null;
@@ -158,7 +158,7 @@ namespace Project_Web.Controllers
                     {
                         BillDetail billDetail = new BillDetail();
                         billDetail.IDBillDetail = dr["IDBillDetails"].ToString();
-                        billDetail.DishName = DishName;
+                        billDetail.DishName = dish.DishName;
                         billDetail.Price = dish.SalePrice;
                         billDetail.Quantity = int.Parse(dr["Quantity"].ToString());
                         billDetail.Promotion = null;
@@ -189,7 +189,7 @@ namespace Project_Web.Controllers
 
                         BillDetail billDetail = new BillDetail();
                         billDetail.IDBillDetail = dr["IDBillDetails"].ToString();
-                        billDetail.DishName = DishName;
+                        billDetail.DishName = dish.DishName;
                         billDetail.Price = dish.SalePrice;
                         billDetail.Quantity = int.Parse(dr["Quantity"].ToString());
                         billDetail.Promotion = null;
@@ -203,8 +203,9 @@ namespace Project_Web.Controllers
                 }
                 Session["cart"] = cart;
             }
-            return RedirectToAction("Index", "Home");
+            return Content("true");
         }
+        [HttpPost]
         public ActionResult DeleteCart (int Index)
         {
             if (Session["cart"] != null)
@@ -225,6 +226,7 @@ namespace Project_Web.Controllers
                         _db.SaveChanges();
                         dt.Rows.RemoveAt(Index);
                         Session["cart"] = dt;
+                        return Content("true");
                     }
                     else
                     {
@@ -244,11 +246,12 @@ namespace Project_Web.Controllers
                         }
                         _db.SaveChanges();
                         Session.Remove("Cart");
+                        return Content("true");
                     }
                 }
 
             }
-            return RedirectToAction("ShoppingCart", "Home");
+            return Content("false");
         }
 
         public ActionResult EditCart (string IDBillDetail, int Quantity)
@@ -277,7 +280,7 @@ namespace Project_Web.Controllers
                 Session["cart"] = dt;
                 return Content("true");
             }
-            return RedirectToAction("ShoppingCart", "Home");
+            return Content("false");
         }
         #endregion
     }

@@ -12,8 +12,15 @@ namespace Project_Web.Controllers
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: OrderProducts
+        [HttpGet]
         [Authorize_userController]
         public ActionResult OrderProducts()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize_userController]
+        public ActionResult OrderProducts(string AddressOrder)
         {
             return View();
         }

@@ -1,19 +1,17 @@
-﻿//$(document).ready(function () {
-//    //var count = 0;
-//    $('.cart-plus').click(function () {
-//        //count++;
-//        //$('#number-shopping').html(count); 
-//        let dishname = $(this).text();
-//        alert(dishname);
-//        $.ajax({
-//            type: "post",
-//            url: "/Home/AddCart",
-//            data: {
-//                DishName: dishname
-//            },
-//            success: function () {
-
-//            }
-//        })
-//    });
-//});
+﻿$(document).ready(function () {
+    $('.cart-plus').click(function () {
+        var IDDish = $(this).attr("data-IDDish");
+        $.ajax({
+            type: "post",
+            url: "/Home/AddCart",
+            data: {
+                IDDish: IDDish
+            },
+            success: function (res) {
+                if (res == "true") {
+                    $(window).attr('location', '../Home/Index');
+                }
+            }
+        })
+    });
+});

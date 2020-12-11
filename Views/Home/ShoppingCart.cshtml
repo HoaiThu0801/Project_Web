@@ -61,15 +61,14 @@
                                     <a href="~/Home/EditCart" class="btn btn-info btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </a>
-                                    <a href="/delete-cart?Index=@i" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-trash-o"></i>
+                                    <a href="#" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-trash-o trash-o" data-index="@i"></i>
                                     </a>
                                 </td>
                             </tr>
                             i = i+1;
                         }
                     }
-
                 }
             </tbody>
             <tfoot>

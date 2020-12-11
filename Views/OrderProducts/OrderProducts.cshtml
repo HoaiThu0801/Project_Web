@@ -8,6 +8,8 @@
     DataTable cart = new DataTable();
     cart = Session["cart"] as DataTable;
     float sum = 0;
+    Address_Users address_Users = new Address_Users();
+    address_Users = _db.Address_Users.SingleOrDefault(n => n.IDUser == user.IDUser && n.IsDefault == 1);
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -113,7 +115,7 @@
                     </div>
                 </div>
                 <div>
-                    <button class="orderProducts-left-button">Đặt mua</button>
+                    <button class="orderProducts-left-button" id="Order-item">Đặt mua</button>
                     <p>(Xin vui lòng kiểm tra lại đơn hàng trước khi Đặt Mua)</p>
                 </div>
             </div>
@@ -128,7 +130,19 @@
                     <div class="orderProducts-right-hr"></div>
                     <div class="orderProducts-right-border-cover-bottom">
                         <div class="orderProducts-right-border-cover-bottom-name">@user.Fullname</div>
-                        <div class="orderProducts-right-border-cover-bottom-address">2 đào trinh nhất</div>
+                        @{
+                            string address = "";
+                            if (address_Users != null)
+                            {
+                                address = address_Users.Street + ", " + address_Users.Ward + ", " + address_Users.District + ", " + address_Users.Province;
+                                <div class="orderProducts-right-border-cover-bottom-address" id="address_user">@address</div>
+                            }
+                            else
+                            {
+                                <div class="orderProducts-right-border-cover-bottom-address" id="address_user">@address</div>
+
+                            }
+                        }
                         <div class="orderProducts-right-border-cover-bottom-phone">@user.PhoneNumber</div>
                     </div>
                 </div>

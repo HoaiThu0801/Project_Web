@@ -58,10 +58,12 @@
                             <label>Họ tên</label>
                             <input type="text" name="FullName" id="Fullname" placeholder="Nhập họ tên" class="form-input" value="@user.Fullname" />
                         </div>
+                        <div id="showError_Fullname"></div>
                         <div class="shipping-group">
                             <label>Điện thoại di động</label>
                             <input type="text" name="PhoneNumber" id="PhoneNumber" placeholder="Nhập số điện thoại" class="form-input" value="@user.PhoneNumber" />
                         </div>
+                        <div id="showError_PhoneNumber"></div>
                         <div class="shipping-group">
                             <label>Tỉnh/Thành phố</label>
                             <select class="custom-select" name="Province" id="ProvinceSelect">
@@ -92,7 +94,7 @@
                             <label>Địa chỉ</label>
                             <input name="Street" id="Street" type="text" class="form-input" placeholder="Nhập số nhà và tên đường" value="@user.Address" />
                         </div>
-
+                        <div id="showError_Address"></div>
                         <div class="button-form">
                             <input type="submit" name="submit" id="submit" class="form-submit" value="Xác nhận" />
                             <input name="Cancel" id="Cancel" class="form-submit" value="Hủy" />

@@ -20,3 +20,26 @@ $(document).ready(function () {
         }
     });
 })
+
+//Order the item
+$(document).ready(function () {
+    $('#Order-item').click(function () {
+        var address_user = $('#address_user').text();
+        if (address_user == "") {
+            alert("Bạn chưa cài địa chỉ mặc định, hãy cài địa chỉ mặc định");
+            $(window).attr('location', '../OrderProducts/Shipping');
+        }
+        else {
+            $.ajax({
+                type: "post",
+                data: {
+                    AddressOrder: address_user
+                },
+                url: "/OrderProducts/OrderProducts",
+                success: function (res) {
+                    alert(1);
+                }
+            })
+        }
+    });
+})
