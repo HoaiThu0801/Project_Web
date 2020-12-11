@@ -41,14 +41,13 @@
                         <i class="fa fa-dot-circle-o">Giao tiêu chuẩn</i>
                         <div class="orderProducts-left-step1-border2">
                             @{
-
                                 DateTime now = DateTime.Now;
                                 now = now.AddDays(3);
+                                string datestring = String.Format("{0:dd/MM/yyyy}", now);
                                 <div class="orderProducts-left-step1-border2-textup">
-                                    Giao vào @now
+                                    Giao vào @datestring
                                 </div>
                             }
-
                             <div class="orderProducts-left-step1-border2-nameProduct">
                                 <ul class="orderProducts-left-step1-border2-products">
                                     @{
@@ -126,10 +125,11 @@
                             sum = sum + float.Parse(dr["PaidPrice"].ToString());
                             <div class="orderProducts-right-border-bottom-center">
                                 <div class="text-format">@Quantity x @DishName</div>
-                                <div class="value-format">@Price</div>
+                                <div class="value-format">@Price<span>đ</span></div>
                             </div>
                         }
                         sum = sum + 22000;
+                        
                     }
                     <div class="orderProducts-right-hr"></div>
                     <div class="orderProducts-right-border-bottom-center">
@@ -140,7 +140,7 @@
                     <div class="orderProducts-right-border-bottom-bottom">
                         <div class="text-format-sum">Thành tiền:</div>
                         <div class="text-right">
-                            <div class="pay-value">@sum</div>
+                            <div class="pay-value">@sum<span>đ</span></div>
                             <p>(Đã bao gồm VAT)</p>
                         </div>
                     </div>
