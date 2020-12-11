@@ -38,23 +38,47 @@
                 <div class="orderProducts-left-step1">
                     <h3>1. Chọn hình thức giao hàng</h3>
                     <div class="orderProducts-left-step1-border1">
-                        <i class="fa fa-dot-circle-o">Giao tiêu chuẩn</i>
+                        <i class="fa fa-dot-circle-o">Giao tiêu chuẩn (Giao sau 1 tiếng kể từ lúc đặt hàng)</i>
                         <div class="orderProducts-left-step1-border2">
                             @{
                                 DateTime now = DateTime.Now;
-                                now = now.AddDays(3);
-                                string datestring = String.Format("{0:dd/MM/yyyy}", now);
+                                DateTime hours = now.AddHours(1);
+                                string datestring = String.Format("{0:dd/MM/yyyy HH:mm:ss}", now);
+                                switch (now.DayOfWeek)
+                                {
+                                    case DayOfWeek.Monday:
+                                        datestring = String.Format("Thứ hai {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Tuesday:
+                                        datestring = String.Format("Thứ ba {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Wednesday:
+                                        datestring = String.Format("Thứ tư {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Thursday:
+                                        datestring = String.Format("Thứ năm {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Friday:
+                                        datestring = String.Format("Thứ sáu {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Saturday:
+                                        datestring = String.Format("Thứ bảy {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                    case DayOfWeek.Sunday:
+                                        datestring = String.Format("Chủ nhật {0:dd/MM/yyyy} {1: HH:mm:ss}", now, hours);
+                                        break;
+                                }
                                 <div class="orderProducts-left-step1-border2-textup">
                                     Giao vào @datestring
                                 </div>
-                            }
+                                    }
                             <div class="orderProducts-left-step1-border2-nameProduct">
                                 <ul class="orderProducts-left-step1-border2-products">
                                     @{
                                         foreach (DataRow dr in cart.Rows)
                                         {
                                             string Quantity = dr["Quantity"].ToString();
-                                            string DishName = dr["DishName"].ToString();
+                                    string DishName = dr["DishName"].ToString();
                                             <li>
                                                 <div class="orderProducts-left-step1-border2-products-inner">
                                                     @Quantity x @DishName
@@ -129,7 +153,7 @@
                             </div>
                         }
                         sum = sum + 22000;
-                        
+
                     }
                     <div class="orderProducts-right-hr"></div>
                     <div class="orderProducts-right-border-bottom-center">
