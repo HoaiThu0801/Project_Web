@@ -12,11 +12,40 @@ body {
 .text-product{
     margin-left: 30px;
 }
-.text-center{
-    padding: 20px;
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*CSS for header*/
+.header .row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
 }
 .form-control{
     width: 100px;
+}
+
+.table{
+    margin-top: 20px;
 }
 @media screen and (max-width: 600px) {
     table #cart tbody td .form-control {

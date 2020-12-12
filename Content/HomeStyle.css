@@ -12,6 +12,28 @@ body, html {
     display: block;
     clear: both;
 }
+/*CSS for header*/
+.header .row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
 
 .right-menu {
     float: right;
@@ -157,9 +179,26 @@ body, html {
 .shopping-cart {
     padding: 5px 5px;
     border: 2px solid black;
-    width: 34%;
     margin: 5px 0 5px 7px;
 }
+
+    .shopping-cart:after {
+        content: "";
+        position: absolute;
+        height: 20px;
+        border-top: 1px solid transparent;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+        border-style: solid;
+        border-width: 14px;
+        color: white;
+        z-index: 1000;
+        left: 59%;
+        bottom: 31%;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s linear;
+    }
 
 .number-shopping-cart {
     background: rgb(253, 216, 53);
@@ -198,19 +237,27 @@ body, html {
             opacity: 1;
             visibility: visible;
             margin-top: 5px;
-            width: 90%;
+            height: unset;
             padding: 23px 23px 23px 23px;
             transition-delay: 0.3s;
         }
 
+        .change-web-shopping:hover .shopping-cart:after {
+            opacity: 1;
+            visibility: visible;
+        }
+
 .info-shopping-cart {
-    width: 0;
+    width: 90%;
+    height: 0;
     background-color: white;
     position: absolute;
     z-index: 1000;
     opacity: 0;
+    left: 15px;
     visibility: hidden;
     transition: 0.3s linear;
+    border-radius: 10px;
 }
 
 .info-image-shopping-cart {
