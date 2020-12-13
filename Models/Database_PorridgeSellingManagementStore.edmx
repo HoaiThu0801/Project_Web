@@ -107,6 +107,7 @@
         </EntityType>
         <EntityType Name="OrderTracks">
           <Key>
+            <PropertyRef Name="IDOrderStatse" />
             <PropertyRef Name="IDBill" />
           </Key>
           <Property Name="IDOrderStatse" Type="varchar" MaxLength="50" Nullable="false" />
@@ -313,7 +314,7 @@
         </Association>
         <Association Name="FK_OrderTracks_Bills">
           <End Role="Bills" Type="Self.Bills" Multiplicity="1" />
-          <End Role="OrderTracks" Type="Self.OrderTracks" Multiplicity="0..1" />
+          <End Role="OrderTracks" Type="Self.OrderTracks" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Bills">
               <PropertyRef Name="IDBill" />
