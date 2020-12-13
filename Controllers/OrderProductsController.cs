@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -22,7 +23,39 @@ namespace Project_Web.Controllers
         [Authorize_userController]
         public ActionResult OrderProducts(string AddressOrder)
         {
-            return View();
+            User user = new User();
+            user = Session["User"] as User;
+            DataTable cart = new DataTable();
+            cart = Session["cart"] as DataTable;
+            var role = (from ur in _db.User_Roles
+                       where ur.IDUser == user.IDUser
+                       select ur.IDRole).SingleOrDefault();
+            DataRow dr = cart.Rows[0];
+            string IDBill = dr["IDBill"].ToString();
+            OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == IDBill);
+            if (orderTrack != null)
+            {
+                if (role == "R02")
+                {
+                    orderTrack.IDOrderStatse = "OS-04";
+                    _db.OrderTracks.AddOrUpdate(orderTrack);
+                    _db.SaveChanges();
+                    Session.Remove("Cart");
+                    return Content("true");
+                }
+                else
+                {
+                    orderTrack.IDOrderStatse = "OS-02";
+                    _db.OrderTracks.AddOrUpdate(orderTrack);
+                    _db.SaveChanges();
+                    Session.Remove("Cart");
+                    return Content("true");
+                }
+            }
+            else
+            {
+                return Content("false");
+            }
         }
         [HttpGet]
         [Authorize_userController]

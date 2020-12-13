@@ -37,7 +37,14 @@ $(document).ready(function () {
                 },
                 url: "/OrderProducts/OrderProducts",
                 success: function (res) {
-                    alert(1);
+                    if (res == "true") {
+                        alert("Bạn đã đặt hàng thành công. Cảm ơn bạn đã đồng hàng cùng cửa hàng MST");
+                        $(window).attr('location', '../Home/Index');
+                    }
+                    else {
+                        alert("Đặt hàng không thành công. Chúng tôi xin lỗi vì sự bất tiện này");
+                        $(window).attr('location', '../OrderProducts/OrderProducts');
+                    }
                 }
             })
         }

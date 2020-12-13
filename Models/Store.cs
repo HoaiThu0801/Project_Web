@@ -23,7 +23,7 @@ namespace Project_Web.Models
             this.Statistics = new HashSet<Statistic>();
             this.Warehouses = new HashSet<Warehouse>();
         }
-    
+
         public string IDStore { get; set; }
         [Required(ErrorMessage = "Tên cửa hàng không được trống!")]
         public string StoreName { get; set; }
@@ -37,7 +37,7 @@ namespace Project_Web.Models
                    ErrorMessage = "Hãy nhập email hợp lệ, VD: huutuong@gmail.com")]
         public string Email { get; set; }
         public string IDUser { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bill> Bills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
