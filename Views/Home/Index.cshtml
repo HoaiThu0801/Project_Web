@@ -155,16 +155,17 @@
                             select r.IDRole).SingleOrDefault();
                 if (role == "R02")
                 {
-                    foreach (var s in Model)
-                    {
-                        var menu_store = (from store in _db.Stores
-                                          join ms in _db.Menu_Stores on store.IDStore equals ms.IDStore
-                                          where store.IDUser == user.IDUser && ms.IDDish == s.IDDish
-                                          select ms).SingleOrDefault();
-                        if (menu_store != null)
+                <div class="menu-dish">
+                    @{
+                        foreach (var s in Model)
                         {
-                            string nameDish = s.DishName;
-                            <div class="menu-dish">
+                            var menu_store = (from store in _db.Stores
+                                              join ms in _db.Menu_Stores on store.IDStore equals ms.IDStore
+                                              where store.IDUser == user.IDUser && ms.IDDish == s.IDDish
+                                              select ms).SingleOrDefault();
+                            if (menu_store != null)
+                            {
+                                string nameDish = s.DishName;
                                 <div class="contentProducts">
                                     <div class="contentProducts-image">
                                         <img src="../@s.Image" class="image-title" id="ImageProducts" />
@@ -183,9 +184,11 @@
                                         }
                                     </div>
                                 </div>
-                            </div>
+                            }
                         }
                     }
+                </div>
+                  
                 }
                 else
                 {
