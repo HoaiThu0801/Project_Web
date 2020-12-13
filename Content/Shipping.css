@@ -220,9 +220,64 @@ h3 {
     margin-top: 20px;
 }
 
+/*CSS for div shipping-up*/
+.btn {
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    padding: 6px 14px;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 2px;
+    outline-color: rgb(204, 204, 204);
+    background: linear-gradient(rgb(255, 255, 255), rgb(247, 247, 247));
+    height: 31px;
+    font-size: 12px;
+}
+.button-address {
+    margin-right: 7px;
+    border: 1px solid rgb(2, 159, 209);
+    color: rgb(255, 255, 255);
+    background: rgb(0, 182, 240);
+}
 
-
-
+.button-update {
+    border: 1px solid rgb(204, 204, 204);
+    margin-right: 7px;
+}
+.text-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.text-choice-address {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+.text-fullname {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.text-address{
+    font-size: 14px;
+    margin-bottom: 3px;
+}
+.text-phone{
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+.shipping-up-border {
+    background-color: white;
+    border: 1px dashed lightgreen;
+    max-width: calc(50% - 20px);
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+/*end*/
 /*CSS for form*/
 input {
     border-radius: 5px;
@@ -255,6 +310,9 @@ input {
 
 .shipping-up-border-bottom {
     display: flex;
+    font-size: 13px;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 .text-add-address {
