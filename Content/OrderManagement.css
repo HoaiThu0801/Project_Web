@@ -273,3 +273,22 @@ thead{
     margin-top: 10px;
 }
 /*end*/
+
+/*CSS for paging*/
+.paging {
+    margin-top: 20px;
+}
+
+.paging-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paging-choose {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*end*/
