@@ -3,6 +3,7 @@
     ViewBag.Title = "Thông tin giao hàng";
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
     User user = Session["User"] as User;
+    //var address_user = _db.Address_Users.SingleOrDefault(x => x.IDUser == user.IDUser);
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -33,17 +34,17 @@
             if (user != null)
             {
                 <div class="shipping-up">
-                    <div>2. Địa chỉ giao hàng</div>
-                    <h6>Chọn địa chỉ giao hàng có sẵn bên dưới</h6>
+                    <div class="text-title">2. Địa chỉ giao hàng</div>
+                    <div class="text-choice-address">Chọn địa chỉ giao hàng có sẵn bên dưới</div>
                     <div class="shipping-up-border">
                         <div class="shipping-up-border-text">
-                            <div>@user.Fullname</div>
-                            <div>@user.Address</div>
-                            <div>Điện thoại: @user.PhoneNumber</div>
+                            <div class="text-fullname">@user.Fullname</div>
+                            <div class="text-address">Địa chỉ: @user.Address</div>
+                            <div class="text-phone">Điện thoại: @user.PhoneNumber</div>
                         </div>
                         <div class="shipping-up-border-button">
-                            <button class="button-address">Giao đến địa chỉ này</button>
-                            <button class="button-update" id="update-button">Sửa</button>
+                            <button class="btn button-address">Giao đến địa chỉ này</button>
+                            <button class="btn button-update" id="update-button">Sửa</button>
                         </div>
                     </div>
                     <div class="shipping-up-border-bottom">
