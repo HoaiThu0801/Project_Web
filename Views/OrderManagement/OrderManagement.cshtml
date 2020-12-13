@@ -1,5 +1,13 @@
-﻿@{
+﻿@using Project_Web.Models;
+@model PagedList.IPagedList<Project_Web.Models.Bill>
+@using PagedList.Mvc;
+@using System.Data;
+
+@{
     ViewBag.Title = "Quản lý đơn hàng";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    User user = new User();
+    user = Session["User"] as User;
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -51,37 +59,81 @@
                         </div>
                         <div class="tabcontent-all-bottom">
                             <div class="tabcontent-all-bottom-products">
-                                <div class="tabcontent-all-bottom-left">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                <th style="width: 10% ">Tổng đơn hàng</th>
-                                                <th style="width: 30% ">Trạng thái</th>
-                                                <th style="width: 15% ">Vận chuyển</th>
-                                                <th style="width: 15% ">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="display-infor">
-                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                </td>
-                                                <td class="text-center">860.000đ</td>
-                                                <td class="text-center">Đã giao</td>
-                                                <td class="text-center">Giao tiêu chuẩn</td>
-                                                <td class="text-center">
-                                                    <a href="#" class="detail">Xem chi tiết</a>
-                                                    <button class="button-sale">Mua lần nữa</button>
-                                                    <a href="#" class="detail">Chuyển state</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="table-top">
-                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                        <div class="table-top-products">DH000000</div>
+                                @{
+                                    if (user != null)
+                                    {
+
+                                        var role = _db.User_Roles.SingleOrDefault(n => n.IDUser == user.IDUser);
+                                        if (role.IDRole == "R01")
+                                        {
+                                            foreach (var s in Model)
+                                            {
+                                                                <div class="tabcontent-all-bottom-left">
+                                                                    <table>
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                                <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                                <th style="width: 30% ">Trạng thái</th>
+                                                                                <th style="width: 15% ">Vận chuyển</th>
+                                                                                <th style="width: 15% ">Thao tác</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                @{
+                                                                                    float sum = 0;
+                                                                                    var BillDetails = (from bd in _db.BillDetails
+                                                                                                       where bd.IDBill == s.IDBill
+                                                                                                       select bd).ToList();
+                                                                                    foreach (var bd in BillDetails)
+                                                                                    {
+                                                                                        sum = sum + float.Parse(bd.PaidPrice.ToString());
+                                                                                        var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                        <td class="display-infor">
+                                                                                            <img src="../@dish.Image" />
+                                                                                            <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                        </td>
+                                                                                    }
+                                                                                    var orderState = (from os in _db.OrderStates
+                                                                                                      join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                                      where ot.IDBill == s.IDBill
+                                                                                                      select os.StateName).SingleOrDefault();
+                                                                                    <td class="text-center">@sum</td>
+                                                                                    <td class="text-center">@orderState</td>
+                                                                                    <td class="text-center">Giao tiêu chuẩn</td>
+                                                                                    <td class="text-center">
+                                                                                        <a href="#" class="detail">Xem chi tiết</a>
+                                                                                        <button class="button-sale">Mua lần nữa</button>
+                                                                                        <a href="#" class="detail">Chuyển state</a>
+                                                                                    </td>
+                                                                                }
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @{
+                                                                        var usertemp = (from u in _db.Users
+                                                                                        where u.IDUser == s.IDUser
+                                                                                        select u).SingleOrDefault();
+                                                                        <div class="table-top">
+                                                                            <div class="table-top-user"><i class="fa fa-user-circle-o">@usertemp.Username</i></div>
+                                                                            <div class="table-top-products">@s.IDBill</div>
+                                                                        </div>
+
+                                                                    }
+
+                                                                </div>
+
+                                            }
+                                        }
+                                    }
+                                }
+                                <div class="paging">
+                                    <div class="paging-show">
+                                        Trang: @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                                    </div>
+                                    <div class="paging-choose">
+                                        @Html.PagedListPager(Model, page => Url.Action("OrderManagement", new { page }))
                                     </div>
                                 </div>
                             </div>
