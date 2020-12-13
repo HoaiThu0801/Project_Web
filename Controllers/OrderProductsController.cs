@@ -1,4 +1,7 @@
-﻿using System;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
+using MailKit;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity.Migrations;
@@ -37,24 +40,77 @@ namespace Project_Web.Controllers
             {
                 if (role == "R02")
                 {
-                    orderTrack.IDOrderStatse = "OS-04";
-                    _db.OrderTracks.AddOrUpdate(orderTrack);
+                    var IDStore = (from s in _db.Stores
+                                   where s.IDUser == user.IDUser
+                                   select s.IDStore).SingleOrDefault();
+                    Bill bill = _db.Bills.SingleOrDefault(n => n.IDBill == IDBill);
+                    if (bill != null)
+                    {
+                        bill.IDStore = IDStore;
+                        _db.Bills.AddOrUpdate(bill);
+                        _db.SaveChanges();
+                    }
+                    else
+                    {
+                        return Content("false");
+                    }
+                    OrderTrack orderTrackTemp = new OrderTrack();
+                    orderTrackTemp.IDBill = orderTrack.IDBill;
+                    orderTrackTemp.IDOrderStatse = "OS-04";
+                    _db.OrderTracks.Remove(orderTrack);
+                    _db.OrderTracks.Add(orderTrackTemp);
                     _db.SaveChanges();
-                    Session.Remove("Cart");
+                    SendMail(AddressOrder);
+                    Session.Remove("cart");
                     return Content("true");
                 }
                 else
                 {
-                    orderTrack.IDOrderStatse = "OS-02";
-                    _db.OrderTracks.AddOrUpdate(orderTrack);
+
+                    OrderTrack orderTrackTemp = new OrderTrack();
+                    orderTrackTemp.IDBill = orderTrack.IDBill;
+                    orderTrackTemp.IDOrderStatse = "OS-02";
+                    _db.OrderTracks.Remove(orderTrack);
+                    _db.OrderTracks.Add(orderTrackTemp);
                     _db.SaveChanges();
-                    Session.Remove("Cart");
+                    SendMail(AddressOrder);
+                    Session.Remove("cart");
                     return Content("true");
                 }
             }
             else
             {
                 return Content("false");
+            }
+        }
+
+        public void SendMail (string address)
+        {
+            User user = new User();
+            user = Session["User"] as User;
+            if (user.Email != null)
+            {
+
+                var message = new MimeMessage();
+                //From Address
+                message.From.Add(new MailboxAddress("Huu Tuong", "huutuong1403@gmail.com"));
+                //To Address
+                message.To.Add(new MailboxAddress("Dot net", user.Email));
+                //Subject
+                message.Subject = "Xác nhận đơn hàng -  OrderConfirmation";
+                //Body
+                message.Body = new TextPart
+                {
+                    Text = "Địa chỉ giao hàng của bạn: " + address
+                };
+                //Configure send email
+                using (var client = new SmtpClient())
+                {
+                    client.Connect("smtp.gmail.com", 587, false);
+                    client.Authenticate("huutuong1403@gmail.com", "14032018");
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
             }
         }
         [HttpGet]
@@ -69,9 +125,17 @@ namespace Project_Web.Controllers
         {
             User user = new User();
             user = Session["User"] as User;
+            Address_Users address_UsersTemp = _db.Address_Users.SingleOrDefault(n => n.IDUser == user.IDUser && n.IsDefault == 1);
             Address_Users address_Users = new Address_Users();
+            if (address_UsersTemp != null)
+            {
+                address_Users.IsDefault = 0;
+            }
+            else
+            {
+                address_Users.IsDefault = 1;
+            }
             address_Users.IDUser = user.IDUser;
-            address_Users.IsDefault = 0;
             address_Users.Fullname = form["FullName"].ToString();
             address_Users.PhoneNumber = form["PhoneNumber"].ToString();
             address_Users.Province = form["Province"].ToString();

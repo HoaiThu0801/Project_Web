@@ -40,7 +40,7 @@ namespace Project_Web.Controllers
         {
             Session["Is Login"] = 0;
             Session.Remove("User");
-            Session.Remove("Cart");
+            Session.Remove("cart");
             return RedirectToAction("Index", "Home");
         }
         [HttpGet]

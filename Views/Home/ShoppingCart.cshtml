@@ -92,7 +92,12 @@
                         <strong>Tổng tiền: @sum</strong>
                     </td>
                     <td>
-                        <a href="~/OrderProducts/OrderProducts" class="btn btn-success btn-block">Đặt hàng <i class="fa fa-angle-right"></i></a>
+                        @{
+                            if (Session["cart"] != null)
+                            {
+                                <a href="~/OrderProducts/OrderProducts" class="btn btn-success btn-block">Đặt hàng <i class="fa fa-angle-right"></i></a>
+                            }
+                        }
                     </td>
                 </tr>
             </tfoot>

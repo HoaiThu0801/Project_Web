@@ -146,31 +146,104 @@
         <div class="menu-parialview">
             @Html.Partial("~/Views/Shared/_LocationStore.cshtml")
         </div>
-        <div class="menu-dish">
-            @{
-                foreach (var s in Model)
+        @{
+            if (Session["User"] != null)
+            {
+                User user = Session["User"] as User;
+                var role = (from r in _db.User_Roles
+                            where user.IDUser == r.IDUser
+                            select r.IDRole).SingleOrDefault();
+                if (role == "R02")
                 {
-                    string nameDish = s.DishName;
-                    <div class="contentProducts">
-                        <div class="contentProducts-image">
-                            <img src="../@s.Image" class="image-title" id="ImageProducts" />
-                            <p class="imgredient">Thành phần<br />@s.Ingredient</p>
-                        </div>
-                        <div class="contentProducts-text">
-                            <h4 class="contentProducts-title">@s.DishName</h4>
-                        </div>
-                        <div class="contentProducts-price">
-                            <div class="contentProducts-priceOriginal">@s.SalePrice<span>đ</span></div>
-                            @*<a href="/them-gio-hang?DishName=@nameDish"><i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i></a>*@
-                            <i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i>
-                            @*<i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>*@
-                            @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
-                        </div>
+                    foreach (var s in Model)
+                    {
+                        var menu_store = (from store in _db.Stores
+                                          join ms in _db.Menu_Stores on store.IDStore equals ms.IDStore
+                                          where store.IDUser == user.IDUser && ms.IDDish == s.IDDish
+                                          select ms).SingleOrDefault();
+                        if (menu_store != null)
+                        {
+                            string nameDish = s.DishName;
+                            <div class="menu-dish">
+                                <div class="contentProducts">
+                                    <div class="contentProducts-image">
+                                        <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                                        <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                                    </div>
+                                    <div class="contentProducts-text">
+                                        <h4 class="contentProducts-title">@s.DishName</h4>
+                                    </div>
+                                    <div class="contentProducts-price">
+                                        <div class="contentProducts-priceOriginal">@s.SalePrice<span>đ</span></div>
+                                        @{
+                                            if (menu_store.Available > 0)
+                                            {
+                                                <i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                }
+                else
+                {
+                    <div class="menu-dish">
+                        @{
+                            foreach (var s in Model)
+                            {
+                                string nameDish = s.DishName;
+                                <div class="contentProducts">
+                                    <div class="contentProducts-image">
+                                        <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                                        <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                                    </div>
+                                    <div class="contentProducts-text">
+                                        <h4 class="contentProducts-title">@s.DishName</h4>
+                                    </div>
+                                    <div class="contentProducts-price">
+                                        <div class="contentProducts-priceOriginal">@s.SalePrice<span>đ</span></div>
+                                        @*<a href="/them-gio-hang?DishName=@nameDish"><i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i></a>*@
+                                        <i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i>
+                                        @*<i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>*@
+                                        @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
+                                    </div>
+                                </div>
+                            }
+                        }
                     </div>
-
                 }
             }
-        </div>
+            else
+            {
+                <div class="menu-dish">
+                    @{
+                        foreach (var s in Model)
+                        {
+                            string nameDish = s.DishName;
+                            <div class="contentProducts">
+                                <div class="contentProducts-image">
+                                    <img src="../@s.Image" class="image-title" id="ImageProducts" />
+                                    <p class="imgredient">Thành phần<br />@s.Ingredient</p>
+                                </div>
+                                <div class="contentProducts-text">
+                                    <h4 class="contentProducts-title">@s.DishName</h4>
+                                </div>
+                                <div class="contentProducts-price">
+                                    <div class="contentProducts-priceOriginal">@s.SalePrice<span>đ</span></div>
+                                    @*<a href="/them-gio-hang?DishName=@nameDish"><i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i></a>*@
+                                    <i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i>
+                                    @*<i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>*@
+                                    @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+        }
+
     </div>
     <div class="paging">
         <div class="paging-show">
