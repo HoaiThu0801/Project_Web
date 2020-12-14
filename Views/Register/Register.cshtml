@@ -1,15 +1,11 @@
-﻿@{
+﻿@using Project_Web.Models;
+@{
     ViewBag.Title = "Đăng ký";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+
 }
 @model Project_Web.Models.User
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/boostrap-social.css" />
     <link rel="stylesheet" href="~/fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -21,37 +17,37 @@
         <section class="signup">
             <div class="container">
                 <div class="signup-content">
-                    <form method="post" id="signup-form" action="/Register/Register" class="signup-form" onsubmit="return validateform()">
+                    <form method="post" id="signup-form" action="/Register/Register" class="signup-form">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="Username" id="Username" placeholder="Your Username" />
+                            <input type="text" class="form-input" name="Username" id="Username" placeholder="Nhập tên tài khoản" />
                             @ViewBag.Message1
                         </div>
                         <div id="showError_Username"></div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="Password" id="Password" placeholder="Your Password" />
+                            <input type="password" class="form-input" name="Password" id="Password" placeholder="Nhập mật khẩu" />
                             <span toggle="#Password" class="zmdi zmdi-eye field-icon toggle-password"></span>
                         </div>
                         <div id="showError_Password"></div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password" />
+                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu" />
                         </div>
                         <div id="showerror"></div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Your FullName" />
+                            <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Nhập họ tên của bạn" />
                         </div>
                         <div id="showError_Fullname"></div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Your Email" />
+                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Nhập e-mail của bạn" />
                         </div>
                         <div id="showError_Email"></div>
                         <div class="form-group">
                             <div class="form-input">
                                 <select class="custom-select" id="Gender" name="Gender">
-                                    <option disabled="disabled" selected="selected">Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                    <option value="Other">Other</option>
+                                    <option disabled="disabled" selected="selected">Giới tính</option>
+                                    <option value="Male">Nam</option>
+                                    <option value="Female">Nữ</option>
+                                    <option value="Other">Khác</option>
                                 </select>
                             </div>
                         </div>
@@ -59,14 +55,37 @@
                             <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" id="IdentityCard" name="IdentityCard" placeholder="Your Identity Card" />
+                            <input type="text" class="form-input" id="IdentityCard" name="IdentityCard" placeholder="Nhập CMND của bạn" />
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" id="Address" name="Address" placeholder="Your Address" />
+                            <select class="custom-select" name="Province" id="ProvinceSelect">
+                                <option disabled selected>Chọn Tỉnh/Thành phố</option>
+                                @{
+                                    var provinces = (from s in _db.Provinces
+                                                     select s).ToList();
+                                    foreach (var pro in provinces)
+                                    {
+                                        <option value="@pro.Name">@pro.Type @pro.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select" name="District" id="DistrictSelect">
+                                <option disabled selected>Chọn Quận/Huyện</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="custom-select" name="Ward" id="WardSelect">
+                                <option disabled selected>Chọn Phường/Xã</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-input" id="Address" name="Address" placeholder="Nhập số nhà và tên đường" />
                         </div>
                         <div id="showError_Address"></div>
                         <div class="form-group">
-                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Your PhoneNumber" />
+                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Nhập số điện thoại của bạn" />
                         </div>
                         <div id="showError_PhoneNumber"></div>
                         <div class="form-group">
@@ -85,8 +104,7 @@
             </div>
         </section>
     </div>
-    <script src="~/Scripts/jquery-3.5.1.js"></script>
-    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
-    <script src="~/Scripts/RegisterJS.js"></script>
 </body>
-</html>
+<script src="~/Scripts/jquery-3.5.1.js"></script>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/RegisterJS.js"></script>

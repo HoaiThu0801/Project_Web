@@ -3,7 +3,7 @@
     ViewBag.Title = "Thông tin giao hàng";
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
     User user = Session["User"] as User;
-    //var address_user = _db.Address_Users.SingleOrDefault(x => x.IDUser == user.IDUser);
+    var address_user = _db.Address_Users.Where(x => x.IDUser == user.IDUser).ToList();
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -36,16 +36,45 @@
                 <div class="shipping-up">
                     <div class="text-title">2. Địa chỉ giao hàng</div>
                     <div class="text-choice-address">Chọn địa chỉ giao hàng có sẵn bên dưới</div>
-                    <div class="shipping-up-border">
-                        <div class="shipping-up-border-text">
-                            <div class="text-fullname">@user.Fullname</div>
-                            <div class="text-address">Địa chỉ: @user.Address</div>
-                            <div class="text-phone">Điện thoại: @user.PhoneNumber</div>
-                        </div>
-                        <div class="shipping-up-border-button">
-                            <button class="btn button-address">Giao đến địa chỉ này</button>
-                            <button class="btn button-update" id="update-button">Sửa</button>
-                        </div>
+                    <div class="shipping-up-display">
+                        @{
+                            if (address_user != null)
+                            {
+                                foreach (var listaddress in address_user)
+                                {
+                                    if (listaddress.IsDefault == 0)
+                                    {
+                                        <div class="shipping-up-border">
+                                            <div class="shipping-up-border-text">
+                                                <div class="text-fullname">@listaddress.Fullname</div>
+                                                <div class="text-address">Địa chỉ: @listaddress.Street, @listaddress.Ward, @listaddress.District, @listaddress.Province</div>
+                                                <div class="text-phone">Điện thoại: @listaddress.PhoneNumber</div>
+                                            </div>
+                                            <div class="shipping-up-border-button">
+                                                <button class="btn button-address">Giao đến địa chỉ này</button>
+                                                <button class="btn button-update" id="update-button">Sửa</button>
+                                                <button class="btn button-address default-button">Đặt làm mặc định</button>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="shipping-up-border">
+                                            <div class="shipping-up-border-text">
+                                                <div class="text-fullname">@listaddress.Fullname</div>
+                                                <div class="text-address">Địa chỉ: @listaddress.Street, @listaddress.Ward, @listaddress.District, @listaddress.Province</div>
+                                                <div class="text-phone">Điện thoại: @listaddress.PhoneNumber</div>
+                                            </div>
+                                            <div class="shipping-up-border-button">
+                                                <button class="btn button-address">Giao đến địa chỉ này</button>
+                                                <button class="btn button-update" id="update-button">Sửa</button>
+                                            </div>
+                                            <span class="default">Mặc định</span>
+                                        </div>
+                                    }
+                                }
+                            }
+                        }
                     </div>
                     <div class="shipping-up-border-bottom">
                         Bạn muốn giao đến địa chỉ khác?

@@ -11,8 +11,6 @@
     });
 })(jQuery);
 
-
-
 $('#re_password').keyup(function () {
     var password = $('#Password').val();
     var re_password = $('#re_password').val();
@@ -28,7 +26,6 @@ $('#re_password').keyup(function () {
 });
 
 //Validation
-
 $('#Username').keyup(function () {
     var username = $('#Username').val();
     if (!(/^(([A-za-z0-9]+[\s]{1}[A-za-z0-9]+)|([A-Za-z0-9]+)){8,20}$/).test(username))
@@ -45,8 +42,8 @@ $('#Username').keyup(function () {
         $('#showError_Username').html('');
         return true;
     }
-
 });
+
 $('#Password').keyup(function () {
     var password = $('#Password').val();
     if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(password)) {
@@ -63,6 +60,7 @@ $('#Password').keyup(function () {
     }
 
 });
+
 $('#Email').keyup(function () {
     var email = $('#Email').val();
     if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/).test(email)) {
@@ -79,6 +77,7 @@ $('#Email').keyup(function () {
     }
 
 });
+
 $('#Fullname').click(function () {
     var fullname = $('#Fullname').val();
     if (fullname.length <= 0) {
@@ -94,6 +93,7 @@ $('#Fullname').click(function () {
         return true;
     }
 });
+
 $('#Fullname').keyup(function () {
     var fullname = $('#Fullname').val();
     if (fullname.length <= 0) {
@@ -110,6 +110,7 @@ $('#Fullname').keyup(function () {
     }
 
 });
+
 $('#Address').click(function () {
     var address = $('#Address').val();
     if (address.length <= 0) {
@@ -125,6 +126,7 @@ $('#Address').click(function () {
         return true;
     }
 });
+
 $('#Address').keyup(function () {
     var address = $('#Address').val();
     if (address.length <= 0) {
@@ -157,21 +159,6 @@ $('#PhoneNumber').keyup(function () {
     }
 });
 
-
-
-//function validateform() {
-//    var name = document.myform.Username.value;
-//    var password = document.myform.Password.value;
-//    var fullname = document.myform.Fullname.value;
-//    var email = document.myform.Email.value;
-//    var dateofbirth = document.myform.DateofBirth.value;
-//    var IdenCard = document.myform.IdentityCard.value;
-//    var address = document.myform.Address.value;
-//    if (length(name) < 8) {
-//        alert("1");
-//    }
-
-//}
 $(document).ready(function () {
     $("#signup-form").submit(function (event) {
         event.preventDefault();
@@ -196,7 +183,11 @@ $(document).ready(function () {
                 }
                 if (res == "email") {
                     alert("Email đã được sử dụng cho tài khoản khác, xin vui lòng chọn email khác");
-                    $(window).attr('location', '../Register/Register');
+                    window.onbeforeunload;
+                    $('#showError_Email').html('Email đã được đăng kí vui lòng sử dụng email khác');
+                    $('#showError_Email').css('color', 'red');
+                    $('#showError_Email').css('font-weight', 'bold');
+                    $('#Email').css('background', 'yellow')
                 }
             },
 
@@ -204,4 +195,44 @@ $(document).ready(function () {
     });
 });
 
-
+//
+$(document).ready(function () {
+    $("#ProvinceSelect").change(function () {
+        var provincename = $("#ProvinceSelect").val();
+        $.ajax({
+            type: "get",
+            url: "/Register/LoadDistrict",
+            data: {
+                ProvinceName: provincename
+            },
+            success: function (res) {
+                $('#DistrictSelect').html("");
+                $("#DistrictSelect").append(("<option disabled selected>" + "Chọn Quận/Huyện" + "</option>"));
+                $.each(res, function (key, item) {
+                    $("#DistrictSelect").append("<option>" + item + "</option>");
+                });
+            }
+        })
+    })
+})
+$(document).ready(function () {
+    $("#DistrictSelect").change(function () {
+        var temp = $("#DistrictSelect").val();
+        var spaceIndex = temp.search(" ");
+        var districtname = temp.slice(spaceIndex + 1, temp.length);
+        $.ajax({
+            type: "get",
+            url: "/Register/LoadWard",
+            data: {
+                DistrictName: districtname
+            },
+            success: function (res) {
+                $('#WardSelect').html("");
+                $("#WardSelect").append(("<option disabled selected>" + "Chọn Phường/Xã" + "</option>"));
+                $.each(res, function (key, item) {
+                    $("#WardSelect").append("<option>" + item + "</option>");
+                });
+            }
+        })
+    })
+})

@@ -429,6 +429,11 @@ input[type=checkbox]:not(old) {
     color: white;
     font-size: 20px;
 }
+.custom-select {
+    height: 60px;
+    padding: 17px 20px;
+    color: gray;
+}
 @media screen and (max-width: 768px) {
     .container {
         width: calc(100% - 40px);
