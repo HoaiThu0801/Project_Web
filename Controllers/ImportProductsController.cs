@@ -27,7 +27,7 @@ namespace Project_Web.Controllers
             model.IDWarehouse = warehouse.IDWarehouse;
             _db.WarehouseDetails.Add(model);
             Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == model.DishName);
-            Menu_Stores menu_store = _db.Menu_Stores.SingleOrDefault(n => n.IDDish == menu.IDDish);
+            Menu_Stores menu_store = _db.Menu_Stores.SingleOrDefault(n => n.IDDish == menu.IDDish && n.IDStore == warehouse.IDStore);
             if (menu_store != null)
             {
                 menu_store.Available = model.Quantity;

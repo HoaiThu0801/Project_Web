@@ -54,13 +54,25 @@ namespace Project_Web.Controllers
                     {
                         return Content("false");
                     }
+                    foreach(DataRow dataRow in cart.Rows)
+                    {
+                        string Dishname = dataRow["DishName"].ToString();
+                        Menu dish = _db.Menus.SingleOrDefault(n => n.DishName == Dishname);
+                        Menu_Stores menu_Stores = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == IDStore && dish.IDDish == n.IDDish);
+                        if (menu_Stores != null)
+                        {
+                            menu_Stores.Available = menu_Stores.Available - (int.Parse(dataRow["Quantity"].ToString()));
+                            _db.Menu_Stores.AddOrUpdate();
+                            _db.SaveChanges();
+                        }
+                    }
                     OrderTrack orderTrackTemp = new OrderTrack();
                     orderTrackTemp.IDBill = orderTrack.IDBill;
                     orderTrackTemp.IDOrderStatse = "OS-04";
                     _db.OrderTracks.Remove(orderTrack);
                     _db.OrderTracks.Add(orderTrackTemp);
                     _db.SaveChanges();
-                    SendMail(AddressOrder);
+                    //SendMail(AddressOrder);
                     Session.Remove("cart");
                     return Content("true");
                 }
@@ -73,7 +85,7 @@ namespace Project_Web.Controllers
                     _db.OrderTracks.Remove(orderTrack);
                     _db.OrderTracks.Add(orderTrackTemp);
                     _db.SaveChanges();
-                    SendMail(AddressOrder);
+                    //SendMail(AddressOrder);
                     Session.Remove("cart");
                     return Content("true");
                 }

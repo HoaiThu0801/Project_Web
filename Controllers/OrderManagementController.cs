@@ -13,14 +13,9 @@ namespace Project_Web.Controllers
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: OrderManagement
-        public ActionResult OrderManagement(int? page)
+        public ActionResult OrderManagement()
         {
-            if (page == null) page = 1;
-            var billDetails = (from bd in _db.Bills
-                        select bd).OrderBy(x => x.IDBill);
-            int pageSize = 4;
-            int pageNumber = (page ?? 1);
-            return View(billDetails.ToPagedList(pageNumber, pageSize));
+            return View();
         }
     }
 }
