@@ -168,3 +168,10 @@ $('#Street').keyup(function () {
         return true;
     }
 });
+
+//Click button đặt làm mặc định
+$(document).ready(function () {
+    $('.default-button').click(function (e) {
+        $(this).css('display', 'none');
+    });
+});
