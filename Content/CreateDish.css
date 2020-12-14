@@ -1,17 +1,4 @@
-﻿/* @extend display-flex; */
-display-flex, .display-flex, .display-flex-center {
-    display: flex;
-    display: -webkit-flex;
-}
-
-/* @extend list-type-ulli; */
-list-type-ulli {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Montserrat-300 - latin */
+﻿/* Montserrat-300 - latin */
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -176,11 +163,19 @@ body {
     background-position: center center;
     padding: 10px 0;
 }
-
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.signup {
+    width: 100%;
+}
 .container {
-    width: 660px;
     position: relative;
     margin: 0 auto;
+    width: 52%;
 }
 
 .display-flex {
