@@ -25,6 +25,7 @@ namespace Project_Web.Models
         public string IDStore { get; set; }
         public string IDUser { get; set; }
         public Nullable<System.DateTime> Time { get; set; }
+        public Nullable<double> Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BillDetail> BillDetails { get; set; }

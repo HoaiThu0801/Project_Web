@@ -39,6 +39,7 @@
           <Property Name="IDStore" Type="varchar" MaxLength="50" />
           <Property Name="IDUser" Type="varchar" MaxLength="50" />
           <Property Name="Time" Type="date" />
+          <Property Name="Total" Type="float" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -552,6 +553,7 @@
           <NavigationProperty Name="Store" Relationship="Self.FK_Bills_Stores" FromRole="Bills" ToRole="Stores" />
           <NavigationProperty Name="User" Relationship="Self.FK_Bills_Users" FromRole="Bills" ToRole="Users" />
           <NavigationProperty Name="OrderTracks" Relationship="Database_PorridgeSellingManagementStoreModel.FK_OrderTracks_Bills" FromRole="Bill" ToRole="OrderTrack" />
+          <Property Name="Total" Type="Double" />
         </EntityType>
         <EntityType Name="Menu">
           <Key>
@@ -1101,6 +1103,7 @@
           <EntitySetMapping Name="Bills">
             <EntityTypeMapping TypeName="Database_PorridgeSellingManagementStoreModel.Bill">
               <MappingFragment StoreEntitySet="Bills">
+                <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="IDBill" ColumnName="IDBill" />
                 <ScalarProperty Name="IDStore" ColumnName="IDStore" />
                 <ScalarProperty Name="IDUser" ColumnName="IDUser" />
