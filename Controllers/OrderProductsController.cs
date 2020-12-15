@@ -54,8 +54,10 @@ namespace Project_Web.Controllers
                     {
                         return Content("false");
                     }
+                    float sum = 0;
                     foreach(DataRow dataRow in cart.Rows)
                     {
+                        sum = sum + (float.Parse(dataRow["PaidPrice"].ToString()));
                         string Dishname = dataRow["DishName"].ToString();
                         Menu dish = _db.Menus.SingleOrDefault(n => n.DishName == Dishname);
                         Menu_Stores menu_Stores = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == IDStore && dish.IDDish == n.IDDish);
@@ -66,6 +68,8 @@ namespace Project_Web.Controllers
                             _db.SaveChanges();
                         }
                     }
+                    bill.Total = sum + 22000;
+                    _db.Bills.AddOrUpdate(bill);
                     OrderTrack orderTrackTemp = new OrderTrack();
                     orderTrackTemp.IDBill = orderTrack.IDBill;
                     orderTrackTemp.IDOrderStatse = "OS-04";
@@ -79,6 +83,21 @@ namespace Project_Web.Controllers
                 else
                 {
 
+                    Bill bill = _db.Bills.SingleOrDefault(n => n.IDBill == IDBill);
+                    if (bill != null)
+                    {
+                        float sum = 0;
+                       foreach(DataRow dataRow in cart.Rows)
+                       {
+                            sum = sum + (float.Parse(dataRow["PaidPrice"].ToString()));
+                       }
+                        bill.Total = sum + 22000;
+                        _db.Bills.AddOrUpdate(bill);
+                    }
+                    else
+                    {
+                        return Content("false");
+                    }
                     OrderTrack orderTrackTemp = new OrderTrack();
                     orderTrackTemp.IDBill = orderTrack.IDBill;
                     orderTrackTemp.IDOrderStatse = "OS-02";

@@ -8,6 +8,7 @@ using Project_Web.Models;
 
 namespace Project_Web.Controllers
 {
+    [Authorize_seller_adminController]
     public class ImportProductsController : Controller
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();

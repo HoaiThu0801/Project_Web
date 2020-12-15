@@ -35,6 +35,12 @@ namespace Project_Web
            defaults: new { controller = "Home", action = "ShoppingCart", id = UrlParameter.Optional },
            namespaces: new[] { "Project_Web.Controllers" }
           );
+            routes.MapRoute(
+        name: "OrderManagement",
+        url: "{controller}/{action}/{id}",
+        defaults: new { controller = "OrderManagement", action = "OrderManagement", id = UrlParameter.Optional },
+        namespaces: new[] { "Project_Web.Controllers" }
+       );
         }
     }
 }
