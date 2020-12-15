@@ -1,52 +1,63 @@
-﻿
-//Mở đóng popupform
+﻿//Mở đóng popupform
 var flaqStore = true;
 var flaqStaff = true;
 var flaqDish = true;
+var signUpStore = document.getElementById("signup-content-store");
+var signUpStaff = document.getElementById("signup-content-staff");
+var signUpDish = document.getElementById("signup-content-dish");
 function openPopupStoreForm() {
 
     if (flaqStore == false) {
-        document.getElementById("signup-content-store").style.display = "none";
+        signUpStore.style.opacity = 0;
+        signUpStore.style.visibility = "hidden";
         flaqStore = true;
     }
     else {
-        document.getElementById("signup-content-store").style.display = "block";
+        signUpStore.style.opacity = 1;
+        signUpStore.style.visibility = "visible";
         flaqStore = false;
     }
 }
 function openPopupStaffForm() {
 
     if (flaqStaff == false) {
-        document.getElementById("signup-content-staff").style.display = "none";
+        signUpStaff.style.opacity = 0;
+        signUpStaff.style.visibility = "hidden";
         flaqStaff = true;
     }
     else {
-        document.getElementById("signup-content-staff").style.display = "block";
+        signUpStaff.style.opacity = 1;
+        signUpStaff.style.visibility = "visible";
         flaqStaff = false;
     }
 }
 function openPopupDishForm() {
 
     if (flaqDish == false) {
-        document.getElementById("signup-content-dish").style.display = "none";
+        signUpDish.style.opacity = 0;
+        signUpDish.style.visibility = "hidden";
         flaqDish = true;
     }
     else {
-        document.getElementById("signup-content-dish").style.display = "block";
+        signUpDish.style.opacity = 1;
+        signUpDish.style.visibility = "visible";
         flaqDish = false;
     }
 }
 function closePopupForm() {
     if (flaqStore == false) {
-        document.getElementById("signup-content-store").style.display = "none";
+        signUpStore.style.opacity = 0;
+        signUpStore.style.visibility = "hidden";
         flaqStore = true;
     }
     if (flaqStaff == false) {
-        document.getElementById("signup-content-staff").style.display = "none";
+        signUpStaff.style.opacity = 0;
+        signUpStaff.style.visibility = "hidden";
         flaqStaff = true;
     }
     if (flaqDish == false) {
-        document.getElementById("signup-content-dish").style.display = "none";
+        signUpDish.style.opacity = 0;
+        signUpDish.style.visibility = "hidden";
         flaqDish = true;
     }
 }
@@ -119,7 +130,7 @@ $(document).ready(function () {
         storename = $('#StoreNameSelect').val();
         $('#DishNameList').css('opacity', '1');
         $('#DishNameList').css('visibility', 'visible');
-        $('#DishNameList').css('height', 'unset');
+        $('#signup-background-dish').css('height', '100%');
         $.ajax({
             type: "get",
             url: "/Administrator_Setting/LoadDish_no_StoreName",

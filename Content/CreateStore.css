@@ -114,25 +114,42 @@ p {
 
 h2 {
     line-height: 1.66;
-    margin: 0;
-    padding: 0;
     font-weight: 900;
     color: #222;
     font-family: 'Montserrat';
     font-size: 24px;
     text-transform: uppercase;
-    text-align: center;
     margin-bottom: 40px;
-    margin-right: 100px;
+    margin-left: 21%;
 }
-
+.h2-staff {
+    line-height: 1.66;
+    font-weight: 900;
+    color: #222;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    margin-left: 6%;
+}
+.h2-dish {
+    line-height: 1.66;
+    font-weight: 900;
+    color: #222;
+    font-family: 'Montserrat';
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    margin-left: 11%;
+}
 .clear {
     clear: both;
 }
-.main{
-    height: 651px;
+.main {
+    height: 657px;
     display: flex;
     justify-content: center;
+    position: relative;
 }
 body {
     font-size: 14px;
@@ -148,12 +165,10 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     background-position: center center;
-    padding: 10px 0;
 }
 
 .container {
     width: 100%;
-    position: relative;
     margin: 0 auto;
 }
 .signup{
@@ -161,10 +176,14 @@ body {
 }
 
 .signup-form {
-    padding: 80px 0 80px 0;
+    padding: 80px 0 80px 20%;
+    position: absolute;
+    width: 100%;
 }
 .signup-form-dish {
-    padding: 80px 0 0px 0;
+    padding: 80px 0 80px 20%;
+    position: absolute;
+    width: 100%;
 }
 .signup-background-dish {
     background-color: #fff;
@@ -174,9 +193,8 @@ body {
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     width: 60%;
-    position: relative;
-    margin-left: 250px;
-    padding: 0 0 10px 110px;
+    position: absolute;
+    height: 50%;
 }
 .signup-background-store {
     background-color: #fff;
@@ -186,17 +204,17 @@ body {
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
     width: 60%;
-    position: relative;
-    height: 605px;
-    margin-left: 250px;
-    padding-left: 110px;
+    position: absolute;
+    height: 90%;
 }
 .signup-content-store {
     padding: 25px 85px;
-    display: none;
     transition: all 1s;
     -webkit-transition: all 1s;
-    position: fixed;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -204,6 +222,8 @@ body {
     background: rgba(0, 0, 0, 0.53);
     overflow-y: scroll;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
 }
 .signup-background-staff {
     background-color: #fff;
@@ -212,18 +232,17 @@ body {
     -webkit-border-radius: 10px;
     -o-border-radius: 10px;
     -ms-border-radius: 10px;
-    position: relative;
     width: 60%;
-    height: 500px;
-    margin-left: 250px;
-    padding-left: 110px;
+    position: absolute;
+    height: 70%;
 }
 .signup-content-dish {
-    padding: 30px 85px;
-    display: none;
+    padding: 25px 85px;
     transition: all 1s;
     -webkit-transition: all 1s;
-    position: fixed;
+    position: absolute;
+    display: flex;
+    justify-content: center;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -231,13 +250,17 @@ body {
     background: rgba(0, 0, 0, 0.53);
     overflow-y: scroll;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
 }
 .signup-content-staff {
-    padding: 80px 85px;
-    display: none;
+    padding: 25px 85px;
     transition: all 1s;
     -webkit-transition: all 1s;
-    position: fixed;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 0px;
     left: 0px;
     right: 0px;
@@ -245,6 +268,8 @@ body {
     background: rgba(0, 0, 0, 0.53);
     overflow-y: scroll;
     z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
 }
 .button-popup {
     background: #fff;
@@ -260,6 +285,7 @@ body {
     width: auto;
     position: absolute;
     right: 35px;
+    z-index: 1000;
 }
 .remove-icon:hover, .remove-icon:focus{
     cursor: pointer;
@@ -271,6 +297,7 @@ body {
 .form-group {
     overflow: hidden;
     margin-bottom: 20px;
+    width: 80%;
 }
 
 .form-input {
@@ -394,6 +421,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 10px;
 }
 
     /* Style the buttons inside the tab */
@@ -438,6 +466,7 @@ body {
     height: 61px;
     font-size: 18px;
     font-weight:500;
+    color: gray;
 }
 /*Paging table*/
 .paging-show{
