@@ -73,13 +73,13 @@ namespace Project_Web.Controllers
             }
             return View();
         }
+        [Authorize_userController]
         [HttpGet]
         public ActionResult ChangePass()
         {
             return View();
         }
         [HttpPost]
-        [Authorize_userController]
         public ActionResult ChangePass(string Username, string OldPassword, string NewPassword)
         {
             if(OldPassword == NewPassword)
