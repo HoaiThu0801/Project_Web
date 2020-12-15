@@ -13,11 +13,11 @@ namespace Project_Web.Controllers
     public class HomeController : Controller
     {
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
-        public ActionResult Index(int ?page)
+        public ActionResult Index(int? page)
         {
             if (page == null) page = 1;
             var menu = (from l in _db.Menus
-                         select l).OrderBy(x => x.IDDish);
+                        select l).OrderBy(x => x.IDDish);
             int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(menu.ToPagedList(pageNumber, pageSize));
@@ -56,8 +56,8 @@ namespace Project_Web.Controllers
             User user_session = Session["User"] as User;
             model.Username = user_session.Username;
             User user = (from u in _db.Users
-                        where u.Username == model.Username
-                        select u).SingleOrDefault();
+                         where u.Username == model.Username
+                         select u).SingleOrDefault();
             if (user != null)
             {
                 user.Fullname = model.Fullname;
@@ -70,16 +70,38 @@ namespace Project_Web.Controllers
                 _db.SaveChanges();
                 Session["User"] = user;
                 return View();
-
             }
-          
-
-
             return View();
         }
+        [HttpGet]
         public ActionResult ChangePass()
         {
             return View();
+        }
+        [HttpPost]
+        [Authorize_userController]
+        public ActionResult ChangePass(string Username, string OldPassword, string NewPassword)
+        {
+            if(OldPassword == NewPassword)
+            {
+                return Content("IsEquals");
+            }    
+            EncryptionPW encryptionOld_PW = new EncryptionPW(OldPassword);
+            string old_password = encryptionOld_PW.EncryptPass();
+            EncryptionPW encryptionNew_PW = new EncryptionPW(NewPassword);
+            string new_password = encryptionNew_PW.EncryptPass();
+            User user = _db.Users.SingleOrDefault(x => x.Username == Username && x.Password == old_password);
+            if(user != null)
+            {
+                user.Password = new_password;
+                _db.Users.AddOrUpdate(user);
+                _db.SaveChanges();
+                return Content("true");
+            }
+            else
+            {
+                return Content("false");
+            }
         }
         [Authorize_userController]
         public ActionResult ShoppingCart()
@@ -123,7 +145,7 @@ namespace Project_Web.Controllers
                     }
                 }
                 bool isExisted = false;
-                foreach(DataRow dr in cart.Rows)
+                foreach (DataRow dr in cart.Rows)
                 {
                     if (dr["DishName"].ToString() == dish.DishName)
                     {
@@ -139,7 +161,7 @@ namespace Project_Web.Controllers
                             _db.BillDetails.AddOrUpdate(billDetail);
                             _db.SaveChanges();
                         }
-                       
+
                         break;
                     }
                 }
@@ -147,13 +169,13 @@ namespace Project_Web.Controllers
                 {
                     DataRow dr = cart.NewRow();
                     var querryIDBillDetailCount = from bd in _db.BillDetails
-                                           select bd.IDBillDetail;
+                                                  select bd.IDBillDetail;
                     dr["IDBillDetails"] = "ID-B-De" + querryIDBillDetailCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
                     dr["DishName"] = dish.DishName;
                     dr["Price"] = dish.SalePrice;
                     dr["Quantity"] = 1;
-                    dr["Promotion"]=null;
-                    dr["PaidPrice"] =(int.Parse(dr["Quantity"].ToString()) * float.Parse(dr["Price"].ToString())).ToString();
+                    dr["Promotion"] = null;
+                    dr["PaidPrice"] = (int.Parse(dr["Quantity"].ToString()) * float.Parse(dr["Price"].ToString())).ToString();
                     if (IDBill != "Default")
                     {
                         BillDetail billDetail = new BillDetail();
@@ -178,9 +200,9 @@ namespace Project_Web.Controllers
                         dr["IDBill"] = bill.IDBill;
                         bill.IDStore = "S0-29112020221332";
                         bill.IDUser = user.IDUser;
-                        bill.Time =DateTime.Now;
+                        bill.Time = DateTime.Now;
                         _db.Bills.Add(bill);
-                       
+
 
                         OrderTrack orderTrack = new OrderTrack();
                         orderTrack.IDBill = bill.IDBill;
@@ -199,14 +221,14 @@ namespace Project_Web.Controllers
 
                         _db.SaveChanges();
                     }
-                    cart.Rows.Add(dr); 
+                    cart.Rows.Add(dr);
                 }
                 Session["cart"] = cart;
             }
             return Content("true");
         }
         [HttpPost]
-        public ActionResult DeleteCart (int Index)
+        public ActionResult DeleteCart(int Index)
         {
             if (Session["cart"] != null)
             {
@@ -254,13 +276,13 @@ namespace Project_Web.Controllers
             return Content("false");
         }
 
-        public ActionResult EditCart (string IDBillDetail, int Quantity)
+        public ActionResult EditCart(string IDBillDetail, int Quantity)
         {
             if (Session["cart"] != null)
             {
                 DataTable dt = new DataTable();
                 dt = Session["cart"] as DataTable;
-                foreach(DataRow dr in dt.Rows)
+                foreach (DataRow dr in dt.Rows)
                 {
                     if (dr["IDBillDetails"].ToString() == IDBillDetail)
                     {

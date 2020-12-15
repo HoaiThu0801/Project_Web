@@ -58,7 +58,6 @@ $('#Password').keyup(function () {
         $('#showError_Password').html('');
         return true;
     }
-
 });
 
 $('#Email').keyup(function () {

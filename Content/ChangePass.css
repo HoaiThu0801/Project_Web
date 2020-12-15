@@ -136,7 +136,8 @@ h1 {
 }
 
 .text-center {
-    padding: 10px;
+    font-weight: bold;
+    color: red;
 }
 
 .fa-upload:before {
