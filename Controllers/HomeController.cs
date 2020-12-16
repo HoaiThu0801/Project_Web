@@ -73,6 +73,49 @@ namespace Project_Web.Controllers
             }
             return View();
         }
+
+        #region LoadData
+        [HttpGet]
+        public JsonResult LoadDistrict(string ProvinceName)
+        {
+            Province pro = _db.Provinces.SingleOrDefault(n => n.Name == ProvinceName);
+            if (pro != null)
+            {
+                List<string> namedistricts = new List<string>();
+                string name;
+                var districts = (from d in _db.Districts
+                                 where d.ProvinceId == pro.Id
+                                 select new { d.Name, d.Type }).ToList();
+                foreach (var d in districts)
+                {
+                    name = d.Type + " " + d.Name;
+                    namedistricts.Add(name);
+                }
+                return Json(namedistricts, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult LoadWard(string DistrictName)
+        {
+            District dis = _db.Districts.SingleOrDefault(n => n.Name == DistrictName);
+            if (dis != null)
+            {
+                List<string> nameward = new List<string>();
+                string name;
+                var wards = (from w in _db.Wards
+                             where w.DistrictID == dis.Id
+                             select new { w.Name, w.Type }).ToList();
+                foreach (var w in wards)
+                {
+                    name = w.Type + " " + w.Name;
+                    nameward.Add(name);
+                }
+                return Json(nameward, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
         [Authorize_userController]
         [HttpGet]
         public ActionResult ChangePass()

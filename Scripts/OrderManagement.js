@@ -11,3 +11,8 @@
     document.getElementById(orderName).style.display = "block"; 
     evt.currentTarget.className += " active";
 }
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})

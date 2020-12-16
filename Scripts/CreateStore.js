@@ -301,3 +301,8 @@ $(function () {
         return false;
     });
 });
+
+//Scroll to top page
+$(document).ready(function(){
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})

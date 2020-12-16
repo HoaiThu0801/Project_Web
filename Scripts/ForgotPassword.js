@@ -1,4 +1,5 @@
-﻿$('#re_password').keyup(function () {
+﻿
+$('#re_password').keyup(function () {
     var password = $('#Password').val();
     var re_password = $('#re_password').val();
     if (re_password != password) {
@@ -36,3 +37,8 @@ $('#Password').keyup(function () {
         return true;
     }
 });
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})

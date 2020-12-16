@@ -213,7 +213,8 @@ $(document).ready(function () {
             }
         })
     })
-})
+});
+
 $(document).ready(function () {
     $("#DistrictSelect").change(function () {
         var temp = $("#DistrictSelect").val();
@@ -234,4 +235,9 @@ $(document).ready(function () {
             }
         })
     })
+});
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
 })

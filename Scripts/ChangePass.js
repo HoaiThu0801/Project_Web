@@ -1,5 +1,4 @@
-﻿
-$('#New_Password').keyup(function () {
+﻿$('#New_Password').keyup(function () {
     var password = $('#New_Password').val();
     if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(password)) {
         $('#New_Password').css('background', 'yellow')
@@ -67,3 +66,8 @@ $(document).ready(function () {
         });
     });
 });
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})

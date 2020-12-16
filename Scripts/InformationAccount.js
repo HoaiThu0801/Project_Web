@@ -1,13 +1,4 @@
-﻿$(document).ready(function () {
-    $('#changePass').click(function () {
-        $.ajax({
-            type: 'get',
-            url: '/Home/ChangePass',
-            success: function () {
-            }
-        });
-    });
-});
+﻿
 $('#Fullname').click(function () {
     var fullname = $('#Fullname').val();
     if (fullname.length <= 0) {
@@ -85,3 +76,50 @@ $('#PhoneNumber').keyup(function () {
         return true;
     }
 });
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})
+
+//Load Ward, District
+$(document).ready(function () {
+    $("#ProvinceSelect").change(function () {
+        var provincename = $("#ProvinceSelect").val();
+        $.ajax({
+            type: "get",
+            url: "/Home/LoadDistrict",
+            data: {
+                ProvinceName: provincename
+            },
+            success: function (res) {
+                $('#DistrictSelect').html("");
+                $("#DistrictSelect").append(("<option disabled selected>" + "Chọn Quận/Huyện" + "</option>"));
+                $.each(res, function (key, item) {
+                    $("#DistrictSelect").append("<option>" + item + "</option>");
+                });
+            }
+        })
+    })
+})
+$(document).ready(function () {
+    $("#DistrictSelect").change(function () {
+        var temp = $("#DistrictSelect").val();
+        var spaceIndex = temp.search(" ");
+        var districtname = temp.slice(spaceIndex + 1, temp.length);
+        $.ajax({
+            type: "get",
+            url: "/Home/LoadWard",
+            data: {
+                DistrictName: districtname
+            },
+            success: function (res) {
+                $('#WardSelect').html("");
+                $("#WardSelect").append(("<option disabled selected>" + "Chọn Phường/Xã" + "</option>"));
+                $.each(res, function (key, item) {
+                    $("#WardSelect").append("<option>" + item + "</option>");
+                });
+            }
+        })
+    })
+})

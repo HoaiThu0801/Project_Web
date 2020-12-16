@@ -10,48 +10,67 @@
     <link rel="stylesheet" type="text/css" href="~/Content/ChangePass.css">
 </head>
 <body>
-    <div class="changepass">
-        <div class="changepass-background">
-            <div class="changepass-body">
-                <form action="/Home/ChangePass" method="post" class="changepass-form" id="InformationForm">
-                    <h1>Đổi mật khẩu</h1>
-                    <div class="changepass-account">
-                        <div class="form-group">
-                            <label>Tên tài khoản:</label>
-                            <input type="text" readonly id="Username" name="Username" class="form-input" placeholder="Tên tài khoản" value="@user.Username" />
-                        </div>
-                        <div class="form-group">
-                            <label>Mật khẩu cũ:</label>
-                            <input type="password" id="Password" name="Password" class="form-input" required/>
-                        </div>
-                        <div class="text-center" id="showError_OPW"></div>
-                        <div class="form-group">
-                            <label>Mật khẩu mới:</label>
-                            <input type="password" id="New_Password" name="New_Password" class="form-input" required/>
-                        </div>
-                        <div class="text-center" id="showError_NPW"></div>
-                        <div class="form-group">
-                            <label>Nhập lại mật khẩu:</label>
-                            <input type="password" id="Re_Password" name="Re_Password" class="form-input" required/>
-                        </div>
-                        <div class="text-center" id="showError_RPW"></div>
-                        <div class="form-group">
-                            <div class="button-submit">
-                                <input type="submit" name="submit" id="submit" class="form-submit" value="Đổi mật khẩu" />
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center title">Tài khoản | Đổi mật khẩu</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+                <ul class="progressbar">
+                    <li class="complete">Đăng nhập</li>
+                    <li class="complete">Thông tin tài khoản</li>
+                    <li class="active">Đổi mật khẩu</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-form">
+        <div class="changepass">
+            <div class="changepass-background">
+                <div class="changepass-body">
+                    <form action="/Home/ChangePass" method="post" class="changepass-form" id="InformationForm">
+                        <h1>Đổi mật khẩu</h1>
+                        <div class="changepass-account">
+                            <div class="form-group">
+                                <label>Tên tài khoản:</label>
+                                <input type="text" readonly id="Username" name="Username" class="form-input" placeholder="Tên tài khoản" value="@user.Username" />
+                            </div>
+                            <div class="form-group">
+                                <label>Mật khẩu cũ:</label>
+                                <input type="password" id="Password" name="Password" class="form-input" required />
+                            </div>
+                            <div class="text-center error" id="showError_OPW"></div>
+                            <div class="form-group">
+                                <label>Mật khẩu mới:</label>
+                                <input type="password" id="New_Password" name="New_Password" class="form-input" required />
+                            </div>
+                            <div class="text-center error" id="showError_NPW"></div>
+                            <div class="form-group">
+                                <label>Nhập lại mật khẩu:</label>
+                                <input type="password" id="Re_Password" name="Re_Password" class="form-input" required />
+                            </div>
+                            <div class="text-center error" id="showError_RPW"></div>
+                            <div class="form-group">
+                                <div class="button-submit">
+                                    <input type="submit" name="submit" id="submit" class="form-submit" value="Đổi mật khẩu" />
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </form>
-                <div>
-                    <div class="user-page-sidebar">
-                        <div class="user-page">
-                            <a class="user-page-avatar">
-                                <img src="~/images/avatar.jpg" />
-                            </a>
-                        </div>
-                        <div class="user-page-right">
-                            <div class="user-page-username">
-                                tuongkl01
+                    </form>
+                    <div>
+                        <div class="user-page-sidebar">
+                            <div class="user-page">
+                                <a class="user-page-avatar">
+                                    <img src="~/images/avatar.jpg" />
+                                </a>
+                            </div>
+                            <div class="user-page-right">
+                                <div class="user-page-username">
+                                    tuongkl01
+                                </div>
                             </div>
                         </div>
                     </div>

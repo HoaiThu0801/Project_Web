@@ -56,3 +56,8 @@ window.reset = function (e) {
     let file = document.getElementById("file");
     file.style.display = "none";
 }
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})

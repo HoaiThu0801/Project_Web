@@ -37,3 +37,8 @@ $(document).ready(function () {
         alert("Đã nhập hàng vào kho cửa hàng thành công");
     });
 });
+
+//Scroll to top page
+$(document).ready(function () {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+})
