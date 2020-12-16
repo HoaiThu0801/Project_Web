@@ -129,19 +129,35 @@ namespace Project_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateDish(Menu model)
+        public ActionResult CreateDish(string DishName, string Ingredient, string ImportPrice, string SalePrice, string Image, string Category)
         {
+
+            Menu menu_temp = new Menu();
             var querryDishesCount = from Menu in _db.Menus
                                     select Menu.IDDish;
-            Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == model.DishName);
+            Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == DishName);
             if (menu != null)
             {
                 return Content("false");
             }
-            model.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+            if(Category == "")
+            {
+                return Content("CategoryNull");
+            }
+            if(Image == "/images/ImageProducts/undefined")
+            {
+                return Content("ImageNull");
+            }
+            menu_temp.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+            menu_temp.DishName = DishName;
+            menu_temp.Ingredient = Ingredient;
+            menu_temp.ImportPrice = Convert.ToDouble(ImportPrice);
+            menu_temp.SalePrice = Convert.ToDouble(SalePrice);
+            menu_temp.Image = Image;
+            menu_temp.Category = Category;
             if(ModelState.IsValid)
             {
-                _db.Menus.Add(model);
+                _db.Menus.Add(menu_temp);
                 _db.SaveChanges();
                 return Content("true");
             }    

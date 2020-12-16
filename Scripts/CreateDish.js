@@ -8,17 +8,13 @@ function readURL(event) {
         show.src = src;
         srcImage = event.target.files[0].name;
         show.style.display = "block";
-        
-        const reader = new FileReader();
-        reader.onload();
-        
+
     }
 }
 $(document).ready(function () {
     $('#signup-dish-form').submit(function (event) {
         event.preventDefault();
         var url = $(this).attr("action");
-        var formdata = $(this).serialize();
         $.ajax({
             url: url,
             type: 'post',
@@ -28,13 +24,26 @@ $(document).ready(function () {
                 ImportPrice: $('#ImportPrice').val(),
                 SalePrice: $('#SalePrice').val(),
                 Image: "/images/ImageProducts/" + srcImage,
+                Category: $('#SelectCategory').val(),
             },
             success: function (res) {
                 if (res == "true") {
                     alert("Tạo món ăn thành công");
                     setTimeout(function () {
                         location.reload();
-                    },1000)
+                    }, 1000)
+                }
+                if (res == "false") {
+                    alert("Tên món ăn bị trùng");
+                }
+                if (res == "NotPrice") {
+                    alert("Giá nhập hoặc giá bán chưa nhập chính xác");
+                }
+                if (res == "CategoryNull") {
+                    alert("Chưa chọn giá trị của trường Phân loại");
+                }
+                if (res == "ImageNull") {
+                    alert("Chưa chọn hình ảnh");
                 }
             }
         });
