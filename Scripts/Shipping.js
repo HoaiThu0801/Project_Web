@@ -173,5 +173,25 @@ $('#Street').keyup(function () {
 $(document).ready(function () {
     $('.default-button').click(function (e) {
         $(this).css('display', 'none');
+        var IDaddress = $(this).attr("data-IDAddress");
+        var IDuser = $(this).attr("data-IDUser");
+        alert(IDaddress, IDuser);
+        $.ajax({
+            type: 'post',
+            url: "/OrderProducts/DefaultShipping",
+            data: {
+                IDAddress: IDaddress,
+                IDUser: IDuser
+            },
+            success: function (res) {
+                if (res == "true") {
+                    $(window).attr('location', '../OrderProducts/Shipping');
+                }
+                else {
+                    alert("Có lỗi xảy ra trong quá trình xử lý, bạn vui lòng thử lại sau");
+                    $(window).attr('location', '../OrderProducts/Shipping');
+                }
+            }
+        })
     });
 });

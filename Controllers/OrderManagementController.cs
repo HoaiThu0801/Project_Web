@@ -17,6 +17,7 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+        #region MovingState
         public ActionResult StatePreparing(string IDBill)
         {
             OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == IDBill);
@@ -59,5 +60,7 @@ namespace Project_Web.Controllers
             }
             return RedirectToAction("OrderManagement", "OrderManagement");
         }
+        #endregion
+
     }
 }

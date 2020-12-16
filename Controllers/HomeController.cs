@@ -278,6 +278,10 @@ namespace Project_Web.Controllers
 
         public ActionResult EditCart(string IDBillDetail, int Quantity)
         {
+            User user = Session["User"] as User;
+            var role = (from ur in _db.User_Roles
+                        where ur.IDUser == user.IDUser
+                        select ur).SingleOrDefault();
             if (Session["cart"] != null)
             {
                 DataTable dt = new DataTable();
@@ -286,6 +290,30 @@ namespace Project_Web.Controllers
                 {
                     if (dr["IDBillDetails"].ToString() == IDBillDetail)
                     {
+                        if (role.IDRole == "R02")
+                        {
+                            string temp = dr["DishName"].ToString();
+                            Store store = _db.Stores.SingleOrDefault(n => n.IDUser == user.IDUser);
+                            if (store != null)
+                            {
+                                Menu_Stores menu_Stores = (from ms in _db.Menu_Stores
+                                                           join m in _db.Menus on ms.IDDish equals m.IDDish
+                                                           where m.DishName == temp && ms.IDStore == store.IDStore
+                                                           select ms).SingleOrDefault();
+                                if (menu_Stores != null)
+                                {
+                                    if (menu_Stores.Available < Quantity)
+                                    {
+                                        return Content("Sold-out");
+                                    }
+                                }
+                                else
+                                {
+                                    return Content("false");
+                                }
+                            }
+
+                        }
                         dr["Quantity"] = Quantity;
                         dr["PaidPrice"] = (int.Parse(dr["Quantity"].ToString()) * float.Parse(dr["Price"].ToString())).ToString();
                         BillDetail billDetail = _db.BillDetails.SingleOrDefault(n => n.IDBillDetail == IDBillDetail);

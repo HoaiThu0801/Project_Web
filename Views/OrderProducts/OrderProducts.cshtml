@@ -104,7 +104,17 @@
                     <h3>2. Thanh toán bằng MST Xu</h3>
                     <div class="orderProducts-left-step2-border">
                         <div class="orderProducts-left-step2-border-input">
-                            <a class="orderProducts-left-step2-border-input-a"><i class="fa fa-square-o" id="CheckBox"></i>Ấn để sử dụng MST Xu. Hiện có: 1000MST Xu</a>
+                            @{
+                                if (user.Point != null)
+                                {
+                                    <a class="orderProducts-left-step2-border-input-a"><i class="fa fa-square-o" id="CheckBox"></i>Ấn để sử dụng MST Xu. Hiện có: @user.Point MST Xu</a>
+                                }
+                                else
+                                {
+                                    <a class="orderProducts-left-step2-border-input-a"><i class="fa fa-square-o" id="CheckBox"></i>Ấn để sử dụng MST Xu. Hiện có: 0 MST Xu</a>
+                                }
+                            }
+
                         </div>
                     </div>
                 </div>

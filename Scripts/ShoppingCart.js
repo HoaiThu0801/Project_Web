@@ -14,6 +14,11 @@
                 if (res == "true") {
                     $(window).attr('location', '../Home/ShoppingCart');
                 }
+                else if (res == "Sold-out")
+                {
+                    alert("Số lượng món ăn hiện có không đủ ");
+                    $(window).attr('location', '../Home/ShoppingCart');
+                }
                 else
                 {
                     alert("Không thể sửa món ăn");

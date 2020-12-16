@@ -92,6 +92,15 @@ namespace Project_Web.Controllers
                             sum = sum + (float.Parse(dataRow["PaidPrice"].ToString()));
                        }
                         bill.Total = sum + 22000;
+                        if (user.Point != null)
+                        {
+                            user.Point = user.Point + bill.Total / 20000;
+
+                        }
+                        else
+                        {
+                            user.Point = bill.Total / 20000;
+                        }
                         _db.Bills.AddOrUpdate(bill);
                     }
                     else
@@ -179,6 +188,26 @@ namespace Project_Web.Controllers
             _db.Address_Users.Add(address_Users);
             _db.SaveChanges();
             return Content("true");
+        }
+        [HttpPost]
+        public ActionResult DefaultShipping(string IDAddress, string IDUser)
+        {
+            Address_Users address_Users = _db.Address_Users.SingleOrDefault(n => n.IDUser == IDUser && n.IsDefault == 1);
+            if (address_Users != null)
+            {
+                address_Users.IsDefault = 0;
+                _db.Address_Users.AddOrUpdate(address_Users);
+                _db.SaveChanges();
+            }
+            Address_Users address_Users_temp = _db.Address_Users.SingleOrDefault(n => n.IDAddress == IDAddress);
+            if (address_Users_temp != null)
+            {
+                address_Users_temp.IsDefault = 1;
+                _db.Address_Users.AddOrUpdate(address_Users_temp);
+                _db.SaveChanges();
+                return Content("true");
+            }
+            return Content("false");
         }
         #region LoadData
         [HttpGet]
