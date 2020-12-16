@@ -81,13 +81,11 @@
                                                         <tbody>
                                                             <tr>
                                                                 @{
-                                                                    float sum = 0;
                                                                     var BillDetails = (from bd in _db.BillDetails
                                                                                        where bd.IDBill == s.IDBill
                                                                                        select bd).ToList();
                                                                     foreach (var bd in BillDetails)
                                                                     {
-                                                                        sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                         var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                         <td class="display-infor">
                                                                             <img src="../@dish.Image" />
@@ -98,13 +96,12 @@
                                                                                       join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                       where ot.IDBill == s.IDBill
                                                                                       select os.StateName).SingleOrDefault();
-                                                                    <td class="text-center">@sum</td>
+                                                                    <td class="text-center">@s.Total</td>
                                                                     <td class="text-center">@orderState</td>
                                                                     <td class="text-center">Giao tiêu chuẩn</td>
                                                                     <td class="text-center">
                                                                         <a href="#" class="detail">Xem chi tiết</a>
                                                                         <button class="button-sale">Mua lần nữa</button>
-                                                                        <a href="#" class="detail">Chuyển state</a>
                                                                     </td>
                                                                 }
                                                             </tr>
@@ -148,13 +145,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -165,13 +160,12 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
                                                                             <a href="#" class="detail">Xem chi tiết</a>
                                                                             <button class="button-sale">Mua lần nữa</button>
-                                                                            <a href="#" class="detail">Chuyển state</a>
                                                                         </td>
                                                                     }
                                                                 </tr>
@@ -210,14 +204,14 @@
                         </div>
                         <div class="tabcontent-all-bottom">
                             <div class="tabcontent-all-bottom-products">
-                                <div class="none-products" style="display: none;">
+                                @*<div class="none-products" style="display: none;">
                                     <div class="none-products-cover">
                                         <img src="~/images/avatar.jpg" />
                                         <div class="none-products-text">
                                             Không tìm thấy đơn hàng
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 @{
                                     if (user != null)
                                     {
@@ -243,13 +237,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -260,13 +252,13 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
                                                                             <a href="#" class="detail">Xem chi tiết</a>
                                                                             <button class="button-sale">Mua lần nữa</button>
-                                                                            <a href="#" class="detail">Chuyển state</a>
+                                                                            <a href="/OrderManagement/StatePreparing?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                         </td>
                                                                     }
                                                                 </tr>
@@ -315,13 +307,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
                                                                             {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -332,13 +322,13 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
                                                                                 <a href="#" class="detail">Xem chi tiết</a>
                                                                                 <button class="button-sale">Mua lần nữa</button>
-                                                                                <a href="#" class="detail">Chuyển state</a>
+                                                                                <a  href="/OrderManagement/StatePreparing?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                             </td>
                                                                         }
                                                                     </tr>
@@ -378,14 +368,14 @@
                         </div>
                         <div class="tabcontent-all-bottom">
                             <div class="tabcontent-all-bottom-products">
-                                <div class="none-products">
+                                @*<div class="none-products">
                                     <div class="none-products-cover">
                                         <img src="~/images/avatar.jpg" />
                                         <div class="none-products-text">
                                             Không tìm thấy đơn hàng
                                         </div>
                                     </div>
-                                </div>
+                                </div>*@
                                 @{
                                     if (user != null)
                                     {
@@ -411,13 +401,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -428,13 +416,13 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
                                                                             <a href="#" class="detail">Xem chi tiết</a>
                                                                             <button class="button-sale">Mua lần nữa</button>
-                                                                            <a href="#" class="detail">Chuyển state</a>
+                                                                            <a href="/OrderManagement/StateDelivering?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                         </td>
                                                                     }
                                                                 </tr>
@@ -484,13 +472,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
                                                                             {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -501,13 +487,13 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
                                                                                 <a href="#" class="detail">Xem chi tiết</a>
                                                                                 <button class="button-sale">Mua lần nữa</button>
-                                                                                <a href="#" class="detail">Chuyển state</a>
+                                                                                <a href="/OrderManagement/StateDelivering?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                             </td>
                                                                         }
                                                                     </tr>
@@ -532,39 +518,6 @@
                                         }
                                     }
                                 }
-                                <div class="tabcontent-all-bottom-left" style="display: none">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                <th style="width: 10% ">Tổng đơn hàng</th>
-                                                <th style="width: 30% ">Trạng thái</th>
-                                                <th style="width: 15% ">Vận chuyển</th>
-                                                <th style="width: 15% ">Thao tác</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="display-infor">
-                                                    <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                    <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                </td>
-                                                <td class="text-center">860.000đ</td>
-                                                <td class="text-center">Đã giao</td>
-                                                <td class="text-center">Giao tiêu chuẩn</td>
-                                                <td class="text-center">
-                                                    <a href="#" class="detail">Xem chi tiết</a>
-                                                    <button class="button-sale">Mua lần nữa</button>
-                                                    <a href="#" class="detail">Chuyển state</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="table-top">
-                                        <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                        <div class="table-top-products">DH000000</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -613,13 +566,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -630,13 +581,13 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
                                                                             <a href="#" class="detail">Xem chi tiết</a>
                                                                             <button class="button-sale">Mua lần nữa</button>
-                                                                            <a href="#" class="detail">Chuyển state</a>
+                                                                            <a href="/OrderManagement/StatePaid?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                         </td>
                                                                     }
                                                                 </tr>
@@ -686,13 +637,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
                                                                             {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -703,13 +652,13 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
                                                                                 <a href="#" class="detail">Xem chi tiết</a>
                                                                                 <button class="button-sale">Mua lần nữa</button>
-                                                                                <a href="#" class="detail">Chuyển state</a>
+                                                                                <a href="/OrderManagement/StatePaid?IDBill=@s.IDBill" class="detail">Chuyển state</a>
                                                                             </td>
                                                                         }
                                                                     </tr>
@@ -782,13 +731,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -799,7 +746,7 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
@@ -855,13 +802,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
-                                                                            {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
+                                                                            {   
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -872,7 +817,7 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
@@ -951,13 +896,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -968,7 +911,7 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
@@ -1024,13 +967,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
                                                                             {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -1041,7 +982,7 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
@@ -1153,13 +1094,11 @@
                                                             <tbody>
                                                                 <tr>
                                                                     @{
-                                                                        float sum = 0;
                                                                         var BillDetails = (from bd in _db.BillDetails
                                                                                            where bd.IDBill == s.IDBill
                                                                                            select bd).ToList();
                                                                         foreach (var bd in BillDetails)
                                                                         {
-                                                                            sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                             <td class="display-infor">
                                                                                 <img src="../@dish.Image" />
@@ -1170,7 +1109,7 @@
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                           where ot.IDBill == s.IDBill
                                                                                           select os.StateName).SingleOrDefault();
-                                                                        <td class="text-center">@sum</td>
+                                                                        <td class="text-center">@s.Total</td>
                                                                         <td class="text-center">@orderState</td>
                                                                         <td class="text-center">Giao tiêu chuẩn</td>
                                                                         <td class="text-center">
@@ -1226,13 +1165,11 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         @{
-                                                                            float sum = 0;
                                                                             var BillDetails = (from bd in _db.BillDetails
                                                                                                where bd.IDBill == s.IDBill
                                                                                                select bd).ToList();
                                                                             foreach (var bd in BillDetails)
                                                                             {
-                                                                                sum = sum + float.Parse(bd.PaidPrice.ToString());
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
                                                                                 <td class="display-infor">
                                                                                     <img src="../@dish.Image" />
@@ -1243,7 +1180,7 @@
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
                                                                                               where ot.IDBill == s.IDBill
                                                                                               select os.StateName).SingleOrDefault();
-                                                                            <td class="text-center">@sum</td>
+                                                                            <td class="text-center">@s.Total</td>
                                                                             <td class="text-center">@orderState</td>
                                                                             <td class="text-center">Giao tiêu chuẩn</td>
                                                                             <td class="text-center">
