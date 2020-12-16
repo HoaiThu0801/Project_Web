@@ -51,20 +51,36 @@ namespace Project_Web.Controllers
         }
         [HttpPost]
         [Authorize_userController]
-        public ActionResult InformationAccount(User model)
+        public ActionResult InformationAccount(User model, FormCollection form)
         {
+            string Province = form["Province"].ToString();
+            string District = form["District"].ToString();
+            string Ward = form["Ward"].ToString();
+            string Street = form["Street"].ToString();
             User user_session = Session["User"] as User;
             model.Username = user_session.Username;
+            Address_Users address_Users = _db.Address_Users.SingleOrDefault(x => x.IDUser == user_session.IDUser && x.IsDefault == 1);
             User user = (from u in _db.Users
                          where u.Username == model.Username
                          select u).SingleOrDefault();
             if (user != null)
             {
+                if(address_Users!= null)
+                {
+                    address_Users.Province = Province;
+                    address_Users.District = District;
+                    address_Users.Ward = Ward;
+                    address_Users.Street = Street;
+                    address_Users.Fullname = model.Fullname;
+                    address_Users.PhoneNumber = model.PhoneNumber;
+                    _db.Address_Users.AddOrUpdate(address_Users);
+                    _db.SaveChanges();
+                }
                 user.Fullname = model.Fullname;
                 user.Gender = model.Gender;
                 user.DateofBirth = model.DateofBirth;
                 user.IdentityCard = model.IdentityCard;
-                user.Address = model.Address;
+                user.Address = Street;
                 user.PhoneNumber = model.PhoneNumber;
                 _db.Users.AddOrUpdate(user);
                 _db.SaveChanges();
