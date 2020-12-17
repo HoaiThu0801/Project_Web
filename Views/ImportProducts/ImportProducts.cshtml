@@ -11,71 +11,85 @@
 </head>
 
 <body>
-    <div class="import-products-container">
-        <div class="import-products-body">
-            <form method="post" action="/ImportProducts/ImportProducts" class="import-products-form" id="import-products-form">
-                <h1>Nhập hàng cho kho của cửa hàng</h1>
-                <div class="import-products">
-                    <div class="form-group">
-                        <label>Kho hàng:</label>
-                        <select class="custom-select" name="WarehouseName" id="Warehouse-Select">
-                            <option disabled selected>Kho hàng</option>
-                            @{
-                                User user = Session["User"] as User;
-                                var role = (from s in _db.User_Roles
-                                            where s.IDUser == user.IDUser
-                                            select s).SingleOrDefault();
-                                if (role.IDRole == "R02")
-                                {
-                                    var listWarehouse = (from Warehouse in _db.Warehouses
-                                                         join s in _db.Stores
-                                                         on Warehouse.IDStore equals s.IDStore
-                                                         where s.IDUser == user.IDUser
-                                                         select Warehouse).ToList();
-                                    foreach (var warehouse in listWarehouse)
-                                    {
-                                        <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
-                                    }
-                                }
-                                else
-                                {
-                                    var listWarehouse = (from Warehouse in _db.Warehouses
-                                                         select Warehouse).ToList();
-                                    foreach (var warehouse in listWarehouse)
-                                    {
-                                        <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
-                                    }
-                                }
-
-                            }
-                        </select>
-                    </div>
-                    <div class="import-product-display" id="DisplayImportsProduct">
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Cửa hàng bán cháo | Nhập hàng</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+            </div>
+        </div>
+    </div>
+    <div class="import">
+        <div class="import-products-container">
+            <div class="import-products-body">
+                <form method="post" action="/ImportProducts/ImportProducts" class="import-products-form" id="import-products-form">
+                    <h1>Nhập hàng cho kho của cửa hàng</h1>
+                    <div class="import-products">
                         <div class="form-group">
-                            <label>Món ăn:</label>
-                            <select class="custom-select" name="DishName" id="DishName-Select">
-                                <option disabled selected>Món ăn</option>
-                                <option id="loading" value="-">Dish Name</option>
+                            <label>Kho hàng:</label>
+                            <select class="custom-select" name="WarehouseName" id="Warehouse-Select">
+                                <option disabled selected>Kho hàng</option>
+                                @{
+                                    User user = Session["User"] as User;
+                                    var role = (from s in _db.User_Roles
+                                                where s.IDUser == user.IDUser
+                                                select s).SingleOrDefault();
+                                    if (role.IDRole == "R02")
+                                    {
+                                        var listWarehouse = (from Warehouse in _db.Warehouses
+                                                             join s in _db.Stores
+                                                             on Warehouse.IDStore equals s.IDStore
+                                                             where s.IDUser == user.IDUser
+                                                             select Warehouse).ToList();
+                                        foreach (var warehouse in listWarehouse)
+                                        {
+                                            <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        var listWarehouse = (from Warehouse in _db.Warehouses
+                                                             select Warehouse).ToList();
+                                        foreach (var warehouse in listWarehouse)
+                                        {
+                                            <option value="@warehouse.WarehouseName">@warehouse.WarehouseName (@warehouse.LocationofWarehouse)</option>
+                                        }
+                                    }
+
+                                }
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Số lượng:</label>
-                            <input type="number" min="1" max="200" value="1" class="form-input" name="Quantity" id="Quantity" />
-                        </div>
-                        <div class="form-group">
-                            <label>Thời gian nhập:</label>
-                            @{
-                                <input type="datetime" class="form-input" name="Time" readonly id="Time" value="@DateTime.Now" />
-                            }
-                        </div>
-                        <div class="form-group">
-                            <div class="button-submit" id="button-submit">
-                                <input type="submit" name="submit" id="submit" class="form-submit" value="Thêm vào cửa hàng" />
+                        <div class="import-product-display" id="DisplayImportsProduct">
+                            <div class="form-group">
+                                <label>Món ăn:</label>
+                                <select class="custom-select" name="DishName" id="DishName-Select">
+                                    <option disabled selected>Món ăn</option>
+                                    <option id="loading" value="-">Dish Name</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Số lượng:</label>
+                                <input type="number" min="1" max="200" value="1" class="form-input" name="Quantity" id="Quantity" />
+                            </div>
+                            <div class="form-group">
+                                <label>Thời gian nhập:</label>
+                                @{
+                                    <input type="datetime" class="form-input" name="Time" readonly id="Time" value="@DateTime.Now" />
+                                }
+                            </div>
+                            <div class="form-group">
+                                <div class="button-submit" id="button-submit">
+                                    <input type="submit" name="submit" id="submit" class="form-submit" value="Thêm vào cửa hàng" />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </body>

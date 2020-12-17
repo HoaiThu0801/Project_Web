@@ -1,8 +1,40 @@
 ﻿$(document).ready(function () {
-    $(".changQuantity").click(function (event) {
+    $(".quantiTy-decrease").click(function (event) {
         event.preventDefault();
         var IDbilldetail = $(this).attr("data-IDBillDetail");
-        var quantity = $(this).val();
+        var quantity = $(this).attr("data-quantity");
+        quantity = Number(quantity);
+        quantity = quantity - 1;
+        $('.changQuantity').html(quantity);
+        $.ajax({
+            type: "post",
+            url: "/Home/EditCart",
+            data: {
+                IDBillDetail: IDbilldetail,
+                Quantity: quantity
+            },
+            success: function (res) {
+                if (res == "true") {
+                    $(window).attr('location', '../Home/ShoppingCart');
+                }
+                else if (res == "Sold-out") {
+                    alert("Số lượng món ăn hiện có không đủ ");
+                    $(window).attr('location', '../Home/ShoppingCart');
+                }
+                else {
+                    alert("Không thể sửa món ăn");
+                    $(window).attr('location', '../Home/ShoppingCart');
+                }
+            }
+        })
+    })
+    $(".quantiTy-increase").click(function (event) {
+        event.preventDefault();
+        var IDbilldetail = $(this).attr("data-IDBillDetail");
+        var quantity = $(this).attr("data-quantity");
+        quantity = Number(quantity);
+        quantity = quantity + 1;
+        $('.changQuantity').html(quantity);
         $.ajax({
             type: "post",
             url: "/Home/EditCart",

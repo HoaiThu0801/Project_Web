@@ -47,6 +47,42 @@ h3 {
 .table{
     margin-top: 20px;
 }
+.quantiTy {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    background-color: white;
+}
+.quantiTy-sum {
+    border: none;
+    background: transparent;
+    width: 35px;
+    text-align: center;
+    font-size: 13px;
+    appearance: none;
+    margin: 0px;    
+}
+.quantiTy-decrease {
+    border-right: 1px solid rgb(200, 200, 200);
+    color: black;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.quantiTy-increase {
+    border-right: none;
+    color: black;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-left: 1px solid rgb(200, 200, 200);
+}
+.quantiTy-decrease:hover, .quantiTy-increase:hover{
+    font-weight: bolder;
+}
+.disabled{
+    pointer-events: none;
+    background-color: lightgray;
+}
 @media screen and (max-width: 600px) {
     table #cart tbody td .form-control {
         width: 20%;

@@ -64,8 +64,21 @@
                                     @{
                                         int quatity = int.Parse(dr["Quantity"].ToString());
                                         string IDBillDetail = dr["IDBillDetails"].ToString();
-                                        <input class="form-control text-center changQuantity" value="@quatity" id="changQuantity" type="number" min="1" max="20" data-IDBillDetail="@IDBillDetail">
-                                     }
+                                        <div class="quantiTy">
+                                            @{
+                                                if (quatity <= 1)
+                                                {
+                                                    <span class="quantiTy-decrease disabled" data-IDBillDetail="@IDBillDetail" data-quantity="@quatity">-</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="quantiTy-decrease" data-IDBillDetail="@IDBillDetail" data-quantity="@quatity">-</span>
+                                                }
+                                            }
+                                            <input type="tel" class="quantiTy-sum changQuantity" value="@quatity"/>
+                                            <span class="quantiTy-increase" data-IDBillDetail="@IDBillDetail" data-quantity="@quatity">+</span>
+                                        </div>
+                                    }
                                 </td>
                                 <td data-th="Subtotal" class="text-center"> @dr["PaidPrice"]</td>
                                 <td class="actions" data-th="">
@@ -77,7 +90,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            i = i+1;
+                            i = i + 1;
                         }
                     }
                 }
