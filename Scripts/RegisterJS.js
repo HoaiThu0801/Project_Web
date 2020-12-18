@@ -196,7 +196,12 @@ $(document).ready(function () {
 
 //
 $(document).ready(function () {
+    var district = $('#District');
     $("#ProvinceSelect").change(function () {
+        district.css("height", "unset");
+        district.css("opacity", 1);
+        district.css("visibility", "visible");
+        district.css("margin-bottom", "20px");
         var provincename = $("#ProvinceSelect").val();
         $.ajax({
             type: "get",
@@ -216,7 +221,12 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
+    var ward = $("#Ward");
     $("#DistrictSelect").change(function () {
+        ward.css("height", "unset");
+        ward.css("opacity", 1);
+        ward.css("visibility", "visible");
+        ward.css("margin-bottom", "20px");
         var temp = $("#DistrictSelect").val();
         var spaceIndex = temp.search(" ");
         var districtname = temp.slice(spaceIndex + 1, temp.length);

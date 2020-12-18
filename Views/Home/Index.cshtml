@@ -22,8 +22,16 @@
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/HomeStyle.css">
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+    <script src="~/Scripts/HomePage.js"></script>
 </head>
 <body>
+    <div class="khoiload">
+        <div class="load text-center">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        </div>
+    </div>
     <div class="header">
         <div class="row">
             <div class="col-md-4">
@@ -235,10 +243,7 @@
                                 </div>
                                 <div class="contentProducts-price">
                                     <div class="contentProducts-priceOriginal">@s.SalePrice<span>đ</span></div>
-                                    @*<a href="/them-gio-hang?DishName=@nameDish"><i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i></a>*@
                                     <i class="fa fa-cart-plus cart-plus" id="cart-plus" data-IDDish="@s.IDDish"></i>
-                                    @*<i class="fa fa-cart-plus cart-plus" id="cart-plus">@s.DishName</i>*@
-                                    @*<i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />@s.DishName</i>*@
                                 </div>
                             </div>
                         }
@@ -255,9 +260,5 @@
         <div class="paging-choose">
             @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
-
     </div>
 </body>
-
-<script src="~/Scripts/HomePage.js"></script>
-<script src="~/Scripts/jquery-3.5.1.min.js"></script>
