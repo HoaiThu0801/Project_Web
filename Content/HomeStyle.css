@@ -523,10 +523,10 @@ li:hover .sub-menu-around {
 
 /*CSS for load*/
 .load{
-    position: fixed;
+    position: absolute;
     top: 40%;
     left: 45%;
-    z-index: 10000;
+    z-index: 1000;
 }
 .lds-ring {
   display: inline-block;
