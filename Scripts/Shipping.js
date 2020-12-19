@@ -175,7 +175,6 @@ $(document).ready(function () {
         $(this).css('display', 'none');
         var IDaddress = $(this).attr("data-IDAddress");
         var IDuser = $(this).attr("data-IDUser");
-        alert(IDaddress, IDuser);
         $.ajax({
             type: 'post',
             url: "/OrderProducts/DefaultShipping",
@@ -200,3 +199,24 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
 })
+$(document).ready(function () {
+    $(".button-address").click(function (e) {
+        var IDaddresstemp = $(this).attr("data-DThisIDAddress");
+        $.ajax({
+            type: 'post',
+            url: "/OrderProducts/EditAddressShipping",
+            data: {
+                IDAddress: IDaddresstemp
+            },
+            success: function (res) {
+                if (res == "false") {
+                    alert("Có lỗi xảy ra trong quá trình xử lý, bạn vui lòng thử lại sau");
+                    $(window).attr('location', '../OrderProducts/Shipping');
+                }
+                else {
+                    $(window).attr('location', '../OrderProducts/OrderProducts');
+                }
+            }
+        })
+    });
+});
