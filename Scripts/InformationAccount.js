@@ -1,5 +1,4 @@
-﻿
-$('#Fullname').click(function () {
+﻿$('#Fullname').click(function () {
     var fullname = $('#Fullname').val();
     if (fullname.length <= 0) {
         $('#Fullname').css('background', 'yellow')
