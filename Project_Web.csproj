@@ -110,9 +110,9 @@
     <Reference Include="MimeKit, Version=2.9.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
       <HintPath>packages\MimeKit.2.9.2\lib\net47\MimeKit.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
@@ -338,6 +338,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Administrator_SettingController.cs" />
+    <Compile Include="Controllers\Chart_StatisticController.cs" />
     <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportProductsController.cs" />
@@ -379,6 +380,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataPoint.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
@@ -532,6 +534,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChangePass.js" />
+    <Content Include="Scripts\Chart_Statistic.js" />
     <Content Include="Scripts\CreateDish.js" />
     <Content Include="Scripts\CreateSeller.js" />
     <Content Include="Scripts\CreateStore.js" />
@@ -708,6 +711,7 @@
     <Content Include="Views\OrderProducts\Shipping.cshtml" />
     <Content Include="Views\OrderManagement\OrderManagement.cshtml" />
     <Content Include="Views\Home\ChangePass.cshtml" />
+    <Content Include="Views\Chart_Statistic\Chart_Statistic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -723,6 +727,9 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
