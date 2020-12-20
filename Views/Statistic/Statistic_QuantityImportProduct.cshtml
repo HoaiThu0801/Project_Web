@@ -1,0 +1,60 @@
+﻿@using Project_Web.Models;
+@using Newtonsoft.Json;
+@{ 
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    List<DataPoint_Label_y> dataPoints = new List<DataPoint_Label_y>();
+
+    var warehouses = (from s in _db.Stores
+                      join wh in _db.Warehouses on s.IDStore equals wh.IDStore
+                      select wh).ToList();
+    foreach (var wh in warehouses)
+    {
+        var warehouseDetails = (from whd in _db.WarehouseDetails
+                                where whd.IDWarehouse == wh.IDWarehouse
+                                select whd);
+        if (warehouseDetails != null)
+        {
+            double sum = 0;
+            foreach (var temp in warehouseDetails)
+            {
+                sum = sum + Double.Parse(temp.Quantity.ToString());
+            }
+            dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, sum));
+        }
+        else
+        {
+            dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, 0));
+        }
+
+    }
+    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+}
+<div id="chartContainerQuantityImport" style="height: 370px; width: 100%;"></div>
+<script>
+    $('#tabQuantityImport').click(function () {
+        {
+            var chart = new CanvasJS.Chart("chartContainerQuantityImport", {
+                animationEnabled: true,
+                title: {
+                    text: "BIỂU ĐỒ BIỂU DIỄN SỐ LƯỢNG MÓN ĂN ĐÃ NHẬP CỦA MỖI CỬA HÀNG"
+                },
+                subtitles: [{
+                    text: ""
+                }],
+                axisY: {
+                    title: "Số lượng món ăn",
+                    gridThickness: 0
+                },
+                data: [{
+                    type: "bar",
+                    indexLabel: "{y}",
+                    dataPoints: @Html.Raw(ViewBag.DataPoints),
+                }]
+            });
+            chart.render();
+        }
+    });
+</script>
+
+
+

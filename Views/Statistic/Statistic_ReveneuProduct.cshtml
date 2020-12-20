@@ -1,0 +1,49 @@
+﻿@using Project_Web.Models;
+@using Newtonsoft.Json;
+@{ 
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    List<DataPoint_Label_y> dataPoint_Label_Y = new List<DataPoint_Label_y>();
+    var store = (from s in _db.Stores
+                 select s).ToList();
+    foreach (var s in store)
+    {
+        var bill = (from b in _db.Bills
+                    join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                    where b.IDStore == s.IDStore && ot.IDOrderStatse == "OS-05"
+                    select b).ToList();
+        if (bill.Count == 0)
+        {
+            dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, 0));
+        }
+        else
+        {
+            float sum = 0;
+            foreach (var temp in bill)
+            {
+                sum = sum + float.Parse(temp.Total.ToString());
+            }
+            dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, sum));
+        }
+    }
+    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoint_Label_Y);
+}
+<div id="chartContainerReveneu" style="height: 370px; width: 100%;"></div>
+<script>
+    $('#tabReveneuProduct').click(function () {
+        var chart = new CanvasJS.Chart("chartContainerReveneu", {
+            animationEnabled: true,
+            theme: "light1", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Doanh thu của mỗi cửa hàng"
+            },
+            axisY: {
+                title: "VND"
+            },
+            data: [{
+                type: "column",
+                dataPoints: @Html.Raw(ViewBag.DataPoints)
+			}]
+        });
+        chart.render();
+    })
+</script>

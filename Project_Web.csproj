@@ -338,7 +338,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Administrator_SettingController.cs" />
-    <Compile Include="Controllers\Chart_StatisticController.cs" />
     <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportProductsController.cs" />
@@ -346,6 +345,7 @@
     <Compile Include="Controllers\OrderProductsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\SignInController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -454,6 +454,7 @@
     <Content Include="Content\Shipping.css" />
     <Content Include="Content\ShoppingCart.css" />
     <Content Include="Content\SignInStyle.css" />
+    <Content Include="Content\StatisticPage.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\VerifyEmail.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -677,6 +678,7 @@
     <Content Include="Scripts\ShoppingCart.js" />
     <Content Include="Scripts\Shipping.js" />
     <Content Include="Scripts\SignIn.js" />
+    <Content Include="Scripts\Statistic.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -698,7 +700,6 @@
     <Content Include="Views\Administrator_Setting\CreateSeller.cshtml" />
     <Content Include="Views\SignIn\ForgotPassWord.cshtml" />
     <Content Include="Views\SignIn\VerifyEmail.cshtml" />
-    <Content Include="Views\Shared\_LocationStore.cshtml" />
     <Content Include="Views\Administrator_Setting\_TabStore.cshtml" />
     <Content Include="Views\Administrator_Setting\_TabStaff.cshtml" />
     <Content Include="Views\Administrator_Setting\_TabDish.cshtml" />
@@ -710,8 +711,9 @@
     <Content Include="Views\OrderProducts\Shipping.cshtml" />
     <Content Include="Views\OrderManagement\OrderManagement.cshtml" />
     <Content Include="Views\Home\ChangePass.cshtml" />
-    <Content Include="Views\Chart_Statistic\Chart_Statistic_QuantityImportProduct.cshtml" />
-    <Content Include="Views\Chart_Statistic\Chart_Statistic_ReveneuProduct.cshtml" />
+    <Content Include="Views\Statistic\Statistic.cshtml" />
+    <Content Include="Views\Statistic\Statistic_QuantityImportProduct.cshtml" />
+    <Content Include="Views\Statistic\Statistic_ReveneuProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

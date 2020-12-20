@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Thống kê</title>
+    <!-- stylesheets -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/StatisticPage.css" rel="stylesheet" type="text/css" />
+
+    <!-- scripts -->
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="~/Scripts/Statistic.js"></script>
+    <script>
+        $(function () {
+            // #sidebar-toggle-button
+            $('#sidebar-toggle-button').on('click', function () {
+                $('#sidebar').toggleClass('sidebar-toggle');
+                $('#page-content-wrapper').toggleClass('page-content-toggle');
+                fireResize();
+            });
+
+            // sidebar collapse behavior
+            $('#sidebar').on('show.bs.collapse', function () {
+                $('#sidebar').find('.collapse.in').collapse('hide');
+            });
+
+            // To make current link active
+            (function addActiveClassToNestedList() {
+                var pageURL = $(location).attr('href');
+                var URLSplits = pageURL.split('/');
+
+                var routeURL = '/' + URLSplits[URLSplits.length - 3] + '/' + URLSplits[URLSplits.length - 2] + '/';
+                var activeNestedList = $('.sub-menu > li > a[href="' + routeURL + '"]').parent();
+
+                if (activeNestedList.length !== 0 && !activeNestedList.hasClass('active')) {
+                    $('.sub-menu > li').removeClass('active');
+                    activeNestedList.addClass('active');
+                }
+            })();
+
+            function fireResize() {
+                if (document.createEvent) { // W3C
+                    var ev = document.createEvent('Event');
+                    ev.initEvent('resize', true, true);
+                    window.dispatchEvent(ev);
+                }
+                else { // IE
+                    element = document.documentElement;
+                    var event = document.createEventObject();
+                    element.fireEvent("onresize", event);
+                }
+            }
+
+        });
+    </script>
+
+</head>
+<body>
+    <!-- header -->
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Cửa hàng bán cháo | Giỏ hàng</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+            </div>
+        </div>
+    </div>
+    <!-- /header -->
+    <!-- sidebar -->
+    <div class="container-statistic">
+        <div id="sidebar" class="sidebar-toggle">
+            <ul class="nav nav-sidebar">
+                <li>
+                    <a href="/">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                </li>
+                <li data-toggle="collapse" href="#charttypes" aria-expanded="true" aria-controls="chart-types">
+                    <a href="#">
+                        <i class="fa fa-area-chart" aria-hidden="true" style="width: 13px;"></i>
+                        <span>Thống kê</span>
+                    </a>
+                </li>
+
+                <li>
+                    <ul id="charttypes" class="sub-menu collapse @if(Request.Url.AbsoluteUri.ToString().Contains("Statistic/")) { @Html.Raw("in") }">
+                        <li><a class="tablinks" onclick="openChartStatistic(event, 'QuantityImport')" id="tabQuantityImport">Thống kê tổng sản phẩm</a></li>
+                        <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuProduct')" id="tabReveneuProduct">Line Chart</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <div class="tabcontent" id="QuantityImport" style="display: block">
+                @Html.Partial("~/Views/Statistic/Statistic_QuantityImportProduct.cshtml")
+            </div>
+            <div class="tabcontent" id="ReveneuProduct">
+                @Html.Partial("~/Views/Statistic/Statistic_ReveneuProduct.cshtml")
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
