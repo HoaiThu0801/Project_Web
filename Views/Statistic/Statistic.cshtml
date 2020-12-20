@@ -17,50 +17,6 @@
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <script src="~/Scripts/Statistic.js"></script>
-    <script>
-        $(function () {
-            // #sidebar-toggle-button
-            $('#sidebar-toggle-button').on('click', function () {
-                $('#sidebar').toggleClass('sidebar-toggle');
-                $('#page-content-wrapper').toggleClass('page-content-toggle');
-                fireResize();
-            });
-
-            // sidebar collapse behavior
-            $('#sidebar').on('show.bs.collapse', function () {
-                $('#sidebar').find('.collapse.in').collapse('hide');
-            });
-
-            // To make current link active
-            (function addActiveClassToNestedList() {
-                var pageURL = $(location).attr('href');
-                var URLSplits = pageURL.split('/');
-
-                var routeURL = '/' + URLSplits[URLSplits.length - 3] + '/' + URLSplits[URLSplits.length - 2] + '/';
-                var activeNestedList = $('.sub-menu > li > a[href="' + routeURL + '"]').parent();
-
-                if (activeNestedList.length !== 0 && !activeNestedList.hasClass('active')) {
-                    $('.sub-menu > li').removeClass('active');
-                    activeNestedList.addClass('active');
-                }
-            })();
-
-            function fireResize() {
-                if (document.createEvent) { // W3C
-                    var ev = document.createEvent('Event');
-                    ev.initEvent('resize', true, true);
-                    window.dispatchEvent(ev);
-                }
-                else { // IE
-                    element = document.documentElement;
-                    var event = document.createEventObject();
-                    element.fireEvent("onresize", event);
-                }
-            }
-
-        });
-    </script>
-
 </head>
 <body>
     <!-- header -->
@@ -88,14 +44,14 @@
                     </a>
                 </li>
                 <li data-toggle="collapse" href="#charttypes" aria-expanded="true" aria-controls="chart-types">
-                    <a href="#">
+                    <a>
                         <i class="fa fa-area-chart" aria-hidden="true" style="width: 13px;"></i>
                         <span>Thống kê</span>
                     </a>
                 </li>
 
                 <li>
-                    <ul id="charttypes" class="sub-menu collapse @if(Request.Url.AbsoluteUri.ToString().Contains("Statistic/")) { @Html.Raw("in") }">
+                    <ul id="charttypes" class="sub-menu collapse ">
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'QuantityImport')" id="tabQuantityImport">Thống kê tổng sản phẩm</a></li>
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuProduct')" id="tabReveneuProduct">Line Chart</a></li>
                     </ul>
