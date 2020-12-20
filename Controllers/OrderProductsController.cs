@@ -216,7 +216,8 @@ namespace Project_Web.Controllers
             Address_Users address_Users = _db.Address_Users.SingleOrDefault(n => n.IDAddress == IDAddress);
             if (address_Users != null)
             {
-                string address = address_Users.Street + address_Users.Ward + address_Users.District + address_Users.Province;
+                string address = address_Users.Street + " " + address_Users.Ward + " " + address_Users.District + " " +  address_Users.Province;
+                Session["AddressOrder"] = address;
                 return Content(address);
             }
             return Content("false");

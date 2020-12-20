@@ -14,49 +14,63 @@ namespace Project_Web.Controllers
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: Chart_Statistic
-        public ActionResult Chart_Statistic()
+        public ActionResult Chart_Statistic_QuantityImportProduct()
         {
-            List<DataPoint> dataPoints = new List<DataPoint>();
- 
-			dataPoints.Add(new DataPoint("Economics", 1));
-			dataPoints.Add(new DataPoint("Physics", 2));
-			dataPoints.Add(new DataPoint("Literature", 4));
-			dataPoints.Add(new DataPoint("Chemistry", 4));
-			dataPoints.Add(new DataPoint("Literature", 9));
-			dataPoints.Add(new DataPoint("Physiology or Medicine", 11));
-			dataPoints.Add(new DataPoint("Peace", 13));
-			ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            List<DataPoint_Label_y> dataPoints = new List<DataPoint_Label_y>();
+
+            var warehouses = (from s in _db.Stores
+                              join wh in _db.Warehouses on s.IDStore equals wh.IDStore
+                              select wh).ToList();
+            foreach (var wh in warehouses)
+            {
+                var warehouseDetails = (from whd in _db.WarehouseDetails
+                                        where whd.IDWarehouse == wh.IDWarehouse
+                                        select whd);
+                if (warehouseDetails != null)
+                {
+                    double sum = 0;
+                    foreach (var temp in warehouseDetails)
+                    {
+                        sum = sum + Double.Parse(temp.Quantity.ToString());
+                    }
+                    dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, sum));
+                }
+                else
+                {
+                    dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, 0));
+                }
+
+            }
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
             return View();
         }
-        //[HttpGet]
-        //public JsonResult LoadQuantityImportProduct()
-        //{
-        //    List<DataPoint> dataPoints = new List<DataPoint>();
-        //    var warehouses = (from s in _db.Stores
-        //                 join wh in _db.Warehouses on s.IDStore equals wh.IDStore
-        //                 select wh).ToList();
-        //    foreach (var wh in warehouses)
-        //    {
-        //        var warehouseDetails = (from whd in _db.WarehouseDetails
-        //                           where whd.IDWarehouse == wh.IDWarehouse
-        //                           select whd);
-        //        if (warehouseDetails != null)
-        //        {
-        //            double sum = 0;
-        //            foreach (var temp in warehouseDetails)
-        //            {
-        //                sum = sum + Double.Parse(temp.Quantity.ToString());
-        //            }
-        //            dataPoints.Add(new DataPoint(wh.WarehouseName,sum));
-        //        }
-        //        else
-        //        {
-        //            dataPoints.Add(new DataPoint(wh.WarehouseName, 0));
-        //        }
-                
-        //    }
-        //    return Json(dataPoints, JsonRequestBehavior.AllowGet);
-        //}
-
+        public ActionResult Chart_Statistic_ReveneuProduct()
+        {
+            List<DataPoint_Label_y> dataPoint_Label_Y = new List<DataPoint_Label_y>();
+            var store = (from s in _db.Stores
+                        select s).ToList();
+            foreach (var s in store)
+            {
+                var bill = (from b in _db.Bills
+                            join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                            where b.IDStore == s.IDStore && ot.IDOrderStatse == "OS-05"
+                            select b).ToList();
+                if (bill.Count == 0)
+                {
+                    dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, 0));
+                }
+                else
+                {
+                    float sum = 0;
+                    foreach (var temp in bill)
+                    {
+                        sum = sum + float.Parse(temp.Total.ToString());
+                    }
+                    dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, sum));
+                }
+            }
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoint_Label_Y);
+            return View();
+        }
     }
 }

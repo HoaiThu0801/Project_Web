@@ -380,7 +380,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataPoint.cs" />
+    <Compile Include="Models\DataPoint_Label_y.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
@@ -534,7 +534,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ChangePass.js" />
-    <Content Include="Scripts\Chart_Statistic.js" />
     <Content Include="Scripts\CreateDish.js" />
     <Content Include="Scripts\CreateSeller.js" />
     <Content Include="Scripts\CreateStore.js" />
@@ -711,7 +710,8 @@
     <Content Include="Views\OrderProducts\Shipping.cshtml" />
     <Content Include="Views\OrderManagement\OrderManagement.cshtml" />
     <Content Include="Views\Home\ChangePass.cshtml" />
-    <Content Include="Views\Chart_Statistic\Chart_Statistic.cshtml" />
+    <Content Include="Views\Chart_Statistic\Chart_Statistic_QuantityImportProduct.cshtml" />
+    <Content Include="Views\Chart_Statistic\Chart_Statistic_ReveneuProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -142,7 +142,13 @@
                         <div class="orderProducts-right-border-cover-bottom-name">@user.Fullname</div>
                         @{
                             string address = "";
-                            if (address_Users != null)
+                            if (Session["AddressOrder"] != null)
+                            {
+                                address = Session["AddressOrder"].ToString();
+                                <div class="orderProducts-right-border-cover-bottom-address" id="address_user">@address</div>
+                                Session.Remove("AddressOrder");
+                            }
+                            else if (address_Users != null)
                             {
                                 address = address_Users.Street + ", " + address_Users.Ward + ", " + address_Users.District + ", " + address_Users.Province;
                                 <div class="orderProducts-right-border-cover-bottom-address" id="address_user">@address</div>
