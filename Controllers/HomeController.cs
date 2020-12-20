@@ -169,6 +169,7 @@ namespace Project_Web.Controllers
         }
         #region Cart
         [HttpPost]
+        [Authorize_userController]
         public ActionResult AddCart(string IDDish)
         {
             User user = Session["User"] as User;
