@@ -2,7 +2,7 @@
 @using Newtonsoft.Json;
 @{ 
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
-    List<DataPoint_Label_y> dataPoints = new List<DataPoint_Label_y>();
+    List<DataPoints> dataPoints = new List<DataPoints>();
 
     var warehouses = (from s in _db.Stores
                       join wh in _db.Warehouses on s.IDStore equals wh.IDStore
@@ -19,11 +19,11 @@
             {
                 sum = sum + Double.Parse(temp.Quantity.ToString());
             }
-            dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, sum));
+            dataPoints.Add(new DataPoints(wh.WarehouseName, sum));
         }
         else
         {
-            dataPoints.Add(new DataPoint_Label_y(wh.WarehouseName, 0));
+            dataPoints.Add(new DataPoints(wh.WarehouseName, 0));
         }
 
     }
@@ -43,7 +43,7 @@
                 }],
                 axisY: {
                     title: "Số lượng món ăn",
-                    gridThickness: 0
+                    gridThickness: 0,
                 },
                 data: [{
                     type: "bar",

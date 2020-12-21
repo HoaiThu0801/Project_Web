@@ -2,7 +2,7 @@
 @using Newtonsoft.Json;
 @{ 
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
-    List<DataPoint_Label_y> dataPoint_Label_Y = new List<DataPoint_Label_y>();
+    List<DataPoints> dataPoints = new List<DataPoints>();
     var store = (from s in _db.Stores
                  select s).ToList();
     foreach (var s in store)
@@ -13,7 +13,7 @@
                     select b).ToList();
         if (bill.Count == 0)
         {
-            dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, 0));
+            dataPoints.Add(new DataPoints(s.StoreName, 0));
         }
         else
         {
@@ -22,10 +22,10 @@
             {
                 sum = sum + float.Parse(temp.Total.ToString());
             }
-            dataPoint_Label_Y.Add(new DataPoint_Label_y(s.StoreName, sum));
+            dataPoints.Add(new DataPoints(s.StoreName, sum));
         }
     }
-    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoint_Label_Y);
+    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 }
 <div id="chartContainerReveneu" style="height: 370px; width: 100%;"></div>
 <script>

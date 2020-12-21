@@ -403,7 +403,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\DataPoint_Label_y.cs" />
+    <Compile Include="Models\DataPoints.cs" />
     <Compile Include="Models\DataPoint_Name_y.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>

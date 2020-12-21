@@ -7,14 +7,18 @@ using System.Runtime.Serialization;
 namespace Project_Web.Models
 {
 	[DataContract]
-	public class DataPoint_Label_y
+	public class DataPoints
 	{
-        public DataPoint_Label_y(string label, double y)
+        public DataPoints(string label, double y)
 		{
 			this.Label = label;
 			this.Y = y;
 		}
-
+		public DataPoints(double y, string label)
+		{
+			this.Label = label;
+			this.Y = y;
+		}
 		//Explicitly setting the name to be used while serializing to JSON. 
 		[DataMember(Name = "label")]
 		public string Label = null;
