@@ -741,6 +741,7 @@
     <Content Include="Views\Statistic\Statistic_ReveneuProduct.cshtml" />
     <Content Include="Views\Statistic\Statistic_TotalNumberofProduct.cshtml" />
     <Content Include="Templates\File_20201221_v1.0_TemplateImportProduct.xlsx" />
+    <Content Include="Views\Statistic\Statistic_Top5BestSellerPorridge.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

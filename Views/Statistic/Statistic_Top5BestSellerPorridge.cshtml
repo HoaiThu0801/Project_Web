@@ -1,0 +1,43 @@
+﻿@using Project_Web.Models;
+@using Newtonsoft.Json;
+@{
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    List<DataPoints> dataPoints = new List<DataPoints>();
+
+    var dishList = (from bd in _db.BillDetails
+                    group bd by bd.DishName into bdtemp
+                    let sumQuantity = bdtemp.Sum(w => w.Quantity)
+                    select new { DishName = bdtemp.Key, SumQuantity = sumQuantity }).Take(5);
+    var sum = _db.BillDetails.Sum(n => n.Quantity);
+    double Orthers = 0;
+    foreach (var dish in dishList)
+    {
+        Orthers = Orthers + double.Parse(dish.SumQuantity.ToString());
+        double temp = (double.Parse(dish.SumQuantity.ToString()) / double.Parse(sum.ToString())) * 100;
+        dataPoints.Add(new DataPoints(dish.DishName, temp));
+    }
+    double tempOthers = ((double.Parse(sum.ToString()) - double.Parse(Orthers.ToString())) / double.Parse(sum.ToString())) * 100;
+    dataPoints.Add(new DataPoints("Những loại khác", tempOthers));
+    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+}
+<div id="chartContainerTop5BestSellerPorridge" style="height: 370px; width: 100%;"></div>
+<script>
+    $('#tabTop5BestSellerPorridge').click(function () {
+        var chart = new CanvasJS.Chart("chartContainerTop5BestSellerPorridge", {
+	    animationEnabled: true,
+	    title: {
+		    text: "TOP 5 MÓN CHÁO BEST SELLER CỦA QUÁN"
+	    },
+	    data: [{
+		    type: "doughnut",
+		    startAngle: 60,
+		    indexLabelFontSize: 16,
+		    indexLabel: "{label} - {y}%",
+		    toolTipContent: "<b>{label}:</b> {y}%",
+		    dataPoints: @Html.Raw(ViewBag.DataPoints),
+	    }]
+    });
+        chart.render();
+});
+</script>
+
