@@ -2,12 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
+using System.Data.OleDb;
+using System.Text.RegularExpressions;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.DynamicData;
 using System.Web.Mvc;
 using System.Web.UI;
 using PagedList;
+using System.Data;
+using LinqToExcel;
 
 namespace Project_Web.Controllers
 {
@@ -140,11 +146,11 @@ namespace Project_Web.Controllers
             {
                 return Content("false");
             }
-            if(Category == "")
+            if (Category == "")
             {
                 return Content("CategoryNull");
             }
-            if(Image == "/images/ImageProducts/undefined")
+            if (Image == "/images/ImageProducts/undefined")
             {
                 return Content("ImageNull");
             }
@@ -155,12 +161,12 @@ namespace Project_Web.Controllers
             menu_temp.SalePrice = Convert.ToDouble(SalePrice);
             menu_temp.Image = Image;
             menu_temp.Category = Category;
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 _db.Menus.Add(menu_temp);
                 _db.SaveChanges();
                 return Content("true");
-            }    
+            }
             return View();
         }
         #endregion
@@ -245,14 +251,14 @@ namespace Project_Web.Controllers
         #endregion
 
         #region Paging
-        public PartialViewResult _TabStore(int ?page)
+        public PartialViewResult _TabStore(int? page)
         {
             if (page == null) page = 1;
             var store = (from s in _db.Stores
-                        select s).OrderBy(x => x.IDStore);
+                         select s).OrderBy(x => x.IDStore);
             int pageSize = 4;
             int pageNumber = (page ?? 1);
-            return PartialView("_TabStore",store.ToPagedList(pageNumber, pageSize));
+            return PartialView("_TabStore", store.ToPagedList(pageNumber, pageSize));
         }
         public PartialViewResult _TabStaff(int? page)
         {
@@ -285,11 +291,11 @@ namespace Project_Web.Controllers
             string dishname = DishName;
             string storetemp = StoreName;
             var dish = (from d in _db.Menus
-                       where d.DishName == dishname
-                       select d).SingleOrDefault();
+                        where d.DishName == dishname
+                        select d).SingleOrDefault();
             var store = (from s in _db.Stores
-                        where s.StoreName == storetemp && s.Location == location
-                        select s).SingleOrDefault();
+                         where s.StoreName == storetemp && s.Location == location
+                         select s).SingleOrDefault();
             Menu_Stores menu_store_temp = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == store.IDStore && n.IDDish == dish.IDDish);
             if (menu_store_temp != null)
             {
@@ -306,6 +312,100 @@ namespace Project_Web.Controllers
                 @ViewBag.Message = dishname + " được thêm vào thành công";
             }
             return View();
+        }
+        #endregion
+
+        #region ExcelFile
+        public FileResult DownLoadTemplate_Menu()
+        {
+            string path = "~/Templates/File_20201221_v1.0_TemplateImportProduct.xlsx";
+            return File(path, "application/vnd.ms-excel", "File_20201221_v1.0_TemplateImportProduct.xlsx");
+        }
+        [HttpPost]
+        public JsonResult UpLoadMenu(HttpPostedFileBase FileUpload)
+        {
+            List<string> data = new List<string>();
+            if (FileUpload != null)
+            {
+                // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
+                if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                {
+
+
+                    string filename = FileUpload.FileName;
+                    string targetpath = Server.MapPath("~/Doc/");
+                    FileUpload.SaveAs(targetpath + filename);
+                    string pathToExcelFile = targetpath + filename;
+                    var connectionString = "";
+                    if (filename.EndsWith(".xls"))
+                    {
+                        connectionString = string.Format("Provider=Microsoft.Jet.OLEDB.4.0; data source={0}; Extended Properties=Excel 8.0;", pathToExcelFile);
+                    }
+                    else if (filename.EndsWith(".xlsx"))
+                    {
+                        connectionString = string.Format("Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties=\"Excel 12.0 Xml;HDR=YES;IMEX=1\";", pathToExcelFile);
+                    }
+
+                    var adapter = new OleDbDataAdapter("SELECT * FROM [Sheet1$]", connectionString);
+                    var ds = new DataSet();
+
+                    adapter.Fill(ds, "ExcelTable");
+
+                    DataTable dtable = ds.Tables["ExcelTable"];
+
+                    string sheetName = "Sheet1";
+
+                    var excelFile = new ExcelQueryFactory(pathToExcelFile);
+                    var MenuList = from a in excelFile.Worksheet<Menu>(sheetName) select a;
+                    foreach (var m in MenuList)
+                    {
+                        try
+                        {
+                            if (m.DishName != "")
+                            {
+                                Menu dish = new Menu();
+                                var querryDishesCount = from Menu in _db.Menus
+                                                        select Menu.IDDish;
+                                dish.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                                dish.DishName = m.DishName;
+                                dish.Category = m.Category;
+                                dish.Ingredient = m.Ingredient;
+                                dish.ImportPrice = m.ImportPrice;
+                                dish.SalePrice = m.SalePrice;
+                                dish.Image = m.Image;
+                                _db.Menus.Add(dish);
+                                _db.SaveChanges();
+                            }
+                            //else
+                            //{
+                            //    data.Add("<ul>");
+                            //    if (a.Name == "" || a.Name == null) data.Add("<li> name is required</li>");
+                            //    if (a.Address == "" || a.Address == null) data.Add("<li> Address is required</li>");
+                            //    if (a.ContactNo == "" || a.ContactNo == null) data.Add("<li>ContactNo is required</li>");
+
+                            //    data.Add("</ul>");
+                            //    data.ToArray();
+                            //    return Json(data, JsonRequestBehavior.AllowGet);
+                            //}
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                            {
+
+                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                {
+
+                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

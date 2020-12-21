@@ -52,16 +52,27 @@
                         </div>
                         <div id="res"></div>
                     </form>
-                    <div class="form-group">
-                        <label for="Excel" class="form-input text-center"><i class="fa fa-upload">Chọn file excel</i></label>
-                        <input type="file" class="form-input" name="Excel" id="Excel" style="display: none;" />
-                    </div>
-                    <div class="form-group">
-                        <div class="excel">
-                            <a href="#" class="excelImport">Thêm vào database</a>
-                            <a href="#" class="excelImport">Tải về</a>
+                    <form action="/Administrator_Setting/UpLoadMenu" method="post">
+                        <div class="form-group">
+                            <label for="FileUpload" class="form-input text-center"><i class="fa fa-upload">Chọn file excel</i></label>
+                            <input type="file" class="form-input" name="FileUpload" id="FileUpload" style="display: none;" />
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <div class="excel">
+                                <a href="/Administrator_Setting/UpLoadMenu" class="excelImport">Thêm vào database</a>
+                                <a href="/Administrator_Setting/DownLoadTemplate_Menu" class="excelImport">Tải về</a>
+                            </div>
+                        </div><div class="form-group">
+                            <label for="FileUpload" class="form-input text-center"><i class="fa fa-upload">Chọn file excel</i></label>
+                            <input type="file" class="form-input" name="FileUpload" id="FileUpload" style="display: none;" />
+                        </div>
+                        <div class="form-group">
+                            <div class="excel">
+                                <button type="submit" class="excelImport">Thêm vào database</button>
+                                <a href="/Administrator_Setting/DownLoadTemplate_Menu" class="excelImport">Tải về</a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
