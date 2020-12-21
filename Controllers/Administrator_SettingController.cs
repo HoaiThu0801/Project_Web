@@ -330,8 +330,6 @@ namespace Project_Web.Controllers
                 // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
                 if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
-
-
                     string filename = FileUpload.FileName;
                     string targetpath = Server.MapPath("~/Doc/");
                     FileUpload.SaveAs(targetpath + filename);
@@ -402,10 +400,32 @@ namespace Project_Web.Controllers
 
                             }
                         }
+
                     }
+                    if ((System.IO.File.Exists(pathToExcelFile)))
+                    {
+                        System.IO.File.Delete(pathToExcelFile);
+                    }
+                    return Json("success", JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    //alert message for invalid file format  
+                    data.Add("<ul>");
+                    data.Add("<li>Only Excel file format is allowed</li>");
+                    data.Add("</ul>");
+                    data.ToArray();
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
             }
-            return Json("success", JsonRequestBehavior.AllowGet);
+            else
+            {
+                data.Add("<ul>");
+                if (FileUpload == null) data.Add("<li>Please choose Excel file</li>");
+                data.Add("</ul>");
+                data.ToArray();
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
         }
         #endregion
     }

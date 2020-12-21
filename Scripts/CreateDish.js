@@ -56,7 +56,15 @@ window.reset = function (e) {
     let file = document.getElementById("file");
     file.style.display = "none";
 }
-
+$(document).ready(function () {
+    $('#formExcel').submit(function (event) {
+        $.ajax({
+            url: "/Administrator_Setting/UpLoadMenu",
+            success: function (res) {
+            },
+        });
+    });
+});
 //Scroll to top page
 $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
