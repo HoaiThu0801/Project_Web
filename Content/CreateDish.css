@@ -81,40 +81,6 @@ input, select, textarea {
     -ms-appearance: unset !important;
 }
 
-    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-        appearance: none !important;
-        -moz-appearance: none !important;
-        -webkit-appearance: none !important;
-        -o-appearance: none !important;
-        -ms-appearance: none !important;
-        margin: 0;
-    }
-
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        box-shadow: none !important;
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        -o-box-shadow: none !important;
-        -ms-box-shadow: none !important;
-    }
-
-    input[type=checkbox] {
-        appearance: checkbox !important;
-        -moz-appearance: checkbox !important;
-        -webkit-appearance: checkbox !important;
-        -o-appearance: checkbox !important;
-        -ms-appearance: checkbox !important;
-    }
-
-    input[type=radio] {
-        appearance: radio !important;
-        -moz-appearance: radio !important;
-        -webkit-appearance: radio !important;
-        -o-appearance: radio !important;
-        -ms-appearance: radio !important;
-    }
-
 img {
     max-width: 100%;
     height: auto;
@@ -345,6 +311,28 @@ body {
 .fa-upload:before{
     margin-right: 7px;
 }
+.excel{
+    display: flex;
+    justify-content: space-between;
+}
+.excelImport {
+    text-decoration: none;
+    color: white;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-image: linear-gradient(to left, #74ebd5, #9face6);
+    padding: 17px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    width: 45%;
+    text-align:center ;
+}
+    .excelImport:hover, .excelImport:focus {
+        text-decoration: none;
+        color: white;
+        opacity: 0.7;
+        transition-delay: 0.2s;
+    }
 @media screen and (max-width: 768px) {
     .container {
         width: calc(100% - 40px);
