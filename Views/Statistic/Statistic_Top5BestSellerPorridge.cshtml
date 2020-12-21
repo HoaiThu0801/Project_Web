@@ -14,9 +14,11 @@
     {
         Orthers = Orthers + double.Parse(dish.SumQuantity.ToString());
         double temp = (double.Parse(dish.SumQuantity.ToString()) / double.Parse(sum.ToString())) * 100;
+        temp = Math.Round(temp, 2);
         dataPoints.Add(new DataPoints(dish.DishName, temp));
     }
     double tempOthers = ((double.Parse(sum.ToString()) - double.Parse(Orthers.ToString())) / double.Parse(sum.ToString())) * 100;
+    tempOthers = Math.Round(tempOthers, 2);
     dataPoints.Add(new DataPoints("Những loại khác", tempOthers));
     ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 }
