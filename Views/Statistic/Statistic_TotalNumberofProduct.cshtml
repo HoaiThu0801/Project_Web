@@ -2,7 +2,7 @@
 @using Newtonsoft.Json;
 @{
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
-    List<DataPoint_Name_y> dataPoints = new List<DataPoint_Name_y>();
+    List<DataPoints> dataPoints = new List<DataPoints>();
 
     var dish = (from m in _db.Menus
                 group m by m.Category into mtemp
@@ -11,40 +11,34 @@
     foreach (var cato in dish)
     {
         double temp = (double.Parse(cato.Counts.ToString()) / double.Parse(ToTalDish.ToString())) * 100;
-        dataPoints.Add(new DataPoint_Name_y(cato.Category, temp));
+        temp = Math.Round(temp, 2);
+        dataPoints.Add(new DataPoints(temp, cato.Category));
     }
     ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
 }
 <div id="chartContainerTotalNumbleofProducts" style="height: 370px; width: 100%;"></div>
 <script>
 	$('#tabTotalNumberofProducts').click(function () {
+        var chart = new CanvasJS.Chart("chartContainerTotalNumbleofProducts", {
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Desktop Browser Market Share in 2016"
+            },
+            data: [{
+                type: "pie",
+                startAngle: 25,
+                toolTipContent: "<b>{label}</b>: {y}%",
+                showInLegend: "true",
+                legendText: "{label}",
+                indexLabelFontSize: 16,
+                indexLabel: "{label} - {y}%",
+                dataPoints: @Html.Raw(ViewBag.DataPoints),
+            }]
+        });
+        chart.render();
 
-		var chart = new CanvasJS.Chart("chartContainerTotalNumbleofProducts", {
-			exportEnabled: true,
-			animationEnabled: true,
-			theme: "light2",
-			title: {
-				text: "Recomended Diet"
-			},
-			legend: {
-				cursor: "pointer",
-				itemclick: explodePie,
-				verticalAlign: "center",
-				horizontalAlign: "right"
-			},
-			data: [{
-				type: "pie",
-				showInLegend: true,
-				toolTipContent: "{name}: <strong>{y}%</strong>",
-				startAngle: -45,
-				indexLabel: "{name} ({y}%)",
-				indexLabelFontColor: "#12122B",
-				indexLabelPlacement: "inside",
-				indexLabelFontSize: 15,
-				dataPoints: @Html.Raw(ViewBag.DataPoints),
-			}]
-		});
-		chart.render();
 	});
     function explodePie(e) {
         if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
