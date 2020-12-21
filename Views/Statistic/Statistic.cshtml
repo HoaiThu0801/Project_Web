@@ -53,7 +53,8 @@
                 <li>
                     <ul id="charttypes" class="sub-menu collapse ">
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'QuantityImport')" id="tabQuantityImport">Thống kê tổng sản phẩm</a></li>
-                        <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuProduct')" id="tabReveneuProduct">Line Chart</a></li>
+                        <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuProduct')" id="tabReveneuProduct">Tổng Doanh Thu Của Từng Cửa Hàng</a></li>
+                        <li><a class="tablinks" onclick="openChartStatistic(event, 'TotalNumberofProducts')" id="tabTotalNumberofProducts">Tổng số lượng sản phẩm</a></li>
                     </ul>
                 </li>
             </ul>
@@ -64,6 +65,9 @@
             </div>
             <div class="tabcontent" id="ReveneuProduct">
                 @Html.Partial("~/Views/Statistic/Statistic_ReveneuProduct.cshtml")
+            </div>
+            <div class="tabcontent" id="TotalNumberofProducts">
+                @Html.Partial("~/Views/Statistic/Statistic_TotalNumberofProduct.cshtml")
             </div>
         </div>
     </div>

@@ -381,6 +381,7 @@
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DataPoint_Label_y.cs" />
+    <Compile Include="Models\DataPoint_Name_y.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>Database_PorridgeSellingManagementStore.tt</DependentUpon>
     </Compile>
@@ -714,6 +715,7 @@
     <Content Include="Views\Statistic\Statistic.cshtml" />
     <Content Include="Views\Statistic\Statistic_QuantityImportProduct.cshtml" />
     <Content Include="Views\Statistic\Statistic_ReveneuProduct.cshtml" />
+    <Content Include="Views\Statistic\Statistic_TotalNumberofProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
