@@ -15,7 +15,7 @@ using System.Data;
 
 namespace Project_Web.Controllers
 {
-    public class SignInController : Controller
+    public class SignInController : BaseController
     {
         //Chuyển hướng URI
         private Uri RedirectUri
@@ -58,7 +58,7 @@ namespace Project_Web.Controllers
            
             if (user is null)
             {
-                @ViewBag.Message = "Tên đăng nhập hoặc mật khẩu không chính xác";
+                SetAlert("Thông báo","Tên đăng nhập hoặc mật khẩu không chính xác", "error");
             }
             else
             {
@@ -96,6 +96,7 @@ namespace Project_Web.Controllers
                     }
                     Session["cart"] = cart;
                 }
+                SetAlert("Thông báo", "Đăng nhập thành công", "success");
                 return RedirectToAction("Index","Home");
             }
             return View();

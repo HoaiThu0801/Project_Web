@@ -5,13 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
     <link rel="icon" type="image/x-icon" href="~/porridge.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <style>
+        #AlertBox {
+            position: absolute;
+            left: 40%;
+            top: 2%;
+            z-index: 999999;
+        }
+
+        .fa-exclamation-circle:before {
+            margin-right: 5px;
+        }
+
+        .fa-check-circle:before {
+            margin-right: 5px;
+        }
+
+        .fa-check-circle {
+            color: green;
+        }
+
+        .fa-exclamation-circle {
+            color: red;
+        }
+
+        .Title {
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
+    @{
+        if (TempData["AlertMessage"] != null)
+        {
+            
+            <div id="AlertBox" class="alert animate__animated animate__fadeInDown @TempData["AlertType"] hide">
+                <div class="Title text-center">
+                    <i class="@TempData["AlertIcon"]"></i>@TempData["AlertTitle"]
+                </div>
+                <div class="message">
+                    @TempData["AlertMessage"]
+                </div>       
+            </div>
+        }
+    }
     @RenderBody()
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/sb-admin-2.js"></script>
 </body>
 </html>
 

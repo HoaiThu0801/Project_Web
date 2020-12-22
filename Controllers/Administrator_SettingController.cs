@@ -18,7 +18,7 @@ using LinqToExcel;
 namespace Project_Web.Controllers
 {
     [AuthorizeController]
-    public class Administrator_SettingController : Controller
+    public class Administrator_SettingController : BaseController
     {
 
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
@@ -327,11 +327,14 @@ namespace Project_Web.Controllers
             List<string> data = new List<string>();
             if (FileUpload != null)
             {
-                // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
                 if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     string filename = FileUpload.FileName;
                     string targetpath = Server.MapPath("~/Doc/");
+                    if(!(System.IO.Directory.Exists(targetpath)))
+                    {
+                        System.IO.Directory.CreateDirectory(targetpath);
+                    }    
                     FileUpload.SaveAs(targetpath + filename);
                     string pathToExcelFile = targetpath + filename;
                     var connectionString = "";
@@ -359,7 +362,7 @@ namespace Project_Web.Controllers
                     {
                         try
                         {
-                            if (m.DishName != "")
+                            if (m.DishName != null && m.Ingredient != null && m.ImportPrice != null && m.SalePrice != null && m.Image != null)
                             {
                                 Menu dish = new Menu();
                                 var querryDishesCount = from Menu in _db.Menus
@@ -374,17 +377,21 @@ namespace Project_Web.Controllers
                                 _db.Menus.Add(dish);
                                 _db.SaveChanges();
                             }
-                            //else
-                            //{
-                            //    data.Add("<ul>");
-                            //    if (a.Name == "" || a.Name == null) data.Add("<li> name is required</li>");
-                            //    if (a.Address == "" || a.Address == null) data.Add("<li> Address is required</li>");
-                            //    if (a.ContactNo == "" || a.ContactNo == null) data.Add("<li>ContactNo is required</li>");
-
-                            //    data.Add("</ul>");
-                            //    data.ToArray();
-                            //    return Json(data, JsonRequestBehavior.AllowGet);
-                            //}
+                            else
+                            {
+                                if(m.DishName == null)
+                                    data.Add("Dữ liệu của trường DishName trong excel đang trống\n");
+                                if(m.Ingredient == null)
+                                    data.Add("Dữ liệu của trường Ingredient trong excel đang trống\n");
+                                if (m.ImportPrice == null)
+                                    data.Add("Dữ liệu của trường ImportPrice trong excel đang trống\n");
+                                if (m.SalePrice == null)
+                                    data.Add("Dữ liệu của trường SalePrice trong excel đang trống\n");
+                                if (m.Image == null)
+                                    data.Add("Dữ liệu của trường Image trong excel đang trống\n");
+                                data.ToArray();
+                                return Json(data, JsonRequestBehavior.AllowGet);
+                            }
                         }
                         catch (DbEntityValidationException ex)
                         {

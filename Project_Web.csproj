@@ -362,6 +362,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Administrator_SettingController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EncryptionPW.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportProductsController.cs" />
@@ -700,6 +701,8 @@
     <Content Include="Scripts\OrderManagement.js" />
     <Content Include="Scripts\OrderProducts.js" />
     <Content Include="Scripts\RegisterJS.js" />
+    <Content Include="Scripts\sb-admin-2.js" />
+    <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="Scripts\ShoppingCart.js" />
     <Content Include="Scripts\Shipping.js" />
     <Content Include="Scripts\SignIn.js" />
@@ -745,7 +748,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Doc\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
