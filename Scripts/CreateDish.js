@@ -56,11 +56,24 @@ window.reset = function (e) {
     let file = document.getElementById("file");
     file.style.display = "none";
 }
+
 $(document).ready(function () {
     $('#formExcel').submit(function (event) {
+        event.preventDefault();
+        var formdata = new FormData();
+        var fileUpload = $('#FileUpload').get(0);
+        var files = fileUpload.files;
+        formdata.append("FileUpload", files[0]);
         $.ajax({
             url: "/Administrator_Setting/UpLoadMenu",
+            type: "post",
+            enctype: 'multipart/form-data',
+            processData: false,
+            dataType: "json",
+            data: formdata,
+            contentType: false,
             success: function (res) {
+                alert(res);
             },
         });
     });

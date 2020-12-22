@@ -322,7 +322,7 @@ namespace Project_Web.Controllers
             return File(path, "application/vnd.ms-excel", "File_20201221_v1.0_TemplateImportProduct.xlsx");
         }
         [HttpPost]
-        public JsonResult UpLoadMenu(HttpPostedFileBase FileUpload)
+        public ActionResult UpLoadMenu(HttpPostedFileBase FileUpload)
         {
             List<string> data = new List<string>();
             if (FileUpload != null)
@@ -402,27 +402,20 @@ namespace Project_Web.Controllers
                         }
 
                     }
-                    if ((System.IO.File.Exists(pathToExcelFile)))
-                    {
-                        System.IO.File.Delete(pathToExcelFile);
-                    }
-                    return Json("success", JsonRequestBehavior.AllowGet);
+                    data.Add("Thêm dữ liệu thành công");
+                    return Json(data, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     //alert message for invalid file format  
-                    data.Add("<ul>");
-                    data.Add("<li>Only Excel file format is allowed</li>");
-                    data.Add("</ul>");
+                    data.Add("Vui lòng chọn tệp excel");
                     data.ToArray();
                     return Json(data, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                data.Add("<ul>");
-                if (FileUpload == null) data.Add("<li>Please choose Excel file</li>");
-                data.Add("</ul>");
+                data.Add("Vui lòng chọn tệp để thêm vào");
                 data.ToArray();
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
