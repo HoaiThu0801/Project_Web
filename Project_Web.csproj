@@ -683,6 +683,7 @@
     <Content Include="Models\Database_PorridgeSellingManagementStore.edmx.diagram">
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Content>
+    <Content Include="DatabaseBackup\Database_PorridgeSellingManagementStore.bak" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\InformationAccount.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />

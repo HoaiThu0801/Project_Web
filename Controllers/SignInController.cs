@@ -102,22 +102,62 @@ namespace Project_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ForgotPassWord(FogotPassWord model)
+        public ActionResult ForgotPassWord(string Username, string Password, string RePassword)
         {
-            User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
+            User user = _db.Users.SingleOrDefault(n => n.Username == Username);
             if (user is null)
             {
-                @ViewBag.MessageIsNotUser = "Tên đăng nhập không chính xác";
+                var error = new
+                {
+                    title = "Xảy ra lỗi",
+                    message = "Mật khẩu nhập lại không trùng khớp",
+                    type = false,
+                };
+                return Json(error, JsonRequestBehavior.AllowGet);
             }
-            if (ModelState.IsValid)
+            else
             {
-                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
-                model.Password = encryptionPW.EncryptPass();
-                user.Password = model.Password;
-                _db.Users.AddOrUpdate(user);
-                _db.SaveChanges();
-                @ViewBag.MessageSuccess = "Thành công";
-                return RedirectToAction("SignIn", "SignIn");
+                if(RePassword != Password)
+                {
+                    var error = new
+                    {
+                        title = "Xảy ra lỗi",
+                        message = "Mật khẩu nhập lại không trùng khớp",
+                        type = false,
+                    };
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    if (Password == "" && Password is null)
+                    {
+                        var error = new
+                        {
+                            title = "Xảy ra lỗi",
+                            message = "Mật khẩu phải chứa chữ in hoa, số hoặc ký tự đặc biệt",
+                            type = false,
+                        };
+                        return Json(error, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        if (ModelState.IsValid)
+                        {
+                            EncryptionPW encryptionPW = new EncryptionPW(Password);
+                            Password = encryptionPW.EncryptPass();
+                            user.Password = Password;
+                            _db.Users.AddOrUpdate(user);
+                            _db.SaveChanges();
+                            var success = new
+                            {
+                                title = "Thông báo",
+                                message = "Đổi mật khẩu thành công",
+                                type = true,
+                            };
+                            return Json(success, JsonRequestBehavior.AllowGet);
+                        }
+                    }
+                }
             }
             return View();
         }

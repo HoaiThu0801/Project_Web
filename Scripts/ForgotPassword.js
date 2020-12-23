@@ -26,6 +26,7 @@ $('#Username').keyup(function () {
 });
 $('#Password').keyup(function () {
     $('#IsNotPassword').html('');
+
     var username = $('#Password').val();
     if (username == '') {
         $('#IsNotPassword').html('Mật khẩu không được trống');
@@ -41,4 +42,35 @@ $('#Password').keyup(function () {
 //Scroll to top page
 $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
-})
+    $('#form-FP').submit(function (e) {
+        e.preventDefault();
+        var password = $('#Password').val();
+        if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(password)) {
+            password = null;
+        }
+        var url = $(this).attr("action");
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                Username: $('#Username').val(),
+                Password: password,
+                RePassword: $('#re_password').val()
+            },
+            success: function (res) {
+                if (res.type == true) {
+                    notify(res.title, res.message, true);
+                    setTimeout(function () {
+                        location.href = "/SignIn/SignIn";
+                    }, 2000)
+                }
+                else {
+                    notify(res.title, res.message, false);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }
+            }
+        });
+    });
+});
