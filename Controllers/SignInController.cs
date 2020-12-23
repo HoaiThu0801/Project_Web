@@ -51,14 +51,14 @@ namespace Project_Web.Controllers
         {
             Session["Is Login"] = 0;
             Session["User"] = null;
-            Session["cart"] = null;
+            Session["cart"] = null; 
             EncryptionPW encryptionPW = new EncryptionPW(model.Password);
             string EncryptedPass = encryptionPW.EncryptPass();
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username && n.Password == EncryptedPass);
            
             if (user is null)
             {
-                SetAlert("Thông báo","Tên đăng nhập hoặc mật khẩu không chính xác", "error");
+                SetAlert("Thông báo","Tên đăng nhập hoặc mật khẩu không chính xác", false);
             }
             else
             {
@@ -96,7 +96,7 @@ namespace Project_Web.Controllers
                     }
                     Session["cart"] = cart;
                 }
-                SetAlert("Thông báo", "Đăng nhập thành công", "success");
+                SetAlert("Thông báo", "Đăng nhập thành công", true);
                 return RedirectToAction("Index","Home");
             }
             return View();

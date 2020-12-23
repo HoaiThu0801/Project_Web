@@ -142,17 +142,23 @@ namespace Project_Web.Controllers
             var querryDishesCount = from Menu in _db.Menus
                                     select Menu.IDDish;
             Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == DishName);
-            if (menu != null)
+            string mess = "";
+            //Validate
+            if (menu != null && Category == "" && Image == "/images/ImageProducts/undefined") 
             {
-                return Content("false");
-            }
-            if (Category == "")
-            {
-                return Content("CategoryNull");
-            }
-            if (Image == "/images/ImageProducts/undefined")
-            {
-                return Content("ImageNull");
+                if(menu != null)
+                    mess += "Tên món ăn đã có trong dữ liệu<br />";
+                if (Category == "")
+                    mess += "Giá trị của trường Phân loại chưa có<br />";
+                if (Image == "/images/ImageProducts/undefined<br />")
+                    mess += "Hình ảnh chưa được chọn";
+                var error = new
+                {
+                    title = "Xảy ra lỗi",
+                    message = mess,
+                    type = false,
+                };
+                return Json(error, JsonRequestBehavior.AllowGet);
             }
             menu_temp.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
             menu_temp.DishName = DishName;
@@ -165,7 +171,13 @@ namespace Project_Web.Controllers
             {
                 _db.Menus.Add(menu_temp);
                 _db.SaveChanges();
-                return Content("true");
+                var success = new
+                {
+                    title = "Thông báo",
+                    message = "Tạo món ăn thành công",
+                    type = true,
+                };
+                return Json(success, JsonRequestBehavior.AllowGet);
             }
             return View();
         }

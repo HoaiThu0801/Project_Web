@@ -27,23 +27,17 @@ $(document).ready(function () {
                 Category: $('#SelectCategory').val(),
             },
             success: function (res) {
-                if (res == "true") {
-                    alert("Tạo món ăn thành công");
+                if (res.type == true) {
+                    notify(res.title,res.message,true);
                     setTimeout(function () {
                         location.reload();
-                    }, 1000)
+                    }, 2000)
                 }
-                if (res == "false") {
-                    alert("Tên món ăn bị trùng");
-                }
-                if (res == "NotPrice") {
-                    alert("Giá nhập hoặc giá bán chưa nhập chính xác");
-                }
-                if (res == "CategoryNull") {
-                    alert("Chưa chọn giá trị của trường Phân loại");
-                }
-                if (res == "ImageNull") {
-                    alert("Chưa chọn hình ảnh");
+                else{
+                    notify(res.title, res.message, false);
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
                 }
             }
         });

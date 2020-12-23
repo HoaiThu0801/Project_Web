@@ -1,6 +1,5 @@
 ﻿//Show dish name when change select, load dishname accroding to warehouse
 $(document).ready(function () {
-    alert("Mời bạn chọn kho cửa hàng và món ăn để nhập hàng");
     $('#Warehouse-Select').change(function () {
         var warehouse = $('#Warehouse-Select').val();
         $('#DisplayImportsProduct').css('opacity', '1');
@@ -33,8 +32,12 @@ $(document).ready(function () {
     });
 
     //Show success when submit form
-    $('#import-products-form').submit(function () {
-        alert("Đã nhập hàng vào kho cửa hàng thành công");
+    $('#import-products-form').submit(function (e) {
+        e.preventDefault();
+        notify("Thông báo", "Đã nhập hàng vào kho cửa hàng thành công", true);
+        setTimeout(function () {
+            location.reload();
+        }, 2000)
     });
 });
 

@@ -8,16 +8,16 @@ namespace Project_Web.Controllers
 {
     public class BaseController : Controller
     {
-        protected void SetAlert(string title, string message, string type)
+        protected void SetAlert(string title, string message, bool type)
         {
             TempData["AlertTitle"] = title;
             TempData["AlertMessage"] = message;
-            if (type == "success")
+            if (type == true)
             {
                 TempData["AlertType"] = "alert-success";
                 TempData["AlertIcon"] = "fa fa-check-circle";
             }
-            else if (type == "error") 
+            else if (type == false) 
             {
                 TempData["AlertType"] = "alert-danger";
                 TempData["AlertIcon"] = "fas fa-exclamation-circle";
