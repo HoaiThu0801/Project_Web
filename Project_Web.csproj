@@ -684,6 +684,7 @@
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Content>
     <Content Include="DatabaseBackup\Database_PorridgeSellingManagementStore.bak" />
+    <Content Include="BaoCaoDoAn1_Nhom7\BaoCaoDoAn1_Nhom7.docx" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\InformationAccount.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
@@ -749,7 +750,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BaoCaoDoAn1_Nhom7\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
