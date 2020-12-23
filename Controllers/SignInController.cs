@@ -110,31 +110,31 @@ namespace Project_Web.Controllers
                 var error = new
                 {
                     title = "Xảy ra lỗi",
-                    message = "Mật khẩu nhập lại không trùng khớp",
+                    message = "Tên tài khoản không tồn tại",
                     type = false,
                 };
                 return Json(error, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                if(RePassword != Password)
+                if(Password == "error")
                 {
                     var error = new
                     {
                         title = "Xảy ra lỗi",
-                        message = "Mật khẩu nhập lại không trùng khớp",
+                        message = "Mật khẩu phải chứa chữ in hoa, số hoặc ký tự đặc biệt",
                         type = false,
                     };
-                    return Json(error, JsonRequestBehavior.AllowGet);
+                    return Json(error, JsonRequestBehavior.AllowGet);             
                 }
                 else
                 {
-                    if (Password == "" && Password is null)
+                    if (RePassword != Password)
                     {
                         var error = new
                         {
                             title = "Xảy ra lỗi",
-                            message = "Mật khẩu phải chứa chữ in hoa, số hoặc ký tự đặc biệt",
+                            message = "Mật khẩu nhập lại không trùng khớp",
                             type = false,
                         };
                         return Json(error, JsonRequestBehavior.AllowGet);

@@ -46,7 +46,7 @@ $(document).ready(function () {
         e.preventDefault();
         var password = $('#Password').val();
         if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(password)) {
-            password = null;
+            password = "error";
         }
         var url = $(this).attr("action");
         $.ajax({
