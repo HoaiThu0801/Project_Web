@@ -12,7 +12,7 @@ using Project_Web.Models;
 
 namespace Project_Web.Controllers
 {
-    public class OrderProductsController : Controller
+    public class OrderProductsController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: OrderProducts

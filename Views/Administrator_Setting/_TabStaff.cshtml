@@ -16,15 +16,6 @@
         </tr>
         <tbody id="listStaff">
             @{
-                //var staff = (from st in _db.Users
-                //             join s in Model on st.IDUser equals s.IDUser
-                //             select new
-                //             {
-                //                 StoreName = s.StoreName,
-                //                 Location = s.Location,
-                //                 FullName = st.Fullname,
-                //                 UserName = st.Username
-                //             }).ToList();
                 foreach (var s in Model)
                 {
                     if (s.IDUser != null)

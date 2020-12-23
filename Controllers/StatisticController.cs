@@ -10,7 +10,7 @@ using System.Dynamic;
 namespace Project_Web.Controllers
 {
     [Authorize_seller_adminController]
-    public class StatisticController : Controller
+    public class StatisticController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
 

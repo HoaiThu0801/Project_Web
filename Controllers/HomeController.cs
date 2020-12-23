@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Project_Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         public ActionResult Index(int? page)

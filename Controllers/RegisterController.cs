@@ -10,7 +10,7 @@ using Microsoft.SqlServer.Server;
 
 namespace Project_Web.Controllers
 {
-    public class RegisterController : Controller
+    public class RegisterController : BaseController
     {
         // GET: Register
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();

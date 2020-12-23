@@ -9,7 +9,7 @@ using PagedList;
 namespace Project_Web.Controllers
 {
     [Authorize_seller_adminController]
-    public class OrderManagementController : Controller
+    public class OrderManagementController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
         // GET: OrderManagement
