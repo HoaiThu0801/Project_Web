@@ -1,4 +1,9 @@
 ﻿$(document).ready(function () {
+
+    //Scroll to top page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    //Giảm số lượng món ăn
     $(".quantiTy-decrease").click(function (event) {
         event.preventDefault();
         var IDbilldetail = $(this).attr("data-IDBillDetail");
@@ -15,19 +20,24 @@
             },
             success: function (res) {
                 if (res == "true") {
-                    $(window).attr('location', '../Home/ShoppingCart');
-                }
-                else if (res == "Sold-out") {
-                    alert("Số lượng món ăn hiện có không đủ ");
-                    $(window).attr('location', '../Home/ShoppingCart');
+                    notify("Thông báo", "Bạn đã giảm 1 sản phẩm", true);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
                 else {
-                    alert("Không thể sửa món ăn");
-                    $(window).attr('location', '../Home/ShoppingCart');
+                    notify("Xảy ra lỗi", "Không thể sửa món ăn", false);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
             }
         })
-    })
+    });
+
+    //Tăng số lượng món ăn
     $(".quantiTy-increase").click(function (event) {
         event.preventDefault();
         var IDbilldetail = $(this).attr("data-IDBillDetail");
@@ -40,30 +50,38 @@
             url: "/Home/EditCart",
             data: {
                 IDBillDetail: IDbilldetail,
-                Quantity: quantity 
+                Quantity: quantity
             },
             success: function (res) {
                 if (res == "true") {
-                    $(window).attr('location', '../Home/ShoppingCart');
+                    notify("Thông báo", "Bạn đã tăng 1 sản phẩm", true);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
-                else if (res == "Sold-out")
-                {
-                    alert("Số lượng món ăn hiện có không đủ ");
-                    $(window).attr('location', '../Home/ShoppingCart');
+                else if (res == "Sold-out") {
+                    notify("Xảy ra lỗi", "Số lượng món ăn hiện có không đủ ", false);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
-                else
-                {
-                    alert("Không thể sửa món ăn");
-                    $(window).attr('location', '../Home/ShoppingCart');
+                else {
+                    notify("Xảy ra lỗi", "Không thể sửa món ăn", false);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
-            }            
+            }
         })
-    })
-})
-$(document).ready(function () {
-    $(".trash-o").click(function () {
+    });
+
+    //Xóa món ăn
+    $(".trash-o").click(function (event) {
+        event.preventDefault();
         var index = $(this).attr("data-index");
-        alert(index);
         $.ajax({
             type: "post",
             url: "/Home/DeleteCart",
@@ -72,18 +90,20 @@ $(document).ready(function () {
             },
             success: function (res) {
                 if (res == "true") {
-                    $(window).attr('location', '../Home/ShoppingCart');
+                    notify("Thông báo", "Xóa món ăn khỏi giỏ hàng thành công", true);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
-                else {
-                    alert("Không thể xóa món ăn này");
-                    $(window).attr('location', '../Home/ShoppingCart');
+                if (res == "false") {
+                    notify("Xảy ra lỗi", "Không thể xóa món ăn này", false);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/ShoppingCart');
+                    }, 2000)
                 }
             }
-        })
-    })
-})
-
-//Scroll to top page
-$(document).ready(function () {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-})
+        });
+    });
+});

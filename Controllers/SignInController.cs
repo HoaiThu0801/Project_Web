@@ -169,24 +169,25 @@ namespace Project_Web.Controllers
             {
                 var message = new MimeMessage();
                 //From Address
-                message.From.Add(new MailboxAddress("Huu Tuong", "huutuong1403@gmail.com"));
+                message.From.Add(new MailboxAddress("MST Porridge Shop", "huutuong1403@gmail.com"));
                 //To Address
                 message.To.Add(new MailboxAddress("Dot net", email));
                 //Subject
-                message.Subject = "Hello";
+                message.Subject = "Xin chào bạn chúng tôi gửi cho bạn đường dẫn để đổi mật khẩu bên dưới";
                 //Body
                 message.Body = new TextPart("plain")
                 {
-                    Text = "Link: https://localhost:44319/SignIn/ForgotPassWord"
+                    Text = "Đường dẫn: https://localhost:44319/SignIn/ForgotPassWord \nCảm ơn bạn đã đồng hành cùng MST Porridge Shop",
                 };
                 //Configure send email
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("huutuong1403@gmail.com", "14032018");
+                    client.Authenticate("huutuong1403@gmail.com", "14032018TomL");
                     client.Send(message);
                     client.Disconnect(true);
                 }
+                SetAlert("Thông báo", "Chúng tôi đã gửi đường dẫn phục hồi mật khẩu đến email của bạn", true);
             }
             return View();
         }
@@ -244,6 +245,7 @@ namespace Project_Web.Controllers
                     Session["User"] = user;
                 }
             }
+            SetAlert("Thông báo", "Đăng nhập thành công", true);
             return RedirectToAction("Index", "Home");
         }
         public string InsertForFacebook(User model)

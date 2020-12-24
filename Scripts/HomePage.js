@@ -1,4 +1,4 @@
-﻿
+﻿//Animate when reload Home Page
 $(function () {
     waitToShow = new TimelineMax({onComplete: goto});
     waitToShow.from($('.load'), 0.75, { scale: 2, opacity: 0 })
@@ -9,7 +9,7 @@ $(function () {
         animateImage.play();
     }
     animateImage = new TimelineMax({ paused: true });
-    animateImage.from($('.header'), 0.4, {x: -300, opacity: 0 })
+    animateImage.from($('.header'), 0.4, { opacity: 0 })
         .from($('.wrapper'), 0.4, { opacity: 0 })
         .from($('.body-menu'), 0.4, { x: 300, opacity: 0 })
         .staggerFrom($('.contentProducts'), 0.7, { width: 0, height: 0, opacity: 0 }, 0.3)
@@ -17,6 +17,11 @@ $(function () {
 });
 
 $(document).ready(function () {
+
+    //Scroll to top page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    //Event using ajax when click class cart-plus
     $('.cart-plus').click(function () {
         var IDDish = $(this).attr("data-IDDish");
         $.ajax({
@@ -26,15 +31,21 @@ $(document).ready(function () {
                 IDDish: IDDish
             },
             success: function (res) {
-                if (res == "true") {
+                if (res.type == true) {
+                    notify("Thông báo", "Bạn đã thêm món " + res.message + " vào giỏ hàng thành công", res.type);
                     $("html, body").animate({ scrollTop: 0 }, "slow");
-                    $(window).attr('location', '../Home/Index');        
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/Index');      
+                    }, 2000)                 
+                }
+                if (res == "user") {
+                    notify("Thông báo", "Bạn phải đăng nhập thì mới thêm được món ăn vào giỏ hàng", false);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    setTimeout(function () {
+                        $(window).attr('location', '../SignIn/SignIn');
+                    }, 2000)
                 }
             }
         })
     });
 });
-//Scroll to top page
-$(document).ready(function () {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-})

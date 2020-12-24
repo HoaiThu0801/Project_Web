@@ -20,33 +20,33 @@
                     <form method="post" id="signup-form" action="/Register/Register" class="signup-form">
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="Username" id="Username" placeholder="Nhập tên tài khoản" />
+                            <input type="text" class="form-input" name="Username" id="Username" placeholder="Nhập tên tài khoản" required/>
                             @ViewBag.Message1
                         </div>
                         <div id="showError_Username"></div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="Password" id="Password" placeholder="Nhập mật khẩu" />
+                            <input type="password" class="form-input" name="Password" id="Password" placeholder="Nhập mật khẩu" required/>
                             <span toggle="#Password" class="zmdi zmdi-eye-off field-icon toggle-password"></span>
                         </div>
                         <div id="showError_Password"></div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu" />
+                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu" required/>
                         </div>
                         <div id="showerror"></div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Nhập họ tên của bạn" />
+                            <input type="text" class="form-input" name="Fullname" id="Fullname" placeholder="Nhập họ tên của bạn" required/>
                         </div>
                         <div id="showError_Fullname"></div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Nhập e-mail của bạn" />
+                            <input type="email" class="form-input" name="Email" id="Email" placeholder="Nhập e-mail của bạn" required/>
                         </div>
                         <div id="showError_Email"></div>
                         <div class="form-group">
                             <select class="custom-select" id="Gender" name="Gender">
                                 <option disabled="disabled" selected="selected">Giới tính</option>
-                                <option value="Male">Nam</option>
-                                <option value="Female">Nữ</option>
-                                <option value="Other">Khác</option>
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                                <option value="Khác">Khác</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -79,11 +79,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" id="Address" name="Address" placeholder="Nhập số nhà và tên đường" />
+                            <input type="text" class="form-input" id="Address" name="Address" placeholder="Nhập số nhà và tên đường" required/>
                         </div>
                         <div id="showError_Address"></div>
                         <div class="form-group">
-                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Nhập số điện thoại của bạn" />
+                            <input type="tel" class="form-input" id="PhoneNumber" name="PhoneNumber" placeholder="Nhập số điện thoại của bạn" required/>
                         </div>
                         <div id="showError_PhoneNumber"></div>
                         <div class="form-group">

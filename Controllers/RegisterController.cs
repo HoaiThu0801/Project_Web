@@ -24,50 +24,76 @@ namespace Project_Web.Controllers
         {
             Address_Users address_Users = new Address_Users();
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
-            if (user != null)
+            User email = _db.Users.SingleOrDefault(n => n.Email == model.Email);
+            var province = form["Province"];
+            var district = form["District"];
+            var ward = form["Ward"];
+            var re_password = form["re_password"];
+            //Validate
+            if (user is null && email is null)
             {
-                return Content("user");
-            }
-            user = _db.Users.SingleOrDefault(n => n.Email == model.Email);
-            if (user != null)
-            {
-                return Content("email");
-            }
-            if (ModelState.IsValid)
-            {
-                var querryUsersCount = from User in _db.Users
-                                       select User.IDUser;
-                var querryaddress_UsersCount = (from au in _db.Address_Users
-                                                select au).ToList();
-                model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                address_Users.IDAddress = "A-U" + querryaddress_UsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                address_Users.IDUser = model.IDUser;
-                address_Users.Province = form["Province"].ToString();
-                address_Users.District = form["District"].ToString();
-                address_Users.Ward = form["Ward"].ToString();
-                address_Users.IsDefault = 1;
-                address_Users.Street = form["Address"].ToString();
-                address_Users.PhoneNumber = model.PhoneNumber;
-                address_Users.Fullname = model.Fullname;
-                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
-                model.Password = encryptionPW.EncryptPass();
-                model.Image = "Null";
-                model.Facebook = "0";
-                _db.Users.Add(model);
-                _db.Address_Users.Add(address_Users);
-                //Setting Default: Role "Customer" in Register page
-                User_Roles user_role = new User_Roles();
-                user_role.IDRole = "R03";
-                user_role.IDUser = model.IDUser;
-                _db.User_Roles.Add(user_role);
-                _db.SaveChanges();
-                @ViewBag.Message = "Successful";
-                return Content("true");
+                if(re_password != model.Password)
+                    return Content("password");
+                else
+                {
+                    EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+                    model.Password = encryptionPW.EncryptPass();
+                    if (ModelState.IsValid)
+                    {
+                        var querryUsersCount = from User in _db.Users
+                                               select User.IDUser;
+                        var querryaddress_UsersCount = (from au in _db.Address_Users
+                                                        select au).ToList();
+                        model.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                        address_Users.IDAddress = "A-U" + querryaddress_UsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                        address_Users.IDUser = model.IDUser;
+                        if (province is null || district is null)
+                        {
+                            if (province is null)
+                                return Content("province");
+                            if (district is null)
+                                return Content("district");
+                        }
+                        else
+                        {
+                            if (model.Gender is null)
+                                model.Gender = "Khác";
+                            if (ward is null)
+                                ward = "";
+                            address_Users.Province = province;
+                            address_Users.District = district;
+                            address_Users.Ward = ward;
+                            address_Users.IsDefault = 1;
+                            address_Users.Street = form["Address"].ToString();
+                            address_Users.PhoneNumber = model.PhoneNumber;
+                            address_Users.Fullname = model.Fullname;
+                            model.Image = "Null";
+                            model.Facebook = "0";
+                            _db.Users.Add(model);
+                            _db.Address_Users.Add(address_Users);
+                            //Setting Default: Role "Customer" in Register page
+                            User_Roles user_role = new User_Roles();
+                            user_role.IDRole = "R03";
+                            user_role.IDUser = model.IDUser;
+                            _db.User_Roles.Add(user_role);
+                            _db.SaveChanges();
+                            return Content("true");
+                        }
+                    }
+                    else
+                    {
+                        return Content("false");
+                    }
+                }            
             }
             else
             {
-                return Content("false");
+                if (user != null)
+                    return Content("user");
+                else
+                    return Content("email");
             }
+            return View();
         }
 
         #region LoadData

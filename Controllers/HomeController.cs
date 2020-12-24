@@ -175,7 +175,7 @@ namespace Project_Web.Controllers
             User user = Session["User"] as User;
             if (user == null)
             {
-                return RedirectToAction("SignIn", "SignIn");
+                return Content("user");
             }
             string IDBill = "Default";
             var dish = (from s in _db.Menus
@@ -221,7 +221,6 @@ namespace Project_Web.Controllers
                             _db.BillDetails.AddOrUpdate(billDetail);
                             _db.SaveChanges();
                         }
-
                         break;
                     }
                 }
@@ -285,7 +284,12 @@ namespace Project_Web.Controllers
                 }
                 Session["cart"] = cart;
             }
-            return Content("true");
+            var success = new
+            {
+                message = dish.DishName,
+                type = true,
+            };
+            return Json(success, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public ActionResult DeleteCart(int Index)
@@ -314,8 +318,6 @@ namespace Project_Web.Controllers
                     {
                         string IDBill = bd.IDBill;
                         _db.BillDetails.Remove(bd);
-
-
                         OrderTrack ot = _db.OrderTracks.Where(n => n.IDBill == IDBill).SingleOrDefault();
                         if (ot != null)
                         {
