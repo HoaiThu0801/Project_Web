@@ -1,8 +1,10 @@
-﻿@using Project_Web.Models
-@*@model Project_Web.Models.Menu*@
-@model PagedList.IPagedList<Project_Web.Models.Store>
+﻿@using Project_Web.Models;
 @using PagedList.Mvc;
-@{ Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();}
+
+@model PagedList.IPagedList<Project_Web.Models.Store>
+@{
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+}
 <div class="button-popup">
     <button id="open-popup-dish-form" class="form-submit" onclick="openPopupDishForm()">Thêm món ăn</button>
     <table class="table table-bordered">
@@ -60,7 +62,7 @@
         <form method="POST" action="/Administrator_Setting/AddDish" id="signup-form-dish" class="signup-form-dish">
             <h2 class="form-title h2-dish">Tạo món ăn cho cửa hàng</h2>
             <div class="form-group">
-                <select class="custom-select" id="LocationSelect" name="Location">
+                <select class="custom-select" id="LocationSelectDish" name="Location">
                     <option disabled selected>Location</option>
                     <option value="Quận 1">Quận 1</option>
                     <option value="Quận 2">Quận 2</option>

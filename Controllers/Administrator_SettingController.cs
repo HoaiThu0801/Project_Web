@@ -31,55 +31,104 @@ namespace Project_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateSeller(CreateSeller model)
+        public ActionResult CreateSeller(CreateSeller model, FormCollection form)
         {
             User user = _db.Users.SingleOrDefault(n => n.Username == model.Username);
-            if (user != null)
+            User email = _db.Users.SingleOrDefault(n => n.Email == model.Email);
+            var province = form["Province"];
+            var district = form["District"];
+            var ward = form["Ward"];
+            var re_password = form["re_password"];
+
+            //Validate
+            if (user is null && email is null)
             {
-                return Content("user");
+                if (re_password != model.Password)
+                    return Content("password");
+                else
+                {
+                    EncryptionPW encryptionPW = new EncryptionPW(model.Password);
+                    model.Password = encryptionPW.EncryptPass();
+                    if (ModelState.IsValid)
+                    {
+                        User usertemp = new User();
+                        User_Roles User_Role = new User_Roles();
+                        Address_Users address_Users = new Address_Users();
+                        if (province is null || district is null)
+                        {
+                            if (province is null)
+                                return Content("province");
+                            if (district is null)
+                                return Content("district");
+                        }
+                        else
+                        {
+                            if (ward is null)
+                                ward = "";
+                            //Add user into "User" table
+                            var querryUsersCount = from User in _db.Users
+                                                   select User.IDUser;
+                            usertemp.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+
+                            usertemp.Username = model.Username;
+                            usertemp.Password = model.Password;
+                            usertemp.Fullname = model.Fullname;
+                            usertemp.Address = form["Address"].ToString();
+                            usertemp.PhoneNumber = model.PhoneNumber;
+                            usertemp.Email = model.Email;
+                            usertemp.Image = "Null";
+                            usertemp.Facebook = "0";
+                            _db.Users.Add(usertemp);
+
+                            //Add role of User into "User_Role" table
+                            string roletemp = model.Role;
+                            if (model.Role is null)
+                            {
+                                return Content("role");
+                            }
+                            else
+                            {
+                                User_Role.IDUser = usertemp.IDUser;
+                                var querryGetRole = (from role in _db.Roles
+                                                     where role.Role1 == roletemp
+                                                     select role.IDRole).SingleOrDefault();
+                                User_Role.IDRole = querryGetRole.ToString();
+                                _db.User_Roles.Add(User_Role);
+                                _db.SaveChanges();
+
+                                //Add address default
+                                var querryaddress_UsersCount = (from au in _db.Address_Users
+                                                                select au).ToList();
+                                address_Users.IDAddress = "A-U" + querryaddress_UsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                                address_Users.IDUser = usertemp.IDUser;
+                                address_Users.Province = province;
+                                address_Users.District = district;
+                                address_Users.Ward = ward;
+                                address_Users.IsDefault = 1;
+                                address_Users.Street = form["Address"].ToString();
+                                address_Users.PhoneNumber = model.PhoneNumber;
+                                address_Users.Fullname = model.Fullname;
+                                _db.Address_Users.Add(address_Users);
+                                _db.SaveChanges();
+
+                                return Content("true");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return Content("false");
+                    }
+                }
             }
-            user = _db.Users.SingleOrDefault(n => n.Email == model.Email);
-            if (user != null)
+            else
             {
-                return Content("email");
+                if (user != null)
+                    return Content("user");
+                else
+                    return Content("email");
             }
-
-            if (ModelState.IsValid)
-            {
-                User usertemp = new User();
-                //Add user into "User" table
-                var querryUsersCount = from User in _db.Users
-                                       select User.IDUser;
-                usertemp.IDUser = "U" + querryUsersCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-
-                EncryptionPW encryptionPW = new EncryptionPW(model.Password);
-                model.Password = encryptionPW.EncryptPass();
-                usertemp.Username = model.Username;
-                usertemp.Password = model.Password;
-                usertemp.Fullname = model.Fullname;
-                usertemp.Address = model.Address;
-                usertemp.PhoneNumber = model.PhoneNumber;
-                usertemp.Email = model.Email;
-                _db.Users.Add(usertemp);
-
-
-                //Add role of User into "User_Role" table
-
-                User_Roles User_Role = new User_Roles();
-                string roletemp = model.Role;
-                User_Role.IDUser = usertemp.IDUser;
-                var querryGetRole = (from role in _db.Roles
-                                     where role.Role1 == roletemp
-                                     select role.IDRole).SingleOrDefault();
-                User_Role.IDRole = querryGetRole.ToString();
-                _db.User_Roles.Add(User_Role);
-                _db.SaveChanges();
-                @ViewBag.Message = "Thành công";
-                return Content("true");
-            }
-
-
-            return Content("false");
+            return View();
         }
         #endregion
 
@@ -91,40 +140,46 @@ namespace Project_Web.Controllers
         }
         [HttpPost]
         public ActionResult CreateStore(Store model)
-        {
-            var querryStoresCount = from Store in _db.Stores
-                                    select Store.IDStore;
+        {   
+            Store email = _db.Stores.SingleOrDefault(n => n.Email == model.Email);
             string errorMessage = null;
-            model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-            if (ModelState.IsValid)
+            if (email is null)
             {
-                _db.Stores.Add(model);
-                //Setting Default: While creating store, creating warehouse of store
-                Warehouse warehouse = new Warehouse();
-                warehouse.IDWarehouse = "WH" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                warehouse.WarehouseName = "Kho hàng " + model.StoreName;
-                warehouse.LocationofWarehouse = model.Location;
-                warehouse.IDStore = model.IDStore;
-                _db.Warehouses.Add(warehouse);
-                _db.SaveChanges();
-                return Content("true");
+                var querryStoresCount = from Store in _db.Stores
+                                        select Store.IDStore;
+                model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                if(model.Location is null)
+                {
+                    return Content("nolocation");
+                }
+                else
+                {
+                    if (!ModelState.IsValidField("PhoneNumber"))
+                    {
+                        errorMessage = "PhoneNumber";
+                        return Content(errorMessage);
+                    }
+                    if (ModelState.IsValid)
+                    {
+                        _db.Stores.Add(model);
+
+                        //Setting Default: While creating store, creating warehouse of store
+                        Warehouse warehouse = new Warehouse();
+                        warehouse.IDWarehouse = "WH" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                        warehouse.WarehouseName = "Kho hàng " + model.StoreName;
+                        warehouse.LocationofWarehouse = model.Location;
+                        warehouse.IDStore = model.IDStore;
+                        _db.Warehouses.Add(warehouse);
+                        _db.SaveChanges();
+                        return Content("true");
+                    }
+                    return Content("errormessage");
+                }         
             }
-            if (!ModelState.IsValidField("StoreName"))
+            else
             {
-                errorMessage = "StoreName";
-                return Content(errorMessage);
+                return Content("email");
             }
-            if (!ModelState.IsValidField("PhoneNumber"))
-            {
-                errorMessage = "PhoneNumber";
-                return Content(errorMessage);
-            }
-            if (!ModelState.IsValidField("Email"))
-            {
-                errorMessage = "Email";
-                return Content(errorMessage);
-            }
-            return Content("errormessage");
         }
         #endregion
 
@@ -207,6 +262,13 @@ namespace Project_Web.Controllers
                 _db.SaveChanges();
                 return Content("true");
             }
+            else
+            {
+                if (store is null)
+                    return Content("nostore");
+                if (user is null)
+                    return Content("nouser");
+            }    
             return Content("false");
         }
         #endregion
@@ -309,9 +371,10 @@ namespace Project_Web.Controllers
                          where s.StoreName == storetemp && s.Location == location
                          select s).SingleOrDefault();
             Menu_Stores menu_store_temp = _db.Menu_Stores.SingleOrDefault(n => n.IDStore == store.IDStore && n.IDDish == dish.IDDish);
+
             if (menu_store_temp != null)
             {
-                return Content("False");
+                return Content("false");
             }
             Menu_Stores menu_store = new Menu_Stores();
             menu_store.IDDish = dish.IDDish;
@@ -321,7 +384,12 @@ namespace Project_Web.Controllers
             {
                 _db.Menu_Stores.Add(menu_store);
                 _db.SaveChanges();
-                @ViewBag.Message = dishname + " được thêm vào thành công";
+                var success = new
+                {
+                    message = dishname,
+                    type = true,
+                };
+                return Json(success, JsonRequestBehavior.AllowGet);
             }
             return View();
         }

@@ -61,42 +61,187 @@ function closePopupForm() {
         flaqDish = true;
     }
 }
-//CreateStrore Validation
-$('#StoreName').click(function () {
-    var address = $('#StoreName').val();
-    if (address.length <= 0) {
-        $('#StoreName').css('background', 'yellow')
-        $('#showFail_SN').html('Tên cửa hàng không được trống!');
-        $('#showFail_SN').css('color', 'red');
-        $('#showFail_SN').css('font-weight', 'bold');
-        return false;
+
+//function openForm when click tab
+function openForm(evt, formName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
     }
-    else {
-        $('#StoreName').css('background', 'white')
-        $('#showFail_SN').html('');
-        return true;
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-});
-$('#StoreName').keyup(function () {
-    var address = $('#StoreName').val();
-    if (address.length <= 0) {
-        $('#StoreName').css('background', 'yellow')
-        $('#showFail_SN').html('Tên cửa hàng không được trống!');
-        $('#showFail_SN').css('color', 'red');
-        $('#showFail_SN').css('font-weight', 'bold');
-        return false;
-    }
-    else {
-        $('#StoreName').css('bacskground', 'white')
-        $('#showFail_SN').html('');
-        return true;
-    }
+    document.getElementById(formName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+//Click icon X on popup page reload page
+$(".remove-icon").click(function () {
+    setTimeout(function () {
+        location.reload();
+    }, 1000);
 });
 
-//Show store name and choose dish when change select, load store accroding to location
 $(document).ready(function () {
-    $('#LocationSelect').change(function () {
-        var location = $('#LocationSelect').val();
+    //Scroll to top page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    //Event using Ajax for id myPager in _TabStore
+    $('#myPager').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Store').html(result);
+            },
+        });
+        return false;
+    });
+
+    //Event using Ajax for id myPagerStaff in _TabStaff
+    $('#myPagerStaff').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Staff').html(result);
+            },
+        });
+        return false;
+    });
+
+    //Event using Ajax for id myPagerDish in _TabDish
+    $('#myPagerDish').on('click', 'a', function () {
+        $.ajax({
+            url: this.href,
+            type: 'GET',
+            cache: false,
+            success: function (result) {
+                $('#Dish').html(result);
+            },
+        });
+        return false;
+    });
+
+    //Validation
+    $('#StoreName').click(function () {
+        var address = $('#StoreName').val();
+        if (address.length <= 0) {
+            $('#StoreName').css('background', 'yellow')
+            $('#showFail_SN').html('Tên cửa hàng không được trống!');
+            $('#showFail_SN').css('color', 'red');
+            $('#showFail_SN').css('font-weight', 'bold');
+            return false;
+        }
+        else {
+            $('#StoreName').css('background', 'white')
+            $('#showFail_SN').html('');
+            return true;
+        }
+    });
+    $('#StoreName').keyup(function () {
+        var address = $('#StoreName').val();
+        if (address.length <= 0) {
+            $('#StoreName').css('background', 'yellow')
+            $('#showFail_SN').html('Tên cửa hàng không được trống!');
+            $('#showFail_SN').css('color', 'red');
+            $('#showFail_SN').css('font-weight', 'bold');
+            return false;
+        }
+        else {
+            $('#StoreName').css('background', 'white')
+            $('#showFail_SN').html('');
+            return true;
+        }
+    });
+
+    //Submit form store using ajax
+    $("#signup-form-store").submit(function (event) {
+        event.preventDefault();
+
+        var url = $(this).attr("action");
+        var formdata = $(this).serialize();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formdata,
+            success: function (res) {
+                if (res == "true") {
+                    notify("Thông báo", "Đăng ký thành công", true);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $(".form-input").val('');
+                    $(".form-ipnut").css('background', 'white');
+                    $("#LocationSelect").load(" #Location");
+                }
+                if (res == "PhoneNumber") {
+                    $('#AlertBoxforJS').css('top', $('#PhoneNumber').offset().top - 100);
+                    notify("Xảy ra lỗi", "Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx", false);
+                    $("html, body").animate({ scrollTop: $('#PhoneNumber').offset().top - 100 }, "slow");
+                    $('#PhoneNumber').focus();
+                }
+                if (res == "IsEmail") {
+                    $('#AlertBoxforJS').css('top', $('#Email').offset().top - 100);
+                    notify("Xảy ra lỗi", "Hãy nhập email hợp lệ, VD: cuahang@gmail.com", false);
+                    $("html, body").animate({ scrollTop: $('#Email').offset().top - 100 }, "slow");
+                    $('#Email').focus();
+                }
+                if (res == "email") {
+                    $('#AlertBoxforJS').css('top', $('#Email').offset().top - 100);
+                    notify("Xảy ra lỗi", "Email đã được sử dụng cho cửa hàng khác khác, xin vui lòng chọn email khác", false);
+                    $("html, body").animate({ scrollTop: $('#Email').offset().top - 100 }, "slow");
+                    $('#Email').focus();
+                }
+                if (res == "nolocation") {
+                    $('#AlertBoxforJS').css('top', $('#Location').offset().top - 100);
+                    notify("Xảy ra lỗi", "Chưa chọn địa chỉ cho cửa hàng", false);
+                    $("html, body").animate({ scrollTop: $('#Location').offset().top - 100 }, "slow");
+                    $('#Location').focus();
+                }
+            },
+        });
+    });
+
+    //Submit form staff using ajax
+    $("#signup-form-staff").submit(function (event) {
+        event.preventDefault();
+        var url = $(this).attr("action");
+        var formdata = $(this).serialize();
+        $.ajax({
+            type: 'post',
+            url: url,
+            data: formdata,
+            success: function (res) {
+                if (res == "true") {
+                    notify("Thông báo", "Đăng ký thành công", true);
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $("#StaffSelect").load(" #staff-dropdown");
+                    $("#StoreSelect").load(" #store-dropdown");
+                }
+                else {
+                    notify("Xảy ra lỗi", "Đăng ký thất bại", false);
+                }
+                if (res == "nouser") {
+                    $('#AlertBoxforJS').css('top', $('#staff-dropdown').offset().top - 100);
+                    notify("Xảy ra lỗi", "Chưa chọn người bán hàng", false);
+                    $("html, body").animate({ scrollTop: $('#staff-dropdown').offset().top - 100 }, "slow");
+                    $('#staff-dropdown').focus();
+                }
+                if (res == "nostore") {
+                    $('#AlertBoxforJS').css('top', $('#store-dropdown').offset().top - 100);
+                    notify("Xảy ra lỗi", "Chưa chọn cửa hàng", false);
+                    $("html, body").animate({ scrollTop: $('#store-dropdown').offset().top - 100 }, "slow");
+                    $('#store-dropdown').focus();
+                }
+            },
+        });
+    });
+
+    //Show store name and choose dish when change select, load store accroding to location
+    $('#LocationSelectDish').change(function () {
+        var location = $('#LocationSelectDish').val();
         $('#StoreNameList').css('opacity', '1');
         $('#StoreNameList').css('visibility', 'visible');
         $('#StoreNameList').css('height', 'unset');
@@ -106,8 +251,8 @@ $(document).ready(function () {
             data: {
                 Location: location
             },
-            success: function (response) {          
-                $('#StoreNameSelect').html("");   
+            success: function (response) {
+                $('#StoreNameSelect').html("");
                 $("#StoreNameSelect").append(("<option disabled selected>" + "StoreName" + "</option>"));
                 $.each(response, function (key, item) {
                     $("#StoreNameSelect").append("<option>" + item.StoreName + "</option>");
@@ -115,13 +260,12 @@ $(document).ready(function () {
             }
         })
     });
-});
-//Click dish, add dish into menu_store
-$(document).ready(function () {
+
+    //Event using Ajax when click dish, add dish into menu_store
     var storename;
     var location;
-    $('#LocationSelect').change(function () {
-        location = $('#LocationSelect').val();
+    $('#LocationSelectDish').change(function () {
+        location = $('#LocationSelectDish').val();
         $('#StoreNameList').css('opacity', '1');
         $('#StoreNameList').css('visibility', 'visible');
         $('#StoreNameList').css('height', 'unset');
@@ -146,6 +290,7 @@ $(document).ready(function () {
                     $('.fa').click(function () {
                         var t = $(this).addClass('fa-circle');
                         let dishname = t.text();
+                        $(this).hide();
                         $.ajax({
                             type: "post",
                             url: "/Administrator_Setting/AddDish",
@@ -155,9 +300,14 @@ $(document).ready(function () {
                                 Location: location
                             },
                             success: function (res) {
-                                if (res == "False") {
+                                if (res == "false") {
                                     $('.fa').removeClass('fa-circle');
-                                    alert("Món ăn đã có sẵn");
+                                    notify("Xảy ra lỗi","Món ăn đã có sẵn", false);
+                                }
+                                if (res.type == true) {
+                                    notify("Thông báo", res.message + " được thêm vào thành công", true);
+                                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                                    $('#DishNameList').load(' '+ html);
                                 }
                             }
                         });
@@ -167,142 +317,3 @@ $(document).ready(function () {
         })
     });
 });
-
-   
-
-//Save data without load page
-$(document).ready(function () {
-    $("#signup-form-store").submit(function (event) {
-        event.preventDefault();
-        var url = $(this).attr("action");
-        var formdata = $(this).serialize();
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: formdata,
-            success: function (res) {
-                if (res == "true") {
-                    //$("#showSuccess").html("Đăng ký thành công");
-                    alert("Đăng ký thành công");
-                    $(".form-input").val('');
-                }
-                if (res == "StoreName") {
-                    $("#showFail_SN").html("Tên cửa hàng không được để trống!");
-                    $(".form-input").val('');
-                }
-                else {
-                    $("#showFail_SN").html("");
-                    $(".form-input").val('');
-                }
-                if (res == "PhoneNumber") {
-                    $("#showFail_PN").html("Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx");
-                    $(".form-input").val('');
-                }
-                else {
-                    $("#showFail_PN").html("");
-                    $(".form-input").val('');
-                }
-                if (res == "Email") {
-                    $("#showFail_Email").html("Hãy nhập email hợp lệ, VD: huutuong@gmail.com");
-                    $(".form-input").val('');
-                }
-                else {
-                    $("#showFail_Email").html("");
-                    $(".form-input").val('');
-                }
-            },
-        });
-        return false;
-    });
-});
-
-
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-
-//Click icon X reload page
-$(document).ready(function () {
-    $(".remove-icon").click(function () {
-        setTimeout(function () {
-            location.reload();
-        }, 1000)
-    });
-});
-
-$(document).ready(function () {
-    $("#signup-form-staff").submit(function (event) {
-        event.preventDefault();
-        var url = $(this).attr("action");
-        var formdata = $(this).serialize();
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: formdata,
-            success: function (res) {
-                if (res == "true") {
-                    alert("Đăng ký thành công");
-                }
-                else {
-                    alert("Đăng ký thất bại");
-                }
-            },
-        });
-        return false;
-    });
-});
-
-$(function () {
-    $('#myPager').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Store').html(result);
-            },
-        });
-        return false;
-    });
-});
-$(function () {
-    $('#myPagerStaff').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Staff').html(result);
-            },
-        });
-        return false;
-    });
-});
-$(function () {
-    $('#myPagerDish').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Dish').html(result);
-            },
-        });
-        return false;
-    });
-});
-
-//Scroll to top page
-$(document).ready(function(){
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-})

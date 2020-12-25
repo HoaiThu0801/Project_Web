@@ -52,7 +52,7 @@
         <form method="POST" action="/Administrator_Setting/CreateStaff" id="signup-form-staff" class="signup-form">
             <h2 class="form-title h2-staff">Thêm nhân viên cho cửa hàng</h2>
             <div class="form-group">
-                <div class="form-input-staff">
+                <div class="form-input-staff" id="StaffSelect">
                     <select class="custom-select" id="staff-dropdown" name="Staff">
                         <option disabled="disabled" selected="selected">Chọn nhân viên</option>
                         @{
@@ -69,14 +69,13 @@
                                 {
                                     <option value="@u.Fullname"> @u.Fullname </option>
                                 }
-
                             }
                         }
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <div class="form-input-store">
+                <div class="form-input-store" id="StoreSelect">
                     <select class="custom-select" id="store-dropdown" name="Store">
                         <option disabled="disabled" selected="selected">Chọn cửa hàng</option>
                         @{

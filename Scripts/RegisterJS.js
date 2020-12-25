@@ -168,6 +168,18 @@ $(document).ready(function () {
     //Use ajax when submit form
     $("#signup-form").submit(function (event) {
         event.preventDefault();
+
+        //Validation PhoneNumber
+        var phonenumber = $('#PhoneNumber').val();
+        var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+        if (!(vnf_regex.test(phonenumber))) {
+            $('#AlertBoxforJS').css('top', $('#PhoneNumber').offset().top - 100);
+            notify("Xảy ra lỗi", "Hãy nhập số điện thoại hợp lệ, VD:03xxxxxxxx", false);
+            $("html, body").animate({ scrollTop: $('#PhoneNumber').offset().top - 100 }, "slow");
+            $('#PhoneNumber').focus();
+        }
+        //end 
+
         var url = $(this).attr("action");
         var formdata = $(this).serialize();
         $.ajax({

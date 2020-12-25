@@ -1,17 +1,4 @@
-﻿/* @extend display-flex; */
-display-flex, .display-flex, .display-flex-center {
-    display: flex;
-    display: -webkit-flex;
-}
-
-/* @extend list-type-ulli; */
-list-type-ulli {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-/* Montserrat-300 - latin */
+﻿/* Montserrat-300 - latin */
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -94,40 +81,6 @@ input, select, textarea {
     -ms-appearance: unset !important;
 }
 
-    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-        appearance: none !important;
-        -moz-appearance: none !important;
-        -webkit-appearance: none !important;
-        -o-appearance: none !important;
-        -ms-appearance: none !important;
-        margin: 0;
-    }
-
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        box-shadow: none !important;
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        -o-box-shadow: none !important;
-        -ms-box-shadow: none !important;
-    }
-
-    input[type=checkbox] {
-        appearance: checkbox !important;
-        -moz-appearance: checkbox !important;
-        -webkit-appearance: checkbox !important;
-        -o-appearance: checkbox !important;
-        -ms-appearance: checkbox !important;
-    }
-
-    input[type=radio] {
-        appearance: radio !important;
-        -moz-appearance: radio !important;
-        -webkit-appearance: radio !important;
-        -o-appearance: radio !important;
-        -ms-appearance: radio !important;
-    }
-
 img {
     max-width: 100%;
     height: auto;
@@ -183,43 +136,6 @@ body {
     margin: 0 auto;
 }
 
-.display-flex {
-    justify-content: space-between;
-    -moz-justify-content: space-between;
-    -webkit-justify-content: space-between;
-    -o-justify-content: space-between;
-    -ms-justify-content: space-between;
-    align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -o-align-items: center;
-    -ms-align-items: center;
-}
-
-.display-flex-center {
-    justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
-    -o-justify-content: center;
-    -ms-justify-content: center;
-    align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
-    -o-align-items: center;
-    -ms-align-items: center;
-}
-
-.position-center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-}
-
 .signup-content {
     background: #fff;
     border-radius: 10px;
@@ -230,9 +146,22 @@ body {
     padding: 50px 85px;
 }
 
+.District, .Ward {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    margin-bottom: 0;
+    transition: 0.5s linear all;
+}
+
 .form-group {
     overflow: hidden;
-    margin-bottom: 20px;
+}
+
+.custom-select {
+    height: 60px;
+    padding: 17px 20px;
+    color: gray;
 }
 
 .form-input {

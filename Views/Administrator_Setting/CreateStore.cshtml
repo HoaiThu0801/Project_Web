@@ -13,9 +13,9 @@
             <div class="container">
                 <div class="signup-content">
                     <div class="tab">
-                        <button class="tablinks" onclick="openCity(event, 'Store')">Cửa hàng</button>
-                        <button class="tablinks" onclick="openCity(event, 'Staff')">Nhân viên</button>
-                        <button class="tablinks" onclick="openCity(event, 'Dish')">Món ăn</button>
+                        <button class="tablinks" onclick="openForm(event, 'Store')">Cửa hàng</button>
+                        <button class="tablinks" onclick="openForm(event, 'Staff')">Nhân viên</button>
+                        <button class="tablinks" onclick="openForm(event, 'Dish')">Món ăn</button>
                     </div>
                     <div class="tabcontent" id="Store">
                         @{Html.RenderAction("_TabStore", "Administrator_Setting", new { page = 1 });}
