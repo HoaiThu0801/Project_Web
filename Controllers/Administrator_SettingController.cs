@@ -140,7 +140,7 @@ namespace Project_Web.Controllers
         }
         [HttpPost]
         public ActionResult CreateStore(Store model)
-        {   
+        {
             Store email = _db.Stores.SingleOrDefault(n => n.Email == model.Email);
             string errorMessage = null;
             if (email is null)
@@ -148,7 +148,7 @@ namespace Project_Web.Controllers
                 var querryStoresCount = from Store in _db.Stores
                                         select Store.IDStore;
                 model.IDStore = "S" + querryStoresCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-                if(model.Location is null)
+                if (model.Location is null)
                 {
                     return Content("nolocation");
                 }
@@ -174,7 +174,7 @@ namespace Project_Web.Controllers
                         return Content("true");
                     }
                     return Content("errormessage");
-                }         
+                }
             }
             else
             {
@@ -190,49 +190,73 @@ namespace Project_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult CreateDish(string DishName, string Ingredient, string ImportPrice, string SalePrice, string Image, string Category)
+        public ActionResult CreateDish(string DishName, string Ingredient, string ImportPrice, string SalePrice, string Category, HttpPostedFileBase FileUpload)
         {
 
             Menu menu_temp = new Menu();
             var querryDishesCount = from Menu in _db.Menus
                                     select Menu.IDDish;
             Menu menu = _db.Menus.SingleOrDefault(n => n.DishName == DishName);
-            string mess = "";
             //Validate
-            if (menu != null && Category == "" && Image == "/images/ImageProducts/undefined") 
+            if (menu == null && Category != "null" && ImportPrice != "" && SalePrice != "" && FileUpload != null)
             {
-                if(menu != null)
-                    mess += "Tên món ăn đã có trong dữ liệu<br />";
-                if (Category == "")
-                    mess += "Giá trị của trường Phân loại chưa có<br />";
-                if (Image == "/images/ImageProducts/undefined<br />")
-                    mess += "Hình ảnh chưa được chọn";
-                var error = new
+                string filename = FileUpload.FileName;
+                string targetpath = Server.MapPath("~/images/ImageProducts/");
+                if (!(System.IO.Directory.Exists(targetpath)))
                 {
-                    title = "Xảy ra lỗi",
-                    message = mess,
-                    type = false,
-                };
-                return Json(error, JsonRequestBehavior.AllowGet);
+                    System.IO.Directory.CreateDirectory(targetpath);
+                }
+                FileUpload.SaveAs(targetpath + filename);
+                string Image = "images/ImageProducts/" + filename;
+                menu_temp.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
+                menu_temp.DishName = DishName;
+                menu_temp.Ingredient = Ingredient;
+                menu_temp.ImportPrice = Convert.ToDouble(ImportPrice);
+                menu_temp.SalePrice = Convert.ToDouble(SalePrice);
+                menu_temp.Image = Image;
+                menu_temp.Category = Category;
+
+                if (ModelState.IsValid)
+                {
+                    _db.Menus.Add(menu_temp);
+                    _db.SaveChanges();
+                    var success = new
+                    {
+                        title = "Thông báo",
+                        message = "Tạo món ăn thành công",
+                        type = true,
+                    };
+                    return Json(success, JsonRequestBehavior.AllowGet);
+                }
             }
-            menu_temp.IDDish = "D" + querryDishesCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
-            menu_temp.DishName = DishName;
-            menu_temp.Ingredient = Ingredient;
-            menu_temp.ImportPrice = Convert.ToDouble(ImportPrice);
-            menu_temp.SalePrice = Convert.ToDouble(SalePrice);
-            menu_temp.Image = Image;
-            menu_temp.Category = Category;
-            if (ModelState.IsValid)
+            else
             {
-                _db.Menus.Add(menu_temp);
-                _db.SaveChanges();
-                var success = new
+                string error = "";
+                if (menu != null)
                 {
-                    title = "Thông báo",
-                    message = "Tạo món ăn thành công",
-                    type = true,
-                };
-                return Json(success, JsonRequestBehavior.AllowGet);
+                    error = "menu";
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+                if (ImportPrice == "")
+                {
+                    error = "importPrice";
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+                if (SalePrice == "")
+                {
+                    error = "salePrice";
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+                if (FileUpload is null)
+                {
+                    error = "image";
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
+                if (Category == "null")
+                {
+                    error = "category";
+                    return Json(error, JsonRequestBehavior.AllowGet);
+                }
             }
             return View();
         }
@@ -268,7 +292,7 @@ namespace Project_Web.Controllers
                     return Content("nostore");
                 if (user is null)
                     return Content("nouser");
-            }    
+            }
             return Content("false");
         }
         #endregion
@@ -404,17 +428,17 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult UpLoadMenu(HttpPostedFileBase FileUpload)
         {
-            List<string> data = new List<string>();
+            string data = "";
             if (FileUpload != null)
             {
                 if (FileUpload.ContentType == "application/vnd.ms-excel" || FileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 {
                     string filename = FileUpload.FileName;
                     string targetpath = Server.MapPath("~/Doc/");
-                    if(!(System.IO.Directory.Exists(targetpath)))
+                    if (!(System.IO.Directory.Exists(targetpath)))
                     {
                         System.IO.Directory.CreateDirectory(targetpath);
-                    }    
+                    }
                     FileUpload.SaveAs(targetpath + filename);
                     string pathToExcelFile = targetpath + filename;
                     var connectionString = "";
@@ -459,18 +483,31 @@ namespace Project_Web.Controllers
                             }
                             else
                             {
-                                if(m.DishName == null)
-                                    data.Add("Dữ liệu của trường DishName trong excel đang trống\n");
-                                if(m.Ingredient == null)
-                                    data.Add("Dữ liệu của trường Ingredient trong excel đang trống\n");
+                                if (m.DishName == null)
+                                {
+                                    data = "dishname";
+                                    return Json(data, JsonRequestBehavior.AllowGet);
+                                }
+                                if (m.Ingredient == null)
+                                {
+                                    data = "ingredient";
+                                    return Json(data, JsonRequestBehavior.AllowGet);
+                                }
                                 if (m.ImportPrice == null)
-                                    data.Add("Dữ liệu của trường ImportPrice trong excel đang trống\n");
+                                {
+                                    data = "importPrice";
+                                    return Json(data, JsonRequestBehavior.AllowGet);
+                                }
                                 if (m.SalePrice == null)
-                                    data.Add("Dữ liệu của trường SalePrice trong excel đang trống\n");
+                                {
+                                    data = "salePrice";
+                                    return Json(data, JsonRequestBehavior.AllowGet);
+                                }
                                 if (m.Image == null)
-                                    data.Add("Dữ liệu của trường Image trong excel đang trống\n");
-                                data.ToArray();
-                                return Json(data, JsonRequestBehavior.AllowGet);
+                                {
+                                    data = "image";
+                                    return Json(data, JsonRequestBehavior.AllowGet);
+                                }
                             }
                         }
                         catch (DbEntityValidationException ex)
@@ -482,28 +519,24 @@ namespace Project_Web.Controllers
                                 {
 
                                     Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-
                                 }
-
                             }
                         }
 
                     }
-                    data.Add("Thêm dữ liệu thành công");
+                    data = "success";
                     return Json(data, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     //alert message for invalid file format  
-                    data.Add("Vui lòng chọn tệp excel");
-                    data.ToArray();
+                    data = "warning";
                     return Json(data, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                data.Add("Vui lòng chọn tệp để thêm vào");
-                data.ToArray();
+                data = "false";
                 return Json(data, JsonRequestBehavior.AllowGet);
             }
         }

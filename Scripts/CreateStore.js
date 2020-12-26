@@ -287,10 +287,9 @@ $(document).ready(function () {
                 $.each(res, function (key, item) {
                     html += '<a href="#" class="dishname-choose" id="DishName_a"><i class="fa fa-circle-o"><input hidden value="@s.DishName" id="DishName" name="DishName" />' + item + '</i></a>';
                     $('#listdish').html(html);
-                    $('.fa').click(function () {
-                        var t = $(this).addClass('fa-circle');
-                        let dishname = t.text();
-                        $(this).hide();
+                    $('.dishname-choose').click(function (e) {
+                        let dishname = $(this).text();
+                        $(this).hide(); 
                         $.ajax({
                             type: "post",
                             url: "/Administrator_Setting/AddDish",
@@ -301,13 +300,12 @@ $(document).ready(function () {
                             },
                             success: function (res) {
                                 if (res == "false") {
-                                    $('.fa').removeClass('fa-circle');
-                                    notify("Xảy ra lỗi","Món ăn đã có sẵn", false);
+                                    notify("Xảy ra lỗi", "Món ăn đã có sẵn", false);
+                                    $("html, body").animate({ scrollTop: 0 }, "slow");
                                 }
                                 if (res.type == true) {
                                     notify("Thông báo", res.message + " được thêm vào thành công", true);
                                     $("html, body").animate({ scrollTop: 0 }, "slow");
-                                    $('#DishNameList').load(' '+ html);
                                 }
                             }
                         });
