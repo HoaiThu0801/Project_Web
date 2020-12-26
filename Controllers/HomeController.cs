@@ -13,6 +13,8 @@ namespace Project_Web.Controllers
     public class HomeController : BaseController
     {
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+ 
+        #region Paging
         public ActionResult Index(int? page)
         {
             if (page == null) page = 1;
@@ -22,6 +24,7 @@ namespace Project_Web.Controllers
             int pageNumber = (page ?? 1);
             return View(menu.ToPagedList(pageNumber, pageSize));
         }
+        #endregion
 
         public ActionResult About()
         {
@@ -36,6 +39,8 @@ namespace Project_Web.Controllers
 
             return View();
         }
+
+        #region Logout
         public ActionResult Logout()
         {
             Session["Is Login"] = 0;
@@ -43,6 +48,8 @@ namespace Project_Web.Controllers
             Session.Remove("cart");
             return RedirectToAction("Index", "Home");
         }
+        #endregion
+
         #region InformationAccount
         [HttpGet]
         [Authorize_userController]
@@ -91,6 +98,7 @@ namespace Project_Web.Controllers
             return View();
         }
         #endregion
+
         #region LoadData
         [HttpGet]
         public JsonResult LoadDistrict(string ProvinceName)
@@ -133,6 +141,7 @@ namespace Project_Web.Controllers
         }
         #endregion
 
+        #region ChangePass
         [Authorize_userController]
         [HttpGet]
         public ActionResult ChangePass()
@@ -140,12 +149,16 @@ namespace Project_Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ChangePass(string Username, string OldPassword, string NewPassword)
+        public ActionResult ChangePass(string Username, string OldPassword, string NewPassword, string Re_Password)
         {
             if (OldPassword == NewPassword)
             {
                 return Content("IsEquals");
             }
+            if(Re_Password != NewPassword)
+            {
+                return Content("NotLike");
+            }    
             EncryptionPW encryptionOld_PW = new EncryptionPW(OldPassword);
             string old_password = encryptionOld_PW.EncryptPass();
             EncryptionPW encryptionNew_PW = new EncryptionPW(NewPassword);
@@ -163,12 +176,15 @@ namespace Project_Web.Controllers
                 return Content("false");
             }
         }
+        #endregion
+
+        #region Cart
         [Authorize_userController]
         public ActionResult ShoppingCart()
         {
             return View();
         }
-        #region Cart
+
         [HttpPost]
         [Authorize_userController]
         public ActionResult AddCart(string IDDish)
