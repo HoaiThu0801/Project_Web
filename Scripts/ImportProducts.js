@@ -1,5 +1,16 @@
-﻿//Show dish name when change select, load dishname accroding to warehouse
-$(document).ready(function () {
+﻿$(document).ready(function () {
+
+    //Scroll to top page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    //Show button submit when change data in element has id DishName-Select
+    $('#DishName-Select').change(function () {
+        $('#button-submit').css('opacity', '1');
+        $('#button-submit').css('visibility', 'visible');
+        $('#DisplayImportsProduct').css('height', 'unset');
+    });
+
+    //Show dish name when change select, load dishname accroding to warehouse
     $('#Warehouse-Select').change(function () {
         var warehouse = $('#Warehouse-Select').val();
         $('#DisplayImportsProduct').css('opacity', '1');
@@ -20,28 +31,14 @@ $(document).ready(function () {
             }
         })
     });
-});
-
-//Show button-submit and show success when submit
-$(document).ready(function () {
-    //Show button submit when change data in DishName-Select
-    $('#DishName-Select').change(function () {
-        $('#button-submit').css('opacity', '1');
-        $('#button-submit').css('visibility', 'visible');
-        $('#DisplayImportsProduct').css('height', 'unset');
-    });
 
     //Show success when submit form
     $('#import-products-form').submit(function (e) {
         e.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
         notify("Thông báo", "Đã nhập hàng vào kho cửa hàng thành công", true);
-        setTimeout(function () {
-            location.reload();
-        }, 2000)
+        //setTimeout(function () {
+        //    location.reload();
+        //}, 2000)
     });
 });
-
-//Scroll to top page
-$(document).ready(function () {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-})

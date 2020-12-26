@@ -43,6 +43,7 @@ namespace Project_Web.Controllers
             Session.Remove("cart");
             return RedirectToAction("Index", "Home");
         }
+        #region InformationAccount
         [HttpGet]
         [Authorize_userController]
         public ActionResult InformationAccount()
@@ -65,7 +66,7 @@ namespace Project_Web.Controllers
                          select u).SingleOrDefault();
             if (user != null)
             {
-                if(address_Users!= null)
+                if (address_Users != null)
                 {
                     address_Users.Province = Province;
                     address_Users.District = District;
@@ -85,11 +86,11 @@ namespace Project_Web.Controllers
                 _db.Users.AddOrUpdate(user);
                 _db.SaveChanges();
                 Session["User"] = user;
-                return View();
+                return Content("true");
             }
             return View();
         }
-
+        #endregion
         #region LoadData
         [HttpGet]
         public JsonResult LoadDistrict(string ProvinceName)
@@ -141,16 +142,16 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult ChangePass(string Username, string OldPassword, string NewPassword)
         {
-            if(OldPassword == NewPassword)
+            if (OldPassword == NewPassword)
             {
                 return Content("IsEquals");
-            }    
+            }
             EncryptionPW encryptionOld_PW = new EncryptionPW(OldPassword);
             string old_password = encryptionOld_PW.EncryptPass();
             EncryptionPW encryptionNew_PW = new EncryptionPW(NewPassword);
             string new_password = encryptionNew_PW.EncryptPass();
             User user = _db.Users.SingleOrDefault(x => x.Username == Username && x.Password == old_password);
-            if(user != null)
+            if (user != null)
             {
                 user.Password = new_password;
                 _db.Users.AddOrUpdate(user);

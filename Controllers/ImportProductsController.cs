@@ -12,7 +12,8 @@ namespace Project_Web.Controllers
     public class ImportProductsController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
-        // GET: ImportProducts
+        // GET: ImportProducts        
+        #region ImportProducts
         [HttpGet]
         public ActionResult ImportProducts()
         {
@@ -51,5 +52,6 @@ namespace Project_Web.Controllers
                         }).ToList();
             return Json(dish.ToList(), JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }
