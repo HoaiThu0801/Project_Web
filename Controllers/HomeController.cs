@@ -46,6 +46,7 @@ namespace Project_Web.Controllers
             Session["Is Login"] = 0;
             Session.Remove("User");
             Session.Remove("cart");
+            SetAlert("Thông báo", "Bạn đã đăng xuất thành công", true);
             return RedirectToAction("Index", "Home");
         }
         #endregion
@@ -151,30 +152,42 @@ namespace Project_Web.Controllers
         [HttpPost]
         public ActionResult ChangePass(string Username, string OldPassword, string NewPassword, string Re_Password)
         {
-            if (OldPassword == NewPassword)
+            if (OldPassword == "error" || NewPassword == "error")
             {
-                return Content("IsEquals");
-            }
-            if(Re_Password != NewPassword)
-            {
-                return Content("NotLike");
-            }    
-            EncryptionPW encryptionOld_PW = new EncryptionPW(OldPassword);
-            string old_password = encryptionOld_PW.EncryptPass();
-            EncryptionPW encryptionNew_PW = new EncryptionPW(NewPassword);
-            string new_password = encryptionNew_PW.EncryptPass();
-            User user = _db.Users.SingleOrDefault(x => x.Username == Username && x.Password == old_password);
-            if (user != null)
-            {
-                user.Password = new_password;
-                _db.Users.AddOrUpdate(user);
-                _db.SaveChanges();
-                return Content("true");
+                if(OldPassword == "error")
+                    return Content("NotOldPassword");
+                if (NewPassword == "error")
+                    return Content("NotNewPassword");
             }
             else
             {
-                return Content("false");
+                if (OldPassword == NewPassword)
+                {
+                    return Content("IsEquals");
+                }
+                if (Re_Password != NewPassword)
+                {
+                    return Content("NotLike");
+                }
+
+                EncryptionPW encryptionOld_PW = new EncryptionPW(OldPassword);
+                string old_password = encryptionOld_PW.EncryptPass();
+                EncryptionPW encryptionNew_PW = new EncryptionPW(NewPassword);
+                string new_password = encryptionNew_PW.EncryptPass();
+                User user = _db.Users.SingleOrDefault(x => x.Username == Username && x.Password == old_password);
+                if (user != null)
+                {
+                    user.Password = new_password;
+                    _db.Users.AddOrUpdate(user);
+                    _db.SaveChanges();
+                    return Content("true");
+                }
+                else
+                {
+                    return Content("false");
+                }
             }
+            return View();
         }
         #endregion
 

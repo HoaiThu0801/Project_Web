@@ -41,10 +41,21 @@ $(document).ready(function () {
     //Event submit using ajax when submite element <form> has id InformationForm
     $('#InformationForm').submit(function (event) {
         event.preventDefault();
+
+        //Declare variables
         var old_Password = $('#Password').val();
         var new_Password = $('#New_Password').val();
         var username = $('#Username').val();
         var re_password = $('#Re_Password').val();
+
+        //Validation password
+        if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(old_Password)) {
+            old_Password = "error";
+        }
+        if (!(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,30}$/).test(new_Password)) {
+            new_Password = "error";
+        }
+
         $.ajax({
             type: 'post',
             url: '/Home/ChangePass',
@@ -60,6 +71,7 @@ $(document).ready(function () {
                     $('#AlertBoxforJS').css('top', $('#Password').offset().top - 100);
                     notify("Xảy ra lỗi", 'Mật khẩu cũ không chính xác', false);
                     $("html, body").animate({ scrollTop: $('#Password').offset().top - 100 }, "slow");
+                    $('#Password').focus();
                 }
                 if (res == "true") {
                     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -72,11 +84,23 @@ $(document).ready(function () {
                     $('#AlertBoxforJS').css('top', $('#New_Password').offset().top - 100);
                     notify("Xảy ra lỗi", "Mật khẩu mới không được trùng mật khẩu cũ", false);
                     $("html, body").animate({ scrollTop: $('#New_Password').offset().top - 100 }, "slow");
+                    $("#New_Password").focus();
                 }
                 if (res == "NotLike") {
                     $('#AlertBoxforJS').css('top', $('#Re_Password').offset().top - 100);
                     notify("Xảy ra lỗi", "Mật khẩu nhập lại sai", false);
                     $("html, body").animate({ scrollTop: $('#Re_Password').offset().top - 100 }, "slow");
+                    $("#Re_Password").focus();
+                }
+                if (res == "NotNewPassword") {
+                    $('#AlertBoxforJS').css('top', $('#New_Password').offset().top - 100);
+                    notify("Xảy ra lỗi", "Mật khẩu mới phải chứa chữ in hoa, số hoặc ký tự đặc biệt", false);
+                    $("html, body").animate({ scrollTop: $('#New_Password').offset().top - 100 }, "slow");
+                }
+                if (res == "NotOldPassword") {
+                    $('#AlertBoxforJS').css('top', $('#Password').offset().top - 100);
+                    notify("Xảy ra lỗi", "Mật khẩu cũ phải chứa chữ in hoa, số hoặc ký tự đặc biệt", false);
+                    $("html, body").animate({ scrollTop: $('#Password').offset().top - 100 }, "slow");
                 }
             },
         });
