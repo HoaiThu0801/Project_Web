@@ -16,3 +16,21 @@
 $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
 })
+$(document).ready(function () {
+    $(".search").keyup(function (e) {
+        if (e.which == 13) {
+            var datasearch = $(this).val();
+            $.ajax({
+                url: "/OrderManagement/JsonSearch_OrderManagement",
+                data: {
+                    DataSearch: datasearch
+                },
+                success: function (response) {
+                    if (response == "True") {
+                        $(window).attr('location', '../OrderManagement/OrderManagement');
+                    }
+                }
+            });
+        }
+    });
+})

@@ -1,13 +1,25 @@
 ﻿@using Project_Web.Models;
 @using System.Data;
-
 @{
     ViewBag.Title = "Quản lý đơn hàng";
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
     User user = new User();
     user = Session["User"] as User;
-    var Model = (from s in _db.Bills
+    List<Bill> Model = new List<Bill>();
+    string input = "";
+    if (Session["Search"] != null)
+    {
+        List<Bill> bill = Session["Search"] as List<Bill>;
+        Model = bill;
+        input = Session["InputSearch"] as string;
+    }
+    else
+    {
+        Model = (from s in _db.Bills
                  select s).ToList();
+    }
+    Session.Remove("Search");
+    Session.Remove("InputSearch");
 }
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
@@ -53,7 +65,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -186,39 +208,58 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                                <button class="button-sale">Hủy</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                if (s.IDUser == user.IDUser)
+                                                {
+                                                    <div class="tabcontent-all-bottom-left">
+                                                        <table>
+                                                            <thead>
+                                                                <tr>
+                                                                    <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                    <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                    <th style="width: 30% ">Trạng thái</th>
+                                                                    <th style="width: 15% ">Vận chuyển</th>
+                                                                    <th style="width: 15% ">Thao tác</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    @{
+                                                                        var billDetails = (from bd in _db.BillDetails
+                                                                                           where bd.IDBill == s.IDBill
+                                                                                           select bd).ToList();
+                                                                        foreach (var bd in billDetails)
+                                                                        {
+                                                                            var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                            <td class="display-infor">
+                                                                                <img src="../@dish.Image" />
+                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                            </td>
+                                                                        }
+                                                                        var orderState = (from os in _db.OrderStates
+                                                                                          join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                          where ot.IDBill == s.IDBill
+                                                                                          select os.StateName).SingleOrDefault();
+                                                                        <td class="text-center">@s.Total</td>
+                                                                        <td class="text-center">@orderState</td>
+                                                                        <td class="text-center">Giao tiêu chuẩn</td>
+                                                                        <td class="text-center">
+                                                                            <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                            <button class="button-sale">Mua lần nữa</button>
+                                                                            <button class="button-sale">Hủy</button>
+                                                                        </td>
+                                                                    }
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="table-top">
+                                                            <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                            <div class="table-top-products">@s.IDBill</div>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -231,7 +272,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -378,39 +429,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                                <button class="button-sale">Hủy</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-02");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -423,7 +497,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -568,38 +652,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-03");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -612,7 +720,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -756,38 +874,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-04");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -800,7 +942,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -946,38 +1098,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-05");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -990,7 +1166,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1141,38 +1327,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-07");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1185,7 +1395,17 @@
                             <div class="tabcontent-container">
                                 <div class="search-border">
                                     <i class="fa fa-search"></i>
-                                    <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                    @{
+
+                                        if (input != null)
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" value="@input" />
+                                        }
+                                        else
+                                        {
+                                            <input class="search" type="text" placeholder="Tìm theo tên sản phẩm, ID đơn hàng" />
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1329,38 +1549,62 @@
                                         //Customers
                                         else if (role.IDRole == "R03")
                                         {
-                                            <div class="tabcontent-all-bottom-left">
-                                                <table>
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
-                                                            <th style="width: 10% ">Tổng đơn hàng</th>
-                                                            <th style="width: 30% ">Trạng thái</th>
-                                                            <th style="width: 15% ">Vận chuyển</th>
-                                                            <th style="width: 15% ">Thao tác</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td class="display-infor">
-                                                                <img src="~/images/ImageProducts/chao-hanh.jpg" />
-                                                                <div class="text-information">Thông tin sản phẩm x số lượng</div>
-                                                            </td>
-                                                            <td class="text-center">860.000đ</td>
-                                                            <td class="text-center">Đã giao</td>
-                                                            <td class="text-center">Giao tiêu chuẩn</td>
-                                                            <td class="text-center">
-                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
-                                                                <button class="button-sale">Mua lần nữa</button>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="table-top">
-                                                    <div class="table-top-user"><i class="fa fa-user-circle-o">tuongkl01</i></div>
-                                                    <div class="table-top-products">DH000000</div>
-                                                </div>
-                                            </div>
+                                            foreach (var s in Model)
+                                            {
+                                                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == s.IDBill && n.IDOrderStatse == "OS-06");
+                                                if (orderTrack != null)
+                                                {
+                                                    if (s.IDUser == user.IDUser)
+                                                    {
+                                                        <div class="tabcontent-all-bottom-left">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th style="width: 30% "><i class="fa fa-info-circle"></i>Thông tin sản phẩm</th>
+                                                                        <th style="width: 10% ">Tổng đơn hàng</th>
+                                                                        <th style="width: 30% ">Trạng thái</th>
+                                                                        <th style="width: 15% ">Vận chuyển</th>
+                                                                        <th style="width: 15% ">Thao tác</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        @{
+                                                                            var billDetails = (from bd in _db.BillDetails
+                                                                                               where bd.IDBill == s.IDBill
+                                                                                               select bd).ToList();
+                                                                            foreach (var bd in billDetails)
+                                                                            {
+                                                                                var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            var orderState = (from os in _db.OrderStates
+                                                                                              join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
+                                                                                              where ot.IDBill == s.IDBill
+                                                                                              select os.StateName).SingleOrDefault();
+                                                                            <td class="text-center">@s.Total</td>
+                                                                            <td class="text-center">@orderState</td>
+                                                                            <td class="text-center">Giao tiêu chuẩn</td>
+                                                                            <td class="text-center">
+                                                                                <a href="/OrderManagement/InformationProducts" class="detail">Xem chi tiết</a>
+                                                                                <button class="button-sale">Mua lần nữa</button>
+                                                                                <button class="button-sale">Hủy</button>
+                                                                            </td>
+                                                                        }
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="table-top">
+                                                                <div class="table-top-user"><i class="fa fa-user-circle-o">@user.Username</i></div>
+                                                                <div class="table-top-products">@s.IDBill</div>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -1372,5 +1616,5 @@
         </section>
     </div>
 </body>
-
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/OrderManagement.js"></script>

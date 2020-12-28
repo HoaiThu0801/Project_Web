@@ -75,5 +75,28 @@ namespace Project_Web.Controllers
             return View();
         }
         #endregion
+
+        #region Search
+        public ActionResult JsonSearch_OrderManagement(string DataSearch)
+        {
+            List<Bill> billList = new List<Bill>();
+            var billDetails = _db.BillDetails.Where(n => n.DishName.Contains(DataSearch));
+            foreach (var bd in billDetails)
+            {
+                var billTemp = billList.SingleOrDefault(n => n.IDBill == bd.IDBill);
+                if (billTemp == null)
+                {
+                    Bill bill = _db.Bills.SingleOrDefault(n => n.IDBill == bd.IDBill);
+                    if (bill != null)
+                    {
+                        billList.Add(bill);
+                    }
+                }
+            }
+            Session["InputSearch"] = DataSearch;
+            Session["Search"] = billList;
+            return Content("True");
+        }
+        #endregion
     }
 }

@@ -100,7 +100,7 @@
                     notify("Xảy ra lỗi", "Không thể xóa món ăn này", false);
                     $("html, body").animate({ scrollTop: 0 }, "slow");
                     setTimeout(function () {
-                        $(window).attr('location', '../Home/ShoppingCart');
+                        $(window).attr('location', '../OrderManagement/OrderManagement');
                     }, 2000)
                 }
             }
