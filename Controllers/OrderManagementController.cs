@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project_Web.Models;
 using PagedList;
+using System.Data.Entity.Migrations;
 
 namespace Project_Web.Controllers
 {
@@ -66,6 +67,58 @@ namespace Project_Web.Controllers
         public ActionResult UserManagement()
         {
             return View();
+        }
+        public ActionResult DeleteUser (string IDUser)
+        {
+            var user = _db.Users.SingleOrDefault(n => n.IDUser == IDUser);
+            var role = (from ur in _db.User_Roles
+                        where ur.IDUser == IDUser
+                        select ur).SingleOrDefault();
+            if (role.IDRole == "R02")
+            {
+                Store store = _db.Stores.SingleOrDefault(n => n.IDUser == IDUser);
+                if (store != null)
+                {
+                    store.IDUser = null;
+                    _db.Stores.AddOrUpdate(store);
+                    _db.SaveChanges();
+                }
+            }
+            List<Bill> bills = (from b in _db.Bills
+                         where b.IDUser == IDUser
+                         select b).ToList();
+            foreach (Bill b in bills)
+            {
+                List<BillDetail> billDetails = (from bd in _db.BillDetails
+                                                where bd.IDBill == b.IDBill
+                                                select bd).ToList();
+                foreach (BillDetail bd in billDetails)
+                {
+                    _db.BillDetails.Remove(bd);
+                }
+                _db.SaveChanges();
+                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == b.IDBill);
+                if (orderTrack != null)
+                {
+                    _db.OrderTracks.Remove(orderTrack);
+                }
+                _db.SaveChanges();
+                _db.Bills.Remove(b);
+                _db.SaveChanges();
+            }
+            List<Address_Users> address_Users = (from au in _db.Address_Users
+                                                 where au.IDUser == IDUser
+                                                 select au).ToList();
+            foreach (Address_Users au in address_Users)
+            {
+                _db.Address_Users.Remove(au);
+            }
+            _db.SaveChanges();
+            _db.User_Roles.Remove(role);
+            _db.SaveChanges();
+            _db.Users.Remove(user);
+            _db.SaveChanges();
+            return Content("True");
         }
         #endregion
 
