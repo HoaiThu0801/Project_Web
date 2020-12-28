@@ -473,6 +473,7 @@
     <Content Include="Content\HomeStyle.css" />
     <Content Include="Content\ImportProducts.css" />
     <Content Include="Content\InformationAccount.css" />
+    <Content Include="Content\InformationProducts.css" />
     <Content Include="Content\OrderManagement.css" />
     <Content Include="Content\OrderProducts.css" />
     <Content Include="Content\PagedList.css" />
@@ -687,6 +688,7 @@
     <Content Include="BaoCaoDoAn1_Nhom7\BaoCaoDoAn1_Nhom7.docx" />
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\InformationAccount.js" />
+    <Content Include="Scripts\InformationProducts.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.js" />
@@ -747,6 +749,8 @@
     <Content Include="Views\Statistic\Statistic_TotalNumberofProduct.cshtml" />
     <Content Include="Templates\File_20201221_v1.0_TemplateImportProduct.xlsx" />
     <Content Include="Views\Statistic\Statistic_Top5BestSellerPorridge.cshtml" />
+    <Content Include="Views\OrderManagement\InformationProducts.cshtml" />
+    <Content Include="Views\OrderManagement\UserManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,6 @@ using PagedList;
 
 namespace Project_Web.Controllers
 {
-    [Authorize_seller_adminController]
     public class OrderManagementController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
@@ -17,6 +16,7 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+
         #region MovingState
         public ActionResult StatePreparing(string IDBill)
         {
@@ -62,5 +62,18 @@ namespace Project_Web.Controllers
         }
         #endregion
 
+        #region UserManagement
+        public ActionResult UserManagement()
+        {
+            return View();
+        }
+        #endregion
+
+        #region InformationProducts
+        public ActionResult InformationProducts()
+        {
+            return View();
+        }
+        #endregion
     }
 }

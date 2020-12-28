@@ -1,0 +1,83 @@
+﻿@using Project_Web.Models;
+@{
+    ViewBag.Title = "Thông tin sản phẩm";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/InformationProducts.css">
+</head>
+
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Thông tin sản phẩm</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+                @*<ul class="progressbar">
+                        <li class="active">Xem chi tiết</li>
+                    </ul>*@
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="information-products">
+            <div class="background-products">
+                <div class="image">
+                    <div class="group-images">
+                        <div class="thumbnail">
+                            <div class="wrapper">
+                                <div class="container">
+                                    <img src="~/images/avatar.jpg" style="width: 420px; height: 444px" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="jamb"></div>
+                <div class="information-right">
+                    <div class="header-Infor">
+                        <h1 class="title">
+                            Tên món ăn
+                        </h1>
+                    </div>
+                    <div class="body-Infor">
+                        <div class="summary">
+                            <div class="left">
+                                <div class="priceandicon">
+                                    <div class="product-price">
+                                        <div class="product-current-price">Giá tiền ₫</div>
+                                    </div>
+                                </div>
+                                <div class="crossbar"></div>
+                                <div class="count">
+                                    <div class="quantity">
+                                        <div class="quantity-Wrapper">
+                                            <p class="label">Số lượng</p>
+                                            <div class="group-input">
+                                                <span class="quantiTy-decrease disabled" data-IDBillDetail="" data-quantity="">-</span>
+                                                <input type="text" class="quantiTy-sum changQuantity" value="1" />
+                                                <span class="quantiTy-increase" data-IDBillDetail="" data-quantity="">+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="group-button">
+                                        <button class="btn btn-add-to-cart">Chọn mua</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/InformationProducts.js"></script>

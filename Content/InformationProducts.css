@@ -1,0 +1,299 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightyellow;
+    min-height: 100vh;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+/*CSS for header*/
+.row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
+/*Progress Bar*/
+.progress-bar-design {
+    margin-top: 60px;
+    padding-left: 94px;
+}
+
+.progressbar {
+    counter-reset: step;
+    padding: 0;
+}
+
+    .progressbar li {
+        float: left;
+        list-style: none;
+        position: relative;
+        text-align: center;
+        width: calc(100% / 5);
+    }
+
+        .progressbar li:before {
+            background: #fff;
+            border: 2px solid #bebebe;
+            border-radius: 50%;
+            color: #bebebe;
+            content: counter(step);
+            counter-increment: step;
+            display: block;
+            font-weight: 700;
+            height: 30px;
+            line-height: 27px;
+            margin: 0 auto 10px;
+            text-align: center;
+            width: 30px;
+        }
+
+        .progressbar li:after {
+            background: #979797;
+            content: '';
+            height: 3px;
+            left: -50%;
+            position: absolute;
+            top: 15px;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .progressbar li.active:after,
+        .progressbar li.complete:after {
+            background: #3aac5d;
+        }
+
+        .progressbar li.active:before,
+        .progressbar li.complete:before {
+            background: #3aac5d;
+            border-color: #3aac5d;
+            color: #fff;
+        }
+
+        .progressbar li.active {
+            color: #3aac5d;
+            font-weight: 700;
+        }
+
+        .progressbar li.complete {
+            color: #333;
+            font-weight: 700;
+        }
+/*end*/
+
+/*CSS for main*/
+.main{
+    margin-top: 10px;
+}
+.information-products {
+    width: 1270px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.background-products {
+    display: flex;
+    margin-bottom: 40px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0px 0px 4px 4px;
+}
+
+.image {
+    padding: 16px 0px 16px 16px;
+    position: relative;
+}
+
+    .image .group-images {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+    }
+
+        .image .group-images .thumbnail {
+            text-align: center;
+        }
+
+.wrapper {
+    position: relative;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 444px;
+    height: 444px;
+}
+
+    .wrapper .container {
+        position: relative;
+        display: flex;
+        width: 444px;
+        height: 444px;
+    }
+
+.jamb {
+    margin: 0px 12px;
+    width: 1px;
+    background: rgb(242, 242, 242);
+    flex-shrink: 0;
+}
+
+.information-right {
+    flex: 1 1 0%;
+}
+
+    .information-right .header-Infor {
+        padding: 16px 24px 16px 0px;
+        position: relative;
+    }
+
+        .information-right .header-Infor .title {
+            margin: 0px 0px 4px;
+            color: rgb(36, 36, 36);
+            font-size: 24px;
+            font-weight: 300;
+            line-height: 32px;
+            max-width: 615px;
+        }
+
+.body-Infor {
+    padding: 0px 24px 0px 0px;
+}
+
+    .body-Infor .left {
+        flex: 1 1 0%;
+        padding-right: 12px;
+    }
+
+        .body-Infor .left .priceandicon {
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px;
+            background-color: rgb(250, 250, 250);
+            padding: 12px 16px;
+        }
+.product-current-price {
+    font-size: 32px;
+    line-height: 40px;
+    margin-right: 8px;
+    font-weight: 500;
+}
+.crossbar {
+    background: white;
+    margin: 8px 0px;
+    border-top: 1px solid rgb(242, 242, 242);
+}
+.count {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0px 0px;
+    padding: 16px 0px;
+    border-top: 1px solid rgb(242, 242, 242);
+}
+.quantity {
+    display: flex;
+    align-items: flex-end;
+}
+.count .label {
+    font-size: 15px;
+    line-height: 1.6;
+}
+p {
+    margin: 0px 0px 10px;
+}
+.group-input {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid rgb(200, 200, 200);
+    border-radius: 3px;
+    background-color: white;
+}
+
+.quantiTy-sum {
+    border: none;
+    background: transparent;
+    width: 35px;
+    text-align: center;
+    font-size: 13px;
+    appearance: none;
+    margin: 0px;
+}
+
+.quantiTy-decrease {
+    border-right: 1px solid rgb(200, 200, 200);
+    color: black;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.quantiTy-increase {
+    border-right: none;
+    color: black;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-left: 1px solid rgb(200, 200, 200);
+}
+
+    .quantiTy-decrease:hover, .quantiTy-increase:hover {
+        font-weight: bolder;
+    }
+
+.disabled {
+    pointer-events: none;
+    background-color: lightgray;
+}
+.group-button {
+    margin-top: 16px;
+    flex: 1 1 0%;
+    display: flex;
+}
+.btn.btn-add-to-cart {
+    color: rgb(255, 255, 255);
+    background-color: rgb(255, 57, 69);
+}
+    .btn.btn-add-to-cart:hover{
+        opacity: 0.7;
+    }
+    .btn {
+        cursor: pointer;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        min-width: 190px;
+        width: 100%;
+        max-width: 300px;
+        height: 48px;
+        font-size: 15px;
+        line-height: 24px;
+        font-weight: 500;
+        text-transform: capitalize;
+        border: none;
+        border-radius: 4px;
+        outline: none;
+    }
+/*end*/
