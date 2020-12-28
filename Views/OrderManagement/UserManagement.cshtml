@@ -49,19 +49,24 @@
 
                         foreach (var s in listUsers)
                         {
+                            var quyen = (from ur in _db.User_Roles
+                                         join r in _db.Roles on ur.IDRole equals r.IDRole
+                                         where ur.IDUser == s.IDUser
+                                         select r.Role1).SingleOrDefault();
+                            string datestring = String.Format("{0:dd-MM-yyyy}", s.DateofBirth);
                             <tr>
                                 <td>@s.IDUser</td>
                                 <td>@s.Username</td>
                                 <td>@s.Fullname</td>
                                 <td>@s.Gender</td>
-                                <td>@s.DateofBirth</td>
+                                <td>@datestring</td>
                                 <td>@s.IdentityCard</td>
                                 <td>@s.Address</td>
-                                <td>@s.PhoneNumber/td>
+                                <td>@s.PhoneNumber</td>
                                 <td>@s.Point</td>
                                 <td>@s.Email</td>
-                                <td></td>
-                                <td><button class="btn btn-danger">Xóa</button></td>
+                                <td>@quyen</td>
+                                <td><button class="btn btn-danger" id="DeleteUser" data-IDUser="@s.IDUser">Xóa</button></td>
                             </tr>
                         }
                     }
@@ -70,4 +75,5 @@
         </div>
     </div>
 </body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
 <script src="~/Scripts/UserManagement.js"></script>
