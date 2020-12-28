@@ -1,0 +1,51 @@
+﻿* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightyellow;
+    min-height: 100vh;
+}
+h1{
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/*CSS for header*/
+.row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
+/*end*/
+.main{
+    margin-top: 10px;
+    width: 100%;
+}
+.main-background{
+    background-color: white;
+    padding: 10px;
+    width: 100%;
+}
+.table tbody td{
+    text-align:center;
+    width: 100%;
+}
