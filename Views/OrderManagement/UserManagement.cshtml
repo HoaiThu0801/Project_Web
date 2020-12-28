@@ -1,5 +1,73 @@
-﻿@{
+﻿@using Project_Web.Models;
+@{
     ViewBag.Title = "Quản lý người dùng";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
 }
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/UserManagement.css">
+</head>
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Quản lý người dùng</h2>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-background">
+            <h1 class="text-center">Danh sách người dùng</h1>
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th style="width: 10%">IDUser</th>
+                        <th style="width: 10%">Username</th>
+                        <th style="width: 10%">Fullname</th>
+                        <th style="width: 5%">Gender</th>
+                        <th style="width: 5%">DateofBirth</th>
+                        <th style="width: 5%">IdentityCard</th>
+                        <th style="width: 15%">Address</th>
+                        <th style="width: 5%">PhoneNumber</th>
+                        <th style="width: 5%">Point</th>
+                        <th style="width: 10%">Email</th>
+                        <th style="width: 5%">Role</th>
+                        <th style="width: 10%">Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="ListData">
+                    @{
+                        var listUsers = (from s in _db.Users
+                                         select s).ToList();
 
 
+                        foreach (var s in listUsers)
+                        {
+                            <tr>
+                                <td>@s.IDUser</td>
+                                <td>@s.Username</td>
+                                <td>@s.Fullname</td>
+                                <td>@s.Gender</td>
+                                <td>@s.DateofBirth</td>
+                                <td>@s.IdentityCard</td>
+                                <td>@s.Address</td>
+                                <td>@s.PhoneNumber/td>
+                                <td>@s.Point</td>
+                                <td>@s.Email</td>
+                                <td></td>
+                                <td><button class="btn btn-danger">Xóa</button></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/UserManagement.js"></script>
