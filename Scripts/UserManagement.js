@@ -8,7 +8,10 @@
             },
             success: function (response) {
                 if (response == "True") {
-                    $(window).attr('location', '../OrderManagement/UserManagement');
+                    notify("Thông báo", "Xóa người dùng này thành công", true);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderManagement/UserManagement');
+                    }, 2000);
                 }
             }
         });

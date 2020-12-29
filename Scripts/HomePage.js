@@ -7,6 +7,8 @@ $(function () {
 
     function goto() {
         animateImage.play();
+        $('.khoiload').css("opaity", 0);
+        $('.khoiload').css("visibility", "hidden");
     }
     animateImage = new TimelineMax({ paused: true });
     animateImage.from($('.header'), 0.4, { opacity: 0 })
@@ -22,11 +24,13 @@ $(document).ready(function () {
     $("html, body").animate({ scrollTop: 0 }, "slow");
 
     //Event using ajax when click class cart-plus
-    $('.cart-plus').click(function () {
+    $('.cart-plus').click(function (e) {
+        e.preventDefault();
         var IDDish = $(this).attr("data-IDDish");
         $.ajax({
             type: "post",
             url: "/Home/AddCart",
+            dataType: "json",
             data: {
                 IDDish: IDDish
             },
@@ -35,8 +39,8 @@ $(document).ready(function () {
                     notify("Thông báo", "Bạn đã thêm món " + res.message + " vào giỏ hàng thành công", res.type);
                     $("html, body").animate({ scrollTop: 0 }, "slow");
                     setTimeout(function () {
-                        $(window).attr('location', '../Home/Index');      
-                    }, 2000)                 
+                        $(window).attr('location', '../Home/Index');
+                    }, 2000);
                 }
                 if (res == "user") {
                     notify("Thông báo", "Bạn phải đăng nhập thì mới thêm được món ăn vào giỏ hàng", false);

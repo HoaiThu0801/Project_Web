@@ -49,8 +49,11 @@ $(document).ready(function () {
             data: form,
             success: function (res) {
                 if (res == "true") {
-                    alert("Thêm địa chỉ mới thành công");
-                    $(window).attr('location', '../OrderProducts/Shipping');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Thông báo", "Thêm địa chỉ mới thành công", true);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderProducts/Shipping');
+                    }, 2000);
                 }
             },
         })
@@ -171,6 +174,7 @@ $('#Street').keyup(function () {
 
 //Click button đặt làm mặc định
 $(document).ready(function () {
+
     $('.default-button').click(function (e) {
         $(this).css('display', 'none');
         var IDaddress = $(this).attr("data-IDAddress");
@@ -184,11 +188,18 @@ $(document).ready(function () {
             },
             success: function (res) {
                 if (res == "true") {
-                    $(window).attr('location', '../OrderProducts/Shipping');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Thông báo", "Bạn đã đổi địa chỉ mặc định thành công", true);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderProducts/Shipping');
+                    }, 2000);
                 }
-                else {
-                    alert("Có lỗi xảy ra trong quá trình xử lý, bạn vui lòng thử lại sau");
-                    $(window).attr('location', '../OrderProducts/Shipping');
+                if (res == "false") {
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Xảy ra lỗi", "Đã có lỗi trong quá trình xử lý, bạn vui lòng thử lại sau", false);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderProducts/Shipping');
+                    }, 2000);
                 }
             }
         })
@@ -210,11 +221,18 @@ $(document).ready(function () {
             },
             success: function (res) {
                 if (res == "false") {
-                    alert("Có lỗi xảy ra trong quá trình xử lý, bạn vui lòng thử lại sau");
-                    $(window).attr('location', '../OrderProducts/Shipping');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Xảy ra lỗi", "Đã có lỗi xảy ra trong quá trình xử lý, bạn vui lòng thử lại sau", false);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderProducts/Shipping');
+                    }, 2000);
                 }
                 else {
-                    $(window).attr('location', '../OrderProducts/OrderProducts');
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Thông báo", "Bạn đã chọn giao đến địa chỉ này", true);
+                    setTimeout(function () {
+                        $(window).attr('location', '../OrderProducts/OrderProducts');
+                    }, 2000);
                 }
             }
         })

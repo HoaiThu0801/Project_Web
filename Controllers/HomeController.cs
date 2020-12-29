@@ -287,7 +287,7 @@ namespace Project_Web.Controllers
                         Bill bill = new Bill();
                         bill.IDBill = "ID-B" + querryIDBillCount.Count() + "-" + String.Format("{0:ddMMyyyyHHmmss}", DateTime.Now);
                         dr["IDBill"] = bill.IDBill;
-                        bill.IDStore = "S0-29112020221332";
+                        bill.IDStore = "S1-29122020214830";
                         bill.IDUser = user.IDUser;
                         bill.Time = DateTime.Now;
                         _db.Bills.Add(bill);

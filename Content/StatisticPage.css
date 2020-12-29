@@ -55,6 +55,7 @@ body {
 
         #sidebar > ul.nav > li {
             margin: 10px 20px 20px;
+            cursor: pointer;
         }
 
             #sidebar > ul.nav > li > a {
@@ -98,6 +99,12 @@ body {
                 margin: 0;
                 overflow: hidden;
             }
+
+#charttypes{
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s linear all;
+}
 /* sidebar toggle */
 .sidebar-toggle {
     display: none !important;

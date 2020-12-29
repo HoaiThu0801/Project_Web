@@ -34,9 +34,9 @@ namespace Project_Web.Controllers
             {
                 menu_store.Available = model.Quantity;
                 _db.Menu_Stores.AddOrUpdate(menu_store);
+                _db.SaveChanges();
             }
-            _db.SaveChanges();
-            return View();
+            return Content("true");
         }
 
         public JsonResult LoadDishName(string WarehouseName)

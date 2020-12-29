@@ -35,8 +35,19 @@
     //Show success when submit form
     $('#import-products-form').submit(function (e) {
         e.preventDefault();
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        notify("Thông báo", "Đã nhập hàng vào kho cửa hàng thành công", true);
+        var url = $(this).attr('action');
+        var formdata = $(this).serialize();
+        $.ajax({
+            type: "post",
+            url: url,
+            data: formdata,
+            success: function (res) {
+                if (res == "true") {
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    notify("Thông báo", "Đã nhập hàng vào kho cửa hàng thành công", true);
+                }
+            }
+        })
         //setTimeout(function () {
         //    location.reload();
         //}, 2000)

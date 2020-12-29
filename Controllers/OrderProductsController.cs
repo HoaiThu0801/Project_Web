@@ -15,6 +15,8 @@ namespace Project_Web.Controllers
     public class OrderProductsController : BaseController
     {
         Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+
+        #region OrderProducts
         // GET: OrderProducts
         [HttpGet]
         [Authorize_userController]
@@ -78,6 +80,7 @@ namespace Project_Web.Controllers
                     _db.SaveChanges();
                     //SendMail(AddressOrder);
                     Session.Remove("cart");
+                    SetAlert("Thông báo", "Bạn đã đặt hàng thành công.Cảm ơn bạn đã đồng hàng cùng cửa hàng MST", true);
                     return Content("true");
                 }
                 else
@@ -115,6 +118,8 @@ namespace Project_Web.Controllers
                     _db.SaveChanges();
                     //SendMail(AddressOrder);
                     Session.Remove("cart");
+                    SetAlert("Thông báo", "Bạn đã đặt hàng thành công.Cảm ơn bạn đã đồng hàng cùng cửa hàng MST", true);
+                    TempData["AlertMessage"] = null;
                     return Content("true");
                 }
             }
@@ -123,7 +128,9 @@ namespace Project_Web.Controllers
                 return Content("false");
             }
         }
+        #endregion
 
+        #region SendMail
         public void SendMail (string address)
         {
             User user = new User();
@@ -153,6 +160,9 @@ namespace Project_Web.Controllers
                 }
             }
         }
+        #endregion
+
+        #region Shipping
         [HttpGet]
         [Authorize_userController]
         public ActionResult Shipping()
@@ -222,6 +232,8 @@ namespace Project_Web.Controllers
             }
             return Content("false");
         }
+        #endregion
+
         #region LoadData
         [HttpGet]
         public JsonResult LoadDistrict(string ProvinceName)

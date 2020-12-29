@@ -27,18 +27,17 @@
             <table class="table table-bordered">
                 <thead>
                     <tr class="text-center">
-                        <th style="width: 10%">IDUser</th>
-                        <th style="width: 10%">Username</th>
-                        <th style="width: 10%">Fullname</th>
-                        <th style="width: 5%">Gender</th>
-                        <th style="width: 5%">DateofBirth</th>
-                        <th style="width: 5%">IdentityCard</th>
-                        <th style="width: 15%">Address</th>
-                        <th style="width: 5%">PhoneNumber</th>
-                        <th style="width: 5%">Point</th>
-                        <th style="width: 10%">Email</th>
-                        <th style="width: 5%">Role</th>
-                        <th style="width: 10%">Delete</th>
+                        <th>Username</th>
+                        <th>Fullname</th>
+                        <th>Gender</th>
+                        <th>DateofBirth</th>
+                        <th>IdentityCard</th>
+                        <th>Address</th>
+                        <th>PhoneNumber</th>
+                        <th>Point</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody id="ListData">
@@ -55,7 +54,6 @@
                                          select r.Role1).SingleOrDefault();
                             string datestring = String.Format("{0:dd-MM-yyyy}", s.DateofBirth);
                             <tr>
-                                <td>@s.IDUser</td>
                                 <td>@s.Username</td>
                                 <td>@s.Fullname</td>
                                 <td>@s.Gender</td>
@@ -75,5 +73,5 @@
         </div>
     </div>
 </body>
-<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+
 <script src="~/Scripts/UserManagement.js"></script>

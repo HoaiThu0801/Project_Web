@@ -73,14 +73,14 @@
                                 <div class="orderProducts-left-step1-border2-textup">
                                     Giao vào @datestring
                                 </div>
-                                    }
+                            }
                             <div class="orderProducts-left-step1-border2-nameProduct">
                                 <ul class="orderProducts-left-step1-border2-products">
                                     @{
                                         foreach (DataRow dr in cart.Rows)
                                         {
                                             string Quantity = dr["Quantity"].ToString();
-                                    string DishName = dr["DishName"].ToString();
+                                            string DishName = dr["DishName"].ToString();
                                             <li>
                                                 <div class="orderProducts-left-step1-border2-products-inner">
                                                     @Quantity x @DishName

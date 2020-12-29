@@ -11,3 +11,20 @@
     document.getElementById(statisticName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+$(document).ready(function () {
+    var flaq = true;
+    $('#statistic').click(function () {
+        if (flaq == true) {
+            $('#charttypes').css('opacity', 1);
+            $('#charttypes').css('visibility', 'visible');
+            flaq = false;
+        }
+        else {
+            $('#charttypes').css('opacity', 0);
+            $('#charttypes').css('visibility', 'hidden');
+            $('.tablinks').removeClass('active');
+            $('.tabcontent').css('display', 'none');
+            flaq = true;
+        }
+    });
+});

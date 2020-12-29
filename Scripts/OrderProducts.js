@@ -5,7 +5,10 @@ $('#update-button-products').click(function () {
     $(window).attr('location', '../Home/ShoppingCart');
 });
 
+//Order the item
 $(document).ready(function () {
+
+    //CheckBox event
     var flaqCheckBox = true;
     $('#CheckBox').click(function () {
         if (flaqCheckBox == true) {
@@ -19,15 +22,18 @@ $(document).ready(function () {
             flaqCheckBox = true
         }
     });
-})
 
-//Order the item
-$(document).ready(function () {
-    $('#Order-item').click(function () {
+    //Scroll to top page
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    $('#Order-item').click(function (e) {
+        e.preventDefault();
         var address_user = $('#address_user').text();
         if (address_user == "") {
-            alert("Bạn chưa cài địa chỉ mặc định, hãy cài địa chỉ mặc định");
-            $(window).attr('location', '../OrderProducts/Shipping');
+            notify("Xảy ra lỗi", "Bạn chưa cài địa chỉ mặc định, hãy cài địa chỉ mặc định", false);
+            setTimeout(function () {
+                $(window).attr('location', '../OrderProducts/Shipping');
+            });
         }
         else {
             $.ajax({
@@ -38,12 +44,13 @@ $(document).ready(function () {
                 url: "/OrderProducts/OrderProducts",
                 success: function (res) {
                     if (res == "true") {
-                        alert("Bạn đã đặt hàng thành công. Cảm ơn bạn đã đồng hàng cùng cửa hàng MST");
                         $(window).attr('location', '../Home/Index');
                     }
                     else {
-                        alert("Đặt hàng không thành công. Chúng tôi xin lỗi vì sự bất tiện này");
-                        $(window).attr('location', '../OrderProducts/OrderProducts');
+                        notify("Xảy ra lỗi", "Đặt hàng không thành công. Chúng tôi xin lỗi vì sự bất tiện này", false);
+                        setTimeout(function () {
+                            $(window).attr('location', '../OrderProducts/OrderProducts');
+                        }, 2000);
                     }
                 }
             })
@@ -51,7 +58,3 @@ $(document).ready(function () {
     });
 })
 
-//Scroll to top page
-$(document).ready(function () {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-})

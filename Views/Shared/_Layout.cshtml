@@ -45,13 +45,16 @@
             font-weight: bold;
             text-transform: uppercase;
         }
+
+        .text-center-div {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     @{
         if (TempData["AlertMessage"] != null)
         {
-
             <div id="AlertBoxforController" class="alert animate__animated animate__bounceInDown @TempData["AlertType"] hide">
                 <div class="Title text-center">
                     <i id="IconBox" class="@TempData["AlertIcon"]"></i>@TempData["AlertTitle"]
@@ -61,19 +64,16 @@
                 </div>
             </div>
         }
-        else
-        {
-            <div id="Alert">
-                <div id="AlertBoxforJS" class="hide">
-                    <div class="Title text-center">
-                        <i id="IconBox" class=""></i>
-                    </div>
-                    <div class="message" id="messageJS">
-                    </div>
-                </div>
-            </div>
-        }
     }
+    <div id="Alert">
+        <div id="AlertBoxforJS" class="hide">
+            <div class="Title text-center-div">
+                <i id="IconBox" class=""></i>
+            </div>
+            <div class="message" id="messageJS">
+            </div>
+        </div>
+    </div>
     <script>
         function notify(t, m, ty) {
             var title = t;
