@@ -1,0 +1,71 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: lightyellow;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: white;
+}
+
+.text-product {
+    margin-left: 30px;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/*CSS for header*/
+.header .row {
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+}
+
+.header {
+    width: 98.9%;
+}
+/*Can giua*/
+.col-md-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.image-logo {
+    width: 150px;
+    height: 150px;
+}
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.main-background {
+    background-color: white;
+    width: 90%;
+    padding: 0 10px 0 10px;
+    height: 70px;
+    transition: 0.3s linear all;
+}
+.main-inputDate {
+    display: flex;
+    margin: 10px 0 10px 10px;
+    align-items: center;
+    justify-content: center;
+}
+.table{
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s linear all;
+}
+.btn{
+    margin-left: 10px;
+}

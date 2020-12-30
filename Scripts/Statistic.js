@@ -1,4 +1,5 @@
-﻿function openChartStatistic(evt, statisticName) {
+﻿//Function click tab statistic and show content
+function openChartStatistic(evt, statisticName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -11,6 +12,7 @@
     document.getElementById(statisticName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
 $(document).ready(function () {
     var flaq = true;
     $('#statistic').click(function () {

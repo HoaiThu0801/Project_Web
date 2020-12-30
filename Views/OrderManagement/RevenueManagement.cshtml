@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Doanh thu cửa hàng";
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/RevenueManagement.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+</head>
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Doanh thu cửa hàng</h2>
+            </div>
+            <div class="col-md-4 progress-bar-design">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-background">
+            <div class="main-inputDate">
+                <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 23%">
+                    <i class="fa fa-calendar"></i>&nbsp;
+                    <span></span> <i class="fa fa-caret-down"></i>
+                </div>
+                <button class="btn btn-success" id="Confirm">Xác nhận</button>
+                <button class="btn btn-info" id="ExportExcel">Xuất ra file Excel</button>
+                <button class="btn btn-danger" id="Cancel">Hủy</button>
+            </div>
+            <table class="table table-bordered" id="table">
+                <thead>
+                    <tr class="text-center">
+                        <th>Tên cửa hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>Tên nhân viên</th>
+                        <th>Doanh thu</th>
+                        <th>Ngày</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td>Cửa hàng Lê Lợi</td>
+                        <td>Quận 10</td>
+                        <td>Đặng Nguyễn Hoài Thư</td>
+                        <td>300.000 ₫</td>
+                        <td>@DateTime.Now</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script src="~/Scripts/RevenueManagement.js"></script>
+

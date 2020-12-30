@@ -1,12 +1,13 @@
-﻿$('#update-button-information').click(function () {
-    $(window).attr('location', '../OrderProducts/Shipping');
-});
-$('#update-button-products').click(function () {
-    $(window).attr('location', '../Home/ShoppingCart');
-});
-
-//Order the item
+﻿//Order the item
 $(document).ready(function () {
+
+    //Event redirect when click butotn
+    $('#update-button-information').click(function () {
+        $(window).attr('location', '../OrderProducts/Shipping');
+    });
+    $('#update-button-products').click(function () {
+        $(window).attr('location', '../Home/ShoppingCart');
+    });
 
     //CheckBox event
     var flaqCheckBox = true;

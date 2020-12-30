@@ -478,6 +478,7 @@
     <Content Include="Content\OrderProducts.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\RegisterStyle.css" />
+    <Content Include="Content\RevenueManagement.css" />
     <Content Include="Content\Shipping.css" />
     <Content Include="Content\ShoppingCart.css" />
     <Content Include="Content\SignInStyle.css" />
@@ -706,6 +707,7 @@
     <Content Include="Scripts\OrderManagement.js" />
     <Content Include="Scripts\OrderProducts.js" />
     <Content Include="Scripts\RegisterJS.js" />
+    <Content Include="Scripts\RevenueManagement.js" />
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Scripts\sb-admin-2.min.js" />
     <Content Include="Scripts\ShoppingCart.js" />
@@ -753,6 +755,7 @@
     <Content Include="Views\Statistic\Statistic_Top5BestSellerPorridge.cshtml" />
     <Content Include="Views\OrderManagement\InformationProducts.cshtml" />
     <Content Include="Views\OrderManagement\UserManagement.cshtml" />
+    <Content Include="Views\OrderManagement\RevenueManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

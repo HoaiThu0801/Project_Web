@@ -118,7 +118,12 @@ namespace Project_Web.Controllers
             _db.SaveChanges();
             _db.Users.Remove(user);
             _db.SaveChanges();
-            return Content("True");
+            var success = new
+            {
+                message = user.Username,
+                type = true,            
+            };
+            return Json(success, JsonRequestBehavior.AllowGet);
         }
         #endregion
 
@@ -149,6 +154,13 @@ namespace Project_Web.Controllers
             Session["InputSearch"] = DataSearch;
             Session["Search"] = billList;
             return Content("True");
+        }
+        #endregion
+
+        #region RevenueManagement
+        public ActionResult RevenueManagement()
+        {
+            return View();
         }
         #endregion
     }
