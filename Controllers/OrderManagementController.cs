@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using Project_Web.Models;
 using PagedList;
 using System.Data.Entity.Migrations;
+using ClosedXML.Excel;
+using System.Data;
+using System.IO;
 
 namespace Project_Web.Controllers
 {
@@ -162,6 +165,107 @@ namespace Project_Web.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult TrackRevenue(DateTime StartTime, DateTime EndTime)
+        {
+            if (Session["User"] != null)
+            {
+                User user = Session["User"] as User;
+                var role = _db.User_Roles.SingleOrDefault(n => n.IDUser == user.IDUser);
+                if (role.IDRole == "R02")
+                {
+                    var store = _db.Stores.SingleOrDefault(n => n.IDUser == user.IDUser);
+                    if (store != null)
+                    {
+                        List<RevenueofStore> revenueofStores = new List<RevenueofStore>();
+                        var Bills = (from b in _db.Bills
+                                     join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                                     where b.IDStore == store.IDStore && (StartTime <= b.Time && EndTime >= b.Time) && ot.IDOrderStatse == "OS-05"
+                                     select b).ToList();
+                        foreach (var b in Bills)
+                        {
+                            RevenueofStore revenueofStoreTemp = new RevenueofStore();
+                            revenueofStoreTemp.StoreName = store.StoreName;
+                            revenueofStoreTemp.Address = store.Location;
+                            revenueofStoreTemp.FullName = user.Fullname;
+                            revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
+                            revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                            revenueofStores.Add(revenueofStoreTemp);
+                        }
+                        return Json(revenueofStores, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Content("False");
+                    }
+                }
+                else if (role.IDRole == "R01")
+                {
+                    List<RevenueofStore> revenueofStores = new List<RevenueofStore>();
+                    var Bills = (from b in _db.Bills
+                                 join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                                 where (StartTime <= b.Time && EndTime >= b.Time) && ot.IDOrderStatse == "OS-05"
+                                 select b).ToList();
+                    foreach (var b in Bills)
+                    {
+                        var store = _db.Stores.SingleOrDefault(n => n.IDStore == b.IDStore);
+                        RevenueofStore revenueofStoreTemp = new RevenueofStore();
+                        revenueofStoreTemp.StoreName = store.StoreName;
+                        revenueofStoreTemp.Address = store.Location;
+                        revenueofStoreTemp.FullName = user.Fullname;
+                        revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
+                        revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                        revenueofStores.Add(revenueofStoreTemp);
+                    }
+                    return Json(revenueofStores, JsonRequestBehavior.AllowGet);
+                }
+                return RedirectToAction("SignIn", "SignIn");
+               
+            }
+            return RedirectToAction("SignIn", "SignIn");
+        }
         #endregion
+        public FileResult ExportTrack(DateTime StartTime, DateTime EndTime)
+        {
+            if (Session["User"] != null)
+            {
+                User user = Session["User"] as User;
+                var role = _db.User_Roles.SingleOrDefault(n => n.IDUser == user.IDUser);
+                if (role.IDRole == "R02")
+                {
+                    var store = _db.Stores.SingleOrDefault(n => n.IDUser == user.IDUser);
+                    if (store != null)
+                    {
+                        DataTable dt = new DataTable("Grid");
+                        dt.Columns.AddRange(new DataColumn[5] { new DataColumn("StoreName"),
+                                            new DataColumn("Location"),
+                                            new DataColumn("Fullname"),
+                                            new DataColumn("Revenue"),
+                                            new DataColumn("Time")});
+                        var Bills = (from b in _db.Bills
+                                     join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                                     where b.IDStore == store.IDStore && (StartTime <= b.Time && EndTime >= b.Time) && ot.IDOrderStatse == "OS-05"
+                                     select b).ToList();
+                        foreach (var b in Bills)
+                        {
+                            dt.Rows.Add(store.StoreName, store.Location, user.Fullname, float.Parse(b.Total.ToString()), DateTime.Parse(b.Time.ToString()));
+                        }
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt);
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                wb.SaveAs(stream);
+                                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+                            }
+                        }
+                    }
+                }
+            }
+            string path = "~/Templates/File_20201221_v1.0_TemplateImportProduct.xlsx";
+            return File(path, "application/vnd.ms-excel", "File_20201221_v1.0_TemplateImportProduct.xlsx");
+        }
+
     }
 }

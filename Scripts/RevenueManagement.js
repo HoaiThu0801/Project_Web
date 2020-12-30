@@ -38,11 +38,44 @@
         $('.main-background').css('height', 'unset');
         $('#table').css('opacity', 1);
         $('#table').css('visibility', 'visible');
+        alert(dateStart);
+        alert(dateEnd);
+        $.ajax({
+            type: "post",
+            url: "/OrderManagement/TrackRevenue",
+            data: {
+                StartTime: dateStart,
+                EndTime: dateEnd
+            },
+            success: function (response) {
+                $("tbody#listRevenue").html("");
+                $(response).each(function (i, e) {
+                    var tr = $("<tr/>");
+                    $("<td/>").html(e.StoreName).appendTo(tr);
+                    $("<td/>").html(e.Address).appendTo(tr);
+                    $("<td/>").html(e.FullName).appendTo(tr);
+                    $("<td/>").html(e.Revenue).appendTo(tr);
+                    $("<td/>").html(e.Time).appendTo(tr);
+                    tr.appendTo("tbody#listRevenue");
+                });
+            }
+        });
     });
 
     $('#Cancel').click(function () {
         $('.main-background').css('height', '70px');
         $('#table').css('opacity', 0);
         $('#table').css('visibility', 'hidden');
+    });
+    $('#ExportExcel').click(function () {
+        $.ajax({
+            url: "/OrderManagement/ExportTrack",
+            data: {
+                StartTime: dateStart,
+                EndTime: dateEnd
+            },
+            success: function (response) {
+            }
+        });
     });
 });
