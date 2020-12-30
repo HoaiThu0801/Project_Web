@@ -756,6 +756,7 @@
     <Content Include="Views\OrderManagement\InformationProducts.cshtml" />
     <Content Include="Views\OrderManagement\UserManagement.cshtml" />
     <Content Include="Views\OrderManagement\RevenueManagement.cshtml" />
+    <Content Include="Views\Shared\_LocationStore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

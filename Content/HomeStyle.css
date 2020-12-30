@@ -21,14 +21,26 @@ body, html {
 .header {
     width: 98.9%;
 }
-/*Can giua*/
-.col-md-4 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 0;
-    padding-right: 0;
+.input-search{
+    border: none;
+    font-size: 18px;
+    border-bottom: 1px solid gray;
+    background-color:lightyellow;   
+    margin-right: 10px;
 }
+    .input-search:focus {
+        border: none;
+        border-bottom: 1px solid gray;
+        outline:none;
+    }
+    /*Can giua*/
+    .col-md-4 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
 
 .image-logo {
     width: 150px;
@@ -521,8 +533,23 @@ li:hover .sub-menu-around {
     align-items: center;
 }
 
+/*CSS for category*/
+.category{
+    margin-top: 10px;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 40px;
+}
+.category-background{
+    background-color:white;
+    width: 90%;
+    padding:  20px;
+}
+/*end*/
 /*CSS for load*/
-.load{
+.load {
     position: absolute;
     top: 40%;
     left: 45%;
