@@ -28,23 +28,43 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="text-center">
-                            <th>Storename</th>
-                            <th>Location</th>
-                            <th>PhoneNumber</th>
+                            <th>Tên cửa hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Nhân viên</th>
+                            <th>Số điện thoại</th>
                             <th>Email</th>
-                            <th>WarehouseName</th>
-                            <th>Delete</th>
+                            <th>Tên kho hàng</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><button class="btn btn-danger DeleteUser">Xóa</button></td>
-                        </tr>
+                        @{
+                            var stores = (from s in _db.Stores
+                                          select s).ToList();
+                            foreach (var s in stores)
+                            {
+                                var warehouse = (from w in _db.Warehouses
+                                                 where w.IDStore == s.IDStore
+                                                 select w).SingleOrDefault();
+                                var User = (from u in _db.Users
+                                            where u.IDUser == s.IDUser
+                                            select u).SingleOrDefault();
+                                string username = "Chưa có nhân viên";
+                                if (User != null)
+                                {
+                                    username = User.Username;
+                                }
+                                <tr>
+                                    <td>@s.StoreName</td>
+                                    <td>@s.Location</td>
+                                    <td>@username</td>
+                                    <td>@s.PhoneNumber</td>
+                                    <td>@s.Email</td>
+                                    <td>@warehouse.WarehouseName</td>
+                                    <td><button class="btn btn-danger DeleteStore" data-IDStore="@s.IDStore">Xóa</button></td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>

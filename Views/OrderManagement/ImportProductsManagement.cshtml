@@ -28,25 +28,35 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="text-center">
-                            <th>WarehouseName</th>
-                            <th>StoreName</th>
-                            <th>Location</th>
-                            <th>DishName</th>
-                            <th>Quantity</th>
-                            <th>Time</th>
-                            <th>Delete</th>
+                            <th>Tên kho hàng</th>
+                            <th>Tên cửa hàng</th>
+                            <th>Địa chỉ</th>
+                            <th>Số lượng món ăn</th>
+                            <th>Xem chi tiết</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
-                        <tr>
-                            <td>Kho hàng</td>
-                            <td>Cửa hàng Hoài Thư</td>
-                            <td>Quận thủ đức</td>
-                            <td>Thư</td>
-                            <td>1</td>
-                            <td>31/12/2020</td>
-                            <td><button class="btn btn-danger DeleteUser">Xóa</button></td>
-                        </tr>
+                        @{
+                            List<Warehouse> warehouses = (from w in _db.Warehouses
+                                                          select w).ToList();
+                            foreach (var w in warehouses)
+                            {
+                                var warehouseDetails_quantity = (from wd in _db.WarehouseDetails
+                                                                 where wd.IDWarehouse == w.IDWarehouse
+                                                                 select wd.Quantity).ToList();
+                                var total = warehouseDetails_quantity.Sum();
+                                var store = _db.Stores.SingleOrDefault(n => n.IDStore == w.IDStore);
+                                <tr>
+                                    <td>@w.WarehouseName</td>
+                                    <td>@store.StoreName</td>
+                                    <td>@w.LocationofWarehouse</td>
+                                    <td>@total</td>
+                                    <td><button class="btn btn-danger DeleteUser">Xem chi tiết</button></td>
+                                </tr>
+
+                            }
+
+                        }
                     </tbody>
                 </table>
             </div>

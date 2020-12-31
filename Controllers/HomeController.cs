@@ -425,12 +425,5 @@ namespace Project_Web.Controllers
             return Content("false");
         }
         #endregion
-        #region
-        [HttpPost]
-        public ActionResult SearchDish(string Datakey)
-        {
-            return  View();
-        }
-        #endregion
     }
 }

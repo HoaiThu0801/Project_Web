@@ -278,14 +278,113 @@ namespace Project_Web.Controllers
             return View();
         }
 
+        #region DishManagement
         public ActionResult DishesManagement()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult DeleteDish(string IDDish)
+        {
+            var dish_store = _db.Menu_Stores.Where(n => n.IDDish == IDDish).ToList();
+            foreach (var ds in dish_store)
+            {
+                _db.Menu_Stores.Remove(ds);
+            }
+            _db.SaveChanges();
+            var dish = _db.Menus.SingleOrDefault(n => n.IDDish == IDDish);
+            if (dish != null)
+            {
+                _db.Menus.Remove(dish);
+                _db.SaveChanges();
+                var success = new
+                {
+                    message = dish.DishName,
+                    type = true,
+                };
+                return Json(success, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return View();
+            }
+
+
+        }
+        #endregion
+        #region StoreManagement
         public ActionResult StoresManagement()
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult DeleteStore(string IDStore)
+        {
+            var dish_store = _db.Menu_Stores.Where(n => n.IDStore == IDStore).ToList();
+            foreach (var ds in dish_store)
+            {
+                _db.Menu_Stores.Remove(ds);
+            }
+            _db.SaveChanges();
+
+            List<Bill> bills = (from b in _db.Bills
+                                where b.IDStore == IDStore
+                                select b).ToList();
+            foreach (Bill b in bills)
+            {
+                List<BillDetail> billDetails = (from bd in _db.BillDetails
+                                                where bd.IDBill == b.IDBill
+                                                select bd).ToList();
+                foreach (BillDetail bd in billDetails)
+                {
+                    _db.BillDetails.Remove(bd);
+                }
+                _db.SaveChanges();
+                OrderTrack orderTrack = _db.OrderTracks.SingleOrDefault(n => n.IDBill == b.IDBill);
+                if (orderTrack != null)
+                {
+                    _db.OrderTracks.Remove(orderTrack);
+                }
+                _db.SaveChanges();
+                _db.Bills.Remove(b);
+                _db.SaveChanges();
+            }
+
+            var warehouse = (from w in _db.Warehouses
+                             where w.IDStore == IDStore
+                             select w).SingleOrDefault();
+            List<WarehouseDetail> warehouseDetails = _db.WarehouseDetails.Where(n => n.IDWarehouse == warehouse.IDWarehouse).ToList();
+            foreach (var wh in warehouseDetails)
+            {
+                _db.WarehouseDetails.Remove(wh);
+            }
+            _db.SaveChanges();
+            if (warehouse != null)
+            {
+                _db.Warehouses.Remove(warehouse);
+                _db.SaveChanges();
+            }
+
+            Store store = _db.Stores.SingleOrDefault(n => n.IDStore == IDStore);
+            if (store != null)
+            {
+                _db.Stores.Remove(store);
+                _db.SaveChanges();
+                var success = new
+                {
+                    message = store.StoreName,
+                    type = true,
+                };
+                return Json(success, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return View();
+            }
+
+
+        }
+        #endregion
         public ActionResult ImportProductsManagement()
         {
             return View();

@@ -28,30 +28,36 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr class="text-center">
-                            <th>Dishname</th>
-                            <th>Ingredient</th>
-                            <th>ImportPrice</th>
-                            <th>SalePrice</th>
-                            <th>Image</th>
-                            <th>Category</th>
-                            <th>Delete</th>
+                            <th>Tên món ăn</th>
+                            <th>Thành phần</th>
+                            <th>Giá nhập</th>
+                            <th>Giá bán</th>
+                            <th>Hình ảnh</th>
+                            <th>Phân loại</th>
+                            <th>Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
-                        <tr>
-                            <td>Cháo Bồ Câu</td>
-                            <td>Thành phần</td>
-                            <td>25000</td>
-                            <td>30000</td>
-                            <td><img src="~/images/avatar.jpg" / style="width: 50px; height: 50px;"></td>
-                            <td>Cá</td>
-                            <td><button class="btn btn-danger DeleteUser">Xóa</button></td>
-                        </tr>
+                        @{
+                            var dishes = (from m in _db.Menus
+                                          select m);
+                            foreach (var dish in dishes)
+                            {
+                                <tr>
+                                    <td>@dish.DishName</td>
+                                    <td>@dish.Ingredient</td>
+                                    <td>@dish.ImportPrice</td>
+                                    <td>@dish.SalePrice</td>
+                                    <td><img src="../@dish.Image" style="width: 50px; height: 50px;"></td>
+                                    <td>@dish.Category</td>
+                                    <td><button class="btn btn-danger DeleteDish" data-IDDish="@dish.IDDish">Xóa</button></td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </body>
-
 <script src="~/Scripts/DishesManagement.js"></script>
