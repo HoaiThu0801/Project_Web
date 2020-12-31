@@ -110,10 +110,20 @@
                                                                     foreach (var bd in BillDetails)
                                                                     {
                                                                         var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                        <td class="display-infor">
-                                                                            <img src="../@dish.Image" />
-                                                                            <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                        </td>
+                                                                        if (dish != null)
+                                                                        {
+                                                                            <td class="display-infor">
+                                                                                <img src="../@dish.Image" />
+                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                            </td>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <td class="display-infor">
+                                                                                <img src="~/images/chao-hanh.jpg" />
+                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                            </td>
+                                                                        }
                                                                     }
                                                                     var orderState = (from os in _db.OrderStates
                                                                                       join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -172,10 +182,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -232,10 +252,20 @@
                                                                         foreach (var bd in billDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -320,10 +350,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -391,10 +431,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -456,10 +506,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -545,10 +605,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -613,10 +683,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -679,10 +759,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -768,10 +858,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -836,10 +936,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -901,10 +1011,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -990,10 +1110,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1061,10 +1191,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1125,10 +1265,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1214,10 +1364,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1286,10 +1446,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1354,10 +1524,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1443,10 +1623,20 @@
                                                                         foreach (var bd in BillDetails)
                                                                         {
                                                                             var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                            <td class="display-infor">
-                                                                                <img src="../@dish.Image" />
-                                                                                <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                            </td>
+                                                                            if (dish != null)
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="../@dish.Image" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <td class="display-infor">
+                                                                                    <img src="~/images/chao-hanh.jpg" />
+                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                </td>
+                                                                            }
                                                                         }
                                                                         var orderState = (from os in _db.OrderStates
                                                                                           join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1511,10 +1701,20 @@
                                                                             foreach (var bd in BillDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse
@@ -1576,10 +1776,20 @@
                                                                             foreach (var bd in billDetails)
                                                                             {
                                                                                 var dish = _db.Menus.SingleOrDefault(n => n.DishName == bd.DishName);
-                                                                                <td class="display-infor">
-                                                                                    <img src="../@dish.Image" />
-                                                                                    <div class="text-information">@bd.DishName x @bd.Quantity</div>
-                                                                                </td>
+                                                                                if (dish != null)
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="../@dish.Image" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
+                                                                                else
+                                                                                {
+                                                                                    <td class="display-infor">
+                                                                                        <img src="~/images/chao-hanh.jpg" />
+                                                                                        <div class="text-information">@bd.DishName x @bd.Quantity</div>
+                                                                                    </td>
+                                                                                }
                                                                             }
                                                                             var orderState = (from os in _db.OrderStates
                                                                                               join ot in _db.OrderTracks on os.IDOrderStatse equals ot.IDOrderStatse

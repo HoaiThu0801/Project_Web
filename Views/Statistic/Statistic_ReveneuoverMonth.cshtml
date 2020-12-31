@@ -1,0 +1,46 @@
+﻿@using Project_Web.Models;
+@using Newtonsoft.Json;
+@{
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+    List<DataPoint> dataPoints = new List<DataPoint>();
+    DateTime dateTimeEnd = DateTime.Now;
+    DateTime dateTimeStart = dateTimeEnd.AddDays(-30);
+    var billList = (from bd in _db.Bills
+                    join ot in _db.OrderTracks on bd.IDBill equals ot.IDBill
+                    where bd.Time >= dateTimeStart && bd.Time <= dateTimeEnd && ot.IDOrderStatse == "OS-05"
+                    select bd).ToList();
+
+    foreach (var b in billList)
+    {
+        var timeSpan = (DateTime.Parse(b.Time.ToString()) - new DateTime(1970, 1, 1, 0, 0, 0));
+        double timetemp = (long)timeSpan.TotalSeconds;
+        dataPoints.Add(new DataPoint(timetemp, Double.Parse(b.Total.ToString())));
+    }
+    ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+}
+<div id="chartContainerReveuoverMonth" style="height: 370px; width: 100%;"></div>
+<script>
+    $('#tabReveneuoverMonth').click(function () {
+        var chart = new CanvasJS.Chart("chartContainerReveuoverMonth", {
+	    animationEnabled: true,
+	    title: {
+		    text: "DOANH THU BAN HANG 30 NGAY GAN NHAT"
+	    },
+	    axisX: {
+		    valueFormatString: "DD MMM"
+	    },
+	    axisY: {
+		    title: "Doanh Thu (in VND)",
+		    prefix: "VND"
+	    },
+	    data: [{
+		    type: "spline",
+		    xValueType: "dateTime",
+		    xValueFormatString: "DD MMM",
+		    yValueFormatString: "$#,###",
+		    dataPoints: @Html.Raw(ViewBag.DataPoints),
+	    }]
+    });
+    chart.render();
+    })
+</script>

@@ -418,6 +418,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Database_PorridgeSellingManagementStore.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataPointcs.cs" />
     <Compile Include="Models\DataPoints.cs" />
     <Compile Include="Models\DataPoint_Name_y.cs" />
     <Compile Include="Models\District.cs">
@@ -777,6 +778,7 @@
     <Content Include="Views\OrderManagement\DishesManagement.cshtml" />
     <Content Include="Views\OrderManagement\StoresManagement.cshtml" />
     <Content Include="Views\OrderManagement\ImportProductsManagement.cshtml" />
+    <Content Include="Views\Statistic\Statistic_ReveneuoverMonth.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

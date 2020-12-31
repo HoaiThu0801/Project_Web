@@ -51,6 +51,7 @@
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuProduct')" id="tabReveneuProduct">Tổng doanh thu của từng cửa hàng</a></li>
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'TotalNumberofProducts')" id="tabTotalNumberofProducts">Phần trăm loại cháo trong menu</a></li>
                         <li><a class="tablinks" onclick="openChartStatistic(event, 'Top5BestSellerPorridge')" id="tabTop5BestSellerPorridge">Top 5 sản phẩm bán chạy nhất</a></li>
+                        <li><a class="tablinks" onclick="openChartStatistic(event, 'ReveneuoverMonth')" id="tabReveneuoverMonth">Doanh thu 30 ngày gần đây</a></li>
                     </ul>
                 </li>
             </ul>
@@ -67,6 +68,9 @@
             </div>
             <div class="tabcontent" id="Top5BestSellerPorridge">
                 @Html.Partial("~/Views/Statistic/Statistic_Top5BestSellerPorridge.cshtml")
+            </div>
+            <div class="tabcontent" id="ReveneuoverMonth">
+                @Html.Partial("~/Views/Statistic/Statistic_ReveneuoverMonth.cshtml")
             </div>
         </div>
     </div>
