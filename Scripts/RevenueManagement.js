@@ -1,6 +1,7 @@
-﻿$(document).ready(function () {
-    var dateStart;
-    var dateEnd;
+﻿var dateStart;
+var dateEnd;
+$(document).ready(function () {
+
     //$('#datepicker').daterangepicker({
     //    open: 'center'
     //}, function (start, end) {
@@ -67,6 +68,9 @@
         $('#table').css('opacity', 0);
         $('#table').css('visibility', 'hidden');
     });
+    
+});
+$(document).ready(function () {
     $('#ExportExcel').click(function () {
         $.ajax({
             url: "/OrderManagement/ExportTrack",

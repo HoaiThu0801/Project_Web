@@ -9,6 +9,8 @@ using System.Data.Entity.Migrations;
 using ClosedXML.Excel;
 using System.Data;
 using System.IO;
+using System.Web.UI.WebControls;
+using System.Web.UI;
 
 namespace Project_Web.Controllers
 {
@@ -190,7 +192,7 @@ namespace Project_Web.Controllers
                             revenueofStoreTemp.Address = store.Location;
                             revenueofStoreTemp.FullName = user.Fullname;
                             revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
-                            revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                            revenueofStoreTemp.Time = b.Time.ToString();
                             revenueofStores.Add(revenueofStoreTemp);
                         }
                         return Json(revenueofStores, JsonRequestBehavior.AllowGet);
@@ -215,7 +217,7 @@ namespace Project_Web.Controllers
                         revenueofStoreTemp.Address = store.Location;
                         revenueofStoreTemp.FullName = user.Fullname;
                         revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
-                        revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                        revenueofStoreTemp.Time = b.Time.ToString();
                         revenueofStores.Add(revenueofStoreTemp);
                     }
                     return Json(revenueofStores, JsonRequestBehavior.AllowGet);
@@ -226,7 +228,7 @@ namespace Project_Web.Controllers
             return RedirectToAction("SignIn", "SignIn");
         }
         #endregion
-        public FileResult ExportTrack(DateTime StartTime, DateTime EndTime)
+        public ActionResult ExportTrack(DateTime StartTime, DateTime EndTime)
         {
             if (Session["User"] != null)
             {
@@ -237,34 +239,43 @@ namespace Project_Web.Controllers
                     var store = _db.Stores.SingleOrDefault(n => n.IDUser == user.IDUser);
                     if (store != null)
                     {
-                        DataTable dt = new DataTable("Grid");
-                        dt.Columns.AddRange(new DataColumn[5] { new DataColumn("StoreName"),
-                                            new DataColumn("Location"),
-                                            new DataColumn("Fullname"),
-                                            new DataColumn("Revenue"),
-                                            new DataColumn("Time")});
+                        List<RevenueofStore> revenueofStores = new List<RevenueofStore>();
                         var Bills = (from b in _db.Bills
                                      join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
                                      where b.IDStore == store.IDStore && (StartTime <= b.Time && EndTime >= b.Time) && ot.IDOrderStatse == "OS-05"
                                      select b).ToList();
                         foreach (var b in Bills)
                         {
-                            dt.Rows.Add(store.StoreName, store.Location, user.Fullname, float.Parse(b.Total.ToString()), DateTime.Parse(b.Time.ToString()));
+                            RevenueofStore revenueofStoreTemp = new RevenueofStore();
+                            revenueofStoreTemp.StoreName = store.StoreName;
+                            revenueofStoreTemp.Address = store.Location;
+                            revenueofStoreTemp.FullName = user.Fullname;
+                            revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
+                            revenueofStoreTemp.Time = b.Time.ToString();
+                            revenueofStores.Add(revenueofStoreTemp);
                         }
-                        using (XLWorkbook wb = new XLWorkbook())
-                        {
-                            wb.Worksheets.Add(dt);
-                            using (MemoryStream stream = new MemoryStream())
-                            {
-                                wb.SaveAs(stream);
-                                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
-                            }
-                        }
+                        var gv = new GridView();
+                        gv.DataSource = revenueofStores;
+                        gv.DataBind();
+
+                        Response.ClearContent();
+                        Response.Buffer = true;
+                        Response.AddHeader("content-disposition", "attachment; filename=DemoExcel.xls");
+                        Response.ContentType = "application/ms-excel";
+
+                        Response.Charset = "";
+                        StringWriter objStringWriter = new StringWriter();
+                        HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
+
+                        gv.RenderControl(objHtmlTextWriter);
+                        Response.Output.Write(objStringWriter.ToString());
+                        Response.Flush();
+                        Response.End();
+
                     }
                 }
             }
-            string path = "~/Templates/File_20201221_v1.0_TemplateImportProduct.xlsx";
-            return File(path, "application/vnd.ms-excel", "File_20201221_v1.0_TemplateImportProduct.xlsx");
+            return View();
         }
 
         public ActionResult DishesManagement()

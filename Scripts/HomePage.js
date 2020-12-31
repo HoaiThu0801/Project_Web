@@ -53,3 +53,17 @@ $(document).ready(function () {
         })
     });
 });
+$(document).ready(function () {
+    $('.input-search').keyup(function (e) {
+        alert(1);
+        var datakey = $(this).val();
+        $.ajax({
+            type: "post",
+            url: "/Home/SearchDish",
+            data: {
+                Datakey: datakey
+            },
+            success: function (res) {}
+        });
+    })
+});
