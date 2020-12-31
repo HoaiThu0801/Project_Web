@@ -6,7 +6,7 @@
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/UserManagement.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Management.css">
 </head>
 <body>
     <div class="header">
@@ -24,52 +24,54 @@
     <div class="main">
         <div class="main-background">
             <h1 class="text-center">Danh sách người dùng</h1>
-            <table class="table table-bordered">
-                <thead>
-                    <tr class="text-center">
-                        <th>Username</th>
-                        <th>Fullname</th>
-                        <th>Gender</th>
-                        <th>DateofBirth</th>
-                        <th>IdentityCard</th>
-                        <th>Address</th>
-                        <th>PhoneNumber</th>
-                        <th>Point</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody id="ListData">
-                    @{
-                        var listUsers = (from s in _db.Users
-                                         select s).ToList();
+            <div class="around-table">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Username</th>
+                            <th>Fullname</th>
+                            <th>Gender</th>
+                            <th>DateofBirth</th>
+                            <th>IdentityCard</th>
+                            <th>Address</th>
+                            <th>PhoneNumber</th>
+                            <th>Point</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ListData">
+                        @{
+                            var listUsers = (from s in _db.Users
+                                             select s).ToList();
 
 
-                        foreach (var s in listUsers)
-                        {
-                            var quyen = (from ur in _db.User_Roles
-                                         join r in _db.Roles on ur.IDRole equals r.IDRole
-                                         where ur.IDUser == s.IDUser
-                                         select r.Role1).SingleOrDefault();
-                            string datestring = String.Format("{0:dd-MM-yyyy}", s.DateofBirth);
-                            <tr>
-                                <td>@s.Username</td>
-                                <td>@s.Fullname</td>
-                                <td>@s.Gender</td>
-                                <td>@datestring</td>
-                                <td>@s.IdentityCard</td>
-                                <td>@s.Address</td>
-                                <td>@s.PhoneNumber</td>
-                                <td>@s.Point</td>
-                                <td>@s.Email</td>
-                                <td>@quyen</td>
-                                <td><button class="btn btn-danger DeleteUser" data-IDUser="@s.IDUser">Xóa</button></td>
-                            </tr>
+                            foreach (var s in listUsers)
+                            {
+                                var quyen = (from ur in _db.User_Roles
+                                             join r in _db.Roles on ur.IDRole equals r.IDRole
+                                             where ur.IDUser == s.IDUser
+                                             select r.Role1).SingleOrDefault();
+                                string datestring = String.Format("{0:dd-MM-yyyy}", s.DateofBirth);
+                                <tr>
+                                    <td>@s.Username</td>
+                                    <td>@s.Fullname</td>
+                                    <td>@s.Gender</td>
+                                    <td>@datestring</td>
+                                    <td>@s.IdentityCard</td>
+                                    <td>@s.Address</td>
+                                    <td>@s.PhoneNumber</td>
+                                    <td>@s.Point</td>
+                                    <td>@s.Email</td>
+                                    <td>@quyen</td>
+                                    <td><button class="btn btn-danger DeleteUser" data-IDUser="@s.IDUser">Xóa</button></td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

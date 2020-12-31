@@ -267,5 +267,17 @@ namespace Project_Web.Controllers
             return File(path, "application/vnd.ms-excel", "File_20201221_v1.0_TemplateImportProduct.xlsx");
         }
 
+        public ActionResult DishesManagement()
+        {
+            return View();
+        }
+        public ActionResult StoresManagement()
+        {
+            return View();
+        }
+        public ActionResult ImportProductsManagement()
+        {
+            return View();
+        }
     }
 }

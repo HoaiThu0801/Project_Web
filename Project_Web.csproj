@@ -497,7 +497,7 @@
     <Content Include="Content\ShoppingCart.css" />
     <Content Include="Content\SignInStyle.css" />
     <Content Include="Content\StatisticPage.css" />
-    <Content Include="Content\UserManagement.css" />
+    <Content Include="Content\Management.css" />
     <Content Include="Content\util.css" />
     <Content Include="Content\VerifyEmail.css" />
     <Content Include="fonts\font-awesome-4.7.0\css\font-awesome.css" />
@@ -581,9 +581,11 @@
     <Content Include="Scripts\CreateDish.js" />
     <Content Include="Scripts\CreateSeller.js" />
     <Content Include="Scripts\CreateStore.js" />
+    <Content Include="Scripts\DishesManagement.js" />
     <Content Include="Scripts\ForgotPassword.js" />
     <Content Include="Scripts\HomePage.js" />
     <Content Include="Scripts\ImportProducts.js" />
+    <Content Include="Scripts\ImportProductsManagement.js" />
     <Content Include="Scripts\index.js.flow" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -728,6 +730,7 @@
     <Content Include="Scripts\Shipping.js" />
     <Content Include="Scripts\SignIn.js" />
     <Content Include="Scripts\Statistic.js" />
+    <Content Include="Scripts\StoresManagement.js" />
     <Content Include="Scripts\UserManagement.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -771,6 +774,9 @@
     <Content Include="Views\OrderManagement\UserManagement.cshtml" />
     <Content Include="Views\OrderManagement\RevenueManagement.cshtml" />
     <Content Include="Views\Shared\_LocationStore.cshtml" />
+    <Content Include="Views\OrderManagement\DishesManagement.cshtml" />
+    <Content Include="Views\OrderManagement\StoresManagement.cshtml" />
+    <Content Include="Views\OrderManagement\ImportProductsManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

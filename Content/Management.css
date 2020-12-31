@@ -49,3 +49,9 @@ h1{
     text-align:center;
     width: 100%;
 }
+.around-table{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

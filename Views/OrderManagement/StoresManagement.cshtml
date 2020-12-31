@@ -1,0 +1,56 @@
+﻿@using Project_Web.Models;
+@{
+    ViewBag.Title = "Quản lý cửa hàng";
+    Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
+}
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Management.css">
+</head>
+<body>
+    <div class="header">
+        <div class="row">
+            <div class="col-md-4">
+                <a href="/Home/Index"><img src="~/images/logo.gif" class="image-logo" /></a>
+            </div>
+            <div class="col-md-4">
+                <h2 class="text-center">Quản lý cửa hàng</h2>
+            </div>
+            <div class="col-md-4">
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="main-background">
+            <h1 class="text-center">Danh sách cửa hàng</h1>
+            <div class="around-table">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="text-center">
+                            <th>Storename</th>
+                            <th>Location</th>
+                            <th>PhoneNumber</th>
+                            <th>Email</th>
+                            <th>WarehouseName</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ListData">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><button class="btn btn-danger DeleteUser">Xóa</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="~/Scripts/StoresManagement.js"></script>
+
