@@ -11,7 +11,7 @@ namespace Project_Web.Models
         public string Address { get; set; }
         public string FullName { get; set; }
         public float Revenue { get; set; }
-        public DateTime Time{get; set;}
+        public String Time{get; set;}
 
     }
 }

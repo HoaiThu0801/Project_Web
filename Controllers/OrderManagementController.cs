@@ -192,7 +192,7 @@ namespace Project_Web.Controllers
                             revenueofStoreTemp.Address = store.Location;
                             revenueofStoreTemp.FullName = user.Fullname;
                             revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
-                            revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                            revenueofStoreTemp.Time = b.Time.ToString();
                             revenueofStores.Add(revenueofStoreTemp);
                         }
                         return Json(revenueofStores, JsonRequestBehavior.AllowGet);
@@ -217,7 +217,7 @@ namespace Project_Web.Controllers
                         revenueofStoreTemp.Address = store.Location;
                         revenueofStoreTemp.FullName = user.Fullname;
                         revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
-                        revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                        revenueofStoreTemp.Time = b.Time.ToString();
                         revenueofStores.Add(revenueofStoreTemp);
                     }
                     return Json(revenueofStores, JsonRequestBehavior.AllowGet);
@@ -251,7 +251,7 @@ namespace Project_Web.Controllers
                             revenueofStoreTemp.Address = store.Location;
                             revenueofStoreTemp.FullName = user.Fullname;
                             revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
-                            revenueofStoreTemp.Time = DateTime.Parse(b.Time.ToString());
+                            revenueofStoreTemp.Time = b.Time.ToString();
                             revenueofStores.Add(revenueofStoreTemp);
                         }
                         var gv = new GridView();
