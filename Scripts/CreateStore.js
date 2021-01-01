@@ -274,7 +274,7 @@ $(document).ready(function () {
         storename = $('#StoreNameSelect').val();
         $('#DishNameList').css('opacity', '1');
         $('#DishNameList').css('visibility', 'visible');
-        $('#signup-background-dish').css('height', '100%');
+        $('#signup-background-dish').css('height', '90%');
         $.ajax({
             type: "get",
             url: "/Administrator_Setting/LoadDish_no_StoreName",
