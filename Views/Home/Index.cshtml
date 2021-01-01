@@ -42,9 +42,6 @@
             </div>
             <div class="col-md-4">
                 <div>
-                    <input type="text" placeholder="Tìm kiếm" class="input-search"/>
-                </div>
-                <div>
                     <a href="/Home/ShoppingCart" class="change-web-shopping">
                         <div class="shopping-cart">
                             <i class="fa fa-shopping-cart"></i>
@@ -90,6 +87,7 @@
                                     <li><a href="~/Administrator_Setting/CreateStore">Cài đặt cửa hàng</a></li>
                                     <li><a href="~/Administrator_Setting/CreateSeller">Cài đặt người bán hàng</a></li>
                                     <li><a href="~/Administrator_Setting/CreateDish">Cài đặt món ăn</a></li>
+                                    <li><a href="/ImportProducts/ImportProducts">Nhập hàng</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -103,7 +101,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="/ImportProducts/ImportProducts">Nhập hàng</a>
+                                <a href="/OrderManagement/RevenueManagement">Doanh thu</a>
                             </li>
                             <li>
                                 <a href="/Statistic/Statistic">Thống kê</a>
@@ -141,7 +139,7 @@
                         }
                         <li class="right-menu">
                             <a href="#">
-                                <i class="fa fa-user">@temp</i>
+                                <img src="../@user.Image" style="width: 23px; height: 23px; border-radius: 50%; margin-right: 5px;"/>@temp
                                 <span class="arrow"> &#9660;</span>
                             </a>
                             <ul class="sub-menu-information">

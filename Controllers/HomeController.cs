@@ -13,7 +13,7 @@ namespace Project_Web.Controllers
     public class HomeController : BaseController
     {
         public Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
- 
+
         #region Paging
         public ActionResult Index(int? page)
         {
@@ -60,41 +60,49 @@ namespace Project_Web.Controllers
         }
         [HttpPost]
         [Authorize_userController]
-        public ActionResult InformationAccount(User model, FormCollection form)
+        public ActionResult InformationAccount(string FullName, string Gender, string DateofBirth, string IdentityCard, string Province, string District, string Ward, string Street, string PhoneNumber, HttpPostedFileBase ImageAvatarUser)
         {
-            string Province = form["Province"].ToString();
-            string District = form["District"].ToString();
-            string Ward = form["Ward"].ToString();
-            string Street = form["Street"].ToString();
             User user_session = Session["User"] as User;
-            model.Username = user_session.Username;
             Address_Users address_Users = _db.Address_Users.SingleOrDefault(x => x.IDUser == user_session.IDUser && x.IsDefault == 1);
             User user = (from u in _db.Users
-                         where u.Username == model.Username
+                         where u.Username == user_session.Username
                          select u).SingleOrDefault();
             if (user != null)
             {
+                if (ImageAvatarUser is null)
+                {
+                    user.Image = user.Image;
+                }
+                string filename = ImageAvatarUser.FileName;
+                string targetpath = Server.MapPath("~/images/ImageAvatarUser/");
+                if (!(System.IO.Directory.Exists(targetpath)))
+                {
+                    System.IO.Directory.CreateDirectory(targetpath);
+                }
+                ImageAvatarUser.SaveAs(targetpath + filename);
+                string Image = "images/ImageAvatarUser/" + filename;
                 if (address_Users != null)
                 {
                     address_Users.Province = Province;
                     address_Users.District = District;
                     address_Users.Ward = Ward;
                     address_Users.Street = Street;
-                    address_Users.Fullname = model.Fullname;
-                    address_Users.PhoneNumber = model.PhoneNumber;
+                    address_Users.Fullname = FullName;
+                    address_Users.PhoneNumber = PhoneNumber;
                     _db.Address_Users.AddOrUpdate(address_Users);
                     _db.SaveChanges();
                 }
-                user.Fullname = model.Fullname;
-                user.Gender = model.Gender;
-                user.DateofBirth = model.DateofBirth;
-                user.IdentityCard = model.IdentityCard;
+                user.Fullname = FullName;
+                user.Gender = Gender;
+                user.DateofBirth = DateTime.Parse(DateofBirth);
+                user.IdentityCard = IdentityCard;
                 user.Address = Street;
-                user.PhoneNumber = model.PhoneNumber;
+                user.PhoneNumber = PhoneNumber;
+                user.Image = Image;
                 _db.Users.AddOrUpdate(user);
                 _db.SaveChanges();
                 Session["User"] = user;
-                return Content("true");
+                return Json("true", JsonRequestBehavior.AllowGet);
             }
             return View();
         }
@@ -154,7 +162,7 @@ namespace Project_Web.Controllers
         {
             if (OldPassword == "error" || NewPassword == "error")
             {
-                if(OldPassword == "error")
+                if (OldPassword == "error")
                     return Content("NotOldPassword");
                 if (NewPassword == "error")
                     return Content("NotNewPassword");

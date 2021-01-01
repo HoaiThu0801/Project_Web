@@ -197,9 +197,10 @@ h1{
     justify-content: center;
 }
 .information-form{
-    width: 70%;
+    width: 100%;
 }
-.information-account{
+.information-account {
+    width: 65%;
     border: 1px solid gray;
     margin: 20px;
 }

@@ -67,7 +67,7 @@ namespace Project_Web.Controllers
                             address_Users.Street = form["Address"].ToString();
                             address_Users.PhoneNumber = model.PhoneNumber;
                             address_Users.Fullname = model.Fullname;
-                            model.Image = "Null";
+                            model.Image = "/images/ImageAvatarUser/user-default.jpg";
                             model.Facebook = "0";
                             _db.Users.Add(model);
                             _db.Address_Users.Add(address_Users);

@@ -8,9 +8,9 @@ function readURL(event) {
         show.src = src;
         srcImage = event.target.files[0].name;
         show.style.display = "block";
-
     }
 }
+
 $(document).ready(function () {
 
     //Scroll to top page

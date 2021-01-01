@@ -1,5 +1,14 @@
-﻿$(document).ready(function () {
+﻿var srcImage;
+function readURL(event) {
+    if (event.target.files.length > 0) {
+        let src = URL.createObjectURL(event.target.files[0]);
+        let show = document.getElementById("showImage");
+        show.src = src;
+        srcImage = event.target.files[0].name;
+    }
+}
 
+$(document).ready(function () {
     //Scroll to top page
     $("html, body").animate({ scrollTop: 0 }, "slow");
 
@@ -121,20 +130,50 @@
             }
         })
     })
-
     //Show success when change information account
     $('#InformationForm').submit(function (event) {
         event.preventDefault();
+        //Declare variables
+        var Fullname = $('#Fullname').val();
+        var gender = $('#Gender').val();
+        var DateofBirth = $('#DateofBirth').val();
+        var IdentityCard = $('#IdentityCard').val();
+        var Province = $('#ProvinceSelect').val();
+        var District = $('#DistrictSelect').val();
+        var Ward = $('#WardSelect').val();
+        var Street = $('#Address').val();
+        var PhoneNumber = $('#PhoneNumber').val();
+        var fileUpload = $('#Image').get(0);
+        var files = fileUpload.files;
         var url = $(this).attr("action");
-        var formdata = $(this).serialize();
+
+        var formdata = new FormData();
+        formdata.append("FullName", Fullname);
+        formdata.append("Gender", gender);
+        formdata.append("DateofBirth", DateofBirth);
+        formdata.append("IdentityCard", IdentityCard);
+        formdata.append("Province", Province);
+        formdata.append("District", District);
+        formdata.append("Ward", Ward);
+        formdata.append("Street", Street);
+        formdata.append("PhoneNumber", PhoneNumber);
+        formdata.append("ImageAvatarUser", files[0])
+        
         $.ajax({
             type: 'post',
             url: url,
+            dataType: "json",
+            processData: false,
+            enctype: 'multipart/form-data',
             data: formdata,
+            contentType: false,
             success: function (res) {
                 if (res == "true") {
                     $("html, body").animate({ scrollTop: 0 }, "slow");
                     notify("Thông báo", "Cập nhật thông tin thành công", true);
+                    setTimeout(function () {
+                        $(window).attr('location', '../Home/InformationAccount');
+                    }, 2000);
                 }
             },
         });

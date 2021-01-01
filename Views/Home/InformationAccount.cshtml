@@ -33,23 +33,24 @@
         <div class="information" id="result">
             <div class="information-background">
                 <div class="information-body">
-                    <form method="post" action="/Home/InformationAccount" class="information-form" id="InformationForm">
+                    <form method="post" action="/Home/InformationAccount" enctype="multipart/form-data" class="information-form" id="InformationForm">
                         <h1>Thông tin tài khoản</h1>
-                        <div class="information-account">
-                            @{
-                                if (user != null)
-                                {
-                                    <div class="form-group">
-                                        <label>Tên tài khoản:</label>
-                                        <input type="text" disabled id="Username" value="@user.Username" name="Username" class="form-input" placeholder="Tên tài khoản" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Họ và tên:</label>
-                                        <input type="text" id="Fullname" value="@user.Fullname" name="Fullname" class="form-input" required/>
-                                    </div>
-                                    <div id="showError_Fullname"></div>
-                                    <div class="form-group">
-                                        <label>Giới tính:</label>
+                        <div style="display: flex; ">
+                            <div class="information-account">
+                                @{
+                                    if (user != null)
+                                    {
+                                        <div class="form-group">
+                                            <label>Tên tài khoản:</label>
+                                            <input type="text" disabled id="Username" value="@user.Username" name="Username" class="form-input" placeholder="Tên tài khoản" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Họ và tên:</label>
+                                            <input type="text" id="Fullname" value="@user.Fullname" name="Fullname" class="form-input" required />
+                                        </div>
+                                        <div id="showError_Fullname"></div>
+                                        <div class="form-group">
+                                            <label>Giới tính:</label>
                                             <select class="custom-select" id="Gender" name="Gender">
                                                 @{
                                                     if (user.Gender != null)
@@ -65,136 +66,136 @@
                                                 <option value="Nữ">Nữ</option>
                                                 <option value="Khác">Khác</option>
                                             </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Ngày sinh:</label>
-                                        @{
-                                            string datestring = String.Format("{0:yyyy-MM-dd}", user.DateofBirth);
-                                            if (user.DateofBirth != null)
-                                            {
-                                                <input type="date" value="@datestring" class="form-input" id="DateofBirth" name="DateofBirth" />
-                                            }
-                                            else
-                                            {
-                                                <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
-                                            }
-                                        }
-                                    </div>
-                                    <div class="form-group">
-                                        <label>CMND:</label>
-                                        @{
-                                            if (user.IdentityCard != null)
-                                            {
-                                                <input type="text" id="IdentityCard" value="@user.IdentityCard" name="IdentityCard" class="form-input" />
-                                            }
-                                            else
-                                            {
-                                                <input type="text" id="IdentityCard" value="Chứng minh nhân dân" name="IdentityCard" class="form-input" />
-                                            }
-                                        }
-                                    </div>
-                                    if (address_Users != null)
-                                    {
+                                        </div>
                                         <div class="form-group">
-                                            <label>Tỉnh/Thành phố</label>
-                                            <select class="custom-select" name="Province" id="ProvinceSelect">
-                                                <option selected>@address_Users.Province</option>
-                                                @{
-                                                    var provinces = (from s in _db.Provinces
-                                                                     select s).ToList();
-                                                    foreach (var pro in provinces)
-                                                    {
-                                                        <option value="@pro.Name">@pro.Type @pro.Name</option>
-                                                    }
+                                            <label>Ngày sinh:</label>
+                                            @{
+                                                string datestring = String.Format("{0:yyyy-MM-dd}", user.DateofBirth);
+                                                if (user.DateofBirth != null)
+                                                {
+                                                    <input type="date" value="@datestring" class="form-input" id="DateofBirth" name="DateofBirth" />
                                                 }
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Quận/Huyện</label>
-                                            <select class="custom-select" name="District" id="DistrictSelect">
-                                                <option selected>@address_Users.District</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Phường/Xã</label>
-                                            <select class="custom-select" name="Ward" id="WardSelect">
-                                                <option selected>@address_Users.Ward</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Địa chỉ:</label>
-                                            <input type="text" id="Address" name="Street" value="@address_Users.Street" class="form-input" required/>
-                                        </div>
-                                        <div id="showError_Address"></div>
-                                    }
-                                    else
-                                    {
-                                        <div class="form-group">
-                                            <label>Tỉnh/Thành phố</label>
-                                            <select class="custom-select" name="Province" id="ProvinceSelect">
-                                                <option disabled selected>Chọn Tỉnh/Thành phố</option>
-                                                @{
-                                                    var provinces = (from s in _db.Provinces
-                                                                     select s).ToList();
-                                                    foreach (var pro in provinces)
-                                                    {
-                                                        <option value="@pro.Name">@pro.Type @pro.Name</option>
-                                                    }
+                                                else
+                                                {
+                                                    <input type="date" value="1990-01-01" class="form-input" id="DateofBirth" name="DateofBirth" />
                                                 }
-                                            </select>
+                                            }
                                         </div>
                                         <div class="form-group">
-                                            <label>Quận/Huyện</label>
-                                            <select class="custom-select" name="District" id="DistrictSelect">
-                                                <option disabled selected>Chọn Quận/Huyện</option>
-                                            </select>
+                                            <label>CMND:</label>
+                                            @{
+                                                if (user.IdentityCard != null)
+                                                {
+                                                    <input type="text" id="IdentityCard" value="@user.IdentityCard" name="IdentityCard" class="form-input" />
+                                                }
+                                                else
+                                                {
+                                                    <input type="text" id="IdentityCard" value="Chứng minh nhân dân" name="IdentityCard" class="form-input" />
+                                                }
+                                            }
                                         </div>
+                                        if (address_Users != null)
+                                        {
+                                            <div class="form-group">
+                                                <label>Tỉnh/Thành phố</label>
+                                                <select class="custom-select" name="Province" id="ProvinceSelect">
+                                                    <option selected>@address_Users.Province</option>
+                                                    @{
+                                                        var provinces = (from s in _db.Provinces
+                                                                         select s).ToList();
+                                                        foreach (var pro in provinces)
+                                                        {
+                                                            <option value="@pro.Name">@pro.Type @pro.Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Quận/Huyện</label>
+                                                <select class="custom-select" name="District" id="DistrictSelect">
+                                                    <option selected>@address_Users.District</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Phường/Xã</label>
+                                                <select class="custom-select" name="Ward" id="WardSelect">
+                                                    <option selected>@address_Users.Ward</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Địa chỉ:</label>
+                                                <input type="text" id="Address" name="Street" value="@address_Users.Street" class="form-input" required />
+                                            </div>
+                                            <div id="showError_Address"></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group">
+                                                <label>Tỉnh/Thành phố</label>
+                                                <select class="custom-select" name="Province" id="ProvinceSelect">
+                                                    <option disabled selected>Chọn Tỉnh/Thành phố</option>
+                                                    @{
+                                                        var provinces = (from s in _db.Provinces
+                                                                         select s).ToList();
+                                                        foreach (var pro in provinces)
+                                                        {
+                                                            <option value="@pro.Name">@pro.Type @pro.Name</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Quận/Huyện</label>
+                                                <select class="custom-select" name="District" id="DistrictSelect">
+                                                    <option disabled selected>Chọn Quận/Huyện</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Phường/Xã</label>
+                                                <select class="custom-select" name="Ward" id="WardSelect">
+                                                    <option disabled selected>Chọn Phường Xã</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Địa chỉ:</label>
+                                                <input type="text" id="Address" name="Street" value="@user.Address" class="form-input" required />
+                                            </div>
+                                            <div id="showError_Address"></div>
+                                        }
                                         <div class="form-group">
-                                            <label>Phường/Xã</label>
-                                            <select class="custom-select" name="Ward" id="WardSelect">
-                                                <option disabled selected>Chọn Phường Xã</option>
-                                            </select>
+                                            <label>Số điện thoại:</label>
+                                            <input type="tel" id="PhoneNumber" name="PhoneNumber" value="@user.PhoneNumber" class="form-input" required />
                                         </div>
+                                        <div id="showError_PhoneNumber"></div>
                                         <div class="form-group">
-                                            <label>Địa chỉ:</label>
-                                            <input type="text" id="Address" name="Street" value="@user.Address" class="form-input" required/>
+                                            <div class="button-submit">
+                                                <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu thông tin" />
+                                                <a href="/Home/ChangePass" name="ChangePass" id="changePass" class="form-submit">Đổi mật khẩu</a>
+                                            </div>
                                         </div>
-                                        <div id="showError_Address"></div>
                                     }
-                                    <div class="form-group">
-                                        <label>Số điện thoại:</label>
-                                        <input type="tel" id="PhoneNumber" name="PhoneNumber" value="@user.PhoneNumber" class="form-input" required/>
-                                    </div>
-                                    <div id="showError_PhoneNumber"></div>
-                                    <div class="form-group">
-                                        <div class="button-submit">
-                                            <input type="submit" name="submit" id="submit" class="form-submit" value="Lưu thông tin" />
-                                            <a href="/Home/ChangePass" name="ChangePass" id="changePass" class="form-submit">Đổi mật khẩu</a>
-                                        </div>
-                                    </div>
                                 }
-                            }
-                        </div>
-                    </form>
-                    <div>
-                        <div class="user-page-sidebar">
-                            <div class="user-page">
-                                <a class="user-page-avatar">
-                                    <img src="~/images/avatar.jpg" />
-                                </a>
                             </div>
-                            <div class="user-page-right">
-                                <div class="user-page-username">
-                                    tuongkl01
+                            <div>
+                                <div class="user-page-sidebar">
+                                    <div class="user-page">
+                                        <a class="user-page-avatar">
+                                            <img src="../@user.Image" style="border-radius: 50%;" id="showImage"/>
+                                        </a>
+                                    </div>
+                                    <div class="user-page-right">
+                                        <div class="user-page-username">
+                                            @user.Username
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user-page-choose-image">
+                                    <label for="Image" class="form-input text-center"><i class="fa fa-upload">Chọn ảnh</i></label>
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="Image" id="Image" style="display: none;" onchange="readURL(event);"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="user-page-choose-image">
-                            <label for="Image" class="form-input text-center"><i class="fa fa-upload">Chọn ảnh</i></label>
-                            <input type="file" accept=".jpg,.jpeg,.png" name="Image" id="Image" style="display: none;" />
-                        </div>
-                    </div>
-
+                    </form>
 
                 </div>
             </div>
