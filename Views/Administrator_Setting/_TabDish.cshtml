@@ -1,7 +1,7 @@
 ﻿@using Project_Web.Models;
 @using PagedList.Mvc;
 
-@model PagedList.IPagedList<Project_Web.Models.Store>
+@model PagedList.IPagedList<Project_Web.Models.Menu_Stores>
 @{
     Database_PorridgeSellingManagementStoreEntities _db = new Database_PorridgeSellingManagementStoreEntities();
 }
@@ -21,23 +21,18 @@
 
                 foreach (var s in Model)
                 {
-                    var menu_store = (from ms in _db.Menu_Stores
-                                      where ms.IDStore == s.IDStore
-                                      select ms).ToList();
-                    foreach (var ms in menu_store)
+                    var store = _db.Stores.SingleOrDefault(n => n.IDStore == s.IDStore);
+                    var dish = _db.Menus.SingleOrDefault(n => n.IDDish == s.IDDish);
+                    if (s.Available == null)
                     {
-                        Menu menu = _db.Menus.SingleOrDefault(n => n.IDDish == ms.IDDish);
-                        if (ms.Available == null)
-                        {
-                            ms.Available = 0;
-                        }
-                        <tr>
-                            <td>@s.StoreName</td>
-                            <td>@s.Location</td>
-                            <td>@menu.DishName</td>
-                            <td>@ms.Available</td>
-                        </tr>
+                        s.Available = 0;
                     }
+                    <tr>
+                        <td>@store.StoreName</td>
+                        <td>@store.Location</td>
+                        <td>@dish.DishName</td>
+                        <td>@s.Available</td>
+                    </tr>
 
                 }
             }

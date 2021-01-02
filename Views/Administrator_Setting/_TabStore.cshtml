@@ -35,7 +35,7 @@
         <div class="paging-choose" id="myPager">
             @Html.PagedListPager(Model, page => Url.Action("_TabStore", new { page }), 
            PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.ClassicPlusFirstAndLast
-           , new AjaxOptions 
+           , new AjaxOptions ()
            {InsertionMode = InsertionMode.Replace, HttpMethod = "Get",UpdateTargetId="Store" }))
         </div>
     </div>
