@@ -353,7 +353,7 @@ namespace Project_Web.Controllers
         {
             if (page == null) page = 1;
             var store = (from s in _db.Stores
-                         select s).OrderBy(x => x.IDStore);
+                         select s).ToList();
             int pageSize = 4;
             int pageNumber = (page ?? 1);
             return PartialView("_TabStore", store.ToPagedList(pageNumber, pageSize));
@@ -373,7 +373,7 @@ namespace Project_Web.Controllers
         {
 
             if (page == null) page = 1;
-            var store = (from s in _db.Stores
+            var store = (from s in _db.Menu_Stores
                          select s).OrderBy(x => x.IDStore);
             int pageSize = 4;
             int pageNumber = (page ?? 1);
