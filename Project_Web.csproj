@@ -484,6 +484,7 @@
     <Content Include="Content\CreateSeller.css" />
     <Content Include="Content\CreateStore.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\footer.css" />
     <Content Include="Content\ForgotPassword.css" />
     <Content Include="Content\HomeStyle.css" />
     <Content Include="Content\ImportProducts.css" />

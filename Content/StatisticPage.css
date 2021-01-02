@@ -32,25 +32,22 @@ body {
 
 .container-statistic {
     display: flex;
+    height: 500px;
 }
 
 #sidebar {
     background-color: #eee;
-    border-right: 1px solid #ccc;
-    bottom: 0;
+    border: 1px solid #ccc;
     display: block;
-    left: 0;
-    top: 152px;
     overflow-x: hidden;
     overflow-y: auto;
-    padding: 0;
     width: 19%;
     z-index: 1000;
+    height: 100%;
 }
 
     #sidebar > ul.nav {
         padding-bottom: 24px;
-        display: inline;
     }
 
         #sidebar > ul.nav > li {

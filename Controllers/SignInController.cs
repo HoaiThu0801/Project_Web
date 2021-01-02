@@ -169,9 +169,9 @@ namespace Project_Web.Controllers
             {
                 var message = new MimeMessage();
                 //From Address
-                message.From.Add(new MailboxAddress("MST Porridge Shop", "huutuong1403@gmail.com"));
+                message.From.Add(new MailboxAddress("MST Porridge Shop", "mstporridgeteam@gmail.com"));
                 //To Address
-                message.To.Add(new MailboxAddress("Dot net", email));
+                message.To.Add(new MailboxAddress("Khách hàng", email));
                 //Subject
                 message.Subject = "Xin chào bạn chúng tôi gửi cho bạn đường dẫn để đổi mật khẩu bên dưới";
                 //Body
@@ -183,7 +183,7 @@ namespace Project_Web.Controllers
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("huutuong1403@gmail.com", "14032018TomL");
+                    client.Authenticate("mstporridgeteam@gmail.com", "BanchaoMST");
                     client.Send(message);
                     client.Disconnect(true);
                 }

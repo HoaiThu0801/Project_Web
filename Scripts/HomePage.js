@@ -13,9 +13,10 @@ $(function () {
     animateImage = new TimelineMax({ paused: true });
     animateImage.from($('.header'), 0.4, { opacity: 0 })
         .from($('.wrapper'), 0.4, { opacity: 0 })
-        .from($('.body-menu'), 0.4, { x: 300, opacity: 0 })
+        .from($('.body-menu'), 0.4, { opacity: 0 })
         .staggerFrom($('.contentProducts'), 0.7, { width: 0, height: 0, opacity: 0 }, 0.3)
-        .from($('.paging'), 0.4, {y: -400, opacity: 0 })
+        .from($('.paging'), 0.4, { y: -400, opacity: 0 })
+        .from($('#footer-animate'), 0.4, { opacity: 0 });
 });
 
 $(document).ready(function () {

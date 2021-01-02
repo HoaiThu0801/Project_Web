@@ -268,13 +268,13 @@ $(document).ready(function () {
         location = $('#LocationSelectDish').val();
         $('#StoreNameList').css('opacity', '1');
         $('#StoreNameList').css('visibility', 'visible');
-        $('#StoreNameList').css('height', 'unset');
+        $('#signup-background-dish').css('height', '40%');
     });
     $('#StoreNameSelect').change(function () {
         storename = $('#StoreNameSelect').val();
         $('#DishNameList').css('opacity', '1');
         $('#DishNameList').css('visibility', 'visible');
-        $('#signup-background-dish').css('height', '90%');
+        $('#signup-background-dish').css('height', '60%');
         $.ajax({
             type: "get",
             url: "/Administrator_Setting/LoadDish_no_StoreName",

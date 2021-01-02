@@ -145,7 +145,7 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     background-position: center center;
-    padding: 5px 0;
+    padding-top: 10px;
 }
 
 .container {

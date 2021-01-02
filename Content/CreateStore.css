@@ -145,7 +145,6 @@ h2 {
     height: 657px;
     display: flex;
     justify-content: center;
-    position: relative;
 }
 
 body {
@@ -162,6 +161,7 @@ body {
     -o-background-size: cover;
     -ms-background-size: cover;
     background-position: center center;
+    position:relative;
 }
 
 .container {
@@ -194,7 +194,7 @@ body {
     -ms-border-radius: 10px;
     width: 60%;
     position: absolute;
-    height: 50%;
+    height: 30%;
 }
 
 .signup-background-store {
@@ -206,7 +206,8 @@ body {
     -ms-border-radius: 10px;
     width: 60%;
     position: absolute;
-    height: 90%;
+    top: 5%;
+    height: 60%;
 }
 
 .signup-content-store {
@@ -237,7 +238,8 @@ body {
     -ms-border-radius: 10px;
     width: 60%;
     position: absolute;
-    height: 70%;
+    height: 45%;
+    top: 10%;
 }
 
 .signup-content-dish {
