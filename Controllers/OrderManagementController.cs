@@ -11,7 +11,14 @@ using System.Data;
 using System.IO;
 using System.Web.UI.WebControls;
 using System.Web.UI;
-
+using OfficeOpenXml;
+using System.Linq.Expressions;
+using System.Reflection;
+using Microsoft.Ajax.Utilities;
+using EPPlusTest;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.Configuration;
 namespace Project_Web.Controllers
 {
     public class OrderManagementController : BaseController
@@ -228,8 +235,11 @@ namespace Project_Web.Controllers
             return RedirectToAction("SignIn", "SignIn");
         }
         #endregion
-        public ActionResult ExportTrack(DateTime StartTime, DateTime EndTime)
+
+        public void ExportTrack()
         {
+            DateTime StartTime = DateTime.Now.AddDays(-30);
+            DateTime EndTime = DateTime.Now;
             if (Session["User"] != null)
             {
                 User user = Session["User"] as User;
@@ -254,30 +264,62 @@ namespace Project_Web.Controllers
                             revenueofStoreTemp.Time = b.Time.ToString();
                             revenueofStores.Add(revenueofStoreTemp);
                         }
-                        var gv = new GridView();
-                        gv.DataSource = revenueofStores;
-                        gv.DataBind();
 
-                        Response.ClearContent();
-                        Response.Buffer = true;
-                        Response.AddHeader("content-disposition", "attachment; filename=DemoExcel.xls");
-                        Response.ContentType = "application/ms-excel";
-
-                        Response.Charset = "";
-                        StringWriter objStringWriter = new StringWriter();
-                        HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
-
-                        gv.RenderControl(objHtmlTextWriter);
-                        Response.Output.Write(objStringWriter.ToString());
-                        Response.Flush();
-                        Response.End();
-
+                        ExportExcel(revenueofStores);
                     }
                 }
+                else if (role.IDRole == "R01")
+                {
+                    List<RevenueofStore> revenueofStores = new List<RevenueofStore>();
+                    var Bills = (from b in _db.Bills
+                                 join ot in _db.OrderTracks on b.IDBill equals ot.IDBill
+                                 where (StartTime <= b.Time && EndTime >= b.Time) && ot.IDOrderStatse == "OS-05"
+                                 select b).ToList();
+                    foreach (var b in Bills)
+                    {
+                        var store = _db.Stores.SingleOrDefault(n => n.IDStore == b.IDStore);
+                        RevenueofStore revenueofStoreTemp = new RevenueofStore();
+                        revenueofStoreTemp.StoreName = store.StoreName;
+                        revenueofStoreTemp.Address = store.Location;
+                        revenueofStoreTemp.FullName = user.Fullname;
+                        revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
+                        revenueofStoreTemp.Time = b.Time.ToString();
+                        revenueofStores.Add(revenueofStoreTemp);
+                    }
+                    ExportExcel(revenueofStores);
+                }
             }
-            return View();
         }
+        public void ExportExcel (List<RevenueofStore> revenueofStores)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");
+            Sheet.Cells["A1"].Value = "Tên cửa hàng";
+            Sheet.Cells["B1"].Value = "Địa chỉ";
+            Sheet.Cells["C1"].Value = "Tên nhân viên";
+            Sheet.Cells["D1"].Value = "Doanh thu";
+            Sheet.Cells["E1"].Value = "Ngày";
+
+            int row = 2;
+            foreach (var ros in revenueofStores)
+            {
+                Sheet.Cells[string.Format("A{0}", row)].Value = ros.StoreName;
+                Sheet.Cells[string.Format("B{0}", row)].Value = ros.Address;
+                Sheet.Cells[string.Format("C{0}", row)].Value = ros.FullName;
+                Sheet.Cells[string.Format("D{0}", row)].Value = ros.Revenue;
+                Sheet.Cells[string.Format("E{0}", row)].Value = ros.Time;
+                row++;
+            }
+
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "DoanhThuTheoThang.xlsx");
+            Response.BinaryWrite(Ep.GetAsByteArray());
+            Response.End();
+        }
         #region DishManagement
         public ActionResult DishesManagement()
         {
@@ -388,6 +430,14 @@ namespace Project_Web.Controllers
         public ActionResult ImportProductsManagement()
         {
             return View();
+        }
+        [HttpGet]
+        public JsonResult WarehouseDetails(string IDWarehouse)
+        {
+            var warehouseDetails = (from wd in _db.WarehouseDetails
+                                                     where wd.IDWarehouse == IDWarehouse
+                                                     select new { DishName = wd.DishName, Quantity =  wd.Quantity, Time = wd.Time.ToString()}).ToList();
+            return Json(warehouseDetails, JsonRequestBehavior.AllowGet);
         }
     }
 }

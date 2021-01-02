@@ -39,8 +39,6 @@ $(document).ready(function () {
         $('.main-background').css('height', 'unset');
         $('#table').css('opacity', 1);
         $('#table').css('visibility', 'visible');
-        alert(dateStart);
-        alert(dateEnd);
         $.ajax({
             type: "post",
             url: "/OrderManagement/TrackRevenue",
@@ -49,7 +47,7 @@ $(document).ready(function () {
                 EndTime: dateEnd
             },
             success: function (response) {
-                $("tbody#listRevenue").html("");
+                $("tbody.listWarehouseDetails").html("");
                 $(response).each(function (i, e) {
                     var tr = $('<tr class="text-center"/>');
                     $("<td/>").html(e.StoreName).appendTo(tr);
@@ -68,9 +66,6 @@ $(document).ready(function () {
         $('#table').css('opacity', 0);
         $('#table').css('visibility', 'hidden');
     });
-    
-});
-$(document).ready(function () {
     $('#ExportExcel').click(function () {
         $.ajax({
             url: "/OrderManagement/ExportTrack",
