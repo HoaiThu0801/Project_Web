@@ -27,14 +27,14 @@
             <div class="around-table">
                 <table class="table table-bordered">
                     <thead>
-                        <tr class="text-center">
-                            <th>Tên cửa hàng</th>
-                            <th>Địa chỉ</th>
-                            <th>Nhân viên</th>
-                            <th>Số điện thoại</th>
-                            <th>Email</th>
-                            <th>Tên kho hàng</th>
-                            <th>Xóa</th>
+                        <tr class="d-flex text-center">
+                            <th class="col-2">Tên cửa hàng</th>
+                            <th class="col-1">Địa chỉ</th>
+                            <th class="col-2">Nhân viên</th>
+                            <th class="col-1">Số điện thoại</th>
+                            <th class="col-3">Email</th>
+                            <th class="col-2">Tên kho hàng</th>
+                            <th class="col-1">Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
@@ -54,14 +54,14 @@
                                 {
                                     username = User.Username;
                                 }
-                                <tr>
-                                    <td>@s.StoreName</td>
-                                    <td>@s.Location</td>
-                                    <td>@username</td>
-                                    <td>@s.PhoneNumber</td>
-                                    <td>@s.Email</td>
-                                    <td>@warehouse.WarehouseName</td>
-                                    <td><button class="btn btn-danger DeleteStore" data-IDStore="@s.IDStore">Xóa</button></td>
+                                <tr class="d-flex text-center">
+                                    <td class="col-2">@s.StoreName</td>
+                                    <td class="col-1">@s.Location</td>
+                                    <td class="col-2">@username</td>
+                                    <td class="col-1">@s.PhoneNumber</td>
+                                    <td class="col-3">@s.Email</td>
+                                    <td class="col-2">@warehouse.WarehouseName</td>
+                                    <td class="col-1"><button class="btn btn-danger DeleteStore" data-IDStore="@s.IDStore">Xóa</button></td>
                                 </tr>
                             }
                         }

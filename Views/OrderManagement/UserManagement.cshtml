@@ -27,18 +27,17 @@
             <div class="around-table">
                 <table class="table table-bordered">
                     <thead>
-                        <tr class="text-center">
-                            <th>Username</th>
-                            <th>Fullname</th>
-                            <th>Gender</th>
-                            <th>DateofBirth</th>
-                            <th>IdentityCard</th>
-                            <th>Address</th>
-                            <th>PhoneNumber</th>
-                            <th>Point</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Delete</th>
+                        <tr class="d-flex text-center">
+                            <th class="col-2">Tên tài khoản</th>
+                            <th class="col-1">Tên đầy đủ</th>
+                            <th class="col-1">Giới tính</th>
+                            <th class="col-1">Ngày sinh</th>
+                            <th class="col-1">CMND</th>
+                            <th class="col-1">Địa chỉ</th>
+                            <th class="col-1">Số điện thoại</th>
+                            <th class="col-2">Email</th>
+                            <th class="col-1">Chức vụ</th>
+                            <th class="col-1">Delete</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
@@ -53,19 +52,18 @@
                                              join r in _db.Roles on ur.IDRole equals r.IDRole
                                              where ur.IDUser == s.IDUser
                                              select r.Role1).SingleOrDefault();
-                                string datestring = String.Format("{0:dd-MM-yyyy}", s.DateofBirth);
-                                <tr>
-                                    <td>@s.Username</td>
-                                    <td>@s.Fullname</td>
-                                    <td>@s.Gender</td>
-                                    <td>@datestring</td>
-                                    <td>@s.IdentityCard</td>
-                                    <td>@s.Address</td>
-                                    <td>@s.PhoneNumber</td>
-                                    <td>@s.Point</td>
-                                    <td>@s.Email</td>
-                                    <td>@quyen</td>
-                                    <td><button class="btn btn-danger DeleteUser" data-IDUser="@s.IDUser">Xóa</button></td>
+                                string datestring = String.Format("{0:MM-dd-yyyy}", s.DateofBirth);
+                                <tr class="d-flex text-center">
+                                    <td class="col-2">@s.Username</td>
+                                    <td class="col-1">@s.Fullname</td>
+                                    <td class="col-1">@s.Gender</td>
+                                    <td class="col-1">@datestring</td>
+                                    <td class="col-1">@s.IdentityCard</td>
+                                    <td class="col-1">@s.Address</td>
+                                    <td class="col-1">@s.PhoneNumber</td>
+                                    <td class="col-2">@s.Email</td>
+                                    <td class="col-1">@quyen</td>
+                                    <td class="col-1"><button class="btn btn-danger DeleteUser" data-IDUser="@s.IDUser">Xóa</button></td>
                                 </tr>
                             }
                         }

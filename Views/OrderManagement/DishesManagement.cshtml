@@ -27,14 +27,14 @@
             <div class="around-table">
                 <table class="table table-bordered">
                     <thead>
-                        <tr class="text-center">
-                            <th>Tên món ăn</th>
-                            <th>Thành phần</th>
-                            <th>Giá nhập</th>
-                            <th>Giá bán</th>
-                            <th>Hình ảnh</th>
-                            <th>Phân loại</th>
-                            <th>Xóa</th>
+                        <tr class="d-flex text-center">
+                            <th class="col-2">Tên món ăn</th>
+                            <th class="col-4">Thành phần</th>
+                            <th class="col-1">Giá nhập</th>
+                            <th class="col-1">Giá bán</th>
+                            <th class="col-2">Hình ảnh</th>
+                            <th class="col-1">Phân loại</th>
+                            <th class="col-1">Xóa</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
@@ -43,14 +43,14 @@
                                           select m);
                             foreach (var dish in dishes)
                             {
-                                <tr>
-                                    <td>@dish.DishName</td>
-                                    <td>@dish.Ingredient</td>
-                                    <td>@dish.ImportPrice</td>
-                                    <td>@dish.SalePrice</td>
-                                    <td><img src="../@dish.Image" style="width: 50px; height: 50px;"></td>
-                                    <td>@dish.Category</td>
-                                    <td><button class="btn btn-danger DeleteDish" data-IDDish="@dish.IDDish">Xóa</button></td>
+                                <tr class="d-flex text-center">
+                                    <td class="col-2">@dish.DishName</td>
+                                    <td class="col-4">@dish.Ingredient</td>
+                                    <td class="col-1">@dish.ImportPrice</td>
+                                    <td class="col-1">@dish.SalePrice</td>
+                                    <td class="col-2"><img src="../@dish.Image" style="width: 75px; height: 75px;"></td>
+                                    <td class="col-1">@dish.Category</td>
+                                    <td class="col-1"><button class="btn btn-danger DeleteDish" data-IDDish="@dish.IDDish">Xóa</button></td>
                                 </tr>
                             }
                         }

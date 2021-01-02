@@ -23,16 +23,16 @@
     </div>
     <div class="main">
         <div class="main-background">
-            <h1 class="text-center">Danh sách hàng đã nhập</h1>
+            <h1 class="text-center">Danh sách kho hàng</h1>
             <div class="around-table">
                 <table class="table table-bordered">
                     <thead>
-                        <tr class="text-center">
-                            <th>Tên kho hàng</th>
-                            <th>Tên cửa hàng</th>
-                            <th>Địa chỉ</th>
-                            <th>Số lượng món ăn</th>
-                            <th>Xem chi tiết</th>
+                        <tr class="d-flex text-center">
+                            <th class="col-3">Tên kho hàng</th>
+                            <th class="col-3">Tên cửa hàng</th>
+                            <th class="col-3">Địa chỉ</th>
+                            <th class="col-1">Số lượng món ăn</th>
+                            <th class="col-2">Xem chi tiết</th>
                         </tr>
                     </thead>
                     <tbody id="ListData">
@@ -46,12 +46,12 @@
                                                                  select wd.Quantity).ToList();
                                 var total = warehouseDetails_quantity.Sum();
                                 var store = _db.Stores.SingleOrDefault(n => n.IDStore == w.IDStore);
-                                <tr>
-                                    <td>@w.WarehouseName</td>
-                                    <td>@store.StoreName</td>
-                                    <td>@w.LocationofWarehouse</td>
-                                    <td>@total</td>
-                                    <td><button class="btn btn-danger DeleteUser">Xem chi tiết</button></td>
+                                <tr class="d-flex text-center">
+                                    <td class="col-3">@w.WarehouseName</td>
+                                    <td class="col-3">@store.StoreName</td>
+                                    <td class="col-3">@w.LocationofWarehouse</td>
+                                    <td class="col-1">@total</td>
+                                    <td class="col-2"><button class="btn btn-danger" id="detail">Xem chi tiết</button></td>
                                 </tr>
 
                             }
@@ -59,6 +59,32 @@
                         }
                     </tbody>
                 </table>
+            </div>
+            <div class="popup-background" id="popup">
+                <div class="popup">
+                    <div class="popup-form">
+                        <span class="close-popup" id="close-popup">X</span>
+                        <div class="popup-form-detail">
+                            <div class="warehouseName text-center">Tên kho hàng</div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="d-flex text-center">
+                                        <th class="col-4">Tên món ăn</th>
+                                        <th class="col-4">Số lượng</th>
+                                        <th class="col-4">Thời gian nhập hàng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="d-flex text-center">
+                                        <td class="col-sm-4">Thư</td>
+                                        <td class="col-sm-4">0</td>
+                                        <td class="col-sm-4">0/0/0000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

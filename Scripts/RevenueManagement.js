@@ -51,7 +51,7 @@ $(document).ready(function () {
             success: function (response) {
                 $("tbody#listRevenue").html("");
                 $(response).each(function (i, e) {
-                    var tr = $("<tr/>");
+                    var tr = $('<tr class="text-center"/>');
                     $("<td/>").html(e.StoreName).appendTo(tr);
                     $("<td/>").html(e.Address).appendTo(tr);
                     $("<td/>").html(e.FullName).appendTo(tr);

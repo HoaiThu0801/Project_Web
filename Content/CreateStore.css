@@ -30,6 +30,7 @@
     src: url("../fonts/montserrat/Montserrat-Medium.ttf");
     /* IE9 Compat Modes */
 }
+
 @font-face {
     font-family: 'Montserrat';
     font-style: normal;
@@ -113,6 +114,7 @@ h2 {
     margin-bottom: 40px;
     margin-left: 21%;
 }
+
 .h2-staff {
     line-height: 1.66;
     font-weight: 900;
@@ -123,6 +125,7 @@ h2 {
     margin-bottom: 40px;
     margin-left: 6%;
 }
+
 .h2-dish {
     line-height: 1.66;
     font-weight: 900;
@@ -133,15 +136,18 @@ h2 {
     margin-bottom: 40px;
     margin-left: 11%;
 }
+
 .clear {
     clear: both;
 }
+
 .main {
     height: 657px;
     display: flex;
     justify-content: center;
     position: relative;
 }
+
 body {
     font-size: 14px;
     line-height: 1.8;
@@ -162,7 +168,8 @@ body {
     width: 100%;
     margin: 0 auto;
 }
-.signup{
+
+.signup {
     width: 80%;
 }
 
@@ -171,11 +178,13 @@ body {
     position: absolute;
     width: 100%;
 }
+
 .signup-form-dish {
     padding: 80px 0 80px 20%;
     position: absolute;
     width: 100%;
 }
+
 .signup-background-dish {
     background-color: #fff;
     border-radius: 10px;
@@ -187,6 +196,7 @@ body {
     position: absolute;
     height: 50%;
 }
+
 .signup-background-store {
     background-color: #fff;
     border-radius: 10px;
@@ -198,6 +208,7 @@ body {
     position: absolute;
     height: 90%;
 }
+
 .signup-content-store {
     padding: 25px 85px;
     transition: all 1s;
@@ -216,6 +227,7 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+
 .signup-background-staff {
     background-color: #fff;
     border-radius: 10px;
@@ -227,6 +239,7 @@ body {
     position: absolute;
     height: 70%;
 }
+
 .signup-content-dish {
     padding: 25px 85px;
     transition: all 1s;
@@ -244,6 +257,7 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+
 .signup-content-staff {
     padding: 25px 85px;
     transition: all 1s;
@@ -262,6 +276,7 @@ body {
     opacity: 0;
     visibility: hidden;
 }
+
 .button-popup {
     background: #fff;
     -moz-border-radius: 10px;
@@ -269,6 +284,7 @@ body {
     -ms-border-radius: 10px;
     padding: 50px 85px;
 }
+
 .remove-icon {
     font-size: 40px;
     font-weight: bold;
@@ -278,13 +294,17 @@ body {
     right: 35px;
     z-index: 1000;
 }
-.remove-icon:hover, .remove-icon:focus{
+
+
+.remove-icon:hover, .remove-icon:focus {
     cursor: pointer;
     color: gray;
 }
+
 .popup {
     display: block;
 }
+
 .form-group {
     overflow: hidden;
     margin-bottom: 20px;
@@ -390,17 +410,17 @@ body {
     background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
     background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
     background-image: linear-gradient(to left, #74ebd5, #9face6);
-    align-content:center;
-}
-.form-submit:hover{
-    opacity: 0.7;
-    transition-delay: 0.2s;
+    align-content: center;
 }
 
-.textValidation{
+    .form-submit:hover {
+        opacity: 0.7;
+        transition-delay: 0.2s;
+    }
+
+.textValidation {
     font-weight: bold;
-    color:red;
-    
+    color: red;
 }
 
 /*CSS for TabView*/
@@ -443,63 +463,74 @@ body {
     display: none;
     border-top: none;
 }
+
     .tabcontent .button-popup {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
 
 /*CSS for table View*/
-.table{
+.table {
     margin-top: 10px;
     border-width: 3px;
 }
-.custom-select{
+
+.custom-select {
     height: 61px;
     font-size: 18px;
-    font-weight:500;
+    font-weight: 500;
     color: gray;
 }
 /*Paging table*/
-.paging-show{
+.paging-show {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.paging-choose{
+
+.paging-choose {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .dishname-choose {
     color: black;
     font-size: 18px;
 }
-.dishname-choose:hover {
-    color: black;
-    cursor:text;
-}
-.fa-circle-o:before{
+
+    .dishname-choose:hover {
+        color: black;
+        cursor: text;
+    }
+
+.fa-circle-o:before {
     padding-right: 5px;
 }
-.fa-circle-o:before{
+
+.fa-circle-o:before {
     cursor: pointer;
 }
+
 .list-dish {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
 }
-.show-dish-list{
+
+.show-dish-list {
     opacity: 0;
     visibility: hidden;
     transition: 0.5s linear;
 }
-#StoreNameList{
+
+#StoreNameList {
     opacity: 0;
     visibility: hidden;
     height: 0;
     transition: 0.5s linear;
 }
+
 @media screen and (max-width: 768px) {
     .container {
         width: calc(100% - 40px);
