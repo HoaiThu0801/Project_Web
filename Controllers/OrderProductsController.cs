@@ -119,7 +119,6 @@ namespace Project_Web.Controllers
                     //SendMail(AddressOrder);
                     Session.Remove("cart");
                     SetAlert("Thông báo", "Bạn đã đặt hàng thành công.Cảm ơn bạn đã đồng hàng cùng cửa hàng MST", true);
-                    TempData["AlertMessage"] = null;
                     return Content("true");
                 }
             }

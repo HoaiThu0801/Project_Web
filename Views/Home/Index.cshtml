@@ -71,6 +71,11 @@
                         <i class="fa fa-home">Trang chủ</i>
                     </a>
                 </li>
+                <li>
+                    <a href="/Home/About">
+                        <i class="fa fa-info">About Us</i>
+                    </a>
+                </li>
                 @{
                     if (Session["User"] != null)
                     {
@@ -87,7 +92,6 @@
                                     <li><a href="~/Administrator_Setting/CreateStore">Cài đặt cửa hàng</a></li>
                                     <li><a href="~/Administrator_Setting/CreateSeller">Cài đặt người bán hàng</a></li>
                                     <li><a href="~/Administrator_Setting/CreateDish">Cài đặt món ăn</a></li>
-                                    <li><a href="/ImportProducts/ImportProducts">Nhập hàng</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -106,6 +110,7 @@
                             <li>
                                 <a href="/Statistic/Statistic">Thống kê</a>
                             </li>
+                            <li><a href="/ImportProducts/ImportProducts">Nhập hàng</a></li>
                         }
                         else if (temp == "R02")
                         {
@@ -117,14 +122,6 @@
                             </li>
                             <li>
                                 <a href="/OrderManagement/RevenueManagement">Doanh thu</a>
-                            </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a href="/Home/About">
-                                    <i class="fa fa-info">About Us</i>
-                                </a>
                             </li>
                         }
                     }
