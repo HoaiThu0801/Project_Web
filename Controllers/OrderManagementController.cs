@@ -219,10 +219,16 @@ namespace Project_Web.Controllers
                     foreach (var b in Bills)
                     {
                         var store = _db.Stores.SingleOrDefault(n => n.IDStore == b.IDStore);
+                        var usertemp = _db.Users.SingleOrDefault(n => n.IDUser == store.IDUser);
+                        string username = "Admin";
+                        if (usertemp != null)
+                        {
+                            username = usertemp.Fullname;
+                        }
                         RevenueofStore revenueofStoreTemp = new RevenueofStore();
                         revenueofStoreTemp.StoreName = store.StoreName;
                         revenueofStoreTemp.Address = store.Location;
-                        revenueofStoreTemp.FullName = user.Fullname;
+                        revenueofStoreTemp.FullName = username;
                         revenueofStoreTemp.Revenue = float.Parse(b.Total.ToString());
                         revenueofStoreTemp.Time = b.Time.ToString();
                         revenueofStores.Add(revenueofStoreTemp);
