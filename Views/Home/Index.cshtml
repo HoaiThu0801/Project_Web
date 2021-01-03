@@ -71,11 +71,6 @@
                         <i class="fa fa-home">Trang chủ</i>
                     </a>
                 </li>
-                <li>
-                    <a href="/Home/About">
-                        <i class="fa fa-info">About Us</i>
-                    </a>
-                </li>
                 @{
                     if (Session["User"] != null)
                     {
@@ -124,6 +119,14 @@
                                 <a href="/OrderManagement/RevenueManagement">Doanh thu</a>
                             </li>
                         }
+                        else
+                        {
+                            <li>
+                                <a href="/Home/About">
+                                    <i class="fa fa-info">About Us</i>
+                                </a>
+                            </li>
+                        }
                     }
 
                 }
@@ -144,7 +147,7 @@
                         }
                         <li class="right-menu">
                             <a href="#">
-                                <img src="../@user.Image" style="width: 23px; height: 23px; border-radius: 50%; margin-right: 5px;"/>@temp
+                                <img src="../@user.Image" style="width: 23px; height: 23px; border-radius: 50%; margin-right: 5px;" />@temp
                                 <span class="arrow"> &#9660;</span>
                             </a>
                             <ul class="sub-menu-information">
