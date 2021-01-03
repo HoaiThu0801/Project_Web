@@ -140,7 +140,7 @@ namespace Project_Web.Controllers
 
                 var message = new MimeMessage();
                 //From Address
-                message.From.Add(new MailboxAddress("Huu Tuong", "huutuong1403@gmail.com"));
+                message.From.Add(new MailboxAddress("MST Porridge Shop", "mstporridgeteam@gmail.com"));
                 //To Address
                 message.To.Add(new MailboxAddress("Dot net", user.Email));
                 //Subject
@@ -154,7 +154,7 @@ namespace Project_Web.Controllers
                 using (var client = new SmtpClient())
                 {
                     client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("huutuong1403@gmail.com", "14032018");
+                    client.Authenticate("mstporridgeteam@gmail.com", "BanchaoMST");
                     client.Send(message);
                     client.Disconnect(true);
                 }
