@@ -169,7 +169,7 @@ body, html {
         }
 
 
-.fa-home:before, .fa-user:before {
+.fa-home:before, .fa-user:before, fa-ifo:before {
     padding-right: 5px;
 }
 
