@@ -1,7 +1,125 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<head>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/AboutUs.css">
+    <script src="~/Scripts/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg py-3 sticky" style="background-color: lightyellow; z-index: 10000; width: 100%;" id="scrollMenu">
+        <div class="container">
+            <a href="/Home/Index" class="navbar-brand d-flex align-items-center"><img src="~/images/logo.gif" style="width: 100px; height: 100px;"/></a>
+            <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="/Home/Index" class="nav-link"> Trang chủ </a></li>
+                    <li class="nav-item active"><a href="/Home/About" class="nav-link"> Về chúng tôi </a></li>
+                    <li class="nav-item active"><a class="nav-link" id="history-menu"> Lịch sử </a></li>
+                    <li class="nav-item active"><a class="nav-link" id="update-menu"> Mục tiêu</a></li>
+                    <li class="nav-item active"><a class="nav-link" id="thanks-menu"> Lời cảm ơn</a></li>
+                    <li class="nav-item active"><a class="nav-link" id="aboutTeam-menu"> Về nhóm</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<p>Use this area to provide additional information.</p>
+    <div class="bg-light" style="margin-top: 140px;" id="History">
+        <div class="container py-5">
+            <div class="row h-100 align-items-center py-5">
+                <div class="col-lg-6">
+                    <h1 class="display-4">Lịch sử phát triển</h1>
+                    <p class="lead text-muted mb-0">
+                        Doanh nghiệp MST của chúng tôi được thành 
+                        lập vào ngày 1/1/2020, cùng với 2 founder là Đặng Nguyễn Hoài Thư và Nguyễn Hữu Tường.
+                        Cửa hàng chính của hệ thống MST được tọa lạc tại số 1 Võ Văn Ngân, trung tâm Thành phố Thủ Đức.
+                        Cùng với vị trí địa lí thuận lợi kết hợp với sự thành công trong việc nắm bắt tâm lý khách hàng,
+                        trong vòng hơn một năm qua, cửa hàng bán cháo của hệ thống MST đã phát triển mạnh mẽ và mở rộng các
+                        cửa hàng chi nhánh lan rộng rộng ra toàn quốc. 
+                    </p>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834136/illus_kftyh4.png" alt="" class="img-fluid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-white py-5">
+        <div class="container py-5">
+            <div class="row align-items-center mb-5" id="Update">
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <i class="fa fa-bar-chart fa-2x mb-3 text-primary"></i>
+                    <h2 class="font-weight-light">Mục tiêu phát triển</h2>
+                    <p class="font-italic text-muted mb-4">
+                        Hiểu được tâm lý của khách hàng, dẫu có đi xa đến đâu, thì món ăn nhà nấu vẫn là một phần không thể thiếu 
+                        trong tuổi thơ cũng như tâm hồn của mỗi người. Do đó, mục tiêu của chúng tôi không những tạo ra những tô cháo
+                        chất lượng, thơm ngon đầy đủ dinh dưỡng, mà đặc biệt hơn cả lồng vào đó là hương vị quê nhà mà không đâu có thể 
+                        có được. Từ sự tỉ mỉ, cẩn thận trong lựa chọn nguyên liệu xanh, sạch, an toàn, có nguồn rõ ràng, cho đến sự nghiêm túc,
+                        sự chuyên nghiệp kết hợp với tình cảm của đầu bếp được đặt để vào trong cách chế biến, và dịch vụ giao hàng tận tâm, 
+                        chúng tôi rất hạnh phúc khi đem đến cho khách hàng sự phục vụ hoàn hảo nhất của mình. 
+                    </p>
+                </div>
+                <div class="col-lg-5 px-5 mx-auto order-1 order-lg-2"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834139/img-1_e25nvh.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+            </div>
+            <div class="row align-items-center" id="Thanks">
+                <div class="col-lg-5 px-5 mx-auto"><img src="https://res.cloudinary.com/mhmd/image/upload/v1556834136/img-2_vdgqgn.jpg" alt="" class="img-fluid mb-4 mb-lg-0"></div>
+                <div class="col-lg-6">
+                    <i class="fa fa-leaf fa-2x mb-3 text-primary"></i>
+                    <h2 class="font-weight-light">Lời cảm ơn</h2>
+                    <p class="font-italic text-muted mb-4">
+                        Sự phát triển lớn mạnh của doanh nghiệp MST có một phần không nhỏ đóng góp của các bạn. 
+                        Chúng tôi xin chân thành cảm ơn khách hàng đã lựa chọn món ăn của chúng tôi như một phần của bữa ăn gia đình của các bạn. 
+                        Chúng tôi sẽ cố gắng hoàn thiện mình hơn nữa, để đem đến cho khách hàng sự hoàn hảo nhất.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-light py-5" id="AboutTeam" style="position: relative">
+        <div class="container py-5">
+            <div class="row mb-4">
+                <div class="col-lg-5">
+                    <h2 class="font-weight-light">Nhóm của chúng tôi</h2>
+                    <p class="font-italic text-muted">Nhóm MST gồm 2 thành viên: </p>
+                </div>
+            </div>
+
+            <div class="row text-center" style="display: flex; justify-content: center; align-items: center">
+                <!-- Team item-->
+                <div class="col-xl-4 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4">
+                        <img src="~/images/den.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Đặng Nguyễn Hoài Thư</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://www.facebook.com/di.di.56232/" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/su.mas/" class="social-link"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/HoaiThu0801" class="social-link"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+                <!-- Team item-->
+                <div class="col-xl-4 col-sm-6 mb-5">
+                    <div class="bg-white rounded shadow-sm py-5 px-4">
+                        <img src="~/images/avatar.jpg" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                        <h5 class="mb-0">Nguyễn Hữu Tường</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item"><a href="https://www.facebook.com/huutuong1403/" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a href="https://www.instagram.com/tommmmmm.m/" class="social-link"><i class="fa fa-instagram"></i></a></li>
+                            <li class="list-inline-item"><a href="https://github.com/tuong1403" class="social-link"><i class="fa fa-github"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End-->
+            </div>
+        </div>
+        <div class="arrow-up" id="goToTop">
+            <i class="fa fa-arrow-up" style="font-size: 20px"></i>
+        </div>
+    </div>
+
+</body>
+<script src="~/Scripts/jquery-3.5.1.min.js"></script>
+<script src="~/Scripts/AboutUs.js"></script>

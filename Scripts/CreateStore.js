@@ -87,45 +87,6 @@ $(document).ready(function () {
     //Scroll to top page
     $("html, body").animate({ scrollTop: 0 }, "slow");
 
-    //Event using Ajax for id myPager in _TabStore
-    $('#myPager').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Store').html(result);
-            },
-        });
-        return false;
-    });
-
-    //Event using Ajax for id myPagerStaff in _TabStaff
-    $('#myPagerStaff').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Staff').html(result);
-            },
-        });
-        return false;
-    });
-
-    //Event using Ajax for id myPagerDish in _TabDish
-    $('#myPagerDish').on('click', 'a', function () {
-        $.ajax({
-            url: this.href,
-            type: 'GET',
-            cache: false,
-            success: function (result) {
-                $('#Dish').html(result);
-            },
-        });
-        return false;
-    });
-
     //Validation
     $('#StoreName').click(function () {
         var address = $('#StoreName').val();

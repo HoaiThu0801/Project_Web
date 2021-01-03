@@ -472,6 +472,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\AboutUs.css" />
     <Content Include="Content\boostrap-social.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
@@ -575,6 +576,7 @@
       <LastGenOutput>Database_PorridgeSellingManagementStore.cs</LastGenOutput>
     </Content>
     <Content Include="porridge.ico" />
+    <Content Include="Scripts\AboutUs.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
