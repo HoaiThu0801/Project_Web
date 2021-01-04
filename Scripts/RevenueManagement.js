@@ -47,7 +47,7 @@ $(document).ready(function () {
                 EndTime: dateEnd
             },
             success: function (response) {
-                $("tbody.listWarehouseDetails").html("");
+                $("#listRevenue").html("");
                 $(response).each(function (i, e) {
                     var tr = $('<tr class="text-center"/>');
                     $("<td/>").html(e.StoreName).appendTo(tr);
